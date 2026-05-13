@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>麻薯菜谱 · mashuhome</title>
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif; background: #fafaf8; }
+    .card { transition: transform 0.22s ease, box-shadow 0.22s ease; cursor: pointer; }
+    .card:hover { transform: translateY(-5px); box-shadow: 0 12px 28px rgba(0,0,0,0.10); }
+    .card img { transition: transform 0.4s ease; }
+    .card:hover img { transform: scale(1.04); }
+    button { cursor: pointer; font-family: inherit; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const { useState, useMemo } = React;
+
+    const TM = {
+      TM5: { bg: '#f2f9f2', text: '#2d6e3a', border: '#a8d4a8', dot: '#4caf50' },
+      TM6: { bg: '#e8f5e8', text: '#1a5c28', border: '#7cc47c', dot: '#2e7d32' },
+      TM7: { bg: '#1e2b1e', text: '#7ddb8a', border: '#3a5a3a', dot: '#5cb85c' },
+    };
+
+    const diff = {
+      简单: { bg: '#f0faf2', text: '#2a6e3a' },
+      中等: { bg: '#fffbf0', text: '#8a5a00' },
+      高级: { bg: '#fff4f4', text: '#9a2020' },
+    };
+
+    const recipes = [
+      {
+        id: 1, title: '奶油蘑菇浓汤', category: '汤羹', time: 25, servings: 4, difficulty: '简单',
+        img: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=600&h=380&fit=crop',
+        desc: '鲜嫩蘑菇搭配淡奶油，口感丝滑浓郁，是全家人都喜欢的暖身汤',
+        tm: ['TM5', 'TM6', 'TM7'],
+        ingredients: ['新鲜蘑菇 400g', '洋葱 1 个，切碎', '大蒜 2 瓣', '淡奶油 150ml', '牛奶 200ml', '无盐黄油 20g', '盐、白胡椒粉 适量', '欧芹碎 少许'],
+        steps: [
+          { title: '炒香洋葱', time: '5 分钟', desc: '将黄油、大蒜和洋葱放入锅中，100°C 速度 1，炒 5 分钟至洋葱软化透明。' },
+          { title: '加入蘑菇', time: '8 分钟', desc: '加入蘑菇，100°C 速度 1，翻炒 8 分钟直到蘑菇出水并变软。' },
+          { title: '打成泥', time: '1 分钟', desc: '稍凉后，从速度 5 慢慢升至速度 9，搅打 1 分钟成光滑蘑菇泥。' },
+          { title: '加入奶油', time: '5 分钟', desc: '倒入淡奶油和牛奶，90°C 速度 3，加热 5 分钟，用盐和白胡椒调味。' },
+          { title: '盛盘享用', time: '', desc: '倒入碗中，撒上欧芹碎，趁热享用。可搭配脆皮面包一起吃。' },
+        ],
+      },
+      {
+        id: 2, title: '香蕉燕麦早餐粥', category: '早餐', time: 12, servings: 2, difficulty: '简单',
+        img: 'https://images.unsplash.com/photo-1517673132405-a56a62b18caf?w=600&h=380&fit=crop',
+        desc: '熟透的香蕉自带天然甜味，营养满分，孩子们最爱的早晨第一餐',
+        tm: ['TM5', 'TM6', 'TM7'],
+        ingredients: ['即食燕麦片 120g', '熟香蕉 2 根', '牛奶 400ml', '蜂蜜 1 汤匙', '肉桂粉 少许', '核桃碎 适量'],
+        steps: [
+          { title: '放入材料', time: '', desc: '将燕麦片、牛奶倒入锅中，香蕉剥皮直接放入，不需要提前切。' },
+          { title: '烹煮', time: '8 分钟', desc: '90°C 速度 2，煮 8 分钟，香蕉会自动软化融入燕麦中。' },
+          { title: '搅拌调味', time: '30 秒', desc: '加入蜂蜜，速度 4 搅拌 30 秒，根据喜好决定是否打得更细腻。' },
+          { title: '装碗', time: '', desc: '盛入碗中，撒上核桃碎和少许肉桂粉，立即享用。' },
+        ],
+      },
+      {
+        id: 3, title: '番茄鸡蛋意面', category: '主食', time: 30, servings: 3, difficulty: '简单',
+        img: 'https://images.unsplash.com/photo-1555949258-eb67b1ef0ceb?w=600&h=380&fit=crop',
+        desc: '家常版番茄意面，酸甜开胃，简单食材做出让全家满足的一餐',
+        tm: ['TM5', 'TM6', 'TM7'],
+        ingredients: ['意大利面 250g', '新鲜番茄 4 个', '鸡蛋 3 个', '大蒜 3 瓣', '橄榄油 2 汤匙', '番茄膏 1 汤匙', '盐、糖 适量', '罗勒叶 少许'],
+        steps: [
+          { title: '煮意面', time: '10 分钟', desc: '锅中烧开足量水，加盐，按包装说明煮意面，捞出备用。' },
+          { title: '蒜香爆锅', time: '3 分钟', desc: '大蒜放入，速度 5 切碎。加橄榄油，100°C 速度 1 爆香 3 分钟。' },
+          { title: '煮番茄酱', time: '12 分钟', desc: '番茄切块放入，加番茄膏、盐和少许糖，100°C 速度 2 煮 12 分钟至浓稠。' },
+          { title: '加入鸡蛋', time: '3 分钟', desc: '鸡蛋打散后慢慢倒入，80°C 速度 2 轻轻搅拌 3 分钟，蛋液半凝固即可。' },
+          { title: '拌入意面', time: '', desc: '将煮好的意面倒入拌匀，撒上新鲜罗勒叶，趁热上桌。' },
+        ],
+      },
+      {
+        id: 4, title: '苹果肉桂麦芬', category: '甜点', time: 45, servings: 12, difficulty: '中等',
+        img: 'https://images.unsplash.com/photo-1486427944299-d1955d23e34d?w=600&h=380&fit=crop',
+        desc: '家里孩子最爱的下午茶点心，苹果粒软糯，肉桂香气四溢',
+        tm: ['TM5', 'TM6', 'TM7'],
+        ingredients: ['低筋面粉 200g', '苹果 2 个，去皮切丁', '鸡蛋 2 个', '牛奶 120ml', '无盐黄油 80g', '细砂糖 90g', '泡打粉 1.5 茶匙', '肉桂粉 1 茶匙'],
+        steps: [
+          { title: '预热烤箱', time: '', desc: '烤箱预热至 180°C，麦芬模具铺上纸杯备用。' },
+          { title: '融化黄油', time: '2 分钟', desc: '黄油放入，50°C 速度 2 融化约 2 分钟。加入糖、鸡蛋、牛奶，速度 4 搅拌均匀。' },
+          { title: '加粉类', time: '10 秒', desc: '筛入面粉、泡打粉、肉桂粉，速度 4 搅拌约 10 秒，看不到干粉即可。' },
+          { title: '拌入苹果', time: '', desc: '用刮刀轻轻折叠拌入苹果丁，动作要轻柔保持面糊蓬松。' },
+          { title: '烘烤', time: '22 分钟', desc: '面糊倒入模具至七分满，180°C 烤约 22 分钟，牙签插入无沾即熟。' },
+        ],
+      },
+      {
+        id: 5, title: '南瓜糙米粥', category: '早餐', time: 35, servings: 4, difficulty: '简单',
+        img: 'https://images.unsplash.com/photo-1476718406336-ef34863ab63d?w=600&h=380&fit=crop',
+        desc: '甜糯南瓜搭配糙米，健康低卡，老人和孩子都适合的养胃粥品',
+        tm: ['TM5', 'TM6', 'TM7'],
+        ingredients: ['南瓜 300g，去皮切块', '糙米 150g，提前泡发 2 小时', '水 1200ml', '冰糖 2–3 颗', '枸杞 少许'],
+        steps: [
+          { title: '准备材料', time: '', desc: '糙米提前泡发 2 小时，南瓜去皮切 2cm 小块。' },
+          { title: '放入所有材料', time: '', desc: '将泡发好的糙米、南瓜块、水和冰糖一起放入锅中。' },
+          { title: '慢煮', time: '30 分钟', desc: '100°C 速度 1，煮 30 分钟。中途南瓜会自然软化融入米粥。' },
+          { title: '装碗', time: '', desc: '盛入碗中，点缀几粒枸杞，温热享用。' },
+        ],
+      },
+      {
+        id: 6, title: '自制花生酱', category: '酱料', time: 15, servings: 1, difficulty: '简单',
+        img: 'https://images.unsplash.com/photo-1607051906369-e1f1c14a0b65?w=600&h=380&fit=crop',
+        desc: '只需花生和少许盐，无任何添加剂，浓郁程度远超超市瓶装花生酱',
+        tm: ['TM5', 'TM6', 'TM7'],
+        ingredients: ['去皮熟花生 300g', '盐 1/4 茶匙', '蜂蜜 1 汤匙（可选）', '葡萄籽油 少许'],
+        steps: [
+          { title: '准备花生', time: '', desc: '使用已去皮的熟花生，确保完全干燥，不能有水分。' },
+          { title: '初步搅打', time: '1 分钟', desc: '花生放入，从速度 5 逐渐升至速度 10，搅打 1 分钟，变成粗粒状。' },
+          { title: '持续研磨', time: '3 分钟', desc: '速度 10 继续搅打 3 分钟，花生会先变成粉，再逐渐出油变成糊状。中途用刮刀刮壁。' },
+          { title: '调味装瓶', time: '', desc: '加入盐和蜂蜜，速度 5 混合 10 秒。装入干净玻璃瓶，密封冷藏可保存约 1 个月。' },
+        ],
+      },
+      {
+        id: 7, title: '猪肉番茄饺子馅', category: '主食', time: 20, servings: 4, difficulty: '中等',
+        img: 'https://images.unsplash.com/photo-1609805988588-44fdb9e0afc7?w=600&h=380&fit=crop',
+        desc: '小美帮你剁肉切菜，省时省力，做出妈妈味道的家常饺子',
+        tm: ['TM5', 'TM6', 'TM7'],
+        ingredients: ['猪前腿肉 400g，切块', '番茄 2 个', '韭菜 1 小把', '姜 1 小块', '生抽 2 汤匙', '芝麻油 1 汤匙', '白胡椒粉、盐 适量'],
+        steps: [
+          { title: '绞肉', time: '5 秒', desc: '猪肉块和姜片放入，速度 6 搅打 5 秒成肉糜，保留些颗粒感更好吃。' },
+          { title: '切番茄', time: '3 秒', desc: '番茄切四块放入，速度 4 搅打 3 秒切碎，然后用纱布挤出多余水分。' },
+          { title: '混合调味', time: '', desc: '肉糜、番茄碎、韭菜放入大碗，加入生抽、芝麻油、盐和白胡椒，顺一个方向搅拌上劲。' },
+          { title: '包饺子', time: '', desc: '包入饺子皮，煮饺子时水开后加两次冷水，饺子浮起后再煮 2 分钟即熟。' },
+        ],
+      },
+      {
+        id: 8, title: '百香果柠檬气泡饮', category: '饮品', time: 5, servings: 2, difficulty: '简单',
+        img: 'https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?w=600&h=380&fit=crop',
+        desc: '清爽酸甜的夏日饮品，孩子放学回来的最佳奖励',
+        tm: ['TM5', 'TM6', 'TM7'],
+        ingredients: ['百香果 3 个，取果肉', '新鲜柠檬 1 个，取汁', '蜂蜜 2 汤匙', '气泡水 400ml（冰的）', '冰块 适量'],
+        steps: [
+          { title: '制作糖浆', time: '30 秒', desc: '百香果肉、柠檬汁和蜂蜜放入，速度 5 搅打 30 秒混合均匀。' },
+          { title: '过滤（可选）', time: '', desc: '若不喜欢百香果籽，可用细筛过滤，取清澈果汁。保留籽口感更丰富。' },
+          { title: '组合饮品', time: '', desc: '杯中加满冰块，倒入果汁，再缓慢注入冰气泡水，不要搅拌保留气泡。' },
+        ],
+      },
+      {
+        id: 9, title: '菠菜豆腐汤', category: '汤羹', time: 15, servings: 4, difficulty: '简单',
+        img: 'https://images.unsplash.com/photo-1547592180-85f173990554?w=600&h=380&fit=crop',
+        desc: '清淡鲜美，10 分钟搞定，老人和孩子都适合的家常养生汤',
+        tm: ['TM5', 'TM6', 'TM7'],
+        ingredients: ['菠菜 200g，焯水后切段', '嫩豆腐 1 盒（约 400g）', '姜丝 少许', '清水或高汤 800ml', '盐、芝麻油 适量'],
+        steps: [
+          { title: '菠菜焯水', time: '1 分钟', desc: '菠菜用普通锅焯水 1 分钟，捞出冲冷水，挤干水分，切段备用。' },
+          { title: '煮开高汤', time: '5 分钟', desc: '清水、姜丝放入，100°C 速度 1 煮开。' },
+          { title: '加入豆腐', time: '5 分钟', desc: '豆腐切成 2cm 小块轻轻放入，100°C 速度 1 煮 5 分钟。' },
+          { title: '加菠菜调味', time: '1 分钟', desc: '放入菠菜段，加盐，再煮 1 分钟即可。盛入碗中，淋几滴芝麻油提香。' },
+        ],
+      },
+      {
+        id: 10, title: '香蕉可可奶昔', category: '饮品', time: 5, servings: 2, difficulty: '简单',
+        img: 'https://images.unsplash.com/photo-1553530666-ba11a90bb0ae?w=600&h=380&fit=crop',
+        desc: '天然甜味无需加糖，浓稠丝滑，孩子的健康早餐饮品',
+        tm: ['TM5', 'TM6', 'TM7'],
+        ingredients: ['熟香蕉 2 根（冷冻后更浓稠）', '可可粉 2 汤匙', '牛奶 250ml', '蜂蜜 1 汤匙（可选）', '冰块 少许'],
+        steps: [
+          { title: '放入材料', time: '', desc: '将香蕉（冷冻最佳）、可可粉、牛奶全部放入。' },
+          { title: '搅打', time: '1 分钟', desc: '从速度 5 慢慢升至速度 10，搅打约 1 分钟至完全顺滑无颗粒。' },
+          { title: '立即享用', time: '', desc: '倒入杯中立即饮用，现做现喝最佳。' },
+        ],
+      },
+    ];
+
+    const categories = ['全部', '早餐', '主食', '汤羹', '甜点', '饮品', '酱料'];
+
+    function TMTag({ label }) {
+      const s = TM[label];
+      return (
+        <span style={{ fontSize: 11, fontWeight: 600, padding: '3px 9px', borderRadius: 20, background: s.bg, color: s.text, border: `1px solid ${s.border}`, display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+          <span style={{ width: 6, height: 6, borderRadius: '50%', background: s.dot, display: 'inline-block' }} />
+          {label}
+        </span>
+      );
+    }
+
+    function RecipeDetail({ r, onBack }) {
+      return (
+        <div style={{ background: '#fafaf8', minHeight: '100vh' }}>
+          <div style={{ background: 'white', borderBottom: '1px solid #eeeae4', padding: '0 1.5rem', position: 'sticky', top: 0, zIndex: 10 }}>
+            <div style={{ maxWidth: 780, margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 52 }}>
+              <button onClick={onBack} style={{ background: 'none', border: 'none', color: '#5a7a50', fontSize: 14 }}>← 返回食谱</button>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
+                <img src="https://i.postimg.cc/BQ6sKJm4/ma-shu-cai-pulogo.png" alt="麻薯菜谱"
+                  style={{ width: 28, height: 28, borderRadius: '50%', objectFit: 'cover', objectPosition: 'center 20%' }} />
+                <span style={{ fontSize: 13, color: '#3a5a30', fontWeight: 700 }}>麻薯菜谱</span>
+              </div>
+              <div style={{ width: 60 }} />
+            </div>
+          </div>
+
+          <div style={{ width: '100%', height: 320, overflow: 'hidden', position: 'relative' }}>
+            <img src={r.img} alt={r.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 60%)' }} />
+            <div style={{ position: 'absolute', bottom: 28, left: 0, right: 0, padding: '0 2rem', textAlign: 'center' }}>
+              <span style={{ fontSize: 12, background: 'rgba(255,255,255,0.2)', color: 'white', borderRadius: 20, padding: '3px 14px' }}>{r.category}</span>
+              <h1 style={{ fontSize: 28, fontWeight: 700, color: 'white', margin: '10px 0 0', textShadow: '0 1px 4px rgba(0,0,0,0.3)' }}>{r.title}</h1>
+            </div>
+          </div>
+
+          <div style={{ maxWidth: 700, margin: '0 auto', padding: '2rem 1.5rem 5rem' }}>
+            <p style={{ fontSize: 15, color: '#6a6055', lineHeight: 1.8, marginBottom: 24, textAlign: 'center' }}>{r.desc}</p>
+            <div style={{ display: 'flex', justifyContent: 'center', gap: 24, marginBottom: 20, flexWrap: 'wrap' }}>
+              <div style={{ textAlign: 'center' }}><div style={{ fontSize: 18 }}>⏱</div><div style={{ fontSize: 13, color: '#7a7060', marginTop: 2 }}>{r.time} 分钟</div></div>
+              <div style={{ textAlign: 'center' }}><div style={{ fontSize: 18 }}>🍽</div><div style={{ fontSize: 13, color: '#7a7060', marginTop: 2 }}>{r.servings} 人份</div></div>
+              <div style={{ textAlign: 'center' }}>
+                <div style={{ fontSize: 18 }}>📊</div>
+                <div style={{ marginTop: 2 }}><span style={{ fontSize: 12, background: diff[r.difficulty].bg, color: diff[r.difficulty].text, padding: '2px 10px', borderRadius: 20 }}>{r.difficulty}</span></div>
+              </div>
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'center', gap: 8, marginBottom: 32, flexWrap: 'wrap', alignItems: 'center' }}>
+              <span style={{ fontSize: 12, color: '#a09880' }}>适用机型</span>
+              {r.tm.map(t => <TMTag key={t} label={t} />)}
+            </div>
+
+            <section style={{ background: 'white', borderRadius: 14, border: '1px solid #ede8e0', padding: '1.5rem', marginBottom: 20 }}>
+              <h2 style={{ fontSize: 15, fontWeight: 700, color: '#3a3028', marginBottom: 16, display: 'flex', alignItems: 'center', gap: 8 }}>
+                <span style={{ width: 4, height: 18, background: '#6aaa60', borderRadius: 2, display: 'inline-block' }} />食材清单
+              </h2>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px 16px' }}>
+                {r.ingredients.map((ing, i) => (
+                  <div key={i} style={{ fontSize: 13, color: '#5a5040', padding: '6px 0', borderBottom: '1px solid #f5f0e8', display: 'flex', gap: 8 }}>
+                    <span style={{ color: '#9acc88', flexShrink: 0 }}>·</span>{ing}
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            <section>
+              <h2 style={{ fontSize: 15, fontWeight: 700, color: '#3a3028', marginBottom: 16, display: 'flex', alignItems: 'center', gap: 8 }}>
+                <span style={{ width: 4, height: 18, background: '#6aaa60', borderRadius: 2, display: 'inline-block' }} />烹饪步骤
+              </h2>
+              {r.steps.map((step, i) => (
+                <div key={i} style={{ display: 'flex', gap: 14, marginBottom: 14 }}>
+                  <div style={{ flexShrink: 0, width: 32, height: 32, borderRadius: '50%', background: i === 0 ? '#4a9a55' : '#e8f0e4', color: i === 0 ? 'white' : '#5a7a50', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: 14 }}>{i + 1}</div>
+                  <div style={{ background: 'white', borderRadius: 12, border: '1px solid #ede8e0', padding: '1rem 1.2rem', flex: 1 }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
+                      <span style={{ fontWeight: 600, color: '#2a2018', fontSize: 14 }}>{step.title}</span>
+                      {step.time && <span style={{ fontSize: 11, background: '#f0f8ec', color: '#4a8a3a', padding: '2px 10px', borderRadius: 20 }}>{step.time}</span>}
+                    </div>
+                    <p style={{ fontSize: 13, color: '#7a6e60', lineHeight: 1.75, margin: 0 }}>{step.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </section>
+
+            <div style={{ marginTop: 24, background: '#f5fbf0', border: '1px solid #d4eac8', borderRadius: 10, padding: '1rem 1.2rem' }}>
+              <p style={{ fontSize: 13, color: '#4a7a3a', margin: 0, lineHeight: 1.7 }}>
+                💡 <strong>小贴士：</strong>所有步骤均适用于小美（Thermomix Friend）。TM5 / TM6 / TM7 用户可根据各自机型说明书微调温度和时间设定。
+              </p>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    function App() {
+      const [search, setSearch] = useState('');
+      const [category, setCategory] = useState('全部');
+      const [selected, setSelected] = useState(null);
+
+      const filtered = useMemo(() => recipes.filter(r => {
+        const matchCat = category === '全部' || r.category === category;
+        const matchSearch = !search || r.title.includes(search) || r.desc.includes(search);
+        return matchCat && matchSearch;
+      }), [search, category]);
+
+      if (selected) return <RecipeDetail r={selected} onBack={() => setSelected(null)} />;
+
+      return (
+        <div>
+          <header style={{ background: 'white', borderBottom: '1px solid #eee8de' }}>
+            <div style={{ maxWidth: 1060, margin: '0 auto', padding: '1.2rem 2rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                <img src="https://i.postimg.cc/BQ6sKJm4/ma-shu-cai-pulogo.png" alt="麻薯菜谱"
+                  style={{ width: 80, height: 80, borderRadius: '50%', objectFit: 'cover', objectPosition: 'center 20%', flexShrink: 0 }} />
+                <div>
+                  <h1 style={{ fontSize: 22, fontWeight: 700, color: '#1a1810', letterSpacing: '-0.5px', lineHeight: 1.1 }}>麻薯菜谱</h1>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginTop: 4 }}>
+                    <span style={{ width: 14, height: 1, background: '#c8b89a', display: 'inline-block' }} />
+                    <span style={{ fontSize: 10, color: '#8a7a5a', letterSpacing: 2, textTransform: 'uppercase' }}>mashuhome</span>
+                    <span style={{ width: 14, height: 1, background: '#c8b89a', display: 'inline-block' }} />
+                  </div>
+                </div>
+              </div>
+              <div style={{ position: 'relative' }}>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#b0a090" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none' }}>
+                  <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                </svg>
+                <input type="text" placeholder="搜索食谱…" value={search} onChange={e => setSearch(e.target.value)}
+                  style={{ padding: '9px 14px 9px 34px', borderRadius: 24, border: '1px solid #e0d8cc', fontSize: 13, background: '#fdf9f4', color: '#2a2018', outline: 'none', width: 200, fontFamily: 'inherit' }} />
+              </div>
+            </div>
+
+            <div style={{ position: 'relative', borderTop: '1px solid #ede8e0', overflow: 'hidden', height: 220 }}>
+              <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1200&h=400&fit=crop" alt="家庭餐桌"
+                style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+              <div style={{ position: 'absolute', inset: 0, background: 'rgba(20,15,8,0.48)' }} />
+              <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', padding: '0 2rem', textAlign: 'center' }}>
+                <h2 style={{ fontSize: 28, fontWeight: 700, color: 'white', marginBottom: 10, textShadow: '0 1px 6px rgba(0,0,0,0.4)' }}>家常美味，轻松上桌</h2>
+                <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.82)' }}>所有食谱适配小美，并标注 TM5 · TM6 · TM7 兼容性</p>
+              </div>
+            </div>
+
+            <div style={{ maxWidth: 1060, margin: '0 auto', padding: '1rem 2rem', display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+              {categories.map(c => (
+                <button key={c} onClick={() => setCategory(c)}
+                  style={{ padding: '6px 16px', borderRadius: 24, fontSize: 13, fontWeight: 500, transition: 'all 0.15s', background: category === c ? '#4a9a55' : 'transparent', color: category === c ? 'white' : '#6a5a48', border: category === c ? 'none' : '1px solid #ddd4c4' }}>
+                  {c}
+                </button>
+              ))}
+            </div>
+          </header>
+
+          <main style={{ maxWidth: 1060, margin: '0 auto', padding: '1.5rem 2rem 5rem' }}>
+            <p style={{ fontSize: 12, color: '#b0a090', marginBottom: 20 }}>{filtered.length} 道食谱</p>
+            {filtered.length === 0 ? (
+              <div style={{ textAlign: 'center', padding: '5rem 0', color: '#b0a090' }}>
+                <p style={{ fontSize: 15 }}>暂无相关食谱，换个关键词试试吧～</p>
+              </div>
+            ) : (
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(290px, 1fr))', gap: 22 }}>
+                {filtered.map(r => (
+                  <article key={r.id} className="card" onClick={() => setSelected(r)}
+                    style={{ background: 'white', borderRadius: 14, border: '1px solid #ede8e0', overflow: 'hidden' }}>
+                    <div style={{ height: 190, overflow: 'hidden' }}>
+                      <img src={r.img} alt={r.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    </div>
+                    <div style={{ padding: '1rem 1.1rem 1.2rem' }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 6 }}>
+                        <h3 style={{ fontSize: 16, fontWeight: 700, color: '#1e1810', lineHeight: 1.3, flex: 1 }}>{r.title}</h3>
+                        <span style={{ fontSize: 11, padding: '2px 8px', borderRadius: 20, marginLeft: 8, flexShrink: 0, background: diff[r.difficulty].bg, color: diff[r.difficulty].text }}>{r.difficulty}</span>
+                      </div>
+                      <p style={{ fontSize: 12, color: '#8a7a68', lineHeight: 1.65, marginBottom: 12 }}>{r.desc}</p>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <div style={{ display: 'flex', gap: 5, flexWrap: 'wrap' }}>
+                          {r.tm.map(t => <TMTag key={t} label={t} />)}
+                        </div>
+                        <span style={{ fontSize: 12, color: '#a09080' }}>⏱ {r.time}m</span>
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            )}
+          </main>
+
+          <footer style={{ background: 'white', borderTop: '1px solid #ede8e0', padding: '1.5rem 2rem', textAlign: 'center' }}>
+            <p style={{ fontSize: 13, color: '#a09080' }}>麻薯菜谱 · mashuhome.com · 适用 Thermomix® 小美 · TM5 · TM6 · TM7</p>
+          </footer>
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>
