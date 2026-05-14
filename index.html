@@ -363,20 +363,21 @@
       const [tip, setTip] = useState('');
 
       const handleShare = () => {
+        const url = window.location.href;
         const shareData = {
           title: recipe.title + ' · 麻薯食谱',
           text: recipe.desc + '\n\n来自麻薯食谱 mashuhome.com',
-          url: 'https://www.mashuhome.com',
+          url: url,
         };
         if (navigator.share) {
           navigator.share(shareData).catch(() => {});
         } else {
-          navigator.clipboard.writeText('https://www.mashuhome.com').then(() => {
+          navigator.clipboard.writeText(url).then(() => {
             setTip('链接已复制！打开微信粘贴给好友即可 🎉');
             setTimeout(() => setTip(''), 3000);
           }).catch(() => {
-            setTip('请手动复制网址：mashuhome.com');
-            setTimeout(() => setTip(''), 3000);
+            setTip('请手动复制：' + url);
+            setTimeout(() => setTip(''), 4000);
           });
         }
       };
@@ -524,6 +525,29 @@
       const [page, setPage] = useState(1);
       const PER_PAGE = 12;
 
+      // 页面加载时读取 hash，直接打开对应食谱
+      useEffect(() => {
+        const hash = window.location.hash;
+        if (hash.startsWith('#recipe-')) {
+          const id = parseInt(hash.replace('#recipe-', ''));
+          const recipe = recipes.find(r => r.id === id);
+          if (recipe) { setSelected(recipe); window.scrollTo(0, 0); }
+        }
+      }, []);
+
+      // 打开食谱，更新 URL hash
+      const openRecipe = (r) => {
+        setSelected(r);
+        window.location.hash = 'recipe-' + r.id;
+        window.scrollTo(0, 0);
+      };
+
+      // 返回列表，清除 hash
+      const goBack = () => {
+        setSelected(null);
+        history.pushState('', document.title, window.location.pathname);
+      };
+
       const filtered = useMemo(() => recipes.filter(r => {
         const matchCat = category === '全部' || r.category === category;
         const matchSearch = !search || r.title.includes(search) || r.desc.includes(search);
@@ -535,7 +559,7 @@
       const handleCategory = (c) => { setCategory(c); setPage(1); };
       const handleSearch = (v) => { setSearch(v); setPage(1); };
 
-      if (selected) return <RecipeDetail r={selected} onBack={() => setSelected(null)} />;
+      if (selected) return <RecipeDetail r={selected} onBack={goBack} />;
 
       return (
         <div>
@@ -587,7 +611,7 @@
               <>
                 <div className="recipe-grid">
                   {paged.map(r => (
-                    <article key={r.id} className="card" onClick={() => setSelected(r)}
+                    <article key={r.id} className="card" onClick={() => openRecipe(r)}
                       style={{ background:'white', borderRadius:14, border:'1px solid #ede8e0', overflow:'hidden' }}>
                       <ImgCard src={r.img} alt={r.title} style={{ height:190 }} />
                       <div className="card-body">
