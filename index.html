@@ -216,7 +216,7 @@
         steps:[{title:'排骨焯水',time:'',desc:'排骨冷水下锅，普通锅煮开后捞出，冲洗干净。焯水这步不能省，汤才会清甜不腥。'},{title:'放入所有材料',time:'',desc:'排骨、玉米段、胡萝卜、姜片和清水全部放进小美，食材要一次放好。'},{title:'慢炖',time:'50 分钟',desc:'100°C 速度小勺反转，炖 50 分钟。炖的时候汤色会慢慢变成奶白色，特别诱人。'},{title:'调味盛碗',time:'',desc:'加盐调味，撒几粒枸杞。盛出来趁热喝，玉米甜糯，喝完整个人都暖起来了。'}]},
 
       { id:24, title:'金针肥牛', category:'汤羹', time:25, servings:3, difficulty:'中等',
-        img:'https://images.unsplash.com/photo-1569769125631-c7e80e50fa98?w=600&h=380&fit=crop',
+        img:'https://i.postimg.cc/L4WzkHzF/jin-zhen-gu-fei-niu.png',
         desc:'金黄浓郁的汤底配上嫩滑肥牛和爽脆金针菇，酸辣开胃，一上桌就被抢光', tm:['TM5','TM6','TM7'],
         ingredients:['肥牛卷 350g','金针菇 120g，去根','鸡高汤 900g','绿泡椒 20g','黄灯笼辣椒酱 20g','白醋 100g','油 15g','葱 2 支，切段','姜 5 片','蒜 3 瓣，切片','盐 3g','糖 5g','葱花、小米辣 适量'],
         steps:[
@@ -433,11 +433,19 @@
       const [search, setSearch] = useState('');
       const [category, setCategory] = useState('全部');
       const [selected, setSelected] = useState(null);
+      const [page, setPage] = useState(1);
+      const PER_PAGE = 9;
+
       const filtered = useMemo(() => recipes.filter(r => {
         const matchCat = category === '全部' || r.category === category;
         const matchSearch = !search || r.title.includes(search) || r.desc.includes(search);
         return matchCat && matchSearch;
       }), [search, category]);
+
+      const totalPages = Math.ceil(filtered.length / PER_PAGE);
+      const paged = filtered.slice((page - 1) * PER_PAGE, page * PER_PAGE);
+      const handleCategory = (c) => { setCategory(c); setPage(1); };
+      const handleSearch = (v) => { setSearch(v); setPage(1); };
 
       if (selected) return <RecipeDetail r={selected} onBack={() => setSelected(null)} />;
 
@@ -460,7 +468,7 @@
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#b0a090" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
                 </svg>
-                <input className="search-input" type="text" placeholder="搜索食谱…" value={search} onChange={e => setSearch(e.target.value)} />
+                <input className="search-input" type="text" placeholder="搜索食谱…" value={search} onChange={e => handleSearch(e.target.value)} />
               </div>
             </div>
             <div className="hero">
@@ -473,7 +481,7 @@
             </div>
             <div className="category-bar">
               {categories.map(c => (
-                <button key={c} className="cat-btn" onClick={() => setCategory(c)}
+                <button key={c} className="cat-btn" onClick={() => handleCategory(c)}
                   style={{ background:category===c?'#4a9a55':'transparent', color:category===c?'white':'#6a5a48', border:category===c?'none':'1px solid #ddd4c4' }}>
                   {c}
                 </button>
@@ -481,35 +489,57 @@
             </div>
           </header>
           <main className="main-wrap">
-            <p style={{ fontSize:12, color:'#b0a090', marginBottom:16 }}>{filtered.length} 道食谱</p>
+            <p style={{ fontSize:12, color:'#b0a090', marginBottom:16 }}>{filtered.length} 道食谱 · 第 {page} / {totalPages} 页</p>
             {filtered.length === 0 ? (
               <div style={{ textAlign:'center', padding:'5rem 0', color:'#b0a090' }}>
                 <p style={{ fontSize:15 }}>暂无相关食谱，换个关键词试试吧～</p>
               </div>
             ) : (
-              <div className="recipe-grid">
-                {filtered.map(r => (
-                  <article key={r.id} className="card" onClick={() => setSelected(r)}
-                    style={{ background:'white', borderRadius:14, border:'1px solid #ede8e0', overflow:'hidden' }}>
-                    <div className="card-img-wrap">
-                      <img src={r.img} alt={r.title} style={{ width:'100%', height:'100%', objectFit:'cover' }} />
-                    </div>
-                    <div className="card-body">
-                      <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-start', marginBottom:6 }}>
-                        <span className="card-title">{r.title}</span>
-                        <span style={{ fontSize:11, padding:'2px 8px', borderRadius:20, marginLeft:8, flexShrink:0, background:diff[r.difficulty].bg, color:diff[r.difficulty].text }}>{r.difficulty}</span>
+              <>
+                <div className="recipe-grid">
+                  {paged.map(r => (
+                    <article key={r.id} className="card" onClick={() => setSelected(r)}
+                      style={{ background:'white', borderRadius:14, border:'1px solid #ede8e0', overflow:'hidden' }}>
+                      <div className="card-img-wrap">
+                        <img src={r.img} alt={r.title} style={{ width:'100%', height:'100%', objectFit:'cover' }} />
                       </div>
-                      <p className="card-desc">{r.desc}</p>
-                      <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center' }}>
-                        <div style={{ display:'flex', gap:5, flexWrap:'wrap' }}>
-                          {r.tm.map(t => <TMTag key={t} label={t} />)}
+                      <div className="card-body">
+                        <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-start', marginBottom:6 }}>
+                          <span className="card-title">{r.title}</span>
+                          <span style={{ fontSize:11, padding:'2px 8px', borderRadius:20, marginLeft:8, flexShrink:0, background:diff[r.difficulty].bg, color:diff[r.difficulty].text }}>{r.difficulty}</span>
                         </div>
-                        <span style={{ fontSize:12, color:'#a09080' }}>⏱ {r.time}m</span>
+                        <p className="card-desc">{r.desc}</p>
+                        <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center' }}>
+                          <div style={{ display:'flex', gap:5, flexWrap:'wrap' }}>
+                            {r.tm.map(t => <TMTag key={t} label={t} />)}
+                          </div>
+                          <span style={{ fontSize:12, color:'#a09080' }}>⏱ {r.time}m</span>
+                        </div>
                       </div>
-                    </div>
-                  </article>
-                ))}
-              </div>
+                    </article>
+                  ))}
+                </div>
+
+                {/* 分页控件 */}
+                {totalPages > 1 && (
+                  <div style={{ display:'flex', justifyContent:'center', alignItems:'center', gap:8, marginTop:40 }}>
+                    <button onClick={() => setPage(p => Math.max(1, p-1))} disabled={page === 1}
+                      style={{ padding:'8px 16px', borderRadius:24, border:'1px solid #ddd4c4', background:page===1?'#f5f0e8':'white', color:page===1?'#c0b8a8':'#4a9a55', cursor:page===1?'not-allowed':'pointer', fontSize:13, fontFamily:'inherit' }}>
+                      ← 上一页
+                    </button>
+                    {Array.from({ length: totalPages }, (_, i) => i + 1).map(n => (
+                      <button key={n} onClick={() => setPage(n)}
+                        style={{ width:36, height:36, borderRadius:'50%', border:'none', background:page===n?'#4a9a55':'transparent', color:page===n?'white':'#6a5a48', cursor:'pointer', fontSize:13, fontFamily:'inherit', fontWeight:page===n?700:400 }}>
+                        {n}
+                      </button>
+                    ))}
+                    <button onClick={() => setPage(p => Math.min(totalPages, p+1))} disabled={page === totalPages}
+                      style={{ padding:'8px 16px', borderRadius:24, border:'1px solid #ddd4c4', background:page===totalPages?'#f5f0e8':'white', color:page===totalPages?'#c0b8a8':'#4a9a55', cursor:page===totalPages?'not-allowed':'pointer', fontSize:13, fontFamily:'inherit' }}>
+                      下一页 →
+                    </button>
+                  </div>
+                )}
+              </>
             )}
           </main>
           <footer style={{ background:'white', borderTop:'1px solid #ede8e0', padding:'1.8rem 1.5rem', textAlign:'center' }}>
