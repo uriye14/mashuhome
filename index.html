@@ -669,48 +669,39 @@
             )}
           </main>
           {/* 底部：小店橱窗 + 顾问联系 */}
-          <div style={{ background:'white', borderTop:'1px solid #ede8e0' }}>
-            <div style={{ maxWidth:1060, margin:'0 auto', padding:'2.5rem 2rem', display:'flex', justifyContent:'center', gap:'4rem', flexWrap:'wrap' }}>
+          <div style={{ background:'#f5fbf5', borderTop:'1px solid #daeeda' }}>
+            <div style={{ maxWidth:1060, margin:'0 auto', padding:'1.5rem 1.2rem 1.2rem' }}>
+              <p style={{ textAlign:'center', fontSize:11, color:'#8a9a88', letterSpacing:1.5, textTransform:'uppercase', marginBottom:16 }}>联系我们</p>
+              <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:12 }}>
 
-              {/* 微信小店橱窗 */}
-              <div style={{ textAlign:'center' }}>
-                <div style={{ fontSize:13, fontWeight:700, color:'#1a1810', marginBottom:4 }}>🛒 美善品官方小店</div>
-                <div style={{ fontSize:11, color:'#8a7a68', marginBottom:12 }}>小美主机 · 配件 · 周边好物</div>
-                <div style={{ position:'relative', display:'inline-block', cursor:'pointer' }} onClick={() => setQrModal({ src:'https://i.postimg.cc/85nRsDpT/wei-xin-dian-pu-chu-chuang.png', alt:'微信小店二维码' })}>
-                  <img src="https://i.postimg.cc/85nRsDpT/wei-xin-dian-pu-chu-chuang.png" alt="微信小店二维码"
-                    style={{ width:130, height:130, borderRadius:12, border:'2px solid #c8e8c0', objectFit:'cover', display:'block', transition:'transform 0.2s' }}
-                    onMouseEnter={e => e.target.style.transform='scale(1.05)'}
-                    onMouseLeave={e => e.target.style.transform='scale(1)'} />
-                  <div style={{ position:'absolute', bottom:6, left:0, right:0, textAlign:'center' }}>
-                    <span style={{ fontSize:10, background:'rgba(7,193,96,0.9)', color:'white', borderRadius:20, padding:'2px 8px' }}>点击放大扫码</span>
+                {/* 微信小店 */}
+                <div style={{ background:'white', borderRadius:14, padding:'14px 12px', textAlign:'center', border:'1px solid #d8edd8' }}>
+                  <div style={{ fontSize:12, fontWeight:700, color:'#1a1810', marginBottom:2 }}>🛒 美善品小店</div>
+                  <div style={{ fontSize:10, color:'#8a9a88', marginBottom:10 }}>小美主机 · 配件 · 好物</div>
+                  <div style={{ cursor:'pointer' }} onClick={() => setQrModal({ src:'https://i.postimg.cc/85nRsDpT/wei-xin-dian-pu-chu-chuang.png', alt:'微信小店二维码' })}>
+                    <img src="https://i.postimg.cc/85nRsDpT/wei-xin-dian-pu-chu-chuang.png" alt="微信小店二维码"
+                      style={{ width:'100%', maxWidth:120, borderRadius:10, border:'1.5px solid #c8e8c0', display:'block', margin:'0 auto' }} />
+                    <div style={{ fontSize:10, color:'#07c160', marginTop:8, fontWeight:600 }}>点击放大 · 扫码进店</div>
                   </div>
                 </div>
-                <div style={{ fontSize:11, color:'#07c160', marginTop:8, fontWeight:600 }}>扫码进入小店选购</div>
-              </div>
 
-              {/* 分割线 */}
-              <div style={{ width:1, background:'#ede8e0', alignSelf:'stretch', minHeight:140 }} />
-
-              {/* 顾问联系 */}
-              <div style={{ textAlign:'center' }}>
-                <div style={{ fontSize:13, fontWeight:700, color:'#1a1810', marginBottom:4 }}>👩‍💼 美善品顾问</div>
-                <div style={{ fontSize:11, color:'#8a7a68', marginBottom:12 }}>曾丽 · 海口福维克剑桥郡店主理人</div>
-                <div style={{ position:'relative', display:'inline-block', cursor:'pointer' }} onClick={() => setQrModal({ src:'https://i.postimg.cc/VNkrQnzK/ceng-li-wei-xin-er-wei-ma.png', alt:'曾丽微信二维码' })}>
-                  <img src="https://i.postimg.cc/VNkrQnzK/ceng-li-wei-xin-er-wei-ma.png" alt="曾丽微信二维码"
-                    style={{ width:130, height:130, borderRadius:12, border:'2px solid #c8e8c0', objectFit:'cover', display:'block', transition:'transform 0.2s' }}
-                    onMouseEnter={e => e.target.style.transform='scale(1.05)'}
-                    onMouseLeave={e => e.target.style.transform='scale(1)'} />
-                  <div style={{ position:'absolute', bottom:6, left:0, right:0, textAlign:'center' }}>
-                    <span style={{ fontSize:10, background:'rgba(7,193,96,0.9)', color:'white', borderRadius:20, padding:'2px 8px' }}>点击放大扫码</span>
+                {/* 顾问微信 */}
+                <div style={{ background:'white', borderRadius:14, padding:'14px 12px', textAlign:'center', border:'1px solid #d8edd8' }}>
+                  <div style={{ fontSize:12, fontWeight:700, color:'#1a1810', marginBottom:2 }}>👩‍💼 曾丽顾问</div>
+                  <div style={{ fontSize:10, color:'#8a9a88', marginBottom:10 }}>海口福维克剑桥郡</div>
+                  <div style={{ cursor:'pointer' }} onClick={() => setQrModal({ src:'https://i.postimg.cc/VNkrQnzK/ceng-li-wei-xin-er-wei-ma.png', alt:'曾丽微信二维码' })}>
+                    <img src="https://i.postimg.cc/VNkrQnzK/ceng-li-wei-xin-er-wei-ma.png" alt="曾丽微信二维码"
+                      style={{ width:'100%', maxWidth:120, borderRadius:10, border:'1.5px solid #c8e8c0', display:'block', margin:'0 auto' }} />
+                    <div style={{ fontSize:10, color:'#07c160', marginTop:8, fontWeight:600 }}>点击放大 · 扫码咨询</div>
                   </div>
                 </div>
-                <div style={{ fontSize:11, color:'#07c160', marginTop:8, fontWeight:600 }}>扫码添加微信咨询</div>
+
               </div>
             </div>
 
             {/* 版权 */}
-            <div style={{ borderTop:'1px solid #f0ebe2', padding:'1rem 1.5rem', textAlign:'center' }}>
-              <p style={{ fontSize:11, color:'#b0a080' }}>麻薯食谱 · mashuhome.com · 适用 Thermomix® 小美 · TM5 · TM6 · TM7</p>
+            <div style={{ borderTop:'1px solid #daeeda', padding:'0.8rem 1.5rem', textAlign:'center' }}>
+              <p style={{ fontSize:10, color:'#a0b0a0' }}>麻薯食谱 · mashuhome.com · 适用 Thermomix® 小美 · TM5 · TM6 · TM7</p>
             </div>
           </div>
 
