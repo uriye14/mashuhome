@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>麻薯菜谱 · mashuhome</title>
+  <title>麻薯食谱 · mashuhome</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;500;700&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
@@ -19,14 +19,14 @@
     .card:hover { transform: translateY(-5px); box-shadow: 0 12px 28px rgba(0,0,0,0.10); }
     .card img { transition: transform 0.4s ease; display: block; }
     .card:hover img { transform: scale(1.04); }
-    .header-top { max-width:1060px; margin:0 auto; padding:1rem 2rem; display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:12px; }
+    .header-top { max-width:1060px; margin:0 auto; padding:1rem 2rem; display:flex; align-items:center; justify-content:space-between; gap:12px; }
     .logo-area { display:flex; align-items:center; gap:16px; }
-    .logo-img { height:70px; width:auto; flex-shrink:0; }
+    .logo-img { height:210px; width:auto; flex-shrink:0; }
     .brand-title { font-size:22px; font-weight:700; color:#1a1810; letter-spacing:1px; line-height:1.2; }
     .brand-sub { display:flex; align-items:center; gap:6px; margin-top:5px; }
     .brand-sub-line { width:14px; height:1px; background:#c8b89a; display:inline-block; }
     .brand-sub-text { font-size:10px; color:#8a7a5a; letter-spacing:2.5px; text-transform:uppercase; }
-    .logo-center { display:flex; justify-content:center; align-items:center; }
+    .logo-center { display:none; }
     .search-right { display:flex; justify-content:flex-end; }
     .search-wrap { position:relative; }
     .search-wrap svg { position:absolute; left:12px; top:50%; transform:translateY(-50%); pointer-events:none; }
@@ -51,12 +51,11 @@
     .detail-content { max-width:700px; margin:0 auto; padding:2rem 1.5rem 5rem; }
     .ingredient-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px 16px; }
     @media (max-width: 640px) {
-      .header-top { padding:1rem 1.2rem; grid-template-columns:1fr auto; }
-      .logo-center { display:none; }
-      .search-right { justify-content:flex-end; }
+      .header-top { padding:1rem 1.2rem; flex-direction:column; align-items:flex-start; }
       .search-wrap { width:100%; }
       .search-input { width:100%; }
-      .logo-img { height:52px; }
+      .logo-img { height:120px; }
+      .brand-title { font-size:18px; }
       .hero { height:150px; }
       .hero-text h2 { font-size:18px; margin-bottom:6px; }
       .hero-text p { font-size:11px; }
@@ -257,8 +256,8 @@
             <div className="detail-nav-inner">
               <button onClick={onBack} style={{ background:'none', border:'none', color:'#5a7a50', fontSize:14 }}>← 返回食谱</button>
               <div style={{ display:'flex', alignItems:'center', gap:7 }}>
-                <img src="https://i.postimg.cc/ydRp6XW3/ma-shu-cai-pulogo2.png" alt="麻薯菜谱" style={{ width:28, height:28, borderRadius:'50%', objectFit:'cover', objectPosition:'center 20%' }} />
-                <span style={{ fontSize:13, color:'#3a5a30', fontWeight:700 }}>麻薯菜谱</span>
+                <img src="https://i.postimg.cc/ydRp6XW3/ma-shu-cai-pulogo2.png" alt="麻薯食谱" style={{ width:28, height:28, borderRadius:'50%', objectFit:'cover', objectPosition:'center 20%' }} />
+                <span style={{ fontSize:13, color:'#3a5a30', fontWeight:700 }}>麻薯食谱</span>
               </div>
               <div style={{ width:60 }} />
             </div>
@@ -341,8 +340,9 @@
           <header style={{ background:'white', borderBottom:'1px solid #eee8de' }}>
             <div className="header-top">
               <div className="logo-area">
+                <img className="logo-img" src="https://i.postimg.cc/ydRp6XW3/ma-shu-cai-pulogo2.png" alt="麻薯食谱" />
                 <div>
-                  <div className="brand-title">麻薯菜谱</div>
+                  <div className="brand-title">麻薯食谱</div>
                   <div className="brand-sub">
                     <span className="brand-sub-line" />
                     <span className="brand-sub-text">mashuhome</span>
@@ -350,16 +350,11 @@
                   </div>
                 </div>
               </div>
-              <div className="logo-center">
-                <img className="logo-img" src="https://i.postimg.cc/ydRp6XW3/ma-shu-cai-pulogo2.png" alt="麻薯菜谱" />
-              </div>
-              <div className="search-right">
-                <div className="search-wrap">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#b0a090" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-                  </svg>
-                  <input className="search-input" type="text" placeholder="搜索食谱…" value={search} onChange={e => setSearch(e.target.value)} />
-                </div>
+              <div className="search-wrap">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#b0a090" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                </svg>
+                <input className="search-input" type="text" placeholder="搜索食谱…" value={search} onChange={e => setSearch(e.target.value)} />
               </div>
             </div>
             <div className="hero">
@@ -412,7 +407,7 @@
             )}
           </main>
           <footer style={{ background:'white', borderTop:'1px solid #ede8e0', padding:'1.5rem 1.5rem', textAlign:'center' }}>
-            <p style={{ fontSize:12, color:'#a09080', marginBottom:10 }}>麻薯菜谱 · mashuhome.com · 适用 Thermomix® 小美 · TM5 · TM6 · TM7</p>
+            <p style={{ fontSize:12, color:'#a09080', marginBottom:10 }}>麻薯食谱 · mashuhome.com · 适用 Thermomix® 小美 · TM5 · TM6 · TM7</p>
             <div style={{ width:40, height:1, background:'#e0d8cc', margin:'0 auto 10px' }} />
             <p style={{ fontSize:12, color:'#7a6a58', fontWeight:500 }}>美善品顾问联系方式</p>
             <p style={{ fontSize:13, color:'#5a4a38', marginTop:4, lineHeight:1.8 }}>
