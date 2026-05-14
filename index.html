@@ -3,7 +3,56 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>麻薯食谱 · mashuhome</title>
+  <title>麻薯食谱 · 小美家庭菜谱 | mashuhome.com</title>
+
+  <!-- SEO 基础标签 -->
+  <meta name="description" content="麻薯食谱，专为美善品小美（Thermomix）用户打造的家庭菜谱网站。收录早餐、主食、汤羹、甜点、饮品、酱料等多类原创食谱，步骤简单易懂，适合 TM5、TM6、TM7 使用。" />
+  <meta name="keywords" content="小美食谱,美善品食谱,Thermomix食谱,小美菜谱,美善品菜谱,TM6食谱,TM7食谱,家庭食谱,家常菜,豆浆,番茄牛肉面,玉米排骨汤,mashuhome" />
+  <meta name="author" content="麻薯食谱 mashuhome.com" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.mashuhome.com" />
+
+  <!-- Open Graph 社交分享标签（微信/微博分享时显示） -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="麻薯食谱 · 小美家庭菜谱" />
+  <meta property="og:description" content="专为美善品小美用户打造的家庭食谱，原创步骤简单易懂，涵盖早餐、主食、汤羹、甜点、饮品、酱料等多类菜谱。" />
+  <meta property="og:url" content="https://www.mashuhome.com" />
+  <meta property="og:image" content="https://i.postimg.cc/d3Ykkdm6/ma-shu-cai-pulogo2.png" />
+  <meta property="og:locale" content="zh_CN" />
+  <meta property="og:site_name" content="麻薯食谱" />
+
+  <!-- 结构化数据 Schema（让谷歌百度识别网站内容） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "麻薯食谱",
+    "alternateName": "mashuhome",
+    "url": "https://www.mashuhome.com",
+    "description": "专为美善品小美（Thermomix）用户打造的家庭食谱网站，涵盖早餐、主食、汤羹、甜点、饮品、酱料等原创菜谱。",
+    "inLanguage": "zh-CN",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://www.mashuhome.com/?search={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "麻薯食谱",
+    "url": "https://www.mashuhome.com",
+    "logo": "https://i.postimg.cc/d3Ykkdm6/ma-shu-cai-pulogo2.png",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "customer service",
+      "areaServed": "CN",
+      "availableLanguage": "Chinese"
+    }
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;500;700&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
@@ -74,7 +123,7 @@
 <body>
   <div id="root"></div>
   <script type="text/babel">
-    const { useState, useMemo } = React;
+    const { useState, useMemo, useEffect } = React;
 
     const TM = {
       TM5: { bg:'#f2f9f2', text:'#2d6e3a', border:'#a8d4a8', dot:'#4caf50' },
@@ -88,6 +137,115 @@
     };
 
     const recipes = [
+      // ── 早餐 ──
+      { id:2, title:'香蕉燕麦早餐粥', category:'早餐', time:12, servings:2, difficulty:'简单',
+        img:'https://images.unsplash.com/photo-1657373373438-db858cf59399?q=80&w=1287&auto=format&fit=crop',
+        desc:'熟透的香蕉自带天然甜味，营养满分，孩子们最爱的早晨第一餐', tm:['TM5','TM6','TM7'],
+        ingredients:['即食燕麦片 120g','熟香蕉 2 根','牛奶 400ml','蜂蜜 1 汤匙','肉桂粉 少许','核桃碎 适量'],
+        steps:[{title:'放入材料',time:'',desc:'将燕麦片、牛奶倒入锅中，香蕉剥皮直接放入，不需要提前切。'},{title:'烹煮',time:'8 分钟',desc:'90°C 速度 2，煮 8 分钟，香蕉会自动软化融入燕麦中。'},{title:'搅拌调味',time:'30 秒',desc:'加入蜂蜜，速度 4 搅拌 30 秒，根据喜好决定是否打得更细腻。'},{title:'装碗',time:'',desc:'盛入碗中，撒上核桃碎和少许肉桂粉，立即享用。'}]},
+
+      { id:5, title:'南瓜糙米粥', category:'早餐', time:35, servings:4, difficulty:'简单',
+        img:'https://images.unsplash.com/photo-1687684981416-6ff84d754b0b?q=80&w=927&auto=format&fit=crop',
+        desc:'甜糯南瓜搭配糙米，健康低卡，老人和孩子都适合的养胃粥品', tm:['TM5','TM6','TM7'],
+        ingredients:['南瓜 300g，去皮切块','糙米 150g，提前泡发 2 小时','水 1200ml','冰糖 2–3 颗','枸杞 少许'],
+        steps:[{title:'准备材料',time:'',desc:'糙米提前泡发 2 小时，南瓜去皮切 2cm 小块。'},{title:'放入所有材料',time:'',desc:'将泡发好的糙米、南瓜块、水和冰糖一起放入锅中。'},{title:'慢煮',time:'30 分钟',desc:'100°C 速度 1，煮 30 分钟。中途南瓜会自然软化融入米粥。'},{title:'装碗',time:'',desc:'盛入碗中，点缀几粒枸杞，温热享用。'}]},
+
+      { id:14, title:'五谷米糊', category:'早餐', time:40, servings:3, difficulty:'简单',
+        img:'https://images.unsplash.com/photo-1555078604-b2379f0e964a?q=80&w=1364&auto=format&fit=crop',
+        desc:'杂粮混在一起打成糊，暖胃又营养，冬天早上来一碗，一整天都有劲', tm:['TM5','TM6','TM7'],
+        ingredients:['大米 50g','黑米 30g','小米 30g','燕麦片 20g','花生 20g','清水 800ml','冰糖 适量'],
+        steps:[{title:'提前准备',time:'',desc:'所有食材淘洗干净。有时间的话提前泡发 2 小时，煮出来会更香更软，没时间直接煮也可以。'},{title:'放入所有材料',time:'',desc:'把泡好的五谷杂粮和清水一起倒进小美，不用切，直接放就行。'},{title:'慢煮',time:'20 分钟',desc:'100°C 速度 1，煮 20 分钟，煮到食材都软烂为止。'},{title:'搅打成糊',time:'1 分钟',desc:'从速度 5 慢慢升到速度 10，搅打 1 分钟，越打越细腻，打到你喜欢的稠度就停。'},{title:'加糖享用',time:'',desc:'加入冰糖，速度 3 搅匀融化，趁热喝。喝不完放冰箱，第二天加热还是一样好喝。'}]},
+
+      // ── 主食 ──
+      { id:3, title:'番茄鸡蛋意面', category:'主食', time:30, servings:3, difficulty:'简单',
+        img:'https://images.unsplash.com/photo-1626844131082-256783844137?q=80&w=1335&auto=format&fit=crop',
+        desc:'家常版番茄意面，酸甜开胃，简单食材做出让全家满足的一餐', tm:['TM5','TM6','TM7'],
+        ingredients:['意大利面 250g','新鲜番茄 4 个','鸡蛋 3 个','大蒜 3 瓣','橄榄油 2 汤匙','番茄膏 1 汤匙','盐、糖 适量','罗勒叶 少许'],
+        steps:[{title:'煮意面',time:'10 分钟',desc:'锅中烧开足量水，加盐，按包装说明煮意面，捞出备用。'},{title:'蒜香爆锅',time:'3 分钟',desc:'大蒜放入，速度 5 切碎。加橄榄油，100°C 速度 1 爆香 3 分钟。'},{title:'煮番茄酱',time:'12 分钟',desc:'番茄切块放入，加番茄膏、盐和少许糖，100°C 速度 2 煮 12 分钟至浓稠。'},{title:'加入鸡蛋',time:'3 分钟',desc:'鸡蛋打散后慢慢倒入，80°C 速度 2 轻轻搅拌 3 分钟，蛋液半凝固即可。'},{title:'拌入意面',time:'',desc:'将煮好的意面倒入拌匀，撒上新鲜罗勒叶，趁热上桌。'}]},
+
+      { id:15, title:'番茄牛肉面', category:'主食', time:60, servings:3, difficulty:'中等',
+        img:'https://images.unsplash.com/photo-1613744013720-4f505ce31735?q=80&w=1287&auto=format&fit=crop',
+        desc:'汤头浓郁，牛肉软烂，番茄酸甜，这碗面端上桌全家都安静了', tm:['TM5','TM6','TM7'],
+        ingredients:['牛腩 400g，切大块','番茄 3 个，切块','大蒜 3 瓣','姜 2 片','生抽 2 汤匙','老抽 1 茶匙','番茄膏 1 汤匙','盐、糖 适量','面条 适量','清水 800ml'],
+        steps:[{title:'牛肉焯水',time:'',desc:'牛腩冷水下锅，普通锅大火煮开后捞出，冲洗干净去掉血水。这步做好汤才不会腥。'},{title:'爆香蒜姜',time:'3 分钟',desc:'大蒜和姜片放入小美，速度 5 切碎，加少许油，100°C 速度 1 炒 3 分钟，香味出来了。'},{title:'炒番茄',time:'5 分钟',desc:'番茄块和番茄膏一起放入，100°C 速度 1 翻炒 5 分钟，炒到番茄出汁变软。'},{title:'炖牛肉',time:'40 分钟',desc:'放入牛腩、生抽、老抽、盐、糖和清水，100°C 速度小勺反转，炖 40 分钟。牛肉要软烂才好吃。'},{title:'煮面装碗',time:'',desc:'另起锅煮面，煮好捞出装碗，浇上满满一大勺番茄牛肉汤，趁热吃！'}]},
+
+      // ── 汤羹 ──
+      { id:1, title:'奶油蘑菇浓汤', category:'汤羹', time:25, servings:4, difficulty:'简单',
+        img:'https://images.unsplash.com/photo-1552309463-7c221c5130c2?q=80&w=1287&auto=format&fit=crop',
+        desc:'鲜嫩蘑菇搭配淡奶油，口感丝滑浓郁，是全家人都喜欢的暖身汤', tm:['TM5','TM6','TM7'],
+        ingredients:['新鲜蘑菇 400g','洋葱 1 个，切碎','大蒜 2 瓣','淡奶油 150ml','牛奶 200ml','无盐黄油 20g','盐、白胡椒粉 适量','欧芹碎 少许'],
+        steps:[{title:'炒香洋葱',time:'5 分钟',desc:'将黄油、大蒜和洋葱放入锅中，100°C 速度 1，炒 5 分钟至洋葱软化透明。'},{title:'加入蘑菇',time:'8 分钟',desc:'加入蘑菇，100°C 速度 1，翻炒 8 分钟直到蘑菇出水并变软。'},{title:'打成泥',time:'1 分钟',desc:'稍凉后，从速度 5 慢慢升至速度 9，搅打 1 分钟成光滑蘑菇泥。'},{title:'加入奶油',time:'5 分钟',desc:'倒入淡奶油和牛奶，90°C 速度 3，加热 5 分钟，用盐和白胡椒调味。'},{title:'盛盘享用',time:'',desc:'倒入碗中，撒上欧芹碎，趁热享用。可搭配脆皮面包一起吃。'}]},
+
+      { id:16, title:'玉米排骨汤', category:'汤羹', time:65, servings:4, difficulty:'简单',
+        img:'https://images.unsplash.com/photo-1717815963472-d1ae37cdd8d2?q=80&w=1364&auto=format&fit=crop',
+        desc:'甜玉米配排骨，汤色奶白，喝起来鲜甜清润，家里老人小孩都爱喝', tm:['TM5','TM6','TM7'],
+        ingredients:['猪排骨 500g','甜玉米 2 根，切段','胡萝卜 1 根，切滚刀块','姜 3 片','清水 1200ml','盐 适量','枸杞 少许（可选）'],
+        steps:[{title:'排骨焯水',time:'',desc:'排骨冷水下锅，普通锅煮开后捞出，冲洗干净。焯水这步不能省，汤才会清甜不腥。'},{title:'放入所有材料',time:'',desc:'排骨、玉米段、胡萝卜、姜片和清水全部放进小美，食材要一次放好。'},{title:'慢炖',time:'50 分钟',desc:'100°C 速度小勺反转，炖 50 分钟。炖的时候汤色会慢慢变成奶白色，特别诱人。'},{title:'调味盛碗',time:'',desc:'加盐调味，撒几粒枸杞。盛出来趁热喝，玉米甜糯，喝完整个人都暖起来了。'}]},
+
+      // ── 冷菜 ──
+      { id:11, title:'腌萝卜', category:'冷菜', time:30, servings:4, difficulty:'简单',
+        img:'https://i.postimg.cc/C1ZZs9CN/yan-zhi-luo-bo-pian.jpg',
+        desc:'酸甜爽脆的腌萝卜，用小美快速完成腌制，冷藏保存随取随吃，开胃下饭一绝', tm:['TM5','TM6','TM7'],
+        ingredients:['白萝卜 1000g','生抽 130g','醋 100g','冰糖 100g'],
+        steps:[{title:'准备腌汁',time:'6 分钟',desc:'锅内放入醋、生抽、冰糖，100°C 速度小勺煮开，约 6 分钟，让冰糖完全融化。'},{title:'处理萝卜',time:'18 分钟',desc:'白萝卜洗净，切成薄片，放入主锅。70°C 速度小勺反转，慢慢翻动 18 分钟让萝卜吸收腌汁。'},{title:'冷却装瓶',time:'',desc:'完成后取出，冷却至室温后放入玻璃瓶，放冰箱冷藏保存。'},{title:'小贴士',time:'',desc:'白萝卜无需用盐腌制杀水，小美方便快速。冷藏后口感更爽脆，隔夜后味道更佳。'}]},
+
+      // ── 甜点 ──
+      { id:4, title:'苹果肉桂麦芬', category:'甜点', time:45, servings:12, difficulty:'中等',
+        img:'https://images.unsplash.com/photo-1608847568631-50d50ebe4407?q=80&w=1286&auto=format&fit=crop',
+        desc:'家里孩子最爱的下午茶点心，苹果粒软糯，肉桂香气四溢', tm:['TM5','TM6','TM7'],
+        ingredients:['低筋面粉 200g','苹果 2 个，去皮切丁','鸡蛋 2 个','牛奶 120ml','无盐黄油 80g','细砂糖 90g','泡打粉 1.5 茶匙','肉桂粉 1 茶匙'],
+        steps:[{title:'预热烤箱',time:'',desc:'烤箱预热至 180°C，麦芬模具铺上纸杯备用。'},{title:'融化黄油',time:'2 分钟',desc:'黄油放入，50°C 速度 2 融化约 2 分钟。加入糖、鸡蛋、牛奶，速度 4 搅拌均匀。'},{title:'加粉类',time:'10 秒',desc:'筛入面粉、泡打粉、肉桂粉，速度 4 搅拌约 10 秒，看不到干粉即可。'},{title:'拌入苹果',time:'',desc:'用刮刀轻轻折叠拌入苹果丁，动作要轻柔保持面糊蓬松。'},{title:'烘烤',time:'22 分钟',desc:'面糊倒入模具至七分满，180°C 烤约 22 分钟，牙签插入无沾即熟。'}]},
+
+      { id:17, title:'双皮奶', category:'甜点', time:45, servings:4, difficulty:'中等',
+        img:'https://images.unsplash.com/photo-1488477181946-6428a0291777?w=600&h=380&fit=crop',
+        desc:'比奶茶店还好吃的双皮奶，嫩滑到勺子插进去都是享受，冷藏后口感更绝', tm:['TM5','TM6','TM7'],
+        ingredients:['全脂牛奶 500ml（全脂的才能起好奶皮）','蛋清 3 个','白糖 40g'],
+        steps:[{title:'加热牛奶',time:'5 分钟',desc:'牛奶倒入小美，80°C 速度 2 加热 5 分钟，然后倒入碗中，静置放凉。表面会自然形成一层奶皮，这是第一层。'},{title:'打蛋清',time:'2 分钟',desc:'蛋清加白糖，用蝴蝶棒速度 4 打约 2 分钟，打到起泡就好，不需要打到全发。'},{title:'混合',time:'',desc:'轻轻用牙签挑开碗边的奶皮，把蛋清液从边缘缓缓倒入奶皮下方，然后把奶皮轻轻放回表面。'},{title:'上锅蒸',time:'25 分钟',desc:'蒸锅加水，放好碗后盖上保鲜膜，80°C 蒸 25 分钟。蒸的过程不要开盖！'},{title:'冷藏享用',time:'',desc:'蒸好后放凉，放冰箱冷藏 1 小时，口感更嫩滑。吃的时候可以加红豆或者芒果粒，好吃翻倍。'}]},
+
+      // ── 饮品 ──
+      { id:12, title:'自制豆浆', category:'饮品', time:20, servings:4, difficulty:'简单',
+        img:'https://images.unsplash.com/photo-1555465083-a845797ef750?q=80&w=1364&auto=format&fit=crop',
+        desc:'比超市买的香太多了！自己打的豆浆没有任何添加剂，浓郁又健康，早餐喝一碗超满足', tm:['TM5','TM6','TM7'],
+        ingredients:['干黄豆 100g（提前泡发一晚）','清水 1000ml','白糖 适量（按口味加）'],
+        steps:[{title:'泡豆',time:'',desc:'黄豆提前用清水泡发一整夜，泡好后冲洗几遍，这步不能省，泡透了打出来才够香。'},{title:'放入材料',time:'',desc:'把泡好的黄豆和 1000ml 清水一起倒进小美，不需要提前煮。'},{title:'搅打',time:'1 分钟',desc:'从速度 5 慢慢升到速度 10，搅打 1 分钟，打到顺滑细腻为止。'},{title:'过滤豆渣',time:'',desc:'用豆浆袋或细网筛过滤一遍。不喜欢过滤麻烦的话，直接喝也可以，豆渣营养也很好。'},{title:'煮熟',time:'8 分钟',desc:'过滤好的豆浆倒回小美，100°C 速度 2，煮 8 分钟。一定要煮熟才能喝！加糖调味，趁热享用。'}]},
+
+      { id:7, title:'百香果柠檬气泡饮', category:'饮品', time:5, servings:2, difficulty:'简单',
+        img:'https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?w=600&h=380&fit=crop',
+        desc:'清爽酸甜的夏日饮品，孩子放学回来的最佳奖励', tm:['TM5','TM6','TM7'],
+        ingredients:['百香果 3 个，取果肉','新鲜柠檬 1 个，取汁','蜂蜜 2 汤匙','气泡水 400ml（冰的）','冰块 适量'],
+        steps:[{title:'制作糖浆',time:'30 秒',desc:'百香果肉、柠檬汁和蜂蜜放入，速度 5 搅打 30 秒混合均匀。'},{title:'过滤（可选）',time:'',desc:'若不喜欢百香果籽，可用细筛过滤，取清澈果汁。保留籽口感更丰富。'},{title:'组合饮品',time:'',desc:'杯中加满冰块，倒入果汁，再缓慢注入冰气泡水，不要搅拌保留气泡。'}]},
+
+      { id:8, title:'香蕉可可奶昔', category:'饮品', time:5, servings:2, difficulty:'简单',
+        img:'https://images.unsplash.com/photo-1542444592-e6880e286bb9?q=80&w=961&auto=format&fit=crop',
+        desc:'天然甜味无需加糖，浓稠丝滑，孩子的健康早餐饮品', tm:['TM5','TM6','TM7'],
+        ingredients:['熟香蕉 2 根（冷冻后更浓稠）','可可粉 2 汤匙','牛奶 250ml','蜂蜜 1 汤匙（可选）','冰块 少许'],
+        steps:[{title:'放入材料',time:'',desc:'将香蕉（冷冻最佳）、可可粉、牛奶全部放入。'},{title:'搅打',time:'1 分钟',desc:'从速度 5 慢慢升至速度 10，搅打约 1 分钟至完全顺滑无颗粒。'},{title:'立即享用',time:'',desc:'倒入杯中立即饮用，现做现喝最佳。'}]},
+
+      // ── 酱料 ──
+      { id:6, title:'自制花生酱', category:'酱料', time:15, servings:1, difficulty:'简单',
+        img:'https://images.unsplash.com/photo-1615110250484-e8c3b151b957?q=80&w=1287&auto=format&fit=crop',
+        desc:'只需花生和少许盐，无任何添加剂，浓郁程度远超超市瓶装花生酱', tm:['TM5','TM6','TM7'],
+        ingredients:['去皮熟花生 300g','盐 1/4 茶匙','蜂蜜 1 汤匙（可选）','葡萄籽油 少许'],
+        steps:[{title:'准备花生',time:'',desc:'使用已去皮的熟花生，确保完全干燥，不能有水分。'},{title:'初步搅打',time:'1 分钟',desc:'花生放入，从速度 5 逐渐升至速度 10，搅打 1 分钟，变成粗粒状。'},{title:'持续研磨',time:'3 分钟',desc:'速度 10 继续搅打 3 分钟，花生会先变成粉，再逐渐出油变成糊状。中途用刮刀刮壁。'},{title:'调味装瓶',time:'',desc:'加入盐和蜂蜜，速度 5 混合 10 秒。装入干净玻璃瓶，密封冷藏可保存约 1 个月。'}]},
+
+      { id:18, title:'葱油', category:'酱料', time:20, servings:1, difficulty:'简单',
+        img:'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=600&h=380&fit=crop',
+        desc:'一罐葱油，拌面拌饭拌什么都香，自己炸的比外面买的香十倍，做一罐能用好久', tm:['TM5','TM6','TM7'],
+        ingredients:['小葱 200g，切成 5cm 小段','色拉油 300ml','盐 少许'],
+        steps:[{title:'葱一定要晾干',time:'',desc:'小葱洗净后必须完全晾干，有水分放进热油会溅油，危险又影响香味。晾干至少半小时。'},{title:'放入小美',time:'',desc:'葱段和色拉油一起放入小美，葱要完全浸在油里。'},{title:'慢炸',time:'15 分钟',desc:'120°C 速度小勺反转，慢炸 15 分钟。葱会从翠绿慢慢变成金黄色，香味会越来越浓。'},{title:'过滤',time:'',desc:'用细筛过滤掉葱渣，留下清澈金黄的葱油。葱渣也别扔，拌进炒饭或者面条里很香。'},{title:'装瓶保存',time:'',desc:'葱油晾凉后装入干净玻璃瓶，密封冷藏可以保存约一个月。拌面时淋一勺，立刻升华。'}]},
+
+      { id:19, title:'辣椒酱', category:'酱料', time:25, servings:1, difficulty:'简单',
+        img:'https://images.unsplash.com/photo-1692302756206-3dd7506cb8f0?q=80&w=1287&auto=format&fit=crop',
+        desc:'不辣不欢的朋友必备！自己做的辣椒酱，想多辣就多辣，吃什么都能加一勺', tm:['TM5','TM6','TM7'],
+        ingredients:['新鲜红辣椒 300g，去蒂','大蒜 50g','姜 20g','食用油 50ml','盐 1 茶匙','糖 1 茶匙','生抽 1 汤匙'],
+        steps:[{title:'处理食材',time:'',desc:'辣椒去蒂洗净，一定要完全晾干。大蒜和姜不需要提前切，直接放进小美就行。'},{title:'切碎',time:'5 秒',desc:'辣椒、大蒜、姜一起放入，速度 5 搅打 5 秒，打成粗粒状。喜欢细腻的可以再打几秒。'},{title:'炒制',time:'10 分钟',desc:'加入食用油，100°C 速度 1 翻炒 10 分钟，把辣椒的水分炒干，香味全出来了。'},{title:'调味',time:'5 分钟',desc:'加入盐、糖和生抽，继续 100°C 速度 1 炒 5 分钟，炒到稍微浓稠就好。'},{title:'装瓶',time:'',desc:'放凉后装入消毒过的玻璃瓶，冷藏可以保存一个月。吃面、吃饺子、拌菜都来一勺！'}]},
+
+      { id:20, title:'番茄酱', category:'酱料', time:35, servings:1, difficulty:'简单',
+        img:'https://images.unsplash.com/photo-1472476443507-c7a5948772fc?w=600&h=380&fit=crop',
+        desc:'用新鲜番茄自己熬的番茄酱，酸甜浓郁，比瓶装的新鲜好吃，做披萨拌面都用得上', tm:['TM5','TM6','TM7'],
+        ingredients:['成熟番茄 800g（越熟越红越好）','洋葱 半个','大蒜 3 瓣','橄榄油 2 汤匙','盐 1 茶匙','糖 1 茶匙','罗勒叶 少许（可选）'],
+        steps:[{title:'爆香洋葱蒜',time:'5 分钟',desc:'橄榄油、切碎的洋葱和大蒜放入小美，100°C 速度 1 炒 5 分钟，炒到软化出香味。'},{title:'加入番茄',time:'15 分钟',desc:'番茄切块放入，100°C 速度 2，煮 15 分钟，煮到番茄完全软烂出汁，颜色变深。'},{title:'搅打顺滑',time:'30 秒',desc:'稍微放凉后，速度 8 搅打 30 秒，打成顺滑的番茄酱。喜欢有颗粒感的打短一点。'},{title:'收汁调味',time:'5 分钟',desc:'加入盐和糖，90°C 速度 2 再煮 5 分钟，煮到番茄酱变浓稠。尝一下味道，按喜好调整。'},{title:'装瓶保存',time:'',desc:'晾凉后装入玻璃瓶，冷藏保存约 2 周。做披萨、拌意面、涂面包都非常好用。'}]},
+    ];
       { id:1, title:'奶油蘑菇浓汤', category:'汤羹', time:25, servings:4, difficulty:'简单',
         img:'https://images.unsplash.com/photo-1552309463-7c221c5130c2?q=80&w=1287&auto=format&fit=crop',
         desc:'鲜嫩蘑菇搭配淡奶油，口感丝滑浓郁，是全家人都喜欢的暖身汤', tm:['TM5','TM6','TM7'],
@@ -117,127 +275,6 @@
         desc:'甜糯南瓜搭配糙米，健康低卡，老人和孩子都适合的养胃粥品', tm:['TM5','TM6','TM7'],
         ingredients:['南瓜 300g，去皮切块','糙米 150g，提前泡发 2 小时','水 1200ml','冰糖 2–3 颗','枸杞 少许'],
         steps:[{title:'准备材料',time:'',desc:'糙米提前泡发 2 小时，南瓜去皮切 2cm 小块。'},{title:'放入所有材料',time:'',desc:'将泡发好的糙米、南瓜块、水和冰糖一起放入锅中。'},{title:'慢煮',time:'30 分钟',desc:'100°C 速度 1，煮 30 分钟。中途南瓜会自然软化融入米粥。'},{title:'装碗',time:'',desc:'盛入碗中，点缀几粒枸杞，温热享用。'}]},
-
-      { id:6, title:'自制花生酱', category:'酱料', time:15, servings:1, difficulty:'简单',
-        img:'https://images.unsplash.com/photo-1615110250484-e8c3b151b957?q=80&w=1287&auto=format&fit=crop',
-        desc:'只需花生和少许盐，无任何添加剂，浓郁程度远超超市瓶装花生酱', tm:['TM5','TM6','TM7'],
-        ingredients:['去皮熟花生 300g','盐 1/4 茶匙','蜂蜜 1 汤匙（可选）','葡萄籽油 少许'],
-        steps:[{title:'准备花生',time:'',desc:'使用已去皮的熟花生，确保完全干燥，不能有水分。'},{title:'初步搅打',time:'1 分钟',desc:'花生放入，从速度 5 逐渐升至速度 10，搅打 1 分钟，变成粗粒状。'},{title:'持续研磨',time:'3 分钟',desc:'速度 10 继续搅打 3 分钟，花生会先变成粉，再逐渐出油变成糊状。中途用刮刀刮壁。'},{title:'调味装瓶',time:'',desc:'加入盐和蜂蜜，速度 5 混合 10 秒。装入干净玻璃瓶，密封冷藏可保存约 1 个月。'}]},
-
-      { id:8, title:'百香果柠檬气泡饮', category:'饮品', time:5, servings:2, difficulty:'简单',
-        img:'https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?w=600&h=380&fit=crop',
-        desc:'清爽酸甜的夏日饮品，孩子放学回来的最佳奖励', tm:['TM5','TM6','TM7'],
-        ingredients:['百香果 3 个，取果肉','新鲜柠檬 1 个，取汁','蜂蜜 2 汤匙','气泡水 400ml（冰的）','冰块 适量'],
-        steps:[{title:'制作糖浆',time:'30 秒',desc:'百香果肉、柠檬汁和蜂蜜放入，速度 5 搅打 30 秒混合均匀。'},{title:'过滤（可选）',time:'',desc:'若不喜欢百香果籽，可用细筛过滤，取清澈果汁。保留籽口感更丰富。'},{title:'组合饮品',time:'',desc:'杯中加满冰块，倒入果汁，再缓慢注入冰气泡水，不要搅拌保留气泡。'}]},
-
-      { id:10, title:'香蕉可可奶昔', category:'饮品', time:5, servings:2, difficulty:'简单',
-        img:'https://images.unsplash.com/photo-1542444592-e6880e286bb9?q=80&w=961&auto=format&fit=crop',
-        desc:'天然甜味无需加糖，浓稠丝滑，孩子的健康早餐饮品', tm:['TM5','TM6','TM7'],
-        ingredients:['熟香蕉 2 根（冷冻后更浓稠）','可可粉 2 汤匙','牛奶 250ml','蜂蜜 1 汤匙（可选）','冰块 少许'],
-        steps:[{title:'放入材料',time:'',desc:'将香蕉（冷冻最佳）、可可粉、牛奶全部放入。'},{title:'搅打',time:'1 分钟',desc:'从速度 5 慢慢升至速度 10，搅打约 1 分钟至完全顺滑无颗粒。'},{title:'立即享用',time:'',desc:'倒入杯中立即饮用，现做现喝最佳。'}]},
-
-      { id:11, title:'腌萝卜', category:'冷菜', time:30, servings:4, difficulty:'简单',
-        img:'https://i.postimg.cc/C1ZZs9CN/yan-zhi-luo-bo-pian.jpg',
-        desc:'酸甜爽脆的腌萝卜，用小美快速完成腌制，冷藏保存随取随吃，开胃下饭一绝', tm:['TM5','TM6','TM7'],
-        ingredients:['白萝卜 1000g','生抽 130g','醋 100g','冰糖 100g'],
-        steps:[{title:'准备腌汁',time:'6 分钟',desc:'锅内放入醋、生抽、冰糖，100°C 速度小勺煮开，约 6 分钟，让冰糖完全融化。'},{title:'处理萝卜',time:'18 分钟',desc:'白萝卜洗净，切成薄片，放入主锅。70°C 速度小勺反转，慢慢翻动 18 分钟让萝卜吸收腌汁。'},{title:'冷却装瓶',time:'',desc:'完成后取出，冷却至室温后放入玻璃瓶，放冰箱冷藏保存。'},{title:'小贴士',time:'',desc:'白萝卜无需用盐腌制杀水，小美方便快速。冷藏后口感更爽脆，隔夜后味道更佳。'}]},
-
-      { id:12, title:'自制豆浆', category:'饮品', time:20, servings:4, difficulty:'简单',
-        img:'https://images.unsplash.com/photo-1555465083-a845797ef750?q=80&w=1364&auto=format&fit=crop',
-        desc:'比超市买的香太多了！自己打的豆浆没有任何添加剂，浓郁又健康，早餐喝一碗超满足', tm:['TM5','TM6','TM7'],
-        ingredients:['干黄豆 100g（提前泡发一晚）','清水 1000ml','白糖 适量（按口味加）'],
-        steps:[
-          {title:'泡豆',time:'',desc:'黄豆提前用清水泡发一整夜，泡好后冲洗几遍，这步不能省，泡透了打出来才够香。'},
-          {title:'放入材料',time:'',desc:'把泡好的黄豆和 1000ml 清水一起倒进小美，不需要提前煮。'},
-          {title:'搅打',time:'1 分钟',desc:'从速度 5 慢慢升到速度 10，搅打 1 分钟，打到顺滑细腻为止。'},
-          {title:'过滤豆渣',time:'',desc:'用豆浆袋或细网筛过滤一遍。不喜欢过滤麻烦的话，直接喝也可以，豆渣营养也很好。'},
-          {title:'煮熟',time:'8 分钟',desc:'过滤好的豆浆倒回小美，100°C 速度 2，煮 8 分钟。一定要煮熟才能喝！加糖调味，趁热享用。'},
-        ]},
-
-      { id:14, title:'五谷米糊', category:'早餐', time:40, servings:3, difficulty:'简单',
-        img:'https://images.unsplash.com/photo-1555078604-b2379f0e964a?q=80&w=1364&auto=format&fit=crop',
-        desc:'杂粮混在一起打成糊，暖胃又营养，冬天早上来一碗，一整天都有劲', tm:['TM5','TM6','TM7'],
-        ingredients:['大米 50g','黑米 30g','小米 30g','燕麦片 20g','花生 20g','清水 800ml','冰糖 适量'],
-        steps:[
-          {title:'提前准备',time:'',desc:'所有食材淘洗干净。有时间的话提前泡发 2 小时，煮出来会更香更软，没时间直接煮也可以。'},
-          {title:'放入所有材料',time:'',desc:'把泡好的五谷杂粮和清水一起倒进小美，不用切，直接放就行。'},
-          {title:'慢煮',time:'20 分钟',desc:'100°C 速度 1，煮 20 分钟，煮到食材都软烂为止。'},
-          {title:'搅打成糊',time:'1 分钟',desc:'从速度 5 慢慢升到速度 10，搅打 1 分钟，越打越细腻，打到你喜欢的稠度就停。'},
-          {title:'加糖享用',time:'',desc:'加入冰糖，速度 3 搅匀融化，趁热喝。喝不完放冰箱，第二天加热还是一样好喝。'},
-        ]},
-
-      { id:15, title:'番茄牛肉面', category:'主食', time:60, servings:3, difficulty:'中等',
-        img:'https://images.unsplash.com/photo-1613744013720-4f505ce31735?q=80&w=1287&auto=format&fit=crop',
-        desc:'汤头浓郁，牛肉软烂，番茄酸甜，这碗面端上桌全家都安静了', tm:['TM5','TM6','TM7'],
-        ingredients:['牛腩 400g，切大块','番茄 3 个，切块','大蒜 3 瓣','姜 2 片','生抽 2 汤匙','老抽 1 茶匙','番茄膏 1 汤匙','盐、糖 适量','面条 适量','清水 800ml'],
-        steps:[
-          {title:'牛肉焯水',time:'',desc:'牛腩冷水下锅，普通锅大火煮开后捞出，冲洗干净去掉血水。这步做好汤才不会腥。'},
-          {title:'爆香蒜姜',time:'3 分钟',desc:'大蒜和姜片放入小美，速度 5 切碎，加少许油，100°C 速度 1 炒 3 分钟，香味出来了。'},
-          {title:'炒番茄',time:'5 分钟',desc:'番茄块和番茄膏一起放入，100°C 速度 1 翻炒 5 分钟，炒到番茄出汁变软。'},
-          {title:'炖牛肉',time:'40 分钟',desc:'放入牛腩、生抽、老抽、盐、糖和清水，100°C 速度小勺反转，炖 40 分钟。牛肉要软烂才好吃。'},
-          {title:'煮面装碗',time:'',desc:'另起锅煮面，煮好捞出装碗，浇上满满一大勺番茄牛肉汤，趁热吃！'},
-        ]},
-
-      { id:16, title:'玉米排骨汤', category:'汤羹', time:65, servings:4, difficulty:'简单',
-        img:'https://images.unsplash.com/photo-1717815963472-d1ae37cdd8d2?q=80&w=1364&auto=format&fit=crop',
-        desc:'甜玉米配排骨，汤色奶白，喝起来鲜甜清润，家里老人小孩都爱喝', tm:['TM5','TM6','TM7'],
-        ingredients:['猪排骨 500g','甜玉米 2 根，切段','胡萝卜 1 根，切滚刀块','姜 3 片','清水 1200ml','盐 适量','枸杞 少许（可选）'],
-        steps:[
-          {title:'排骨焯水',time:'',desc:'排骨冷水下锅，普通锅煮开后捞出，冲洗干净。焯水这步不能省，汤才会清甜不腥。'},
-          {title:'放入所有材料',time:'',desc:'排骨、玉米段、胡萝卜、姜片和清水全部放进小美，食材要一次放好。'},
-          {title:'慢炖',time:'50 分钟',desc:'100°C 速度小勺反转，炖 50 分钟。炖的时候汤色会慢慢变成奶白色，特别诱人。'},
-          {title:'调味盛碗',time:'',desc:'加盐调味，撒几粒枸杞。盛出来趁热喝，玉米甜糯，喝完整个人都暖起来了。'},
-        ]},
-
-      { id:17, title:'双皮奶', category:'甜点', time:45, servings:4, difficulty:'中等',
-        img:'https://images.unsplash.com/photo-1488477181946-6428a0291777?w=600&h=380&fit=crop',
-        desc:'比奶茶店还好吃的双皮奶，嫩滑到勺子插进去都是享受，冷藏后口感更绝', tm:['TM5','TM6','TM7'],
-        ingredients:['全脂牛奶 500ml（全脂的才能起好奶皮）','蛋清 3 个','白糖 40g'],
-        steps:[
-          {title:'加热牛奶',time:'5 分钟',desc:'牛奶倒入小美，80°C 速度 2 加热 5 分钟，然后倒入碗中，静置放凉。表面会自然形成一层奶皮，这是第一层。'},
-          {title:'打蛋清',time:'2 分钟',desc:'蛋清加白糖，用蝴蝶棒速度 4 打约 2 分钟，打到起泡就好，不需要打到全发。'},
-          {title:'混合',time:'',desc:'轻轻用牙签挑开碗边的奶皮，把蛋清液从边缘缓缓倒入奶皮下方，然后把奶皮轻轻放回表面。'},
-          {title:'上锅蒸',time:'25 分钟',desc:'蒸锅加水，放好碗后盖上保鲜膜，80°C 蒸 25 分钟。蒸的过程不要开盖！'},
-          {title:'冷藏享用',time:'',desc:'蒸好后放凉，放冰箱冷藏 1 小时，口感更嫩滑。吃的时候可以加红豆或者芒果粒，好吃翻倍。'},
-        ]},
-
-      { id:18, title:'葱油', category:'酱料', time:20, servings:1, difficulty:'简单',
-        img:'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=600&h=380&fit=crop',
-        desc:'一罐葱油，拌面拌饭拌什么都香，自己炸的比外面买的香十倍，做一罐能用好久', tm:['TM5','TM6','TM7'],
-        ingredients:['小葱 200g，切成 5cm 小段','色拉油 300ml','盐 少许'],
-        steps:[
-          {title:'葱一定要晾干',time:'',desc:'小葱洗净后必须完全晾干，有水分放进热油会溅油，危险又影响香味。晾干至少半小时。'},
-          {title:'放入小美',time:'',desc:'葱段和色拉油一起放入小美，葱要完全浸在油里。'},
-          {title:'慢炸',time:'15 分钟',desc:'120°C 速度小勺反转，慢炸 15 分钟。葱会从翠绿慢慢变成金黄色，香味会越来越浓。'},
-          {title:'过滤',time:'',desc:'用细筛过滤掉葱渣，留下清澈金黄的葱油。葱渣也别扔，拌进炒饭或者面条里很香。'},
-          {title:'装瓶保存',time:'',desc:'葱油晾凉后装入干净玻璃瓶，密封冷藏可以保存约一个月。拌面时淋一勺，立刻升华。'},
-        ]},
-
-      { id:19, title:'辣椒酱', category:'酱料', time:25, servings:1, difficulty:'简单',
-        img:'https://images.unsplash.com/photo-1692302756206-3dd7506cb8f0?q=80&w=1287&auto=format&fit=crop',
-        desc:'不辣不欢的朋友必备！自己做的辣椒酱，想多辣就多辣，吃什么都能加一勺', tm:['TM5','TM6','TM7'],
-        ingredients:['新鲜红辣椒 300g，去蒂','大蒜 50g','姜 20g','食用油 50ml','盐 1 茶匙','糖 1 茶匙','生抽 1 汤匙'],
-        steps:[
-          {title:'处理食材',time:'',desc:'辣椒去蒂洗净，一定要完全晾干。大蒜和姜不需要提前切，直接放进小美就行。'},
-          {title:'切碎',time:'5 秒',desc:'辣椒、大蒜、姜一起放入，速度 5 搅打 5 秒，打成粗粒状。喜欢细腻的可以再打几秒。'},
-          {title:'炒制',time:'10 分钟',desc:'加入食用油，100°C 速度 1 翻炒 10 分钟，把辣椒的水分炒干，香味全出来了。'},
-          {title:'调味',time:'5 分钟',desc:'加入盐、糖和生抽，继续 100°C 速度 1 炒 5 分钟，炒到稍微浓稠就好。'},
-          {title:'装瓶',time:'',desc:'放凉后装入消毒过的玻璃瓶，冷藏可以保存一个月。吃面、吃饺子、拌菜都来一勺！'},
-        ]},
-
-      { id:20, title:'番茄酱', category:'酱料', time:35, servings:1, difficulty:'简单',
-        img:'https://images.unsplash.com/photo-1472476443507-c7a5948772fc?w=600&h=380&fit=crop',
-        desc:'用新鲜番茄自己熬的番茄酱，酸甜浓郁，比瓶装的新鲜好吃，做披萨拌面都用得上', tm:['TM5','TM6','TM7'],
-        ingredients:['成熟番茄 800g（越熟越红越好）','洋葱 半个','大蒜 3 瓣','橄榄油 2 汤匙','盐 1 茶匙','糖 1 茶匙','罗勒叶 少许（可选）'],
-        steps:[
-          {title:'爆香洋葱蒜',time:'5 分钟',desc:'橄榄油、切碎的洋葱和大蒜放入小美，100°C 速度 1 炒 5 分钟，炒到软化出香味。'},
-          {title:'加入番茄',time:'15 分钟',desc:'番茄切块放入，100°C 速度 2，煮 15 分钟，煮到番茄完全软烂出汁，颜色变深。'},
-          {title:'搅打顺滑',time:'30 秒',desc:'稍微放凉后，速度 8 搅打 30 秒，打成顺滑的番茄酱。喜欢有颗粒感的打短一点。'},
-          {title:'收汁调味',time:'5 分钟',desc:'加入盐和糖，90°C 速度 2 再煮 5 分钟，煮到番茄酱变浓稠。尝一下味道，按喜好调整。'},
-          {title:'装瓶保存',time:'',desc:'晾凉后装入玻璃瓶，冷藏保存约 2 周。做披萨、拌意面、涂面包都非常好用。'},
-        ]},
-    ];
-
     const categories = ['全部','早餐','主食','汤羹','甜点','饮品','冷菜','酱料'];
 
     function TMTag({ label }) {
@@ -250,6 +287,46 @@
     }
 
     function RecipeDetail({ r, onBack }) {
+
+      // 动态插入 Recipe Schema，让搜索引擎识别每道菜
+      useEffect(() => {
+        const schema = {
+          "@context": "https://schema.org",
+          "@type": "Recipe",
+          "name": r.title,
+          "description": r.desc,
+          "image": r.img,
+          "author": { "@type": "Organization", "name": "麻薯食谱", "url": "https://www.mashuhome.com" },
+          "datePublished": "2025-01-01",
+          "recipeCategory": r.category,
+          "recipeYield": r.servings + " 人份",
+          "totalTime": "PT" + r.time + "M",
+          "recipeIngredient": r.ingredients,
+          "recipeInstructions": r.steps.map((step, i) => ({
+            "@type": "HowToStep",
+            "position": i + 1,
+            "name": step.title,
+            "text": step.desc
+          })),
+          "keywords": "小美食谱,美善品," + r.title + "," + r.category,
+          "tool": r.tm.map(t => ({ "@type": "HowToTool", "name": "Thermomix " + t }))
+        };
+        const script = document.createElement('script');
+        script.type = 'application/ld+json';
+        script.id = 'recipe-schema';
+        script.text = JSON.stringify(schema);
+        document.head.appendChild(script);
+
+        // 同步更新页面标题
+        document.title = r.title + ' · 麻薯食谱';
+
+        return () => {
+          const el = document.getElementById('recipe-schema');
+          if (el) el.remove();
+          document.title = '麻薯食谱 · 小美家庭菜谱 | mashuhome.com';
+        };
+      }, [r]);
+
       return (
         <div style={{ background:'#fafaf8', minHeight:'100vh' }}>
           <div className="detail-nav">
