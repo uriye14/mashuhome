@@ -19,13 +19,15 @@
     .card:hover { transform: translateY(-5px); box-shadow: 0 12px 28px rgba(0,0,0,0.10); }
     .card img { transition: transform 0.4s ease; display: block; }
     .card:hover img { transform: scale(1.04); }
-    .header-top { max-width:1060px; margin:0 auto; padding:1.2rem 2rem; display:flex; align-items:center; justify-content:space-between; gap:12px; }
+    .header-top { max-width:1060px; margin:0 auto; padding:1rem 2rem; display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:12px; }
     .logo-area { display:flex; align-items:center; gap:16px; }
-    .logo-img { width:120px; height:auto; flex-shrink:0; }
-    .brand-title { font-size:22px; font-weight:700; color:#1a1810; letter-spacing:1px; line-height:1.2; text-align:center; }
-    .brand-sub { display:flex; align-items:center; justify-content:center; gap:6px; margin-top:5px; }
+    .logo-img { height:70px; width:auto; flex-shrink:0; }
+    .brand-title { font-size:22px; font-weight:700; color:#1a1810; letter-spacing:1px; line-height:1.2; }
+    .brand-sub { display:flex; align-items:center; gap:6px; margin-top:5px; }
     .brand-sub-line { width:14px; height:1px; background:#c8b89a; display:inline-block; }
     .brand-sub-text { font-size:10px; color:#8a7a5a; letter-spacing:2.5px; text-transform:uppercase; }
+    .logo-center { display:flex; justify-content:center; align-items:center; }
+    .search-right { display:flex; justify-content:flex-end; }
     .search-wrap { position:relative; }
     .search-wrap svg { position:absolute; left:12px; top:50%; transform:translateY(-50%); pointer-events:none; }
     .search-input { padding:9px 14px 9px 34px; border-radius:24px; border:1px solid #e0d8cc; font-size:13px; background:#fdf9f4; color:#2a2018; outline:none; width:200px; font-family:inherit; }
@@ -49,11 +51,12 @@
     .detail-content { max-width:700px; margin:0 auto; padding:2rem 1.5rem 5rem; }
     .ingredient-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px 16px; }
     @media (max-width: 640px) {
-      .header-top { padding:1rem 1.2rem; flex-direction:column; align-items:flex-start; }
+      .header-top { padding:1rem 1.2rem; grid-template-columns:1fr auto; }
+      .logo-center { display:none; }
+      .search-right { justify-content:flex-end; }
       .search-wrap { width:100%; }
       .search-input { width:100%; }
-      .logo-img { width:80px; }
-      .brand-title { font-size:18px; }
+      .logo-img { height:52px; }
       .hero { height:150px; }
       .hero-text h2 { font-size:18px; margin-bottom:6px; }
       .hero-text p { font-size:11px; }
@@ -338,7 +341,6 @@
           <header style={{ background:'white', borderBottom:'1px solid #eee8de' }}>
             <div className="header-top">
               <div className="logo-area">
-                <img className="logo-img" src="https://i.postimg.cc/ydRp6XW3/ma-shu-cai-pulogo2.png" alt="麻薯菜谱" />
                 <div>
                   <div className="brand-title">麻薯菜谱</div>
                   <div className="brand-sub">
@@ -348,11 +350,16 @@
                   </div>
                 </div>
               </div>
-              <div className="search-wrap">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#b0a090" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-                </svg>
-                <input className="search-input" type="text" placeholder="搜索食谱…" value={search} onChange={e => setSearch(e.target.value)} />
+              <div className="logo-center">
+                <img className="logo-img" src="https://i.postimg.cc/ydRp6XW3/ma-shu-cai-pulogo2.png" alt="麻薯菜谱" />
+              </div>
+              <div className="search-right">
+                <div className="search-wrap">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#b0a090" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                  </svg>
+                  <input className="search-input" type="text" placeholder="搜索食谱…" value={search} onChange={e => setSearch(e.target.value)} />
+                </div>
               </div>
             </div>
             <div className="hero">
