@@ -4,715 +4,600 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>麻薯食谱 · 小美家庭菜谱 | mashuhome.com</title>
-
-  <!-- SEO 基础标签 -->
   <meta name="description" content="麻薯食谱，专为美善品小美（Thermomix）用户打造的家庭菜谱网站。收录早餐、主食、汤羹、甜点、饮品、酱料等多类原创食谱，步骤简单易懂，适合 TM5、TM6、TM7 使用。" />
   <meta name="keywords" content="小美食谱,美善品食谱,Thermomix食谱,小美菜谱,美善品菜谱,TM6食谱,TM7食谱,家庭食谱,家常菜,豆浆,番茄牛肉面,玉米排骨汤,mashuhome" />
   <meta name="author" content="麻薯食谱 mashuhome.com" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.mashuhome.com" />
-
-  <!-- Open Graph 社交分享标签（微信/微博分享时显示） -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="麻薯食谱 · 小美家庭菜谱" />
   <meta property="og:description" content="专为美善品小美用户打造的家庭食谱，原创步骤简单易懂，涵盖早餐、主食、汤羹、甜点、饮品、酱料等多类菜谱。" />
   <meta property="og:url" content="https://www.mashuhome.com" />
   <meta property="og:image" content="https://i.postimg.cc/d3Ykkdm6/ma-shu-cai-pulogo2.png" />
   <meta property="og:locale" content="zh_CN" />
-  <meta property="og:site_name" content="麻薯食谱" />
-
-  <!-- 结构化数据 Schema（让谷歌百度识别网站内容） -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "麻薯食谱",
-    "alternateName": "mashuhome",
-    "url": "https://www.mashuhome.com",
-    "description": "专为美善品小美（Thermomix）用户打造的家庭食谱网站，涵盖早餐、主食、汤羹、甜点、饮品、酱料等原创菜谱。",
-    "inLanguage": "zh-CN",
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": "https://www.mashuhome.com/?search={search_term_string}",
-      "query-input": "required name=search_term_string"
-    }
-  }
-  </script>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "麻薯食谱",
-    "url": "https://www.mashuhome.com",
-    "logo": "https://i.postimg.cc/d3Ykkdm6/ma-shu-cai-pulogo2.png",
-    "contactPoint": {
-      "@type": "ContactPoint",
-      "contactType": "customer service",
-      "areaServed": "CN",
-      "availableLanguage": "Chinese"
-    }
-  }
-  </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;500;700&display=swap" rel="stylesheet">
-  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"麻薯食谱","url":"https://www.mashuhome.com","description":"专为美善品小美用户打造的家庭食谱网站","inLanguage":"zh-CN"}</script>
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: -apple-system,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif; background: #fafaf8; }
-    button { cursor: pointer; font-family: inherit; }
-    .card { transition: transform 0.22s ease, box-shadow 0.22s ease; cursor: pointer; }
-    .card:hover { transform: translateY(-5px); box-shadow: 0 12px 28px rgba(0,0,0,0.10); }
-    .card img { transition: transform 0.4s ease; display: block; }
-    .card:hover img { transform: scale(1.04); }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:-apple-system,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;background:#fafaf8;color:#1a1810}
+    button{cursor:pointer;font-family:inherit;border:none;background:none}
+    a{text-decoration:none}
+    img{display:block}
 
-    /* 图片骨架屏 */
-    .img-wrap { position:relative; background:#f0ede6; overflow:hidden; }
-    .img-wrap::before { content:''; position:absolute; inset:0; background:linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.5) 50%, transparent 100%); background-size:200% 100%; animation:shimmer 1.4s infinite; }
-    .img-wrap img { position:relative; z-index:1; transition:opacity 0.3s ease, transform 0.4s ease; opacity:0; }
-    .img-wrap img.loaded { opacity:1; }
-    .card:hover .img-wrap img { transform:scale(1.04); }
-    @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+    /* Header */
+    .header{background:linear-gradient(180deg,#f0f8f0 0%,#f7fbf5 100%);border-bottom:1px solid #d8edd8;position:sticky;top:0;z-index:100}
+    .header-top{max-width:1060px;margin:0 auto;padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .logo-area{display:flex;align-items:center;gap:14px}
+    .logo-img{height:90px;width:auto;flex-shrink:0}
+    .brand-box{display:flex;flex-direction:column;align-items:center}
+    .brand-title{font-size:21px;font-weight:700;color:#1a1810;letter-spacing:1px}
+    .brand-sub{display:flex;align-items:center;gap:5px;margin-top:4px}
+    .brand-line{width:12px;height:1px;background:#c8b89a}
+    .brand-en{font-size:9px;color:#8a7a5a;letter-spacing:2.5px;text-transform:uppercase}
+    .search-wrap{position:relative}
+    .search-wrap svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);pointer-events:none}
+    .search-input{padding:8px 13px 8px 32px;border-radius:22px;border:1px solid #c8ddc8;font-size:13px;background:rgba(255,255,255,0.85);color:#1a1810;outline:none;width:190px;font-family:inherit}
+    .cat-bar{background:#e8f4e8;border-top:1px solid #d0e8d0}
+    .cat-inner{max-width:1060px;margin:0 auto;padding:.8rem 1.5rem;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
+    .cat-inner::-webkit-scrollbar{display:none}
+    .cat-btn{padding:6px 15px;border-radius:22px;font-size:13px;font-weight:500;white-space:nowrap;cursor:pointer;transition:all .15s;border:1px solid #b8d8b8;background:rgba(255,255,255,0.7);color:#4a6a44}
+    .cat-btn.active{background:#4a9a55;color:white;border-color:#4a9a55}
 
-    /* 回到顶部按钮 */
-    .back-top { position:fixed; bottom:28px; right:24px; width:44px; height:44px; borderRadius:50%; background:#4a9a55; color:white; border:none; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 14px rgba(74,154,85,0.35); cursor:pointer; z-index:999; transition:all 0.25s ease; opacity:0; pointer-events:none; }
-    .back-top.show { opacity:1; pointer-events:auto; }
-    .back-top:hover { background:#3a7a44; transform:translateY(-2px); }
+    /* Hero */
+    .hero{position:relative;height:200px;overflow:hidden;border-top:1px solid #daeeda}
+    .hero img{width:100%;height:100%;object-fit:cover}
+    .hero-overlay{position:absolute;inset:0;background:rgba(20,15,8,.47)}
+    .hero-text{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 1.5rem}
+    .hero-text h2{font-size:26px;font-weight:700;color:white;text-shadow:0 1px 6px rgba(0,0,0,.4);margin-bottom:8px}
+    .hero-text p{font-size:13px;color:rgba(255,255,255,.82)}
 
-    /* 打印样式 */
-    @media print {
-      header, .detail-nav, .back-top, .print-btn, footer { display:none !important; }
-      .detail-content { padding:0 !important; max-width:100% !important; }
-      .detail-hero { height:200px !important; }
-      body { background:white !important; }
-    }
-    .header-top { max-width:1060px; margin:0 auto; padding:1rem 2rem; display:flex; align-items:center; justify-content:space-between; gap:12px; }
-    .logo-area { display:flex; align-items:center; gap:16px; }
-    .logo-img { height:105px; width:auto; flex-shrink:0; }
-    .brand-title { font-size:22px; font-weight:700; color:#1a1810; letter-spacing:1px; line-height:1.2; }
-    .brand-sub { display:flex; align-items:center; gap:6px; margin-top:5px; }
-    .brand-sub-line { width:14px; height:1px; background:#c8b89a; display:inline-block; }
-    .brand-sub-text { font-size:10px; color:#8a7a5a; letter-spacing:2.5px; text-transform:uppercase; }
-    .logo-center { display:none; }
-    .search-right { display:flex; justify-content:flex-end; }
-    .search-wrap { position:relative; }
-    .search-wrap svg { position:absolute; left:12px; top:50%; transform:translateY(-50%); pointer-events:none; }
-    .search-input { padding:9px 14px 9px 34px; border-radius:24px; border:1px solid #c8ddc8; font-size:13px; background:rgba(255,255,255,0.85); color:#2a2018; outline:none; width:200px; font-family:inherit; }
-    .hero { position:relative; border-top:1px solid #ede8e0; overflow:hidden; height:220px; }
-    .hero-img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
-    .hero-overlay { position:absolute; inset:0; background:rgba(20,15,8,0.48); }
-    .hero-text { position:relative; z-index:1; display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; padding:0 2rem; text-align:center; }
-    .hero-text h2 { font-size:28px; font-weight:700; color:white; margin-bottom:10px; text-shadow:0 1px 6px rgba(0,0,0,0.4); }
-    .hero-text p { font-size:14px; color:rgba(255,255,255,0.82); }
-    .category-bar { max-width:1060px; margin:0 auto; padding:1rem 2rem; display:flex; gap:8px; background:transparent; }
-    .cat-btn { padding:6px 16px; border-radius:24px; font-size:13px; font-weight:500; transition:all 0.15s; white-space:nowrap; }
-    .main-wrap { max-width:1060px; margin:0 auto; padding:1.5rem 2rem 5rem; }
-    .recipe-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(290px, 1fr)); gap:22px; }
-    .card-img-wrap { height:190px; overflow:hidden; }
-    .card-body { padding:1rem 1.1rem 1.2rem; }
-    .card-title { font-size:16px; font-weight:700; color:#1e1810; line-height:1.3; flex:1; }
-    .card-desc { font-size:12px; color:#8a7a68; line-height:1.65; margin-bottom:12px; }
-    .detail-nav { background:white; border-bottom:1px solid #eeeae4; padding:0 1.5rem; position:sticky; top:0; z-index:10; }
-    .detail-nav-inner { max-width:780px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; height:52px; }
-    .detail-hero { width:100%; height:300px; overflow:hidden; position:relative; }
-    .detail-content { max-width:700px; margin:0 auto; padding:2rem 1.5rem 5rem; }
-    .ingredient-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px 16px; }
-    @media (max-width: 640px) {
-      .header-top { padding:1rem 1.2rem; flex-direction:column; align-items:flex-start; }
-      .search-wrap { width:100%; }
-      .search-input { width:100%; }
-      .logo-img { height:60px; }
-      .brand-title { font-size:18px; }
-      .hero { height:150px; }
-      .hero-text h2 { font-size:18px; margin-bottom:6px; }
-      .hero-text p { font-size:11px; }
-      .category-bar { padding:0.8rem 1.2rem; flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; }
-      .category-bar::-webkit-scrollbar { display:none; }
-      .main-wrap { padding:1rem 1rem 4rem; }
-      .recipe-grid { grid-template-columns:1fr; gap:14px; }
-      .card-img-wrap { height:200px; }
-      .detail-hero { height:220px; }
-      .detail-content { padding:1.2rem 1rem 4rem; }
-      .ingredient-grid { grid-template-columns:1fr; }
-      .detail-nav { padding:0 1rem; }
+    /* Hot ranking */
+    .hot-bar{max-width:1060px;margin:0 auto;padding:1.2rem 1.5rem .5rem}
+    .hot-title{font-size:12px;font-weight:700;color:#3a7a3a;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+    .hot-list{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;padding-bottom:4px}
+    .hot-list::-webkit-scrollbar{display:none}
+    .hot-card{flex-shrink:0;width:110px;cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid #dff0d8;background:white;transition:transform .2s}
+    .hot-card:hover{transform:translateY(-3px)}
+    .hot-card-img{width:110px;height:72px;object-fit:cover}
+    .hot-card-body{padding:5px 7px 7px}
+    .hot-card-name{font-size:11px;font-weight:600;color:#1e1810;line-height:1.3}
+    .hot-card-meta{font-size:10px;color:#a09080;margin-top:1px}
+
+    /* Main */
+    .main-wrap{max-width:1060px;margin:0 auto;padding:1.2rem 1.5rem 4rem}
+    .recipe-count{font-size:12px;color:#b0a090;margin-bottom:14px}
+    .recipe-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
+    .recipe-card{background:white;border-radius:13px;border:1px solid #ede8e0;overflow:hidden;cursor:pointer;transition:transform .22s ease,box-shadow .22s ease}
+    .recipe-card:hover{transform:translateY(-5px);box-shadow:0 12px 28px rgba(0,0,0,.1)}
+    .card-img-wrap{height:185px;background:#f0ede6;overflow:hidden;position:relative}
+    .card-img-wrap img{width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .3s}
+    .card-img-wrap img.loaded{opacity:1}
+    .card-img-wrap::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,.45) 50%,transparent 100%);background-size:200% 100%;animation:shimmer 1.4s infinite}
+    .card-img-wrap img.loaded + *,.card-img-wrap:has(img.loaded)::before{display:none}
+    @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+    .card-body{padding:.9rem 1rem 1rem}
+    .card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:5px}
+    .card-title{font-size:15px;font-weight:700;color:#1e1810;line-height:1.3;flex:1}
+    .diff-badge{font-size:10px;padding:2px 7px;border-radius:18px;margin-left:8px;flex-shrink:0}
+    .card-desc{font-size:12px;color:#8a7a68;line-height:1.6;margin-bottom:10px}
+    .card-footer{display:flex;justify-content:space-between;align-items:center}
+    .card-time{font-size:11px;color:#a09080}
+
+    /* TM tags */
+    .tm-tag{font-size:10px;font-weight:600;padding:2px 8px;border-radius:18px;display:inline-flex;align-items:center;gap:3px}
+    .tm-dot{width:5px;height:5px;border-radius:50%}
+    .tm-tags{display:flex;gap:4px;flex-wrap:wrap}
+
+    /* Pagination */
+    .pagination{display:flex;justify-content:center;align-items:center;gap:8px;margin-top:36px}
+    .page-btn{padding:7px 16px;border-radius:22px;border:1px solid #ddd4c4;background:white;color:#4a9a55;font-size:13px;cursor:pointer;transition:all .15s}
+    .page-btn:disabled{color:#c0b8a8;background:#f5f0e8;cursor:not-allowed}
+    .page-num{width:34px;height:34px;border-radius:50%;border:none;font-size:13px;cursor:pointer;background:transparent;color:#6a5a48}
+    .page-num.active{background:#4a9a55;color:white;font-weight:700}
+
+    /* Detail */
+    .detail-nav{background:white;border-bottom:1px solid #eeeae4;padding:0 1.5rem;position:sticky;top:0;z-index:100}
+    .detail-nav-inner{max-width:780px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:50px}
+    .back-btn{display:flex;align-items:center;gap:5px;color:#5a7a50;font-size:14px;cursor:pointer;background:none;border:none}
+    .detail-hero{width:100%;height:280px;overflow:hidden;background:#f0ede6;position:relative}
+    .detail-hero img{width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .3s}
+    .detail-hero img.loaded{opacity:1}
+    .detail-content{max-width:700px;margin:0 auto;padding:1.5rem 1.5rem 4rem}
+    .detail-title-area{text-align:center;margin-bottom:14px}
+    .detail-cat{font-size:11px;background:#edf7e8;color:#4a8a3a;border-radius:18px;padding:3px 13px;display:inline-block;margin-bottom:8px}
+    .detail-title{font-size:25px;font-weight:700;color:#1a1810;line-height:1.3}
+    .detail-desc{font-size:14px;color:#6a6055;line-height:1.8;margin-bottom:18px;text-align:center}
+    .detail-meta{display:flex;justify-content:center;gap:22px;margin-bottom:14px;flex-wrap:wrap}
+    .meta-item{text-align:center}
+    .meta-icon{font-size:18px}
+    .meta-label{font-size:12px;color:#7a7060;margin-top:2px}
+    .detail-tm{display:flex;justify-content:center;gap:7px;margin-bottom:20px;flex-wrap:wrap;align-items:center}
+    .detail-tm-label{font-size:11px;color:#a09880}
+    .section-card{background:white;border-radius:13px;border:1px solid #ede8e0;padding:1.2rem;margin-bottom:14px}
+    .section-title{font-size:14px;font-weight:700;color:#3a3028;margin-bottom:13px;display:flex;align-items:center;gap:8px}
+    .section-bar{width:4px;height:17px;background:#6aaa60;border-radius:2px;display:inline-block}
+    .ingredient-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px 14px}
+    .ingredient-item{font-size:12px;color:#5a5040;padding:5px 0;border-bottom:1px solid #f5f0e8;display:flex;gap:6px}
+    .ingredient-dot{color:#9acc88;flex-shrink:0}
+    .step-item{display:flex;gap:12px;margin-bottom:12px}
+    .step-num{flex-shrink:0;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px}
+    .step-num.first{background:#4a9a55;color:white}
+    .step-num.rest{background:#e8f0e4;color:#5a7a50}
+    .step-box{background:white;border-radius:11px;border:1px solid #ede8e0;padding:.85rem 1rem;flex:1}
+    .step-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;flex-wrap:wrap;gap:4px}
+    .step-name{font-weight:600;color:#2a2018;font-size:13px}
+    .step-time{font-size:10px;background:#f0f8ec;color:#4a8a3a;padding:2px 9px;border-radius:18px}
+    .step-desc{font-size:12px;color:#7a6e60;line-height:1.75;margin:0}
+    .tip-box{margin-top:18px;background:#f5fbf0;border:1px solid #d4eac8;border-radius:10px;padding:.9rem 1rem}
+    .tip-text{font-size:12px;color:#4a7a3a;line-height:1.7;margin:0}
+
+    /* Share button */
+    .share-wrap{display:flex;flex-direction:column;align-items:center;margin-bottom:20px;gap:7px}
+    .share-btn{display:flex;align-items:center;gap:7px;background:#07c160;border:none;border-radius:22px;padding:9px 22px;color:white;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;box-shadow:0 3px 12px rgba(7,193,96,.3)}
+    .share-tip{font-size:11px;color:#4a8a3a;background:#f0f8ec;padding:5px 14px;border-radius:18px;border:1px solid #c8e4b8}
+
+    /* Bottom */
+    .bottom-section{background:#f5fbf5;border-top:1px solid #daeeda}
+    .bottom-inner{max-width:1060px;margin:0 auto;padding:1.4rem 1.2rem 1.1rem}
+    .bottom-label{text-align:center;font-size:10px;color:#8a9a88;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px}
+    .qr-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .qr-card{background:white;border-radius:13px;padding:13px 10px;text-align:center;border:1px solid #d8edd8;cursor:pointer}
+    .qr-card-title{font-size:12px;font-weight:700;color:#1a1810;margin-bottom:2px}
+    .qr-card-sub{font-size:10px;color:#8a9a88;margin-bottom:10px}
+    .qr-img{width:100%;max-width:115px;border-radius:9px;border:1.5px solid #c8e8c0;margin:0 auto;transition:transform .2s}
+    .qr-card:hover .qr-img{transform:scale(1.03)}
+    .qr-hint{font-size:10px;color:#07c160;margin-top:7px;font-weight:600}
+    .copyright{border-top:1px solid #daeeda;padding:.7rem 1.5rem;text-align:center}
+    .copyright p{font-size:10px;color:#a0b0a0}
+
+    /* Modal */
+    .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:9999;display:flex;align-items:center;justify-content:center;padding:1.5rem}
+    .modal-box{background:white;border-radius:18px;padding:22px;text-align:center;max-width:300px;width:100%}
+    .modal-img{width:100%;border-radius:11px;margin-bottom:12px}
+    .modal-tip{font-size:12px;color:#6a6a6a;line-height:1.6;margin-bottom:14px}
+    .modal-close{padding:7px 26px;border-radius:22px;background:#4a9a55;color:white;font-size:13px;cursor:pointer;border:none;font-family:inherit}
+
+    /* Back to top */
+    .back-top{position:fixed;bottom:24px;right:20px;width:42px;height:42px;border-radius:50%;background:#4a9a55;color:white;border:none;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(74,154,85,.35);cursor:pointer;z-index:999;opacity:0;pointer-events:none;transition:all .25s}
+    .back-top.show{opacity:1;pointer-events:auto}
+    .back-top:hover{background:#3a7a44;transform:translateY(-2px)}
+
+    /* Responsive */
+    @media(max-width:640px){
+      .header-top{padding:.9rem 1rem;flex-wrap:wrap}
+      .search-input{width:100%}
+      .search-wrap{width:100%}
+      .logo-img{height:64px}
+      .brand-title{font-size:17px}
+      .hero{height:145px}
+      .hero-text h2{font-size:18px}
+      .hero-text p{font-size:11px}
+      .cat-inner{padding:.7rem 1rem}
+      .main-wrap{padding:1rem 1rem 3.5rem}
+      .recipe-grid{grid-template-columns:1fr;gap:12px}
+      .card-img-wrap{height:195px}
+      .detail-hero{height:210px}
+      .detail-content{padding:1.1rem .9rem 3.5rem}
+      .ingredient-grid{grid-template-columns:1fr}
+      .hot-bar{padding:.9rem 1rem .3rem}
     }
   </style>
 </head>
 <body>
-  <div id="root"></div>
-  <script type="text/babel">
-    const { useState, useMemo, useEffect } = React;
+<div id="app"></div>
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
 
-    const TM = {
-      TM5: { bg:'#f2f9f2', text:'#2d6e3a', border:'#a8d4a8', dot:'#4caf50' },
-      TM6: { bg:'#e8f5e8', text:'#1a5c28', border:'#7cc47c', dot:'#2e7d32' },
-      TM7: { bg:'#1e2b1e', text:'#7ddb8a', border:'#3a5a3a', dot:'#5cb85c' },
-    };
-    const diff = {
-      简单: { bg:'#f0faf2', text:'#2a6e3a' },
-      中等: { bg:'#fffbf0', text:'#8a5a00' },
-      高级: { bg:'#fff4f4', text:'#9a2020' },
-    };
+<script>
+// ── Click tracking ──────────────────────────────────────────────
+const CLICK_KEY = id => 'mc_' + id;
+const getClicks = id => parseInt(localStorage.getItem(CLICK_KEY(id)) || 0);
+const addClick = id => localStorage.setItem(CLICK_KEY(id), getClicks(id) + 1);
+const topRecipes = () => [...recipes].map(r => ({...r, clicks: getClicks(r.id)})).filter(r => r.clicks > 0).sort((a,b) => b.clicks - a.clicks).slice(0, 8);
 
-    const recipes = [
-      // ── 早餐 ──
-      { id:2, title:'香蕉燕麦早餐粥', category:'早餐', time:12, servings:2, difficulty:'简单',
-        img:'https://images.unsplash.com/photo-1657373373438-db858cf59399?q=80&w=1287&auto=format&fit=crop',
-        desc:'熟透的香蕉自带天然甜味，营养满分，孩子们最爱的早晨第一餐', tm:['TM5','TM6','TM7'],
-        ingredients:['即食燕麦片 120g','熟香蕉 2 根','牛奶 400ml','蜂蜜 1 汤匙','肉桂粉 少许','核桃碎 适量'],
-        steps:[{title:'放入材料',time:'',desc:'将燕麦片、牛奶倒入锅中，香蕉剥皮直接放入，不需要提前切。'},{title:'烹煮',time:'8 分钟',desc:'90°C 速度 2，煮 8 分钟，香蕉会自动软化融入燕麦中。'},{title:'搅拌调味',time:'30 秒',desc:'加入蜂蜜，速度 4 搅拌 30 秒，根据喜好决定是否打得更细腻。'},{title:'装碗',time:'',desc:'盛入碗中，撒上核桃碎和少许肉桂粉，立即享用。'}]},
+// ── State ────────────────────────────────────────────────────────
+const state = { view:'list', selected:null, search:'', category:'全部', page:1, qrModal:null, shareTip:'' };
+const PER_PAGE = 12;
+const CATS = ['全部','早餐','主食','汤羹','甜点','饮品','冷菜','酱料'];
 
-      { id:5, title:'南瓜糙米粥', category:'早餐', time:35, servings:4, difficulty:'简单',
-        img:'https://images.unsplash.com/photo-1687684981416-6ff84d754b0b?q=80&w=927&auto=format&fit=crop',
-        desc:'甜糯南瓜搭配糙米，健康低卡，老人和孩子都适合的养胃粥品', tm:['TM5','TM6','TM7'],
-        ingredients:['南瓜 300g，去皮切块','糙米 150g，提前泡发 2 小时','水 1200ml','冰糖 2–3 颗','枸杞 少许'],
-        steps:[{title:'准备材料',time:'',desc:'糙米提前泡发 2 小时，南瓜去皮切 2cm 小块。'},{title:'放入所有材料',time:'',desc:'将泡发好的糙米、南瓜块、水和冰糖一起放入锅中。'},{title:'慢煮',time:'30 分钟',desc:'100°C 速度 1，煮 30 分钟。中途南瓜会自然软化融入米粥。'},{title:'装碗',time:'',desc:'盛入碗中，点缀几粒枸杞，温热享用。'}]},
+// ── TM config ───────────────────────────────────────────────────
+const TM = {
+  TM5:{bg:'#f2f9f2',text:'#2d6e3a',border:'#a8d4a8',dot:'#4caf50'},
+  TM6:{bg:'#e8f5e8',text:'#1a5c28',border:'#7cc47c',dot:'#2e7d32'},
+  TM7:{bg:'#1e2b1e',text:'#7ddb8a',border:'#3a5a3a',dot:'#5cb85c'}
+};
+const DIFF = {
+  简单:{bg:'#f0faf2',text:'#2a6e3a'},
+  中等:{bg:'#fffbf0',text:'#8a5a00'},
+  高级:{bg:'#fff4f4',text:'#9a2020'}
+};
 
-      { id:14, title:'五谷米糊', category:'早餐', time:40, servings:3, difficulty:'简单',
-        img:'https://images.unsplash.com/photo-1555078604-b2379f0e964a?q=80&w=1364&auto=format&fit=crop',
-        desc:'杂粮混在一起打成糊，暖胃又营养，冬天早上来一碗，一整天都有劲', tm:['TM5','TM6','TM7'],
-        ingredients:['大米 50g','黑米 30g','小米 30g','燕麦片 20g','花生 20g','清水 800ml','冰糖 适量'],
-        steps:[{title:'提前准备',time:'',desc:'所有食材淘洗干净。有时间的话提前泡发 2 小时，煮出来会更香更软，没时间直接煮也可以。'},{title:'放入所有材料',time:'',desc:'把泡好的五谷杂粮和清水一起倒进小美，不用切，直接放就行。'},{title:'慢煮',time:'20 分钟',desc:'100°C 速度 1，煮 20 分钟，煮到食材都软烂为止。'},{title:'搅打成糊',time:'1 分钟',desc:'从速度 5 慢慢升到速度 10，搅打 1 分钟，越打越细腻，打到你喜欢的稠度就停。'},{title:'加糖享用',time:'',desc:'加入冰糖，速度 3 搅匀融化，趁热喝。喝不完放冰箱，第二天加热还是一样好喝。'}]},
+// ── Recipe Data ─────────────────────────────────────────────────
+const recipes = [
+  {id:2,title:'香蕉燕麦早餐粥',category:'早餐',time:12,servings:2,difficulty:'简单',img:'https://images.unsplash.com/photo-1657373373438-db858cf59399?q=80&w=1287&auto=format&fit=crop',desc:'熟透的香蕉自带天然甜味，营养满分，孩子们最爱的早晨第一餐',tm:['TM5','TM6','TM7'],ingredients:['即食燕麦片 120g','熟香蕉 2 根','牛奶 400ml','蜂蜜 1 汤匙','肉桂粉 少许','核桃碎 适量'],steps:[{title:'放入材料',time:'',desc:'将燕麦片、牛奶倒入锅中，香蕉剥皮直接放入，不需要提前切。'},{title:'烹煮',time:'8 分钟',desc:'90°C 速度 2，煮 8 分钟，香蕉会自动软化融入燕麦中。'},{title:'搅拌调味',time:'30 秒',desc:'加入蜂蜜，速度 4 搅拌 30 秒，根据喜好决定是否打得更细腻。'},{title:'装碗',time:'',desc:'盛入碗中，撒上核桃碎和少许肉桂粉，立即享用。'}]},
+  {id:5,title:'南瓜糙米粥',category:'早餐',time:35,servings:4,difficulty:'简单',img:'https://images.unsplash.com/photo-1687684981416-6ff84d754b0b?q=80&w=927&auto=format&fit=crop',desc:'甜糯南瓜搭配糙米，健康低卡，老人和孩子都适合的养胃粥品',tm:['TM5','TM6','TM7'],ingredients:['南瓜 300g，去皮切块','糙米 150g，提前泡发 2 小时','水 1200ml','冰糖 2–3 颗','枸杞 少许'],steps:[{title:'准备材料',time:'',desc:'糙米提前泡发 2 小时，南瓜去皮切 2cm 小块。'},{title:'放入所有材料',time:'',desc:'将泡发好的糙米、南瓜块、水和冰糖一起放入锅中。'},{title:'慢煮',time:'30 分钟',desc:'100°C 速度 1，煮 30 分钟。中途南瓜会自然软化融入米粥。'},{title:'装碗',time:'',desc:'盛入碗中，点缀几粒枸杞，温热享用。'}]},
+  {id:14,title:'五谷米糊',category:'早餐',time:40,servings:3,difficulty:'简单',img:'https://images.unsplash.com/photo-1555078604-b2379f0e964a?q=80&w=1364&auto=format&fit=crop',desc:'杂粮混在一起打成糊，暖胃又营养，冬天早上来一碗，一整天都有劲',tm:['TM5','TM6','TM7'],ingredients:['大米 50g','黑米 30g','小米 30g','燕麦片 20g','花生 20g','清水 800ml','冰糖 适量'],steps:[{title:'提前准备',time:'',desc:'所有食材淘洗干净。有时间的话提前泡发 2 小时。'},{title:'放入所有材料',time:'',desc:'把泡好的五谷杂粮和清水一起倒进小美。'},{title:'慢煮',time:'20 分钟',desc:'100°C 速度 1，煮 20 分钟，煮到食材都软烂为止。'},{title:'搅打成糊',time:'1 分钟',desc:'从速度 5 慢慢升到速度 10，搅打 1 分钟。'},{title:'加糖享用',time:'',desc:'加入冰糖，速度 3 搅匀融化，趁热喝。'}]},
+  {id:3,title:'番茄鸡蛋意面',category:'主食',time:30,servings:3,difficulty:'简单',img:'https://images.unsplash.com/photo-1626844131082-256783844137?q=80&w=1335&auto=format&fit=crop',desc:'家常版番茄意面，酸甜开胃，简单食材做出让全家满足的一餐',tm:['TM5','TM6','TM7'],ingredients:['意大利面 250g','新鲜番茄 4 个','鸡蛋 3 个','大蒜 3 瓣','橄榄油 2 汤匙','番茄膏 1 汤匙','盐、糖 适量','罗勒叶 少许'],steps:[{title:'煮意面',time:'10 分钟',desc:'锅中烧开足量水，加盐，按包装说明煮意面，捞出备用。'},{title:'蒜香爆锅',time:'3 分钟',desc:'大蒜放入，速度 5 切碎。加橄榄油，100°C 速度 1 爆香 3 分钟。'},{title:'煮番茄酱',time:'12 分钟',desc:'番茄切块放入，加番茄膏、盐和少许糖，100°C 速度 2 煮 12 分钟至浓稠。'},{title:'加入鸡蛋',time:'3 分钟',desc:'鸡蛋打散后慢慢倒入，80°C 速度 2 轻轻搅拌 3 分钟，蛋液半凝固即可。'},{title:'拌入意面',time:'',desc:'将煮好的意面倒入拌匀，撒上新鲜罗勒叶，趁热上桌。'}]},
+  {id:15,title:'番茄牛肉面',category:'主食',time:60,servings:3,difficulty:'中等',img:'https://images.unsplash.com/photo-1613744013720-4f505ce31735?q=80&w=1287&auto=format&fit=crop',desc:'汤头浓郁，牛肉软烂，番茄酸甜，这碗面端上桌全家都安静了',tm:['TM5','TM6','TM7'],ingredients:['牛腩 400g，切大块','番茄 3 个，切块','大蒜 3 瓣','姜 2 片','生抽 2 汤匙','老抽 1 茶匙','番茄膏 1 汤匙','盐、糖 适量','面条 适量','清水 800ml'],steps:[{title:'牛肉焯水',time:'',desc:'牛腩冷水下锅，普通锅大火煮开后捞出，冲洗干净去掉血水。'},{title:'爆香蒜姜',time:'3 分钟',desc:'大蒜和姜片放入小美，速度 5 切碎，加少许油，100°C 速度 1 炒 3 分钟。'},{title:'炒番茄',time:'5 分钟',desc:'番茄块和番茄膏一起放入，100°C 速度 1 翻炒 5 分钟，炒到番茄出汁变软。'},{title:'炖牛肉',time:'40 分钟',desc:'放入牛腩、生抽、老抽、盐、糖和清水，100°C 速度小勺反转，炖 40 分钟。'},{title:'煮面装碗',time:'',desc:'另起锅煮面，煮好捞出装碗，浇上满满一大勺番茄牛肉汤，趁热吃！'}]},
+  {id:21,title:'橙香鸡翅',category:'主食',time:45,servings:3,difficulty:'简单',img:'https://images.unsplash.com/photo-1527477396000-e27163b481c2?w=600&h=380&fit=crop',desc:'小美帮你把鸡翅煮入味，再送进烤箱烤出焦香，橙子的清香让整道菜清爽不腻',tm:['TM5','TM6','TM7'],ingredients:['翅中 500g','糖 10g','生抽 15g','老抽 20g','料酒 50g','水 100g','姜 20g，切片','橙子 1 个，切片'],steps:[{title:'放入腌料',time:'26 分钟',desc:'将翅中、糖、生抽、老抽、料酒、水和姜片全部放入小美，Varoma 温度速度 1，煮 26 分钟把鸡翅煮熟入味。'},{title:'取出备用',time:'',desc:'煮好后用刮刀棒轻轻翻拌均匀，让每块鸡翅都裹上酱汁，倒入碗中稍微放凉备用。'},{title:'烤箱烤制',time:'15 分钟',desc:'烤箱预热 200°C。鸡翅平铺在烤盘上，上面铺几片橙子，放入烤箱烤 15 分钟，表皮焦香上色就好了。'},{title:'装盘上桌',time:'',desc:'取出装盘，趁热吃，外皮焦脆，肉质软嫩，橙香四溢。'}]},
+  {id:22,title:'牛肉丸',category:'主食',time:40,servings:4,difficulty:'中等',img:'https://images.unsplash.com/photo-1529042410759-befb1204b468?w=600&h=380&fit=crop',desc:'弹牙爽口的手工牛肉丸，小美帮你搞定最难的打肉步骤，孩子们超爱吃',tm:['TM5','TM6','TM7'],ingredients:['牛肉 300g，切小块','蛋清 2 个','盐 9g','葱姜水 45g','生粉 15g','黑胡椒粉 适量'],steps:[{title:'处理牛肉',time:'',desc:'牛肉切成麻将大小的块，洗干净后放冰箱冷冻至稍微变硬。'},{title:'打肉',time:'40 秒',desc:'冻硬的牛肉放入小美，速度 6 打 20 秒，用刮刀把肉刮到底部，再速度 6 打 20 秒。'},{title:'调味上劲',time:'3 分钟',desc:'加入盐、蛋清、葱姜水、生粉和黑胡椒粉，速度 3 搅打 3 分钟上劲。'},{title:'煮丸子',time:'15 分钟',desc:'小美加水约 1900g，80°C 速度小勺预热。手蘸凉水挤出丸子，开 100°C 煮至丸子浮起来就熟了。'}]},
+  {id:23,title:'鱼丸',category:'主食',time:35,servings:4,difficulty:'中等',img:'https://images.unsplash.com/photo-1763994682737-477d8200dd5d?q=80&w=2670&auto=format&fit=crop',desc:'嫩滑Q弹的自制鱼丸，没有任何添加剂，新鲜到可以直接咬着吃',tm:['TM5','TM6','TM7'],ingredients:['鱼肉 400g（草鱼或鲈鱼去皮去刺）','葱姜水 100g（分次加）','蛋清 3 个','料酒 40g','生粉 20g','白胡椒粉 5g','盐 15g'],steps:[{title:'第一次打肉',time:'',desc:'鱼肉放入小美，加 50g 葱姜水，速度 8 打 15 秒。重复这个步骤共 4 次，每次都加 50g 葱姜水。'},{title:'加入调味料',time:'30 秒',desc:'加入蛋清、料酒、生粉、剩余葱姜水和白胡椒粉，速度 8 再打 30 秒。'},{title:'加盐上筋',time:'2 分钟',desc:'加入盐，反转速度 3，搅打 2 分钟上筋。放进冷水能浮起来就说明上筋成功了！'},{title:'煮鱼丸',time:'5 分钟',desc:'烧一锅热水，加少许盐。水沸后转小火，手蘸凉水挤出鱼丸放入锅中，3-5 分钟丸子变大浮起就熟了。'}]},
+  {id:1,title:'奶油蘑菇浓汤',category:'汤羹',time:25,servings:4,difficulty:'简单',img:'https://images.unsplash.com/photo-1552309463-7c221c5130c2?q=80&w=1287&auto=format&fit=crop',desc:'鲜嫩蘑菇搭配淡奶油，口感丝滑浓郁，是全家人都喜欢的暖身汤',tm:['TM5','TM6','TM7'],ingredients:['新鲜蘑菇 400g','洋葱 1 个，切碎','大蒜 2 瓣','淡奶油 150ml','牛奶 200ml','无盐黄油 20g','盐、白胡椒粉 适量','欧芹碎 少许'],steps:[{title:'炒香洋葱',time:'5 分钟',desc:'将黄油、大蒜和洋葱放入锅中，100°C 速度 1，炒 5 分钟至洋葱软化透明。'},{title:'加入蘑菇',time:'8 分钟',desc:'加入蘑菇，100°C 速度 1，翻炒 8 分钟直到蘑菇出水并变软。'},{title:'打成泥',time:'1 分钟',desc:'稍凉后，从速度 5 慢慢升至速度 9，搅打 1 分钟成光滑蘑菇泥。'},{title:'加入奶油',time:'5 分钟',desc:'倒入淡奶油和牛奶，90°C 速度 3，加热 5 分钟，用盐和白胡椒调味。'},{title:'盛盘享用',time:'',desc:'倒入碗中，撒上欧芹碎，趁热享用。可搭配脆皮面包一起吃。'}]},
+  {id:16,title:'玉米排骨汤',category:'汤羹',time:65,servings:4,difficulty:'简单',img:'https://images.unsplash.com/photo-1717815963472-d1ae37cdd8d2?q=80&w=1364&auto=format&fit=crop',desc:'甜玉米配排骨，汤色奶白，喝起来鲜甜清润，家里老人小孩都爱喝',tm:['TM5','TM6','TM7'],ingredients:['猪排骨 500g','甜玉米 2 根，切段','胡萝卜 1 根，切滚刀块','姜 3 片','清水 1200ml','盐 适量','枸杞 少许（可选）'],steps:[{title:'排骨焯水',time:'',desc:'排骨冷水下锅，普通锅煮开后捞出，冲洗干净。焯水这步不能省，汤才会清甜不腥。'},{title:'放入所有材料',time:'',desc:'排骨、玉米段、胡萝卜、姜片和清水全部放进小美。'},{title:'慢炖',time:'50 分钟',desc:'100°C 速度小勺反转，炖 50 分钟。炖的时候汤色会慢慢变成奶白色。'},{title:'调味盛碗',time:'',desc:'加盐调味，撒几粒枸杞。盛出来趁热喝，玉米甜糯。'}]},
+  {id:24,title:'金针肥牛',category:'汤羹',time:25,servings:3,difficulty:'中等',img:'https://i.postimg.cc/L4WzkHzF/jin-zhen-gu-fei-niu.png',desc:'金黄浓郁的汤底配上嫩滑肥牛和爽脆金针菇，酸辣开胃，一上桌就被抢光',tm:['TM5','TM6','TM7'],ingredients:['肥牛卷 350g','金针菇 120g，去根','鸡高汤 900g','绿泡椒 20g','黄灯笼辣椒酱 20g','白醋 100g','油 15g','葱 2 支，切段','姜 5 片','蒜 3 瓣，切片','盐 3g','糖 5g','葱花、小米辣 适量'],steps:[{title:'肥牛焯水',time:'',desc:'肥牛卷放入开水中快速焯一下，变色就捞出，沥干备用。'},{title:'爆香底料',time:'3 分钟',desc:'油、葱、姜、蒜、绿泡椒和黄灯笼辣椒酱一起放入小美，120°C 速度 1 爆香 3 分钟。'},{title:'煮汤底',time:'8 分钟',desc:'倒入鸡高汤、白醋、盐和糖，100°C 速度小勺煮 8 分钟。'},{title:'加金针菇',time:'3 分钟',desc:'金针菇放入，100°C 速度小勺再煮 3 分钟，煮到金针菇变软入味。'},{title:'加入肥牛',time:'3 分钟',desc:'放入焯好的肥牛卷，Varoma 反转速度 1 烹煮 3 分钟。倒入大碗，撒上葱花和小米辣圈装饰！'}]},
+  {id:11,title:'腌萝卜',category:'冷菜',time:30,servings:4,difficulty:'简单',img:'https://i.postimg.cc/C1ZZs9CN/yan-zhi-luo-bo-pian.jpg',desc:'酸甜爽脆的腌萝卜，用小美快速完成腌制，冷藏保存随取随吃，开胃下饭一绝',tm:['TM5','TM6','TM7'],ingredients:['白萝卜 1000g','生抽 130g','醋 100g','冰糖 100g'],steps:[{title:'准备腌汁',time:'6 分钟',desc:'锅内放入醋、生抽、冰糖，100°C 速度小勺煮开，约 6 分钟，让冰糖完全融化。'},{title:'处理萝卜',time:'18 分钟',desc:'白萝卜洗净，切成薄片，放入主锅。70°C 速度小勺反转，慢慢翻动 18 分钟让萝卜吸收腌汁。'},{title:'冷却装瓶',time:'',desc:'完成后取出，冷却至室温后放入玻璃瓶，放冰箱冷藏保存。'},{title:'小贴士',time:'',desc:'冷藏后口感更爽脆，隔夜后味道更佳。'}]},
+  {id:25,title:'麻辣鸭舌',category:'冷菜',time:35,servings:2,difficulty:'简单',img:'https://images.unsplash.com/photo-1562967914-608f82629710?w=600&h=380&fit=crop',desc:'麻辣鲜香，嚼劲十足，小美卤好之后拌上调味汁，下酒下饭都绝了',tm:['TM5','TM6','TM7'],ingredients:['鸭舌 250g，提前焯烫沥干','水 800g','生抽 2 茶匙','老抽 1 茶匙','十三香炖肉料包 1 包','盐 1/4 茶匙','糖 1/4 茶匙','花椒粉 2 茶匙','辣椒油 4 茶匙','麻油 2 茶匙','白芝麻 2 汤匙'],steps:[{title:'鸭舌焯水',time:'',desc:'鸭舌提前用开水焯烫，去掉腥味和杂质，捞出沥干备用。'},{title:'卤制鸭舌',time:'20 分钟',desc:'将焯好的鸭舌、水、生抽、老抽和十三香炖肉料包放入小美，100°C 速度 1 卤煮 20 分钟。'},{title:'取出沥干',time:'',desc:'卤好后把鸭舌取出，沥干水分，稍微放凉一会儿。'},{title:'调味拌匀',time:'',desc:'把盐、糖、花椒粉、辣椒油和麻油混合成调味汁。把鸭舌和调味汁充分拌匀，撒上白芝麻即可享用。'}]},
+  {id:4,title:'苹果肉桂麦芬',category:'甜点',time:45,servings:12,difficulty:'中等',img:'https://images.unsplash.com/photo-1608847568631-50d50ebe4407?q=80&w=1286&auto=format&fit=crop',desc:'家里孩子最爱的下午茶点心，苹果粒软糯，肉桂香气四溢',tm:['TM5','TM6','TM7'],ingredients:['低筋面粉 200g','苹果 2 个，去皮切丁','鸡蛋 2 个','牛奶 120ml','无盐黄油 80g','细砂糖 90g','泡打粉 1.5 茶匙','肉桂粉 1 茶匙'],steps:[{title:'预热烤箱',time:'',desc:'烤箱预热至 180°C，麦芬模具铺上纸杯备用。'},{title:'融化黄油',time:'2 分钟',desc:'黄油放入，50°C 速度 2 融化约 2 分钟。加入糖、鸡蛋、牛奶，速度 4 搅拌均匀。'},{title:'加粉类',time:'10 秒',desc:'筛入面粉、泡打粉、肉桂粉，速度 4 搅拌约 10 秒，看不到干粉即可。'},{title:'拌入苹果',time:'',desc:'用刮刀轻轻折叠拌入苹果丁，动作要轻柔保持面糊蓬松。'},{title:'烘烤',time:'22 分钟',desc:'面糊倒入模具至七分满，180°C 烤约 22 分钟，牙签插入无沾即熟。'}]},
+  {id:17,title:'双皮奶',category:'甜点',time:45,servings:4,difficulty:'中等',img:'https://images.unsplash.com/photo-1488477181946-6428a0291777?w=600&h=380&fit=crop',desc:'比奶茶店还好吃的双皮奶，嫩滑到勺子插进去都是享受，冷藏后口感更绝',tm:['TM5','TM6','TM7'],ingredients:['全脂牛奶 500ml','蛋清 3 个','白糖 40g'],steps:[{title:'加热牛奶',time:'5 分钟',desc:'牛奶倒入小美，80°C 速度 2 加热 5 分钟，然后倒入碗中，静置放凉。表面会自然形成一层奶皮，这是第一层。'},{title:'打蛋清',time:'2 分钟',desc:'蛋清加白糖，用蝴蝶棒速度 4 打约 2 分钟，打到起泡就好，不需要打到全发。'},{title:'混合',time:'',desc:'轻轻用牙签挑开碗边的奶皮，把蛋清液从边缘缓缓倒入奶皮下方，然后把奶皮轻轻放回表面。'},{title:'上锅蒸',time:'25 分钟',desc:'蒸锅加水，放好碗后盖上保鲜膜，80°C 蒸 25 分钟。蒸的过程不要开盖！'},{title:'冷藏享用',time:'',desc:'蒸好后放凉，放冰箱冷藏 1 小时，口感更嫩滑。'}]},
+  {id:12,title:'自制豆浆',category:'饮品',time:20,servings:4,difficulty:'简单',img:'https://images.unsplash.com/photo-1555465083-a845797ef750?q=80&w=1364&auto=format&fit=crop',desc:'比超市买的香太多了！自己打的豆浆没有任何添加剂，浓郁又健康，早餐喝一碗超满足',tm:['TM5','TM6','TM7'],ingredients:['干黄豆 100g（提前泡发一晚）','清水 1000ml','白糖 适量'],steps:[{title:'泡豆',time:'',desc:'黄豆提前用清水泡发一整夜，泡好后冲洗几遍。'},{title:'放入材料',time:'',desc:'把泡好的黄豆和 1000ml 清水一起倒进小美。'},{title:'搅打',time:'1 分钟',desc:'从速度 5 慢慢升到速度 10，搅打 1 分钟，打到顺滑细腻为止。'},{title:'过滤豆渣',time:'',desc:'用豆浆袋或细网筛过滤一遍。'},{title:'煮熟',time:'8 分钟',desc:'过滤好的豆浆倒回小美，100°C 速度 2，煮 8 分钟。一定要煮熟才能喝！加糖调味，趁热享用。'}]},
+  {id:7,title:'百香果柠檬气泡饮',category:'饮品',time:5,servings:2,difficulty:'简单',img:'https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?w=600&h=380&fit=crop',desc:'清爽酸甜的夏日饮品，孩子放学回来的最佳奖励',tm:['TM5','TM6','TM7'],ingredients:['百香果 3 个，取果肉','新鲜柠檬 1 个，取汁','蜂蜜 2 汤匙','气泡水 400ml（冰的）','冰块 适量'],steps:[{title:'制作糖浆',time:'30 秒',desc:'百香果肉、柠檬汁和蜂蜜放入，速度 5 搅打 30 秒混合均匀。'},{title:'过滤（可选）',time:'',desc:'若不喜欢百香果籽，可用细筛过滤，取清澈果汁。'},{title:'组合饮品',time:'',desc:'杯中加满冰块，倒入果汁，再缓慢注入冰气泡水，不要搅拌保留气泡。'}]},
+  {id:8,title:'香蕉可可奶昔',category:'饮品',time:5,servings:2,difficulty:'简单',img:'https://images.unsplash.com/photo-1542444592-e6880e286bb9?q=80&w=961&auto=format&fit=crop',desc:'天然甜味无需加糖，浓稠丝滑，孩子的健康早餐饮品',tm:['TM5','TM6','TM7'],ingredients:['熟香蕉 2 根（冷冻后更浓稠）','可可粉 2 汤匙','牛奶 250ml','蜂蜜 1 汤匙（可选）','冰块 少许'],steps:[{title:'放入材料',time:'',desc:'将香蕉（冷冻最佳）、可可粉、牛奶全部放入。'},{title:'搅打',time:'1 分钟',desc:'从速度 5 慢慢升至速度 10，搅打约 1 分钟至完全顺滑无颗粒。'},{title:'立即享用',time:'',desc:'倒入杯中立即饮用，现做现喝最佳。'}]},
+  {id:6,title:'自制花生酱',category:'酱料',time:15,servings:1,difficulty:'简单',img:'https://images.unsplash.com/photo-1615110250484-e8c3b151b957?q=80&w=1287&auto=format&fit=crop',desc:'只需花生和少许盐，无任何添加剂，浓郁程度远超超市瓶装花生酱',tm:['TM5','TM6','TM7'],ingredients:['去皮熟花生 300g','盐 1/4 茶匙','蜂蜜 1 汤匙（可选）','葡萄籽油 少许'],steps:[{title:'准备花生',time:'',desc:'使用已去皮的熟花生，确保完全干燥，不能有水分。'},{title:'初步搅打',time:'1 分钟',desc:'花生放入，从速度 5 逐渐升至速度 10，搅打 1 分钟，变成粗粒状。'},{title:'持续研磨',time:'3 分钟',desc:'速度 10 继续搅打 3 分钟，花生会先变成粉，再逐渐出油变成糊状。中途用刮刀刮壁。'},{title:'调味装瓶',time:'',desc:'加入盐和蜂蜜，速度 5 混合 10 秒。装入干净玻璃瓶，密封冷藏可保存约 1 个月。'}]},
+  {id:18,title:'葱油',category:'酱料',time:20,servings:1,difficulty:'简单',img:'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=600&h=380&fit=crop',desc:'一罐葱油，拌面拌饭拌什么都香，自己炸的比外面买的香十倍，做一罐能用好久',tm:['TM5','TM6','TM7'],ingredients:['小葱 200g，切成 5cm 小段','色拉油 300ml','盐 少许'],steps:[{title:'葱一定要晾干',time:'',desc:'小葱洗净后必须完全晾干，有水分放进热油会溅油。晾干至少半小时。'},{title:'放入小美',time:'',desc:'葱段和色拉油一起放入小美，葱要完全浸在油里。'},{title:'慢炸',time:'15 分钟',desc:'120°C 速度小勺反转，慢炸 15 分钟。葱会从翠绿慢慢变成金黄色。'},{title:'过滤装瓶',time:'',desc:'用细筛过滤掉葱渣，留下清澈金黄的葱油。晾凉后装入干净玻璃瓶，密封冷藏保存约一个月。'}]},
+  {id:19,title:'辣椒酱',category:'酱料',time:25,servings:1,difficulty:'简单',img:'https://images.unsplash.com/photo-1692302756206-3dd7506cb8f0?q=80&w=1287&auto=format&fit=crop',desc:'不辣不欢的朋友必备！自己做的辣椒酱，想多辣就多辣，吃什么都能加一勺',tm:['TM5','TM6','TM7'],ingredients:['新鲜红辣椒 300g，去蒂','大蒜 50g','姜 20g','食用油 50ml','盐 1 茶匙','糖 1 茶匙','生抽 1 汤匙'],steps:[{title:'处理食材',time:'',desc:'辣椒去蒂洗净，一定要完全晾干。大蒜和姜不需要提前切，直接放进小美就行。'},{title:'切碎',time:'5 秒',desc:'辣椒、大蒜、姜一起放入，速度 5 搅打 5 秒，打成粗粒状。'},{title:'炒制',time:'10 分钟',desc:'加入食用油，100°C 速度 1 翻炒 10 分钟，把辣椒的水分炒干，香味全出来了。'},{title:'调味装瓶',time:'',desc:'加入盐、糖和生抽，继续 100°C 速度 1 炒 5 分钟，炒到稍微浓稠就好。放凉后装入玻璃瓶，冷藏保存。'}]},
+  {id:20,title:'番茄酱',category:'酱料',time:35,servings:1,difficulty:'简单',img:'https://images.unsplash.com/photo-1472476443507-c7a5948772fc?w=600&h=380&fit=crop',desc:'用新鲜番茄自己熬的番茄酱，酸甜浓郁，比瓶装的新鲜好吃，做披萨拌面都用得上',tm:['TM5','TM6','TM7'],ingredients:['成熟番茄 800g','洋葱 半个','大蒜 3 瓣','橄榄油 2 汤匙','盐 1 茶匙','糖 1 茶匙','罗勒叶 少许（可选）'],steps:[{title:'爆香洋葱蒜',time:'5 分钟',desc:'橄榄油、切碎的洋葱和大蒜放入小美，100°C 速度 1 炒 5 分钟，炒到软化出香味。'},{title:'加入番茄',time:'15 分钟',desc:'番茄切块放入，100°C 速度 2，煮 15 分钟，煮到番茄完全软烂出汁，颜色变深。'},{title:'搅打顺滑',time:'30 秒',desc:'稍微放凉后，速度 8 搅打 30 秒，打成顺滑的番茄酱。'},{title:'收汁调味',time:'5 分钟',desc:'加入盐和糖，90°C 速度 2 再煮 5 分钟，煮到番茄酱变浓稠。晾凉后装入玻璃瓶，冷藏保存约 2 周。'}]}
+];
 
-      // ── 主食 ──
-      { id:3, title:'番茄鸡蛋意面', category:'主食', time:30, servings:3, difficulty:'简单',
-        img:'https://images.unsplash.com/photo-1626844131082-256783844137?q=80&w=1335&auto=format&fit=crop',
-        desc:'家常版番茄意面，酸甜开胃，简单食材做出让全家满足的一餐', tm:['TM5','TM6','TM7'],
-        ingredients:['意大利面 250g','新鲜番茄 4 个','鸡蛋 3 个','大蒜 3 瓣','橄榄油 2 汤匙','番茄膏 1 汤匙','盐、糖 适量','罗勒叶 少许'],
-        steps:[{title:'煮意面',time:'10 分钟',desc:'锅中烧开足量水，加盐，按包装说明煮意面，捞出备用。'},{title:'蒜香爆锅',time:'3 分钟',desc:'大蒜放入，速度 5 切碎。加橄榄油，100°C 速度 1 爆香 3 分钟。'},{title:'煮番茄酱',time:'12 分钟',desc:'番茄切块放入，加番茄膏、盐和少许糖，100°C 速度 2 煮 12 分钟至浓稠。'},{title:'加入鸡蛋',time:'3 分钟',desc:'鸡蛋打散后慢慢倒入，80°C 速度 2 轻轻搅拌 3 分钟，蛋液半凝固即可。'},{title:'拌入意面',time:'',desc:'将煮好的意面倒入拌匀，撒上新鲜罗勒叶，趁热上桌。'}]},
+// ── Helpers ──────────────────────────────────────────────────────
+function tmTagHTML(label) {
+  const s = TM[label];
+  return `<span class="tm-tag" style="background:${s.bg};color:${s.text};border:1px solid ${s.border}"><span class="tm-dot" style="background:${s.dot}"></span>${label}</span>`;
+}
+function diffBadge(d) {
+  const s = DIFF[d];
+  return `<span class="diff-badge" style="background:${s.bg};color:${s.text}">${d}</span>`;
+}
+function filtered() {
+  return recipes.filter(r => {
+    const mc = state.category === '全部' || r.category === state.category;
+    const ms = !state.search || r.title.includes(state.search) || r.desc.includes(state.search);
+    return mc && ms;
+  });
+}
+function paged() {
+  const f = filtered();
+  return f.slice((state.page - 1) * PER_PAGE, state.page * PER_PAGE);
+}
 
-      { id:15, title:'番茄牛肉面', category:'主食', time:60, servings:3, difficulty:'中等',
-        img:'https://images.unsplash.com/photo-1613744013720-4f505ce31735?q=80&w=1287&auto=format&fit=crop',
-        desc:'汤头浓郁，牛肉软烂，番茄酸甜，这碗面端上桌全家都安静了', tm:['TM5','TM6','TM7'],
-        ingredients:['牛腩 400g，切大块','番茄 3 个，切块','大蒜 3 瓣','姜 2 片','生抽 2 汤匙','老抽 1 茶匙','番茄膏 1 汤匙','盐、糖 适量','面条 适量','清水 800ml'],
-        steps:[{title:'牛肉焯水',time:'',desc:'牛腩冷水下锅，普通锅大火煮开后捞出，冲洗干净去掉血水。这步做好汤才不会腥。'},{title:'爆香蒜姜',time:'3 分钟',desc:'大蒜和姜片放入小美，速度 5 切碎，加少许油，100°C 速度 1 炒 3 分钟，香味出来了。'},{title:'炒番茄',time:'5 分钟',desc:'番茄块和番茄膏一起放入，100°C 速度 1 翻炒 5 分钟，炒到番茄出汁变软。'},{title:'炖牛肉',time:'40 分钟',desc:'放入牛腩、生抽、老抽、盐、糖和清水，100°C 速度小勺反转，炖 40 分钟。牛肉要软烂才好吃。'},{title:'煮面装碗',time:'',desc:'另起锅煮面，煮好捞出装碗，浇上满满一大勺番茄牛肉汤，趁热吃！'}]},
+// ── Render helpers ───────────────────────────────────────────────
+function renderTMTags(tm) {
+  return `<div class="tm-tags">${tm.map(tmTagHTML).join('')}</div>`;
+}
 
-      { id:21, title:'橙香鸡翅', category:'主食', time:45, servings:3, difficulty:'简单',
-        img:'https://images.unsplash.com/photo-1527477396000-e27163b481c2?w=600&h=380&fit=crop',
-        desc:'小美帮你把鸡翅煮入味，再送进烤箱烤出焦香，橙子的清香让整道菜清爽不腻', tm:['TM5','TM6','TM7'],
-        ingredients:['翅中 500g','糖 10g','生抽 15g','老抽 20g','料酒 50g','水 100g','姜 20g，切片','橙子 1 个，切片'],
-        steps:[
-          {title:'放入腌料',time:'26 分钟',desc:'将翅中、糖、生抽、老抽、料酒、水和姜片全部放入小美，Varoma 温度速度 1，煮 26 分钟把鸡翅煮熟入味。'},
-          {title:'取出备用',time:'',desc:'煮好后用刮刀棒轻轻翻拌均匀，让每块鸡翅都裹上酱汁，倒入碗中稍微放凉备用。'},
-          {title:'烤箱烤制',time:'15 分钟',desc:'烤箱预热 200°C。鸡翅平铺在烤盘上，上面铺几片橙子，放入烤箱烤 15 分钟，表皮焦香上色就好了。'},
-          {title:'装盘上桌',time:'',desc:'取出装盘，趁热吃，外皮焦脆，肉质软嫩，橙香四溢。'},
-        ]},
-
-      { id:22, title:'牛肉丸', category:'主食', time:40, servings:4, difficulty:'中等',
-        img:'https://images.unsplash.com/photo-1529042410759-befb1204b468?w=600&h=380&fit=crop',
-        desc:'弹牙爽口的手工牛肉丸，小美帮你搞定最难的打肉步骤，孩子们超爱吃', tm:['TM5','TM6','TM7'],
-        ingredients:['牛肉 300g，切小块','蛋清 2 个','盐 9g','葱姜水 45g','生粉 15g','黑胡椒粉 适量'],
-        steps:[
-          {title:'处理牛肉',time:'',desc:'牛肉切成麻将大小的块，洗干净后放冰箱冷冻至稍微变硬，这样打出来更有弹性。'},
-          {title:'打肉',time:'40 秒',desc:'冻硬的牛肉放入小美，速度 6 打 20 秒，用刮刀把肉刮到底部，再速度 6 打 20 秒，打成细腻肉泥。'},
-          {title:'调味上劲',time:'3 分钟',desc:'加入盐、蛋清、葱姜水、生粉和黑胡椒粉，速度 3 搅打 3 分钟上劲，肉泥变得有黏性就对了。'},
-          {title:'煮丸子',time:'15 分钟',desc:'小美加水约 1900g，80°C 速度小勺预热。手蘸凉水，用虎口挤出圆形丸子，从锅盖口放入。全部挤好后开 100°C 煮至丸子浮起来就熟了。'},
-        ]},
-
-      { id:23, title:'鱼丸', category:'主食', time:35, servings:4, difficulty:'中等',
-        img:'https://images.unsplash.com/photo-1763994682737-477d8200dd5d?q=80&w=2670&auto=format&fit=crop',
-        desc:'嫩滑Q弹的自制鱼丸，没有任何添加剂，新鲜到可以直接咬着吃', tm:['TM5','TM6','TM7'],
-        ingredients:['鱼肉 400g（草鱼或鲈鱼去皮去刺）','葱姜水 100g（分次加）','蛋清 3 个','料酒 40g','生粉 20g','白胡椒粉 5g','盐 15g'],
-        steps:[
-          {title:'第一次打肉',time:'',desc:'鱼肉放入小美，加 50g 葱姜水，速度 8 打 15 秒。重复这个步骤共 4 次，每次都加 50g 葱姜水，分次加才能让鱼肉充分吸收。'},
-          {title:'加入调味料',time:'30 秒',desc:'加入蛋清、料酒、生粉、剩余葱姜水和白胡椒粉，速度 8 再打 30 秒，打到鱼肉变得光滑细腻。'},
-          {title:'加盐上筋',time:'2 分钟',desc:'加入盐，反转速度 3，搅打 2 分钟上筋。检验方法：取一小团放进冷水，能浮起来就说明上筋成功了！'},
-          {title:'煮鱼丸',time:'5 分钟',desc:'烧一锅热水，加少许盐。水沸后转小火，手蘸凉水挤出鱼丸放入锅中，3-5 分钟丸子变大浮起就熟了。捞出泡冷水定型，口感更Q弹。'},
-        ]},
-
-      // ── 汤羹 ──
-      { id:1, title:'奶油蘑菇浓汤', category:'汤羹', time:25, servings:4, difficulty:'简单',
-        img:'https://images.unsplash.com/photo-1552309463-7c221c5130c2?q=80&w=1287&auto=format&fit=crop',
-        desc:'鲜嫩蘑菇搭配淡奶油，口感丝滑浓郁，是全家人都喜欢的暖身汤', tm:['TM5','TM6','TM7'],
-        ingredients:['新鲜蘑菇 400g','洋葱 1 个，切碎','大蒜 2 瓣','淡奶油 150ml','牛奶 200ml','无盐黄油 20g','盐、白胡椒粉 适量','欧芹碎 少许'],
-        steps:[{title:'炒香洋葱',time:'5 分钟',desc:'将黄油、大蒜和洋葱放入锅中，100°C 速度 1，炒 5 分钟至洋葱软化透明。'},{title:'加入蘑菇',time:'8 分钟',desc:'加入蘑菇，100°C 速度 1，翻炒 8 分钟直到蘑菇出水并变软。'},{title:'打成泥',time:'1 分钟',desc:'稍凉后，从速度 5 慢慢升至速度 9，搅打 1 分钟成光滑蘑菇泥。'},{title:'加入奶油',time:'5 分钟',desc:'倒入淡奶油和牛奶，90°C 速度 3，加热 5 分钟，用盐和白胡椒调味。'},{title:'盛盘享用',time:'',desc:'倒入碗中，撒上欧芹碎，趁热享用。可搭配脆皮面包一起吃。'}]},
-
-      { id:16, title:'玉米排骨汤', category:'汤羹', time:65, servings:4, difficulty:'简单',
-        img:'https://images.unsplash.com/photo-1717815963472-d1ae37cdd8d2?q=80&w=1364&auto=format&fit=crop',
-        desc:'甜玉米配排骨，汤色奶白，喝起来鲜甜清润，家里老人小孩都爱喝', tm:['TM5','TM6','TM7'],
-        ingredients:['猪排骨 500g','甜玉米 2 根，切段','胡萝卜 1 根，切滚刀块','姜 3 片','清水 1200ml','盐 适量','枸杞 少许（可选）'],
-        steps:[{title:'排骨焯水',time:'',desc:'排骨冷水下锅，普通锅煮开后捞出，冲洗干净。焯水这步不能省，汤才会清甜不腥。'},{title:'放入所有材料',time:'',desc:'排骨、玉米段、胡萝卜、姜片和清水全部放进小美，食材要一次放好。'},{title:'慢炖',time:'50 分钟',desc:'100°C 速度小勺反转，炖 50 分钟。炖的时候汤色会慢慢变成奶白色，特别诱人。'},{title:'调味盛碗',time:'',desc:'加盐调味，撒几粒枸杞。盛出来趁热喝，玉米甜糯，喝完整个人都暖起来了。'}]},
-
-      { id:24, title:'金针肥牛', category:'汤羹', time:25, servings:3, difficulty:'中等',
-        img:'https://i.postimg.cc/L4WzkHzF/jin-zhen-gu-fei-niu.png',
-        desc:'金黄浓郁的汤底配上嫩滑肥牛和爽脆金针菇，酸辣开胃，一上桌就被抢光', tm:['TM5','TM6','TM7'],
-        ingredients:['肥牛卷 350g','金针菇 120g，去根','鸡高汤 900g','绿泡椒 20g','黄灯笼辣椒酱 20g','白醋 100g','油 15g','葱 2 支，切段','姜 5 片','蒜 3 瓣，切片','盐 3g','糖 5g','葱花、小米辣 适量'],
-        steps:[
-          {title:'肥牛焯水',time:'',desc:'肥牛卷放入开水中快速焯一下，变色就捞出，沥干备用。不要煮太久，肉质会变老。'},
-          {title:'爆香底料',time:'3 分钟',desc:'油、葱、姜、蒜、绿泡椒和黄灯笼辣椒酱一起放入小美，120°C 速度 1 爆香 3 分钟，香味会扑鼻而来。'},
-          {title:'煮汤底',time:'8 分钟',desc:'倒入鸡高汤、白醋、盐和糖，100°C 速度小勺煮 8 分钟，让酸辣汤底充分融合。'},
-          {title:'加金针菇',time:'3 分钟',desc:'金针菇放入，100°C 速度小勺再煮 3 分钟，煮到金针菇变软入味。'},
-          {title:'加入肥牛',time:'3 分钟',desc:'放入焯好的肥牛卷，Varoma 反转速度 1 烹煮 3 分钟。倒入大碗，撒上葱花和小米辣圈装饰，趁热享用！'},
-        ]},
-
-      // ── 冷菜 ──
-      { id:11, title:'腌萝卜', category:'冷菜', time:30, servings:4, difficulty:'简单',
-        img:'https://i.postimg.cc/C1ZZs9CN/yan-zhi-luo-bo-pian.jpg',
-        desc:'酸甜爽脆的腌萝卜，用小美快速完成腌制，冷藏保存随取随吃，开胃下饭一绝', tm:['TM5','TM6','TM7'],
-        ingredients:['白萝卜 1000g','生抽 130g','醋 100g','冰糖 100g'],
-        steps:[{title:'准备腌汁',time:'6 分钟',desc:'锅内放入醋、生抽、冰糖，100°C 速度小勺煮开，约 6 分钟，让冰糖完全融化。'},{title:'处理萝卜',time:'18 分钟',desc:'白萝卜洗净，切成薄片，放入主锅。70°C 速度小勺反转，慢慢翻动 18 分钟让萝卜吸收腌汁。'},{title:'冷却装瓶',time:'',desc:'完成后取出，冷却至室温后放入玻璃瓶，放冰箱冷藏保存。'},{title:'小贴士',time:'',desc:'白萝卜无需用盐腌制杀水，小美方便快速。冷藏后口感更爽脆，隔夜后味道更佳。'}]},
-
-      { id:25, title:'麻辣鸭舌', category:'冷菜', time:35, servings:2, difficulty:'简单',
-        img:'https://images.unsplash.com/photo-1562967914-608f82629710?w=600&h=380&fit=crop',
-        desc:'麻辣鲜香，嚼劲十足，小美卤好之后拌上调味汁，下酒下饭都绝了', tm:['TM5','TM6','TM7'],
-        ingredients:['鸭舌 250g，提前焯烫沥干','水 800g','生抽 2 茶匙','老抽 1 茶匙','十三香炖肉料包 1 包','盐 1/4 茶匙','糖 1/4 茶匙','花椒粉 2 茶匙','辣椒油 4 茶匙','麻油 2 茶匙','白芝麻 2 汤匙'],
-        steps:[
-          {title:'鸭舌焯水',time:'',desc:'鸭舌提前用开水焯烫，去掉腥味和杂质，捞出沥干备用。这步不能省。'},
-          {title:'卤制鸭舌',time:'20 分钟',desc:'将焯好的鸭舌、水、生抽、老抽和十三香炖肉料包放入小美，100°C 速度 1 卤煮 20 分钟，让鸭舌充分吸收卤汁香味。'},
-          {title:'取出沥干',time:'',desc:'卤好后把鸭舌取出，沥干水分，稍微放凉一会儿。'},
-          {title:'调味拌匀',time:'',desc:'取一个小碗，把盐、糖、花椒粉、辣椒油和麻油混合成调味汁。把鸭舌和调味汁充分拌匀，撒上白芝麻，即可享用。冷藏后更入味。'},
-        ]},
-
-      // ── 甜点 ──
-      { id:4, title:'苹果肉桂麦芬', category:'甜点', time:45, servings:12, difficulty:'中等',
-        img:'https://images.unsplash.com/photo-1608847568631-50d50ebe4407?q=80&w=1286&auto=format&fit=crop',
-        desc:'家里孩子最爱的下午茶点心，苹果粒软糯，肉桂香气四溢', tm:['TM5','TM6','TM7'],
-        ingredients:['低筋面粉 200g','苹果 2 个，去皮切丁','鸡蛋 2 个','牛奶 120ml','无盐黄油 80g','细砂糖 90g','泡打粉 1.5 茶匙','肉桂粉 1 茶匙'],
-        steps:[{title:'预热烤箱',time:'',desc:'烤箱预热至 180°C，麦芬模具铺上纸杯备用。'},{title:'融化黄油',time:'2 分钟',desc:'黄油放入，50°C 速度 2 融化约 2 分钟。加入糖、鸡蛋、牛奶，速度 4 搅拌均匀。'},{title:'加粉类',time:'10 秒',desc:'筛入面粉、泡打粉、肉桂粉，速度 4 搅拌约 10 秒，看不到干粉即可。'},{title:'拌入苹果',time:'',desc:'用刮刀轻轻折叠拌入苹果丁，动作要轻柔保持面糊蓬松。'},{title:'烘烤',time:'22 分钟',desc:'面糊倒入模具至七分满，180°C 烤约 22 分钟，牙签插入无沾即熟。'}]},
-
-      { id:17, title:'双皮奶', category:'甜点', time:45, servings:4, difficulty:'中等',
-        img:'https://images.unsplash.com/photo-1488477181946-6428a0291777?w=600&h=380&fit=crop',
-        desc:'比奶茶店还好吃的双皮奶，嫩滑到勺子插进去都是享受，冷藏后口感更绝', tm:['TM5','TM6','TM7'],
-        ingredients:['全脂牛奶 500ml（全脂的才能起好奶皮）','蛋清 3 个','白糖 40g'],
-        steps:[{title:'加热牛奶',time:'5 分钟',desc:'牛奶倒入小美，80°C 速度 2 加热 5 分钟，然后倒入碗中，静置放凉。表面会自然形成一层奶皮，这是第一层。'},{title:'打蛋清',time:'2 分钟',desc:'蛋清加白糖，用蝴蝶棒速度 4 打约 2 分钟，打到起泡就好，不需要打到全发。'},{title:'混合',time:'',desc:'轻轻用牙签挑开碗边的奶皮，把蛋清液从边缘缓缓倒入奶皮下方，然后把奶皮轻轻放回表面。'},{title:'上锅蒸',time:'25 分钟',desc:'蒸锅加水，放好碗后盖上保鲜膜，80°C 蒸 25 分钟。蒸的过程不要开盖！'},{title:'冷藏享用',time:'',desc:'蒸好后放凉，放冰箱冷藏 1 小时，口感更嫩滑。吃的时候可以加红豆或者芒果粒，好吃翻倍。'}]},
-
-      // ── 饮品 ──
-      { id:12, title:'自制豆浆', category:'饮品', time:20, servings:4, difficulty:'简单',
-        img:'https://images.unsplash.com/photo-1555465083-a845797ef750?q=80&w=1364&auto=format&fit=crop',
-        desc:'比超市买的香太多了！自己打的豆浆没有任何添加剂，浓郁又健康，早餐喝一碗超满足', tm:['TM5','TM6','TM7'],
-        ingredients:['干黄豆 100g（提前泡发一晚）','清水 1000ml','白糖 适量（按口味加）'],
-        steps:[{title:'泡豆',time:'',desc:'黄豆提前用清水泡发一整夜，泡好后冲洗几遍，这步不能省，泡透了打出来才够香。'},{title:'放入材料',time:'',desc:'把泡好的黄豆和 1000ml 清水一起倒进小美，不需要提前煮。'},{title:'搅打',time:'1 分钟',desc:'从速度 5 慢慢升到速度 10，搅打 1 分钟，打到顺滑细腻为止。'},{title:'过滤豆渣',time:'',desc:'用豆浆袋或细网筛过滤一遍。不喜欢过滤麻烦的话，直接喝也可以，豆渣营养也很好。'},{title:'煮熟',time:'8 分钟',desc:'过滤好的豆浆倒回小美，100°C 速度 2，煮 8 分钟。一定要煮熟才能喝！加糖调味，趁热享用。'}]},
-
-      { id:7, title:'百香果柠檬气泡饮', category:'饮品', time:5, servings:2, difficulty:'简单',
-        img:'https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?w=600&h=380&fit=crop',
-        desc:'清爽酸甜的夏日饮品，孩子放学回来的最佳奖励', tm:['TM5','TM6','TM7'],
-        ingredients:['百香果 3 个，取果肉','新鲜柠檬 1 个，取汁','蜂蜜 2 汤匙','气泡水 400ml（冰的）','冰块 适量'],
-        steps:[{title:'制作糖浆',time:'30 秒',desc:'百香果肉、柠檬汁和蜂蜜放入，速度 5 搅打 30 秒混合均匀。'},{title:'过滤（可选）',time:'',desc:'若不喜欢百香果籽，可用细筛过滤，取清澈果汁。保留籽口感更丰富。'},{title:'组合饮品',time:'',desc:'杯中加满冰块，倒入果汁，再缓慢注入冰气泡水，不要搅拌保留气泡。'}]},
-
-      { id:8, title:'香蕉可可奶昔', category:'饮品', time:5, servings:2, difficulty:'简单',
-        img:'https://images.unsplash.com/photo-1542444592-e6880e286bb9?q=80&w=961&auto=format&fit=crop',
-        desc:'天然甜味无需加糖，浓稠丝滑，孩子的健康早餐饮品', tm:['TM5','TM6','TM7'],
-        ingredients:['熟香蕉 2 根（冷冻后更浓稠）','可可粉 2 汤匙','牛奶 250ml','蜂蜜 1 汤匙（可选）','冰块 少许'],
-        steps:[{title:'放入材料',time:'',desc:'将香蕉（冷冻最佳）、可可粉、牛奶全部放入。'},{title:'搅打',time:'1 分钟',desc:'从速度 5 慢慢升至速度 10，搅打约 1 分钟至完全顺滑无颗粒。'},{title:'立即享用',time:'',desc:'倒入杯中立即饮用，现做现喝最佳。'}]},
-
-      // ── 酱料 ──
-      { id:6, title:'自制花生酱', category:'酱料', time:15, servings:1, difficulty:'简单',
-        img:'https://images.unsplash.com/photo-1615110250484-e8c3b151b957?q=80&w=1287&auto=format&fit=crop',
-        desc:'只需花生和少许盐，无任何添加剂，浓郁程度远超超市瓶装花生酱', tm:['TM5','TM6','TM7'],
-        ingredients:['去皮熟花生 300g','盐 1/4 茶匙','蜂蜜 1 汤匙（可选）','葡萄籽油 少许'],
-        steps:[{title:'准备花生',time:'',desc:'使用已去皮的熟花生，确保完全干燥，不能有水分。'},{title:'初步搅打',time:'1 分钟',desc:'花生放入，从速度 5 逐渐升至速度 10，搅打 1 分钟，变成粗粒状。'},{title:'持续研磨',time:'3 分钟',desc:'速度 10 继续搅打 3 分钟，花生会先变成粉，再逐渐出油变成糊状。中途用刮刀刮壁。'},{title:'调味装瓶',time:'',desc:'加入盐和蜂蜜，速度 5 混合 10 秒。装入干净玻璃瓶，密封冷藏可保存约 1 个月。'}]},
-
-      { id:18, title:'葱油', category:'酱料', time:20, servings:1, difficulty:'简单',
-        img:'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=600&h=380&fit=crop',
-        desc:'一罐葱油，拌面拌饭拌什么都香，自己炸的比外面买的香十倍，做一罐能用好久', tm:['TM5','TM6','TM7'],
-        ingredients:['小葱 200g，切成 5cm 小段','色拉油 300ml','盐 少许'],
-        steps:[{title:'葱一定要晾干',time:'',desc:'小葱洗净后必须完全晾干，有水分放进热油会溅油，危险又影响香味。晾干至少半小时。'},{title:'放入小美',time:'',desc:'葱段和色拉油一起放入小美，葱要完全浸在油里。'},{title:'慢炸',time:'15 分钟',desc:'120°C 速度小勺反转，慢炸 15 分钟。葱会从翠绿慢慢变成金黄色，香味会越来越浓。'},{title:'过滤',time:'',desc:'用细筛过滤掉葱渣，留下清澈金黄的葱油。葱渣也别扔，拌进炒饭或者面条里很香。'},{title:'装瓶保存',time:'',desc:'葱油晾凉后装入干净玻璃瓶，密封冷藏可以保存约一个月。拌面时淋一勺，立刻升华。'}]},
-
-      { id:19, title:'辣椒酱', category:'酱料', time:25, servings:1, difficulty:'简单',
-        img:'https://images.unsplash.com/photo-1692302756206-3dd7506cb8f0?q=80&w=1287&auto=format&fit=crop',
-        desc:'不辣不欢的朋友必备！自己做的辣椒酱，想多辣就多辣，吃什么都能加一勺', tm:['TM5','TM6','TM7'],
-        ingredients:['新鲜红辣椒 300g，去蒂','大蒜 50g','姜 20g','食用油 50ml','盐 1 茶匙','糖 1 茶匙','生抽 1 汤匙'],
-        steps:[{title:'处理食材',time:'',desc:'辣椒去蒂洗净，一定要完全晾干。大蒜和姜不需要提前切，直接放进小美就行。'},{title:'切碎',time:'5 秒',desc:'辣椒、大蒜、姜一起放入，速度 5 搅打 5 秒，打成粗粒状。喜欢细腻的可以再打几秒。'},{title:'炒制',time:'10 分钟',desc:'加入食用油，100°C 速度 1 翻炒 10 分钟，把辣椒的水分炒干，香味全出来了。'},{title:'调味',time:'5 分钟',desc:'加入盐、糖和生抽，继续 100°C 速度 1 炒 5 分钟，炒到稍微浓稠就好。'},{title:'装瓶',time:'',desc:'放凉后装入消毒过的玻璃瓶，冷藏可以保存一个月。吃面、吃饺子、拌菜都来一勺！'}]},
-
-      { id:20, title:'番茄酱', category:'酱料', time:35, servings:1, difficulty:'简单',
-        img:'https://images.unsplash.com/photo-1472476443507-c7a5948772fc?w=600&h=380&fit=crop',
-        desc:'用新鲜番茄自己熬的番茄酱，酸甜浓郁，比瓶装的新鲜好吃，做披萨拌面都用得上', tm:['TM5','TM6','TM7'],
-        ingredients:['成熟番茄 800g（越熟越红越好）','洋葱 半个','大蒜 3 瓣','橄榄油 2 汤匙','盐 1 茶匙','糖 1 茶匙','罗勒叶 少许（可选）'],
-        steps:[{title:'爆香洋葱蒜',time:'5 分钟',desc:'橄榄油、切碎的洋葱和大蒜放入小美，100°C 速度 1 炒 5 分钟，炒到软化出香味。'},{title:'加入番茄',time:'15 分钟',desc:'番茄切块放入，100°C 速度 2，煮 15 分钟，煮到番茄完全软烂出汁，颜色变深。'},{title:'搅打顺滑',time:'30 秒',desc:'稍微放凉后，速度 8 搅打 30 秒，打成顺滑的番茄酱。喜欢有颗粒感的打短一点。'},{title:'收汁调味',time:'5 分钟',desc:'加入盐和糖，90°C 速度 2 再煮 5 分钟，煮到番茄酱变浓稠。尝一下味道，按喜好调整。'},{title:'装瓶保存',time:'',desc:'晾凉后装入玻璃瓶，冷藏保存约 2 周。做披萨、拌意面、涂面包都非常好用。'}]},
-
-    ];
-
-    const categories = ['全部','早餐','主食','汤羹','甜点','饮品','冷菜','酱料'];
-
-    function TMTag({ label }) {
-      const s = TM[label];
-      return (
-        <span style={{ fontSize:11, fontWeight:600, padding:'3px 9px', borderRadius:20, background:s.bg, color:s.text, border:`1px solid ${s.border}`, display:'inline-flex', alignItems:'center', gap:4 }}>
-          <span style={{ width:6, height:6, borderRadius:'50%', background:s.dot, display:'inline-block' }} />{label}
-        </span>
-      );
-    }
-
-    function BackToTop() {
-      const [show, setShow] = useState(false);
-      useEffect(() => {
-        const onScroll = () => setShow(window.scrollY > 300);
-        window.addEventListener('scroll', onScroll);
-        return () => window.removeEventListener('scroll', onScroll);
-      }, []);
-      return (
-        <button className={`back-top${show ? ' show' : ''}`} onClick={() => window.scrollTo({ top:0, behavior:'smooth' })} title="回到顶部">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <polyline points="18 15 12 9 6 15"/>
-          </svg>
-        </button>
-      );
-    }
-
-    function ImgCard({ src, alt, className, style }) {
-      const [loaded, setLoaded] = useState(false);
-      return (
-        <div className={`img-wrap${className ? ' '+className : ''}`} style={style}>
-          <img src={src} alt={alt} className={loaded ? 'loaded' : ''} onLoad={() => setLoaded(true)} style={{ width:'100%', height:'100%', objectFit:'cover' }} />
-        </div>
-      );
-    }
-
-    function ShareButton({ recipe }) {
-      const [tip, setTip] = useState('');
-
-      const handleShare = () => {
-        const url = window.location.href;
-        const shareData = {
-          title: recipe.title + ' · 麻薯食谱',
-          text: recipe.desc + '\n\n来自麻薯食谱 mashuhome.com',
-          url: url,
-        };
-        if (navigator.share) {
-          navigator.share(shareData).catch(() => {});
-        } else {
-          navigator.clipboard.writeText(url).then(() => {
-            setTip('链接已复制！打开微信粘贴给好友即可 🎉');
-            setTimeout(() => setTip(''), 3000);
-          }).catch(() => {
-            setTip('请手动复制：' + url);
-            setTimeout(() => setTip(''), 4000);
-          });
-        }
-      };
-
-      return (
-        <div style={{ display:'flex', flexDirection:'column', alignItems:'center', marginBottom:24, gap:8 }}>
-          <button onClick={handleShare}
-            style={{ display:'flex', alignItems:'center', gap:8, background:'#07c160', border:'none', borderRadius:24, padding:'10px 24px', color:'white', fontSize:14, fontWeight:600, cursor:'pointer', fontFamily:'inherit', boxShadow:'0 3px 12px rgba(7,193,96,0.3)' }}>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
-              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
-            </svg>
-            分享给微信好友
-          </button>
-          {tip && (
-            <div style={{ fontSize:12, color:'#4a8a3a', background:'#f0f8ec', padding:'6px 16px', borderRadius:20, border:'1px solid #c8e4b8' }}>
-              {tip}
-            </div>
-          )}
-        </div>
-      );
-    }
-
-    function RecipeDetail({ r, onBack }) {
-
-      // 动态插入 Recipe Schema，让搜索引擎识别每道菜
-      useEffect(() => {
-        const schema = {
-          "@context": "https://schema.org",
-          "@type": "Recipe",
-          "name": r.title,
-          "description": r.desc,
-          "image": r.img,
-          "author": { "@type": "Organization", "name": "麻薯食谱", "url": "https://www.mashuhome.com" },
-          "datePublished": "2025-01-01",
-          "recipeCategory": r.category,
-          "recipeYield": r.servings + " 人份",
-          "totalTime": "PT" + r.time + "M",
-          "recipeIngredient": r.ingredients,
-          "recipeInstructions": r.steps.map((step, i) => ({
-            "@type": "HowToStep",
-            "position": i + 1,
-            "name": step.title,
-            "text": step.desc
-          })),
-          "keywords": "小美食谱,美善品," + r.title + "," + r.category,
-          "tool": r.tm.map(t => ({ "@type": "HowToTool", "name": "Thermomix " + t }))
-        };
-        const script = document.createElement('script');
-        script.type = 'application/ld+json';
-        script.id = 'recipe-schema';
-        script.text = JSON.stringify(schema);
-        document.head.appendChild(script);
-
-        // 同步更新页面标题
-        document.title = r.title + ' · 麻薯食谱';
-
-        return () => {
-          const el = document.getElementById('recipe-schema');
-          if (el) el.remove();
-          document.title = '麻薯食谱 · 小美家庭菜谱 | mashuhome.com';
-        };
-      }, [r]);
-
-      return (
-        <div style={{ background:'#fafaf8', minHeight:'100vh' }}>
-          <div className="detail-nav">
-            <div className="detail-nav-inner">
-              <button onClick={onBack} style={{ background:'none', border:'none', color:'#5a7a50', fontSize:14 }}>← 返回食谱</button>
-              <div style={{ display:'flex', alignItems:'center', gap:7 }}>
-                <img src="https://i.postimg.cc/d3Ykkdm6/ma-shu-cai-pulogo2.png" alt="麻薯食谱" style={{ width:28, height:28, borderRadius:'50%', objectFit:'cover', objectPosition:'center 20%' }} />
-                <span style={{ fontSize:13, color:'#3a5a30', fontWeight:700 }}>麻薯食谱</span>
-              </div>
-              <div style={{ width:60 }} />
-            </div>
-          </div>
-          <div className="detail-hero">
-            <ImgCard src={r.img} alt={r.title} style={{ width:'100%', height:'100%' }} />
-          </div>
-          <div className="detail-content">
-            <div style={{ textAlign:'center', marginBottom:16 }}>
-              <span style={{ fontSize:12, background:'#edf7e8', color:'#4a8a3a', borderRadius:20, padding:'3px 14px', display:'inline-block', marginBottom:10 }}>{r.category}</span>
-              <h1 style={{ fontSize:26, fontWeight:700, color:'#1a1810', lineHeight:1.3, letterSpacing:'-0.3px' }}>{r.title}</h1>
-            </div>
-            <p style={{ fontSize:14, color:'#6a6055', lineHeight:1.8, marginBottom:20, textAlign:'center' }}>{r.desc}</p>
-            <div style={{ display:'flex', justifyContent:'center', gap:20, marginBottom:16, flexWrap:'wrap' }}>
-              <div style={{ textAlign:'center' }}><div style={{ fontSize:18 }}>⏱</div><div style={{ fontSize:13, color:'#7a7060', marginTop:2 }}>{r.time} 分钟</div></div>
-              <div style={{ textAlign:'center' }}><div style={{ fontSize:18 }}>🍽</div><div style={{ fontSize:13, color:'#7a7060', marginTop:2 }}>{r.servings} 人份</div></div>
-              <div style={{ textAlign:'center' }}>
-                <div style={{ fontSize:18 }}>📊</div>
-                <div style={{ marginTop:2 }}><span style={{ fontSize:12, background:diff[r.difficulty].bg, color:diff[r.difficulty].text, padding:'2px 10px', borderRadius:20 }}>{r.difficulty}</span></div>
-              </div>
-            </div>
-            <div style={{ display:'flex', justifyContent:'center', gap:8, marginBottom:16, flexWrap:'wrap', alignItems:'center' }}>
-              <span style={{ fontSize:12, color:'#a09880' }}>适用机型</span>
-              {r.tm.map(t => <TMTag key={t} label={t} />)}
-            </div>
-
-            {/* 一键分享按钮 */}
-            <ShareButton recipe={r} />
-            <section style={{ background:'white', borderRadius:14, border:'1px solid #ede8e0', padding:'1.2rem', marginBottom:16 }}>
-              <h2 style={{ fontSize:15, fontWeight:700, color:'#3a3028', marginBottom:14, display:'flex', alignItems:'center', gap:8 }}>
-                <span style={{ width:4, height:18, background:'#6aaa60', borderRadius:2, display:'inline-block' }} />食材清单
-              </h2>
-              <div className="ingredient-grid">
-                {r.ingredients.map((ing, i) => (
-                  <div key={i} style={{ fontSize:13, color:'#5a5040', padding:'6px 0', borderBottom:'1px solid #f5f0e8', display:'flex', gap:8 }}>
-                    <span style={{ color:'#9acc88', flexShrink:0 }}>·</span>{ing}
-                  </div>
-                ))}
-              </div>
-            </section>
-            <section>
-              <h2 style={{ fontSize:15, fontWeight:700, color:'#3a3028', marginBottom:14, display:'flex', alignItems:'center', gap:8 }}>
-                <span style={{ width:4, height:18, background:'#6aaa60', borderRadius:2, display:'inline-block' }} />烹饪步骤
-              </h2>
-              {r.steps.map((step, i) => (
-                <div key={i} style={{ display:'flex', gap:12, marginBottom:12 }}>
-                  <div style={{ flexShrink:0, width:32, height:32, borderRadius:'50%', background:i===0?'#4a9a55':'#e8f0e4', color:i===0?'white':'#5a7a50', display:'flex', alignItems:'center', justifyContent:'center', fontWeight:700, fontSize:14 }}>{i+1}</div>
-                  <div style={{ background:'white', borderRadius:12, border:'1px solid #ede8e0', padding:'0.9rem 1rem', flex:1 }}>
-                    <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:6, flexWrap:'wrap', gap:4 }}>
-                      <span style={{ fontWeight:600, color:'#2a2018', fontSize:14 }}>{step.title}</span>
-                      {step.time && <span style={{ fontSize:11, background:'#f0f8ec', color:'#4a8a3a', padding:'2px 10px', borderRadius:20 }}>{step.time}</span>}
-                    </div>
-                    <p style={{ fontSize:13, color:'#7a6e60', lineHeight:1.75, margin:0 }}>{step.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </section>
-            <div style={{ marginTop:20, background:'#f5fbf0', border:'1px solid #d4eac8', borderRadius:10, padding:'1rem' }}>
-              <p style={{ fontSize:13, color:'#4a7a3a', margin:0, lineHeight:1.7 }}>
-                💡 <strong>小贴士：</strong>所有步骤均适用于小美（Thermomix Friend）。TM5 / TM6 / TM7 用户可根据各自机型说明书微调温度和时间设定。
-              </p>
-            </div>
+function renderHeader() {
+  return `
+  <div class="header" id="pageHeader">
+    <div class="header-top">
+      <div class="logo-area">
+        <img class="logo-img" src="https://i.postimg.cc/d3Ykkdm6/ma-shu-cai-pulogo2.png" alt="麻薯食谱">
+        <div class="brand-box">
+          <div class="brand-title">麻薯食谱</div>
+          <div class="brand-sub">
+            <span class="brand-line"></span>
+            <span class="brand-en">mashuhome</span>
+            <span class="brand-line"></span>
           </div>
         </div>
-      );
-    }
+      </div>
+      <div class="search-wrap">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#8a9a88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input class="search-input" type="text" placeholder="搜索食谱…" value="${state.search}" id="searchInput">
+      </div>
+    </div>
+    <div class="cat-bar">
+      <div class="cat-inner">
+        ${CATS.map(c => `<button class="cat-btn${state.category===c?' active':''}" data-action="category" data-val="${c}">${c}</button>`).join('')}
+      </div>
+    </div>
+  </div>`;
+}
 
-    function QRModal({ src, alt, onClose }) {
-      return (
-        <div onClick={onClose} style={{ position:'fixed', inset:0, background:'rgba(0,0,0,0.75)', zIndex:9999, display:'flex', alignItems:'center', justifyContent:'center', padding:'2rem' }}>
-          <div onClick={e => e.stopPropagation()} style={{ background:'white', borderRadius:20, padding:'24px', textAlign:'center', maxWidth:320, width:'100%' }}>
-            <img src={src} alt={alt} style={{ width:'100%', borderRadius:12 }} />
-            <p style={{ fontSize:13, color:'#6a6a6a', marginTop:14, lineHeight:1.6 }}>微信扫一扫 或 长按保存到手机后在微信中识别</p>
-            <button onClick={onClose} style={{ marginTop:14, padding:'8px 28px', borderRadius:24, border:'none', background:'#4a9a55', color:'white', fontSize:13, cursor:'pointer', fontFamily:'inherit' }}>关闭</button>
+function renderHero() {
+  return `
+  <div class="hero">
+    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1200&h=400&fit=crop" alt="家庭餐桌" onload="this.classList.add('loaded')">
+    <div class="hero-overlay"></div>
+    <div class="hero-text">
+      <h2>家常美味，轻松上桌</h2>
+      <p>所有食谱适配小美，并标注 TM5 · TM6 · TM7 兼容性</p>
+    </div>
+  </div>`;
+}
+
+function renderHotRanking() {
+  const top = topRecipes();
+  if (top.length === 0) return '';
+  return `
+  <div class="hot-bar">
+    <div class="hot-title">
+      <span>🔥</span> 热门排行
+    </div>
+    <div class="hot-list">
+      ${top.map(r => `
+        <div class="hot-card" data-action="open" data-id="${r.id}">
+          <img class="hot-card-img" src="${r.img}" alt="${r.title}" onload="this.classList.add('loaded')">
+          <div class="hot-card-body">
+            <div class="hot-card-name">${r.title}</div>
+            <div class="hot-card-meta">⏱ ${r.time}m · ${r.clicks}次</div>
           </div>
-        </div>
-      );
-    }
+        </div>`).join('')}
+    </div>
+  </div>`;
+}
 
-    function App() {
-      const [search, setSearch] = useState('');
-      const [category, setCategory] = useState('全部');
-      const [selected, setSelected] = useState(null);
-      const [page, setPage] = useState(1);
-      const [qrModal, setQrModal] = useState(null);
-      const PER_PAGE = 12;
+function renderRecipeCard(r) {
+  return `
+  <article class="recipe-card" data-action="open" data-id="${r.id}">
+    <div class="card-img-wrap">
+      <img src="${r.img}" alt="${r.title}" onload="this.classList.add('loaded')">
+    </div>
+    <div class="card-body">
+      <div class="card-top">
+        <span class="card-title">${r.title}</span>
+        ${diffBadge(r.difficulty)}
+      </div>
+      <p class="card-desc">${r.desc}</p>
+      <div class="card-footer">
+        ${renderTMTags(r.tm)}
+        <span class="card-time">⏱ ${r.time}m</span>
+      </div>
+    </div>
+  </article>`;
+}
 
-      // 页面加载时读取 hash，直接打开对应食谱
-      useEffect(() => {
-        const hash = window.location.hash;
-        if (hash.startsWith('#recipe-')) {
-          const id = parseInt(hash.replace('#recipe-', ''));
-          const recipe = recipes.find(r => r.id === id);
-          if (recipe) { setSelected(recipe); window.scrollTo(0, 0); }
-        }
-      }, []);
+function renderPagination() {
+  const f = filtered();
+  const total = Math.ceil(f.length / PER_PAGE);
+  if (total <= 1) return '';
+  const nums = Array.from({length: total}, (_, i) => i + 1)
+    .map(n => `<button class="page-num${state.page===n?' active':''}" data-action="page" data-val="${n}">${n}</button>`).join('');
+  return `
+  <div class="pagination">
+    <button class="page-btn" data-action="page" data-val="${state.page-1}" ${state.page===1?'disabled':''}>← 上一页</button>
+    ${nums}
+    <button class="page-btn" data-action="page" data-val="${state.page+1}" ${state.page===total?'disabled':''}>下一页 →</button>
+  </div>`;
+}
 
-      // 打开食谱，更新 URL hash
-      const openRecipe = (r) => {
-        setSelected(r);
-        window.location.hash = 'recipe-' + r.id;
-        window.scrollTo(0, 0);
-      };
+function renderListPage() {
+  const f = filtered();
+  const p = paged();
+  return `
+  ${renderHeader()}
+  ${renderHero()}
+  <div class="main-wrap">
+    ${renderHotRanking()}
+    <p class="recipe-count">${f.length} 道食谱${f.length > 0 ? ' · 第 '+ state.page +' / '+ Math.ceil(f.length/PER_PAGE) +' 页' : ''}</p>
+    ${p.length === 0
+      ? '<div style="text-align:center;padding:5rem 0;color:#b0a090;font-size:15px">暂无相关食谱，换个关键词试试吧～</div>'
+      : `<div class="recipe-grid">${p.map(renderRecipeCard).join('')}</div>`}
+    ${renderPagination()}
+  </div>
+  ${renderBottom()}`;
+}
 
-      // 返回列表，清除 hash
-      const goBack = () => {
-        setSelected(null);
-        history.pushState('', document.title, window.location.pathname);
-      };
+function renderDetailPage() {
+  const r = state.selected;
+  if (!r) return '';
+  return `
+  <div class="detail-nav">
+    <div class="detail-nav-inner">
+      <button class="back-btn" data-action="back">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        返回食谱
+      </button>
+      <div style="display:flex;align-items:center;gap:7px">
+        <img src="https://i.postimg.cc/d3Ykkdm6/ma-shu-cai-pulogo2.png" alt="麻薯食谱" style="width:26px;height:26px;border-radius:50%;object-fit:cover;object-position:center 20%">
+        <span style="font-size:13px;color:#3a5a30;font-weight:700">麻薯食谱</span>
+      </div>
+      <div style="width:60px"></div>
+    </div>
+  </div>
+  <div class="detail-hero">
+    <img src="${r.img}" alt="${r.title}" onload="this.classList.add('loaded')">
+  </div>
+  <div class="detail-content">
+    <div class="detail-title-area">
+      <div class="detail-cat">${r.category}</div>
+      <h1 class="detail-title">${r.title}</h1>
+    </div>
+    <p class="detail-desc">${r.desc}</p>
+    <div class="detail-meta">
+      <div class="meta-item"><div class="meta-icon">⏱</div><div class="meta-label">${r.time} 分钟</div></div>
+      <div class="meta-item"><div class="meta-icon">🍽</div><div class="meta-label">${r.servings} 人份</div></div>
+      <div class="meta-item"><div class="meta-icon">📊</div><div class="meta-label"><span style="font-size:11px;background:${DIFF[r.difficulty].bg};color:${DIFF[r.difficulty].text};padding:2px 10px;border-radius:18px">${r.difficulty}</span></div></div>
+    </div>
+    <div class="detail-tm">
+      <span class="detail-tm-label">适用机型</span>
+      ${renderTMTags(r.tm)}
+    </div>
 
-      const filtered = useMemo(() => recipes.filter(r => {
-        const matchCat = category === '全部' || r.category === category;
-        const matchSearch = !search || r.title.includes(search) || r.desc.includes(search);
-        return matchCat && matchSearch;
-      }), [search, category]);
+    <div class="share-wrap">
+      <button class="share-btn" data-action="share">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        分享给微信好友
+      </button>
+      <div class="share-tip" id="shareTip" style="display:none"></div>
+    </div>
 
-      const totalPages = Math.ceil(filtered.length / PER_PAGE);
-      const paged = filtered.slice((page - 1) * PER_PAGE, page * PER_PAGE);
-      const handleCategory = (c) => { setCategory(c); setPage(1); };
-      const handleSearch = (v) => { setSearch(v); setPage(1); };
+    <div class="section-card">
+      <div class="section-title"><span class="section-bar"></span>食材清单</div>
+      <div class="ingredient-grid">
+        ${r.ingredients.map(ing => `<div class="ingredient-item"><span class="ingredient-dot">·</span>${ing}</div>`).join('')}
+      </div>
+    </div>
 
-      if (selected) return <RecipeDetail r={selected} onBack={goBack} />;
-
-      return (
-        <div>
-          <BackToTop />
-          <header style={{ background:'linear-gradient(180deg, #f0f8f0 0%, #f7fbf5 100%)', borderBottom:'1px solid #d8edd8' }}>
-            <div className="header-top">
-              <div className="logo-area">
-                <img className="logo-img" src="https://i.postimg.cc/d3Ykkdm6/ma-shu-cai-pulogo2.png" alt="麻薯食谱" />
-                <div style={{ display:'flex', flexDirection:'column', alignItems:'center' }}>
-                  <div className="brand-title">麻薯食谱</div>
-                  <div className="brand-sub">
-                    <span className="brand-sub-line" />
-                    <span className="brand-sub-text">mashuhome</span>
-                    <span className="brand-sub-line" />
-                  </div>
-                </div>
-              </div>
-              <div className="search-wrap">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#b0a090" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-                </svg>
-                <input className="search-input" type="text" placeholder="搜索食谱…" value={search} onChange={e => handleSearch(e.target.value)} />
-              </div>
-            </div>
-            <div className="hero">
-              <img className="hero-img" src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1200&h=400&fit=crop" alt="家庭餐桌" />
-              <div className="hero-overlay" />
-              <div className="hero-text">
-                <h2>家常美味，轻松上桌</h2>
-                <p>所有食谱适配小美，并标注 TM5 · TM6 · TM7 兼容性</p>
-              </div>
-            </div>
-
-            <div style={{ background:'#e8f4e8', borderTop:'1px solid #d0e8d0' }}>
-              <div className="category-bar">
-              {categories.map(c => (
-                <button key={c} className="cat-btn" onClick={() => handleCategory(c)}
-                  style={{ background:category===c?'#4a9a55':'rgba(255,255,255,0.7)', color:category===c?'white':'#4a6a44', border:category===c?'none':'1px solid #b8d8b8' }}>
-                  {c}
-                </button>
-              ))}
-            </div>
-            </div>
-          </header>
-          <main className="main-wrap">
-            <p style={{ fontSize:12, color:'#b0a090', marginBottom:16 }}>{filtered.length} 道食谱 · 第 {page} / {totalPages} 页</p>
-            {filtered.length === 0 ? (
-              <div style={{ textAlign:'center', padding:'5rem 0', color:'#b0a090' }}>
-                <p style={{ fontSize:15 }}>暂无相关食谱，换个关键词试试吧～</p>
-              </div>
-            ) : (
-              <>
-                <div className="recipe-grid">
-                  {paged.map(r => (
-                    <article key={r.id} className="card" onClick={() => openRecipe(r)}
-                      style={{ background:'white', borderRadius:14, border:'1px solid #ede8e0', overflow:'hidden' }}>
-                      <ImgCard src={r.img} alt={r.title} style={{ height:190 }} />
-                      <div className="card-body">
-                        <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-start', marginBottom:6 }}>
-                          <span className="card-title">{r.title}</span>
-                          <span style={{ fontSize:11, padding:'2px 8px', borderRadius:20, marginLeft:8, flexShrink:0, background:diff[r.difficulty].bg, color:diff[r.difficulty].text }}>{r.difficulty}</span>
-                        </div>
-                        <p className="card-desc">{r.desc}</p>
-                        <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center' }}>
-                          <div style={{ display:'flex', gap:5, flexWrap:'wrap' }}>
-                            {r.tm.map(t => <TMTag key={t} label={t} />)}
-                          </div>
-                          <span style={{ fontSize:12, color:'#a09080' }}>⏱ {r.time}m</span>
-                        </div>
-                      </div>
-                    </article>
-                  ))}
-                </div>
-
-                {/* 分页控件 */}
-                {totalPages > 1 && (
-                  <div style={{ display:'flex', justifyContent:'center', alignItems:'center', gap:8, marginTop:40 }}>
-                    <button onClick={() => setPage(p => Math.max(1, p-1))} disabled={page === 1}
-                      style={{ padding:'8px 16px', borderRadius:24, border:'1px solid #ddd4c4', background:page===1?'#f5f0e8':'white', color:page===1?'#c0b8a8':'#4a9a55', cursor:page===1?'not-allowed':'pointer', fontSize:13, fontFamily:'inherit' }}>
-                      ← 上一页
-                    </button>
-                    {Array.from({ length: totalPages }, (_, i) => i + 1).map(n => (
-                      <button key={n} onClick={() => setPage(n)}
-                        style={{ width:36, height:36, borderRadius:'50%', border:'none', background:page===n?'#4a9a55':'transparent', color:page===n?'white':'#6a5a48', cursor:'pointer', fontSize:13, fontFamily:'inherit', fontWeight:page===n?700:400 }}>
-                        {n}
-                      </button>
-                    ))}
-                    <button onClick={() => setPage(p => Math.min(totalPages, p+1))} disabled={page === totalPages}
-                      style={{ padding:'8px 16px', borderRadius:24, border:'1px solid #ddd4c4', background:page===totalPages?'#f5f0e8':'white', color:page===totalPages?'#c0b8a8':'#4a9a55', cursor:page===totalPages?'not-allowed':'pointer', fontSize:13, fontFamily:'inherit' }}>
-                      下一页 →
-                    </button>
-                  </div>
-                )}
-              </>
-            )}
-          </main>
-          {/* 底部：小店橱窗 + 顾问联系 */}
-          <div style={{ background:'#f5fbf5', borderTop:'1px solid #daeeda' }}>
-            <div style={{ maxWidth:1060, margin:'0 auto', padding:'1.5rem 1.2rem 1.2rem' }}>
-              <p style={{ textAlign:'center', fontSize:11, color:'#8a9a88', letterSpacing:1.5, textTransform:'uppercase', marginBottom:16 }}>联系我们</p>
-              <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:12 }}>
-
-                {/* 微信小店 */}
-                <div style={{ background:'white', borderRadius:14, padding:'14px 12px', textAlign:'center', border:'1px solid #d8edd8' }}>
-                  <div style={{ fontSize:12, fontWeight:700, color:'#1a1810', marginBottom:2 }}>🛒 美善品小店</div>
-                  <div style={{ fontSize:10, color:'#8a9a88', marginBottom:10 }}>小美主机 · 配件 · 好物</div>
-                  <div style={{ cursor:'pointer' }} onClick={() => setQrModal({ src:'https://i.postimg.cc/85nRsDpT/wei-xin-dian-pu-chu-chuang.png', alt:'微信小店二维码' })}>
-                    <img src="https://i.postimg.cc/85nRsDpT/wei-xin-dian-pu-chu-chuang.png" alt="微信小店二维码"
-                      style={{ width:'100%', maxWidth:120, borderRadius:10, border:'1.5px solid #c8e8c0', display:'block', margin:'0 auto' }} />
-                    <div style={{ fontSize:10, color:'#07c160', marginTop:8, fontWeight:600 }}>点击放大 · 扫码进店</div>
-                  </div>
-                </div>
-
-                {/* 顾问微信 */}
-                <div style={{ background:'white', borderRadius:14, padding:'14px 12px', textAlign:'center', border:'1px solid #d8edd8' }}>
-                  <div style={{ fontSize:12, fontWeight:700, color:'#1a1810', marginBottom:2 }}>👩‍💼 曾丽顾问</div>
-                  <div style={{ fontSize:10, color:'#8a9a88', marginBottom:10 }}>海口福维克剑桥郡</div>
-                  <div style={{ cursor:'pointer' }} onClick={() => setQrModal({ src:'https://i.postimg.cc/VNkrQnzK/ceng-li-wei-xin-er-wei-ma.png', alt:'曾丽微信二维码' })}>
-                    <img src="https://i.postimg.cc/VNkrQnzK/ceng-li-wei-xin-er-wei-ma.png" alt="曾丽微信二维码"
-                      style={{ width:'100%', maxWidth:120, borderRadius:10, border:'1.5px solid #c8e8c0', display:'block', margin:'0 auto' }} />
-                    <div style={{ fontSize:10, color:'#07c160', marginTop:8, fontWeight:600 }}>点击放大 · 扫码咨询</div>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-
-            {/* 版权 */}
-            <div style={{ borderTop:'1px solid #daeeda', padding:'0.8rem 1.5rem', textAlign:'center' }}>
-              <p style={{ fontSize:10, color:'#a0b0a0' }}>麻薯食谱 · mashuhome.com · 适用 Thermomix® 小美 · TM5 · TM6 · TM7</p>
-            </div>
+    <div class="section-title" style="margin-bottom:13px"><span class="section-bar"></span>烹饪步骤</div>
+    ${r.steps.map((step, i) => `
+      <div class="step-item">
+        <div class="step-num ${i===0?'first':'rest'}">${i+1}</div>
+        <div class="step-box">
+          <div class="step-head">
+            <span class="step-name">${step.title}</span>
+            ${step.time ? `<span class="step-time">${step.time}</span>` : ''}
           </div>
-
-          {/* 放大二维码弹窗 */}
-          {qrModal && <QRModal src={qrModal.src} alt={qrModal.alt} onClose={() => setQrModal(null)} />}
+          <p class="step-desc">${step.desc}</p>
         </div>
-      );
-    }
+      </div>`).join('')}
 
-    const root = ReactDOM.createRoot(document.getElementById('root'));
-    root.render(<App />);
-  </script>
+    <div class="tip-box">
+      <p class="tip-text">💡 <strong>小贴士：</strong>所有步骤均适用于小美（Thermomix Friend）。TM5 / TM6 / TM7 用户可根据各自机型说明书微调温度和时间设定。</p>
+    </div>
+  </div>
+  ${renderBottom()}`;
+}
+
+function renderBottom() {
+  return `
+  <div class="bottom-section">
+    <div class="bottom-inner">
+      <p class="bottom-label">联系我们</p>
+      <div class="qr-grid">
+        <div class="qr-card" data-action="qr" data-src="https://i.postimg.cc/85nRsDpT/wei-xin-dian-pu-chu-chuang.png" data-alt="微信小店二维码">
+          <div class="qr-card-title">🛒 美善品小店</div>
+          <div class="qr-card-sub">小美主机 · 配件 · 好物</div>
+          <img class="qr-img" src="https://i.postimg.cc/85nRsDpT/wei-xin-dian-pu-chu-chuang.png" alt="微信小店二维码">
+          <div class="qr-hint">点击放大 · 扫码进店</div>
+        </div>
+        <div class="qr-card" data-action="qr" data-src="https://i.postimg.cc/VNkrQnzK/ceng-li-wei-xin-er-wei-ma.png" data-alt="曾丽微信二维码">
+          <div class="qr-card-title">👩‍💼 曾丽顾问</div>
+          <div class="qr-card-sub">海口福维克剑桥郡</div>
+          <img class="qr-img" src="https://i.postimg.cc/VNkrQnzK/ceng-li-wei-xin-er-wei-ma.png" alt="曾丽微信二维码">
+          <div class="qr-hint">点击放大 · 扫码咨询</div>
+        </div>
+      </div>
+    </div>
+    <div class="copyright"><p>麻薯食谱 · mashuhome.com · 适用 Thermomix® 小美 · TM5 · TM6 · TM7</p></div>
+  </div>`;
+}
+
+function renderModal() {
+  if (!state.qrModal) return '';
+  return `
+  <div class="modal-overlay" data-action="close-modal">
+    <div class="modal-box" onclick="event.stopPropagation()">
+      <img class="modal-img" src="${state.qrModal.src}" alt="${state.qrModal.alt}">
+      <p class="modal-tip">微信扫一扫 或 长按保存到手机后在微信中识别</p>
+      <button class="modal-close" data-action="close-modal">关闭</button>
+    </div>
+  </div>`;
+}
+
+// ── Main render ──────────────────────────────────────────────────
+function render() {
+  const app = document.getElementById('app');
+  if (state.view === 'list') {
+    app.innerHTML = renderListPage() + renderModal();
+    // Restore search input
+    const inp = document.getElementById('searchInput');
+    if (inp) {
+      inp.addEventListener('input', e => { state.search = e.target.value; state.page = 1; render(); });
+      inp.focus && inp.value && inp.setSelectionRange(inp.value.length, inp.value.length);
+    }
+  } else {
+    app.innerHTML = renderDetailPage() + renderModal();
+  }
+}
+
+// ── Events ───────────────────────────────────────────────────────
+document.addEventListener('click', e => {
+  const el = e.target.closest('[data-action]');
+  if (!el) return;
+  const action = el.dataset.action;
+
+  if (action === 'open') {
+    const id = parseInt(el.dataset.id);
+    const recipe = recipes.find(r => r.id === id);
+    if (!recipe) return;
+    addClick(id);
+    state.selected = recipe;
+    state.view = 'detail';
+    window.location.hash = 'recipe-' + id;
+    window.scrollTo(0, 0);
+    render();
+    injectRecipeSchema(recipe);
+  }
+
+  if (action === 'back') {
+    state.view = 'list';
+    state.selected = null;
+    history.pushState('', document.title, window.location.pathname);
+    window.scrollTo(0, 0);
+    render();
+    removeRecipeSchema();
+  }
+
+  if (action === 'category') {
+    state.category = el.dataset.val;
+    state.page = 1;
+    render();
+  }
+
+  if (action === 'page') {
+    const v = parseInt(el.dataset.val);
+    if (!isNaN(v) && v >= 1) { state.page = v; window.scrollTo(0,0); render(); }
+  }
+
+  if (action === 'qr') {
+    state.qrModal = { src: el.dataset.src, alt: el.dataset.alt };
+    render();
+  }
+
+  if (action === 'close-modal') {
+    state.qrModal = null;
+    render();
+  }
+
+  if (action === 'share') {
+    const r = state.selected;
+    const url = window.location.href;
+    const tip = document.getElementById('shareTip');
+    if (navigator.share) {
+      navigator.share({ title: r.title + ' · 麻薯食谱', text: r.desc, url }).catch(()=>{});
+    } else {
+      navigator.clipboard.writeText(url).then(() => {
+        if (tip) { tip.textContent = '链接已复制！打开微信粘贴给好友即可 🎉'; tip.style.display='block'; setTimeout(()=>tip.style.display='none', 3000); }
+      }).catch(() => {
+        if (tip) { tip.textContent = '请手动复制：' + url; tip.style.display='block'; setTimeout(()=>tip.style.display='none', 4000); }
+      });
+    }
+  }
+});
+
+// ── Schema injection ─────────────────────────────────────────────
+function injectRecipeSchema(r) {
+  removeRecipeSchema();
+  const s = document.createElement('script');
+  s.type = 'application/ld+json'; s.id = 'recipe-schema';
+  s.text = JSON.stringify({"@context":"https://schema.org","@type":"Recipe","name":r.title,"description":r.desc,"image":r.img,"author":{"@type":"Organization","name":"麻薯食谱"},"recipeCategory":r.category,"totalTime":"PT"+r.time+"M","recipeYield":r.servings+" 人份","recipeIngredient":r.ingredients,"recipeInstructions":r.steps.map((st,i)=>({"@type":"HowToStep","position":i+1,"name":st.title,"text":st.desc}))});
+  document.head.appendChild(s);
+  document.title = r.title + ' · 麻薯食谱';
+}
+function removeRecipeSchema() {
+  const el = document.getElementById('recipe-schema');
+  if (el) el.remove();
+  document.title = '麻薯食谱 · 小美家庭菜谱 | mashuhome.com';
+}
+
+// ── Back to top ──────────────────────────────────────────────────
+window.addEventListener('scroll', () => {
+  const btn = document.getElementById('backTop');
+  if (btn) btn.classList.toggle('show', window.scrollY > 300);
+});
+
+// ── Hash routing ─────────────────────────────────────────────────
+function checkHash() {
+  const hash = window.location.hash;
+  if (hash.startsWith('#recipe-')) {
+    const id = parseInt(hash.replace('#recipe-', ''));
+    const recipe = recipes.find(r => r.id === id);
+    if (recipe) { state.selected = recipe; state.view = 'detail'; injectRecipeSchema(recipe); }
+  }
+}
+
+// ── Init ─────────────────────────────────────────────────────────
+checkHash();
+render();
+</script>
 </body>
 </html>
