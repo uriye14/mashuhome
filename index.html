@@ -434,7 +434,7 @@
       const [category, setCategory] = useState('全部');
       const [selected, setSelected] = useState(null);
       const [page, setPage] = useState(1);
-      const PER_PAGE = 9;
+      const PER_PAGE = 12;
 
       const filtered = useMemo(() => recipes.filter(r => {
         const matchCat = category === '全部' || r.category === category;
