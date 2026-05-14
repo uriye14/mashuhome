@@ -13,7 +13,7 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Noto Serif SC','PingFang SC','Hiragino Sans GB','Microsoft YaHei',serif; background: #fafaf8; }
+    body { font-family: -apple-system,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif; background: #fafaf8; }
     button { cursor: pointer; font-family: inherit; }
     .card { transition: transform 0.22s ease, box-shadow 0.22s ease; cursor: pointer; }
     .card:hover { transform: translateY(-5px); box-shadow: 0 12px 28px rgba(0,0,0,0.10); }
@@ -21,11 +21,11 @@
     .card:hover img { transform: scale(1.04); }
     .header-top { max-width:1060px; margin:0 auto; padding:1.2rem 2rem; display:flex; align-items:center; justify-content:space-between; gap:12px; }
     .logo-area { display:flex; align-items:center; gap:16px; }
-    .logo-img { width:100px; height:100px; border-radius:50%; object-fit:cover; object-position:center 20%; flex-shrink:0; }
-    .brand-title { font-size:24px; font-weight:700; color:#1a1810; letter-spacing:2px; line-height:1.2; font-family:'Ma Shan Zheng','Noto Serif SC',serif; text-align:center; }
+    .logo-img { width:120px; height:auto; flex-shrink:0; }
+    .brand-title { font-size:22px; font-weight:700; color:#1a1810; letter-spacing:1px; line-height:1.2; text-align:center; }
     .brand-sub { display:flex; align-items:center; justify-content:center; gap:6px; margin-top:5px; }
     .brand-sub-line { width:14px; height:1px; background:#c8b89a; display:inline-block; }
-    .brand-sub-text { font-size:10px; color:#8a7a5a; letter-spacing:2.5px; text-transform:uppercase; font-family:'Noto Serif SC',serif; }
+    .brand-sub-text { font-size:10px; color:#8a7a5a; letter-spacing:2.5px; text-transform:uppercase; }
     .search-wrap { position:relative; }
     .search-wrap svg { position:absolute; left:12px; top:50%; transform:translateY(-50%); pointer-events:none; }
     .search-input { padding:9px 14px 9px 34px; border-radius:24px; border:1px solid #e0d8cc; font-size:13px; background:#fdf9f4; color:#2a2018; outline:none; width:200px; font-family:inherit; }
@@ -52,7 +52,7 @@
       .header-top { padding:1rem 1.2rem; flex-direction:column; align-items:flex-start; }
       .search-wrap { width:100%; }
       .search-input { width:100%; }
-      .logo-img { width:72px; height:72px; }
+      .logo-img { width:80px; }
       .brand-title { font-size:18px; }
       .hero { height:150px; }
       .hero-text h2 { font-size:18px; margin-bottom:6px; }
@@ -254,7 +254,7 @@
             <div className="detail-nav-inner">
               <button onClick={onBack} style={{ background:'none', border:'none', color:'#5a7a50', fontSize:14 }}>← 返回食谱</button>
               <div style={{ display:'flex', alignItems:'center', gap:7 }}>
-                <img src="https://i.postimg.cc/wTGZ9vjX/ma-shu-cai-pulogo2.png" alt="麻薯菜谱" style={{ width:28, height:28, borderRadius:'50%', objectFit:'cover', objectPosition:'center 20%' }} />
+                <img src="https://i.postimg.cc/ydRp6XW3/ma-shu-cai-pulogo2.png" alt="麻薯菜谱" style={{ width:28, height:28, borderRadius:'50%', objectFit:'cover', objectPosition:'center 20%' }} />
                 <span style={{ fontSize:13, color:'#3a5a30', fontWeight:700 }}>麻薯菜谱</span>
               </div>
               <div style={{ width:60 }} />
@@ -338,7 +338,7 @@
           <header style={{ background:'white', borderBottom:'1px solid #eee8de' }}>
             <div className="header-top">
               <div className="logo-area">
-                <img className="logo-img" src="https://i.postimg.cc/wTGZ9vjX/ma-shu-cai-pulogo2.png" alt="麻薯菜谱" />
+                <img className="logo-img" src="https://i.postimg.cc/ydRp6XW3/ma-shu-cai-pulogo2.png" alt="麻薯菜谱" />
                 <div>
                   <div className="brand-title">麻薯菜谱</div>
                   <div className="brand-sub">
