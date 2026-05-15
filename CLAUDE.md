@@ -30,6 +30,23 @@ mashuhome.com/
 
 ## 核心工作流
 
+### 0. 扫描指令（随时手动触发）
+
+当用户说「**扫描**」时，执行以下步骤：
+
+```
+Step 1: 用 PowerShell 读取 processed_recipes.txt 和 processed_recipe_images.txt（-Encoding utf8，Trim，ToLower）
+Step 2: 扫描 菜谱/ 文件夹，找出不在 processed_recipes.txt 中的 .jpg/.jpeg/.png 文件
+Step 3: 扫描 菜谱图片/ 文件夹，找出不在 processed_recipe_images.txt 中的 .jpg/.jpeg/.png 文件
+Step 4: 对每个新菜谱图片 → 执行「添加新菜谱」流程
+Step 5: 对每个新菜谱图片展示图 → 执行「更新菜谱展示图片」流程
+Step 6: 所有处理完成后，把新文件名追加到对应的 processed_*.txt（-Encoding utf8 -Append）
+```
+
+> 比较文件名时必须 `.ToLower()` 处理，避免大小写（如 .JPEG vs .jpeg）导致漏检。
+
+---
+
 ### 1. 添加新菜谱
 
 当用户说「帮我添加这道菜」或提供菜谱卡片图片时：

@@ -11,10 +11,16 @@ $watcher2.EnableRaisingEvents = $true
 while ($true) {
     $r1 = $watcher1.WaitForChanged('Created', 2000)
     if (-not $r1.TimedOut -and $r1.Name -match '\.(jpg|jpeg|png)$') {
-        Write-Output "菜谱:$($r1.Name)"
+        $processed = Get-Content 'D:\YCH\AI\mashuhome\processed_recipes.txt' -Encoding utf8 | ForEach-Object { $_.Trim().ToLower() }
+        if ($r1.Name.ToLower() -notin $processed) {
+            Write-Output "菜谱:$($r1.Name)"
+        }
     }
     $r2 = $watcher2.WaitForChanged('Created', 2000)
     if (-not $r2.TimedOut -and $r2.Name -match '\.(jpg|jpeg|png)$') {
-        Write-Output "菜谱图片:$($r2.Name)"
+        $processed = Get-Content 'D:\YCH\AI\mashuhome\processed_recipe_images.txt' -Encoding utf8 | ForEach-Object { $_.Trim().ToLower() }
+        if ($r2.Name.ToLower() -notin $processed) {
+            Write-Output "菜谱图片:$($r2.Name)"
+        }
     }
 }
