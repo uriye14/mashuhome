@@ -156,6 +156,18 @@
     .modal-tip{font-size:12px;color:#6a6a6a;line-height:1.6;margin-bottom:14px}
     .modal-close{padding:7px 26px;border-radius:22px;background:#4a9a55;color:white;font-size:13px;cursor:pointer;border:none;font-family:inherit}
 
+    /* WeChat site share */
+    .wechat-share-btn{display:flex;align-items:center;gap:5px;background:#07c160;border:none;border-radius:20px;padding:7px 14px;color:white;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;box-shadow:0 2px 8px rgba(7,193,96,.3);flex-shrink:0}
+    .wechat-share-btn:hover{background:#06a050}
+    .site-share-box{background:white;border-radius:20px;padding:26px 22px 20px;text-align:center;max-width:270px;width:100%}
+    .site-share-title{font-size:16px;font-weight:700;color:#1a2a1a;margin-bottom:3px}
+    .site-share-sub{font-size:11px;color:#8a9a88;margin-bottom:16px}
+    .site-share-qr{width:190px;height:190px;border-radius:14px;border:2px solid #e0f0e0;margin:0 auto 10px;display:block}
+    .site-share-hint{font-size:11px;color:#07c160;font-weight:600;margin-bottom:18px}
+    .copy-link-btn{width:100%;padding:10px;border-radius:22px;background:#f0f7f0;border:1.5px solid #c8e4c8;color:#2a6a35;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;transition:background .15s}
+    .copy-link-btn:active,.copy-link-btn:hover{background:#e0f0e0}
+    .copy-link-tip{font-size:11px;color:#07c160;margin-top:8px;min-height:16px;font-weight:500}
+
     /* Back to top */
     .back-top{position:fixed;bottom:24px;right:20px;width:42px;height:42px;border-radius:50%;background:#4a9a55;color:white;border:none;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(74,154,85,.35);cursor:pointer;z-index:999;opacity:0;pointer-events:none;transition:all .25s}
     .back-top.show{opacity:1;pointer-events:auto}
@@ -196,7 +208,7 @@ const addClick = id => localStorage.setItem(CLICK_KEY(id), getClicks(id) + 1);
 const topRecipes = () => [...recipes].map(r => ({...r, clicks: getClicks(r.id)})).filter(r => r.clicks > 0).sort((a,b) => b.clicks - a.clicks).slice(0, 8);
 
 // ── State ────────────────────────────────────────────────────────
-const state = { view:'list', selected:null, search:'', category:'全部', page:1, qrModal:null, shareTip:'' };
+const state = { view:'list', selected:null, search:'', category:'全部', page:1, qrModal:null, shareTip:'', siteShare:false };
 const PER_PAGE = 12;
 const CATS = ['全部','热菜','主食','汤羹','冷菜','早餐','甜点','饮品','酱料'];
 
@@ -292,6 +304,10 @@ function renderHeader() {
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#8a9a88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         <input class="search-input" type="text" placeholder="搜索食谱…" value="${state.search}" id="searchInput">
       </div>
+      <button class="wechat-share-btn" data-action="share-site">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M8.5 13.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm8.5 0a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zM12 2C6.48 2 2 6.02 2 11c0 2.85 1.38 5.39 3.55 7.09L4.5 21l3.18-1.59A10.6 10.6 0 0 0 12 20c5.52 0 10-4.02 10-9S17.52 2 12 2z"/></svg>
+        分享网站
+      </button>
     </div>
     <div class="cat-bar">
       <div class="cat-inner">
@@ -481,6 +497,18 @@ function renderBottom() {
 }
 
 function renderModal() {
+  if (state.siteShare) return `
+  <div class="modal-overlay" data-action="close-site-share">
+    <div class="site-share-box" onclick="event.stopPropagation()">
+      <div class="site-share-title">分享麻薯食谱</div>
+      <div class="site-share-sub">把网站推荐给你的微信好友</div>
+      <img class="site-share-qr" src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=https://mashuhome.com&bgcolor=ffffff&color=1a4a2a" alt="麻薯食谱二维码">
+      <div class="site-share-hint">📱 微信扫码 · 或截图发给好友</div>
+      <button class="copy-link-btn" data-action="copy-site-link">复制网站链接</button>
+      <div class="copy-link-tip" id="copyLinkTip"></div>
+      <button class="modal-close" data-action="close-site-share" style="margin-top:10px">关闭</button>
+    </div>
+  </div>`;
   if (!state.qrModal) return '';
   return `
   <div class="modal-overlay" data-action="close-modal">
@@ -555,6 +583,25 @@ document.addEventListener('click', e => {
   if (action === 'close-modal') {
     state.qrModal = null;
     render();
+  }
+
+  if (action === 'share-site') {
+    state.siteShare = true;
+    render();
+  }
+
+  if (action === 'close-site-share') {
+    state.siteShare = false;
+    render();
+  }
+
+  if (action === 'copy-site-link') {
+    const tip = document.getElementById('copyLinkTip');
+    navigator.clipboard.writeText('https://mashuhome.com').then(() => {
+      if (tip) { tip.textContent = '✅ 已复制！打开微信粘贴给好友'; setTimeout(() => { if (tip) tip.textContent = ''; }, 3000); }
+    }).catch(() => {
+      if (tip) { tip.textContent = 'https://mashuhome.com'; }
+    });
   }
 
   if (action === 'share') {
