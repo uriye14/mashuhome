@@ -549,7 +549,7 @@ document.addEventListener('click', e => {
     addClick(id);
     state.selected = recipe;
     state.view = 'detail';
-    window.location.hash = recipe.title;
+    history.pushState(null, '', '#' + recipe.title);
     window.scrollTo(0, 0);
     render();
     injectRecipeSchema(recipe);
@@ -606,7 +606,7 @@ document.addEventListener('click', e => {
 
   if (action === 'share') {
     const r = state.selected;
-    const url = window.location.href;
+    const url = location.origin + location.pathname + '#' + r.title;
     const tip = document.getElementById('shareTip');
     if (navigator.share) {
       navigator.share({ title: r.title + ' · 麻薯食谱', text: r.desc, url }).catch(()=>{});
