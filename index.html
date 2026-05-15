@@ -4,14 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>麻薯食谱 · 小美家庭菜谱 | mashuhome.com</title>
-  <meta name="description" content="麻薯食谱，专为美善品小美（Thermomix）用户打造的家庭菜谱网站。收录早餐、主食、汤羹、甜点、饮品、酱料等多类原创食谱，步骤简单易懂，适合 TM5、TM6、TM7 使用。" />
+  <meta name="description" content="麻薯食谱，专为美善品小美（Thermomix）用户打造的家庭菜谱网站。收录热菜、主食、汤羹、冷菜、早餐、甜点、饮品、酱料等多类原创食谱，步骤简单易懂，适合 TM5、TM6、TM7 使用。" />
   <meta name="keywords" content="小美食谱,美善品食谱,Thermomix食谱,小美菜谱,美善品菜谱,TM6食谱,TM7食谱,家庭食谱,家常菜,豆浆,番茄牛肉面,玉米排骨汤,mashuhome" />
   <meta name="author" content="麻薯食谱 mashuhome.com" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.mashuhome.com" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="麻薯食谱 · 小美家庭菜谱" />
-  <meta property="og:description" content="专为美善品小美用户打造的家庭食谱，原创步骤简单易懂，涵盖早餐、主食、汤羹、甜点、饮品、酱料等多类菜谱。" />
+  <meta property="og:description" content="专为美善品小美用户打造的家庭食谱，原创步骤简单易懂，涵盖热菜、主食、汤羹、冷菜、早餐、甜点、饮品、酱料等多类菜谱。" />
   <meta property="og:url" content="https://www.mashuhome.com" />
   <meta property="og:image" content="https://i.postimg.cc/d3Ykkdm6/ma-shu-cai-pulogo2.png" />
   <meta property="og:locale" content="zh_CN" />
@@ -198,7 +198,7 @@ const topRecipes = () => [...recipes].map(r => ({...r, clicks: getClicks(r.id)})
 // ── State ────────────────────────────────────────────────────────
 const state = { view:'list', selected:null, search:'', category:'全部', page:1, qrModal:null, shareTip:'' };
 const PER_PAGE = 12;
-const CATS = ['全部','早餐','主食','汤羹','甜点','饮品','冷菜','酱料'];
+const CATS = ['全部','热菜','主食','汤羹','冷菜','早餐','甜点','饮品','酱料'];
 
 // ── TM config ───────────────────────────────────────────────────
 const TM = {
