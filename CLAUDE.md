@@ -14,17 +14,11 @@
 
 ```
 mashuhome.com/
-├── index.html          # 首页
-├── recipes/            # 菜谱页面目录
-│   ├── index.html      # 菜谱列表页
-│   └── {slug}/         # 每道菜一个子目录
-│       └── index.html  # 菜谱详情页
-├── css/
-│   └── style.css       # 全局样式
-├── js/
-│   └── main.js         # 全局脚本
-├── images/             # 图片资源
-│   └── recipes/        # 菜谱图片
+├── index.html          # 首页（所有菜谱数据都在这里）
+├── images/
+│   └── recipes/        # 网站菜谱图片（部署后通过相对路径访问）
+├── 菜谱/               # 本地菜谱卡片图（用于读取提取菜谱信息，不部署）
+├── 菜谱图片/           # 本地菜谱实物图（用于替换网站展示图，会部署）
 └── skills/             # Agent 技能文件（不影响部署）
     └── recipe-converter/
         └── SKILL.md
@@ -36,40 +30,48 @@ mashuhome.com/
 
 ## 核心工作流
 
-### 1. 添加新菜谱（最常用）
+### 1. 添加新菜谱
 
-当用户说「帮我添加这道菜」或提供菜谱图片时：
-
-```
-Step 1: git pull origin main          # 先同步最新代码
-Step 2: cat skills/recipe-converter/SKILL.md  # 读取转换技能
-Step 3: 读取/分析图片，提取菜谱信息
-Step 4: 在 index.html 的 recipes 数组中插入新菜谱对象
-Step 5: 执行自动发布流程
-```
-
-### 2. 从本地图片文件夹添加菜谱
-
-用户会把菜谱图片放在项目根目录的 `菜谱/` 文件夹中，告知图片文件名后：
+当用户说「帮我添加这道菜」或提供菜谱卡片图片时：
 
 ```
-Step 1: git pull origin main
-Step 2: 用 Read 工具直接读取 菜谱/{文件名}（支持 jpg/png/webp 等）
-Step 3: 分析图片内容，提取菜谱信息
-Step 4: 在 index.html 的 recipes 数组中插入新菜谱对象
-Step 5: 执行自动发布流程
+Step 1: git -c http.sslBackend=openssl pull origin main
+Step 2: 用 Read 工具读取 菜谱/{文件名}，分析图片提取菜谱信息
+Step 3: 在 index.html 的 recipes 数组末尾插入新菜谱对象（使用 Unsplash 占位图）
+Step 4: 执行自动发布流程
 ```
 
-> 图片路径示例：`D:\YCH\AI\mashuhome\菜谱\红烧肉.jpg`
-> 读取后图片文件保留在 `菜谱/` 文件夹，不需要移动或删除。
+> 菜谱卡片图路径示例：`D:\YCH\AI\mashuhome\菜谱\水煮牛肉.jpg`
 
-### 2. 自动发布流程（每次改动后必须执行）
+---
+
+### 2. 更新菜谱展示图片
+
+用户把菜肴实物照片放进 `菜谱图片/` 文件夹，告知文件名和对应菜谱名称后：
+
+```
+Step 1: git -c http.sslBackend=openssl pull origin main
+Step 2: 确认 images/recipes/ 目录存在，不存在则创建
+Step 3: 用 PowerShell 把图片从 菜谱图片/{文件名} 复制到 images/recipes/{slug}.{ext}
+        Copy-Item "菜谱图片\{文件名}" "images\recipes\{slug}.{ext}"
+Step 4: 在 index.html 中找到对应菜谱，把 img 字段改为 "images/recipes/{slug}.{ext}"
+Step 5: 执行自动发布流程（commit message 用 🎨 前缀）
+```
+
+**slug 命名规则**：菜谱名拼音，全小写，空格换连字符。  
+例：水煮牛肉 → `shui-zhu-niu-rou`，红烧肉 → `hong-shao-rou`
+
+> 图片文件保留在 `菜谱图片/` 文件夹，复制到 `images/recipes/` 后两份都存在。  
+> `images/recipes/` 目录下的图片会随 git 一起推送到 GitHub Pages 并对外访问。
+
+---
+
+### 3. 自动发布流程（每次改动后必须执行）
 
 ```bash
-git pull origin main      # 防止冲突
 git add -A
-git commit -m "✨ 添加菜谱：{菜名}"
-git push origin main
+git commit -m "✨ 添加菜谱：{菜名}"   # 或对应前缀
+git -c http.sslBackend=openssl push origin master:main
 ```
 
 Push 成功后告知用户：「✅ 已发布！约 1~2 分钟后在 mashuhome.com 生效。」
@@ -83,10 +85,10 @@ Push 成功后告知用户：「✅ 已发布！约 1~2 分钟后在 mashuhome.c
 | ✨   | 新增内容 |
 | 🔧   | 修改/更新 |
 | 🗑️   | 删除 |
-| 🎨   | 样式调整 |
+| 🎨   | 样式/图片调整 |
 | 🐛   | 修复问题 |
 
-示例：`✨ 添加菜谱：红烧肉`、`🔧 更新菜谱：番茄炒蛋的步骤`
+示例：`✨ 添加菜谱：红烧肉`、`🎨 更新图片：水煮牛肉`
 
 ---
 
@@ -105,7 +107,7 @@ git remote set-url origin https://{TOKEN}@github.com/{用户名}/{仓库名}.git
 
 ## 风格规范
 
-- 菜谱 slug：用拼音或英文，全小写，空格换连字符，如 `hong-shao-rou`
-- 图片：放 `images/recipes/{slug}.jpg`
+- 菜谱 slug：用拼音，全小写，空格换连字符，如 `hong-shao-rou`
+- 本地图片路径：`images/recipes/{slug}.jpg`（相对于项目根目录）
 - 编码：UTF-8，缩进 2 空格
 - 语气：页面内容用温暖亲切的中文
