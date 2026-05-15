@@ -39,7 +39,7 @@ Step 1: 用 PowerShell 读取 processed_recipes.txt 和 processed_recipe_images.
 Step 2: 扫描 菜谱/ 文件夹，找出不在 processed_recipes.txt 中的 .jpg/.jpeg/.png 文件
 Step 3: 扫描 菜谱图片/ 文件夹，找出不在 processed_recipe_images.txt 中的 .jpg/.jpeg/.png 文件
 Step 4: 对每个新菜谱图片 → 执行「添加新菜谱」流程
-Step 5: 对每个新菜谱图片展示图 → 执行「更新菜谱展示图片」流程
+Step 5: 对每个新菜谱图片展示图 → 执行「更新菜谱展示图片」流程（含 WebP 转换）
 Step 6: 所有处理完成后，把新文件名追加到对应的 processed_*.txt（-Encoding utf8 -Append）
 ```
 
@@ -69,16 +69,25 @@ Step 4: 执行自动发布流程
 ```
 Step 1: git -c http.sslBackend=openssl pull origin main
 Step 2: 确认 images/recipes/ 目录存在，不存在则创建
-Step 3: 用 PowerShell 把图片从 菜谱图片/{文件名} 复制到 images/recipes/{slug}.{ext}
+Step 3: 用 PowerShell 把图片从 菜谱图片/{文件名} 复制到 images/recipes/{slug}.{原扩展名}
         Copy-Item "菜谱图片\{文件名}" "images\recipes\{slug}.{ext}"
-Step 4: 在 index.html 中找到对应菜谱，把 img 字段改为 "images/recipes/{slug}.{ext}"
-Step 5: 执行自动发布流程（commit message 用 🎨 前缀）
+Step 4: 用 Python 将图片转换为 WebP，保存为 images/recipes/{slug}.webp
+        python -c "
+        from PIL import Image
+        img = Image.open('images/recipes/{slug}.{ext}')
+        rgb = img.convert('RGB') if img.mode in ('RGBA','P') else img
+        rgb.save('images/recipes/{slug}.webp', 'WEBP', quality=82, method=6)
+        "
+Step 5: 删除原始格式文件（保留 WebP）
+        Remove-Item "images\recipes\{slug}.{ext}"
+Step 6: 在 index.html 中找到对应菜谱，把 img 字段改为 "images/recipes/{slug}.webp"
+Step 7: 执行自动发布流程（commit message 用 🎨 前缀）
 ```
 
 **slug 命名规则**：菜谱名拼音，全小写，空格换连字符。  
 例：水煮牛肉 → `shui-zhu-niu-rou`，红烧肉 → `hong-shao-rou`
 
-> 图片文件保留在 `菜谱图片/` 文件夹，复制到 `images/recipes/` 后两份都存在。  
+> 最终只保留 `.webp` 文件在 `images/recipes/`，原始图片留在 `菜谱图片/` 目录中。  
 > `images/recipes/` 目录下的图片会随 git 一起推送到 GitHub Pages 并对外访问。
 
 ---
