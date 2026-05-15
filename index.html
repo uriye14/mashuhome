@@ -523,15 +523,15 @@ function renderBottom() {
 
 function renderModal() {
   if (state.siteShare) return `
-  <div class="modal-overlay" data-action="close-site-share">
-    <div class="site-share-box" onclick="event.stopPropagation()">
+  <div class="modal-overlay" onclick="if(event.target===this)closeSiteShare()">
+    <div class="site-share-box">
       <div class="site-share-title">分享麻薯食谱</div>
       <div class="site-share-sub">把网站推荐给你的微信好友</div>
       <img class="site-share-qr" src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=https://mashuhome.com&bgcolor=ffffff&color=1a4a2a" alt="麻薯食谱二维码">
       <div class="site-share-hint">📱 微信扫码 · 或截图发给好友</div>
-      <button class="copy-link-btn" data-action="copy-site-link">复制网站链接</button>
+      <button class="copy-link-btn" onclick="copySiteLink()">复制网站链接</button>
       <div class="copy-link-tip" id="copyLinkTip"></div>
-      <button class="modal-close" data-action="close-site-share" style="margin-top:10px">关闭</button>
+      <button class="modal-close" onclick="closeSiteShare()" style="margin-top:10px">关闭</button>
     </div>
   </div>`;
   if (!state.qrModal) return '';
@@ -626,19 +626,6 @@ document.addEventListener('click', e => {
     render();
   }
 
-  if (action === 'close-site-share') {
-    state.siteShare = false;
-    render();
-  }
-
-  if (action === 'copy-site-link') {
-    const tip = document.getElementById('copyLinkTip');
-    navigator.clipboard.writeText('https://mashuhome.com').then(() => {
-      if (tip) { tip.textContent = '✅ 已复制！打开微信粘贴给好友'; setTimeout(() => { if (tip) tip.textContent = ''; }, 3000); }
-    }).catch(() => {
-      if (tip) { tip.textContent = 'https://mashuhome.com'; }
-    });
-  }
 
   if (action === 'share') {
     const r = state.selected;
@@ -657,6 +644,15 @@ document.addEventListener('click', e => {
 });
 
 // ── Schema injection ─────────────────────────────────────────────
+// ── Site share helpers ───────────────────────────────────────────
+window.closeSiteShare = function() { state.siteShare = false; render(); };
+window.copySiteLink = function() {
+  const tip = document.getElementById('copyLinkTip');
+  navigator.clipboard.writeText('https://mashuhome.com').then(() => {
+    if (tip) { tip.textContent = '✅ 已复制！打开微信粘贴给好友'; setTimeout(() => { if (tip) tip.textContent = ''; }, 3000); }
+  }).catch(() => { if (tip) tip.textContent = 'https://mashuhome.com'; });
+};
+
 function injectRecipeSchema(r) {
   removeRecipeSchema();
   const s = document.createElement('script');
