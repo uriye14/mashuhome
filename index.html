@@ -549,7 +549,7 @@ document.addEventListener('click', e => {
     addClick(id);
     state.selected = recipe;
     state.view = 'detail';
-    window.location.hash = encodeURIComponent(recipe.title);
+    window.location.hash = recipe.title;
     window.scrollTo(0, 0);
     render();
     injectRecipeSchema(recipe);
