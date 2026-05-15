@@ -549,7 +549,7 @@ document.addEventListener('click', e => {
     addClick(id);
     state.selected = recipe;
     state.view = 'detail';
-    window.location.hash = 'recipe-' + id;
+    window.location.hash = encodeURIComponent(recipe.title);
     window.scrollTo(0, 0);
     render();
     injectRecipeSchema(recipe);
@@ -644,11 +644,18 @@ window.addEventListener('scroll', () => {
 // ── Hash routing ─────────────────────────────────────────────────
 function checkHash() {
   const hash = window.location.hash;
+  if (!hash || hash === '#') return;
+  let recipe;
   if (hash.startsWith('#recipe-')) {
+    // 旧格式兼容：#recipe-22
     const id = parseInt(hash.replace('#recipe-', ''));
-    const recipe = recipes.find(r => r.id === id);
-    if (recipe) { state.selected = recipe; state.view = 'detail'; injectRecipeSchema(recipe); }
+    recipe = recipes.find(r => r.id === id);
+  } else {
+    // 新格式：#菜谱名
+    const title = decodeURIComponent(hash.slice(1));
+    recipe = recipes.find(r => r.title === title);
   }
+  if (recipe) { state.selected = recipe; state.view = 'detail'; injectRecipeSchema(recipe); }
 }
 
 // ── Init ─────────────────────────────────────────────────────────
