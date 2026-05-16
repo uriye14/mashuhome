@@ -293,7 +293,7 @@ function filtered() {
     const mc = state.category === '全部' || r.category === state.category;
     const ms = !state.search || r.title.includes(state.search) || r.desc.includes(state.search);
     return mc && ms;
-  });
+  }).sort((a, b) => b.id - a.id);
 }
 function paged() {
   const f = filtered();
