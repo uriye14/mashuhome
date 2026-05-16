@@ -57,10 +57,12 @@ for line in lines:
         '</html>\n'
     )
 
-    out = rf'D:\YCH\AI\mashuhome\recipe\{slug}.html'
-    with open(out, 'w', encoding='utf-8') as f:
+    # 用目录/index.html结构，GitHub Pages 才能正确响应无扩展名URL
+    dir_ = rf'D:\YCH\AI\mashuhome\recipe\{slug}'
+    os.makedirs(dir_, exist_ok=True)
+    with open(os.path.join(dir_, 'index.html'), 'w', encoding='utf-8') as f:
         f.write(html)
     count += 1
-    print(f'OK: recipe/{slug}.html')
+    print(f'OK: recipe/{slug}/index.html')
 
 print(f'共生成 {count} 个菜谱页面')
