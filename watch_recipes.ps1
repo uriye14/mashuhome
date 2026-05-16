@@ -17,7 +17,7 @@ while ($true) {
         }
     }
     $r2 = $watcher2.WaitForChanged('Created', 2000)
-    if (-not $r2.TimedOut -and $r2.Name -match '\.(jpg|jpeg|png)$') {
+    if (-not $r2.TimedOut -and $r2.Name -match '\.(jpg|jpeg|png|webp)$') {
         $processed = Get-Content 'D:\YCH\AI\mashuhome\processed_recipe_images.txt' -Encoding utf8 | ForEach-Object { $_.Trim().ToLower() }
         if ($r2.Name.ToLower() -notin $processed) {
             Write-Output "菜谱图片:$($r2.Name)"

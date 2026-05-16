@@ -37,7 +37,10 @@ mashuhome.com/
 ```
 Step 1: 用 PowerShell 读取 processed_recipes.txt 和 processed_recipe_images.txt（-Encoding utf8，Trim，ToLower）
 Step 2: 扫描 菜谱/ 文件夹，找出不在 processed_recipes.txt 中的 .jpg/.jpeg/.png 文件
-Step 3: 扫描 菜谱图片/ 文件夹，找出不在 processed_recipe_images.txt 中的 .jpg/.jpeg/.png 文件
+        用法：Get-ChildItem '菜谱\' | Where-Object { $_.Extension -in '.jpg','.jpeg','.png' }
+Step 3: 扫描 菜谱图片/ 文件夹，找出不在 processed_recipe_images.txt 中的 .jpg/.jpeg/.png/.webp 文件
+        用法：Get-ChildItem '菜谱图片\' | Where-Object { $_.Extension -in '.jpg','.jpeg','.png','.webp' }
+        ⚠️ 不要用 -Include 参数（PowerShell 已知 bug：路径末尾无 \* 时 -Include 无效）
 Step 4: 对每个新菜谱图片 → 执行「添加新菜谱」流程
 Step 5: 对每个新菜谱图片展示图 → 执行「更新菜谱展示图片」流程（含 WebP 转换）
 Step 6: 所有处理完成后，把新文件名追加到对应的 processed_*.txt（-Encoding utf8 -Append）
