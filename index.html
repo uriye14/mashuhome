@@ -638,7 +638,7 @@ document.addEventListener('click', e => {
 
   if (action === 'share') {
     const r = state.selected;
-    const url = location.origin + location.pathname + '#' + recipeSlug(r);
+    const url = location.origin + '/recipe/' + recipeSlug(r);
     const tip = document.getElementById('shareTip');
     if (navigator.share) {
       navigator.share({ title: r.title + ' · 麻薯食谱', text: r.desc, url }).catch(()=>{});

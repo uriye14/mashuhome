@@ -1,4 +1,4 @@
-const CACHE = 'mashu-v1';
+const CACHE = 'mashu-v2';
 const IMGS = [
   'images/recipes/bai-xiang-guo-ning-meng-qi-pao-yin.webp',
   'images/recipes/cheng-xiang-ji-chi.webp',
