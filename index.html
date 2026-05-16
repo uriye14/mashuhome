@@ -9,6 +9,12 @@
   <meta name="author" content="麻薯食谱 mashuhome.com" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.mashuhome.com" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#4a9a55" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="马姝菜谱" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="麻薯食谱 · 小美家庭菜谱" />
   <meta property="og:description" content="专为美善品小美用户打造的家庭食谱，原创步骤简单易懂，涵盖热菜、主食、汤羹、冷菜、早餐、甜点、饮品、酱料等多类菜谱。" />
@@ -697,6 +703,13 @@ function checkHash() {
 // ── Init ─────────────────────────────────────────────────────────
 checkHash();
 render();
+
+// 注册 Service Worker
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').catch(() => {});
+  });
+}
 </script>
 </body>
 </html>

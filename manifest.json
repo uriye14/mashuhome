@@ -1,0 +1,24 @@
+{
+  "name": "马姝家常菜谱",
+  "short_name": "马姝菜谱",
+  "description": "小美/美善品 Thermomix 家常菜谱，简单美味每一餐",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f0f8f0",
+  "theme_color": "#4a9a55",
+  "lang": "zh-CN",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
