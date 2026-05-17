@@ -640,7 +640,15 @@ document.addEventListener('click', e => {
     const r = state.selected;
     const url = location.origin + '/recipe/' + recipeSlug(r);
     const tip = document.getElementById('shareTip');
-    if (navigator.share) {
+    const isWeChat = /MicroMessenger/i.test(navigator.userAgent);
+    if (isWeChat) {
+      // 微信内置浏览器不支持 navigator.share，引导用户用右上角菜单
+      if (tip) {
+        tip.innerHTML = '请点右上角 <b>···</b> → 发送给朋友';
+        tip.style.display = 'block';
+        setTimeout(() => tip.style.display = 'none', 4000);
+      }
+    } else if (navigator.share) {
       navigator.share({ title: r.title + ' · 麻薯食谱', text: r.desc, url }).catch(()=>{});
     } else {
       navigator.clipboard.writeText(url).then(() => {
