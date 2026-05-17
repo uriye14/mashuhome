@@ -583,7 +583,7 @@ document.addEventListener('click', e => {
     addClick(id);
     state.selected = recipe;
     state.view = 'detail';
-    history.pushState(null, '', '#' + recipeSlug(recipe));
+    history.pushState(null, '', '/recipe/' + recipeSlug(recipe));
     window.scrollTo(0, 0);
     render();
     injectRecipeSchema(recipe);
@@ -592,7 +592,7 @@ document.addEventListener('click', e => {
   if (action === 'back') {
     state.view = 'list';
     state.selected = null;
-    history.pushState('', document.title, window.location.pathname);
+    history.pushState('', document.title, '/');
     window.scrollTo(0, 0);
     render();
     removeRecipeSchema();
@@ -682,19 +682,26 @@ window.addEventListener('scroll', () => {
   if (btn) btn.classList.toggle('show', window.scrollY > 300);
 });
 
-// ── Hash routing ─────────────────────────────────────────────────
+// ── Routing ──────────────────────────────────────────────────────
 function checkHash() {
+  // 支持 /recipe/{slug} 路径（从stub页跳转过来 或 直接浏览时）
+  const pathMatch = window.location.pathname.match(/^\/recipe\/(.+?)\/?$/);
+  if (pathMatch) {
+    const slug = decodeURIComponent(pathMatch[1]);
+    let recipe = recipes.find(r => recipeSlug(r) === slug);
+    if (!recipe && slug.startsWith('recipe-')) recipe = recipes.find(r => r.id === parseInt(slug.replace('recipe-', '')));
+    if (recipe) { state.selected = recipe; state.view = 'detail'; injectRecipeSchema(recipe); }
+    return;
+  }
+  // 兼容旧 hash 格式
   const hash = window.location.hash;
   if (!hash || hash === '#') return;
   const val = decodeURIComponent(hash.slice(1));
   let recipe;
   if (val.startsWith('recipe-')) {
-    // 旧格式：#recipe-22
     recipe = recipes.find(r => r.id === parseInt(val.replace('recipe-', '')));
   } else {
-    // 新格式：#zi-zhi-xia-wan（slug）
     recipe = recipes.find(r => recipeSlug(r) === val);
-    // 兼容旧版中文标题格式：#自制虾丸
     if (!recipe) recipe = recipes.find(r => r.title === val);
   }
   if (recipe) { state.selected = recipe; state.view = 'detail'; injectRecipeSchema(recipe); }
