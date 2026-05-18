@@ -231,6 +231,18 @@ const getClicks = id => parseInt(localStorage.getItem(CLICK_KEY(id)) || 0);
 const addClick = id => localStorage.setItem(CLICK_KEY(id), getClicks(id) + 1);
 const topRecipes = () => [...recipes].map(r => ({...r, clicks: getClicks(r.id)})).filter(r => r.clicks > 0).sort((a,b) => b.clicks - a.clicks).slice(0, 8);
 
+// ── Step time translator ─────────────────────────────────────────
+function translateTime(t) {
+  if (!t || state.lang !== 'en') return t;
+  return t
+    .replace(/约\s*/g, '~')
+    .replace(/以上/g, '+')
+    .replace(/(\d+)\s*小时/g, '$1 hr')
+    .replace(/(\d+[-–]\d+)\s*分钟/g, '$1 min')
+    .replace(/(\d+)\s*分钟/g, '$1 min')
+    .replace(/(\d+)\s*秒/g, '$1 sec');
+}
+
 // ── Language helper ──────────────────────────────────────────────
 function getLang(recipe) {
   const en = (state.lang === 'en' && typeof recipesEn !== 'undefined') ? recipesEn[recipe.id] : null;
@@ -523,7 +535,7 @@ function renderDetailPage() {
     <div class="share-wrap">
       <button class="share-btn" data-action="share">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-        分享给微信好友
+        ${isEn ? 'Share on WeChat' : '分享给微信好友'}
       </button>
       <div class="share-tip" id="shareTip" style="display:none"></div>
     </div>
@@ -542,7 +554,7 @@ function renderDetailPage() {
         <div class="step-box">
           <div class="step-head">
             <span class="step-name">${step.title}</span>
-            ${step.time ? `<span class="step-time">${step.time}</span>` : ''}
+            ${step.time ? `<span class="step-time">${translateTime(step.time)}</span>` : ''}
           </div>
           <p class="step-desc">${step.desc}</p>
         </div>
