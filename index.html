@@ -590,6 +590,12 @@ document.addEventListener('click', e => {
     const recipe = recipes.find(r => r.id === id);
     if (!recipe) return;
     addClick(id);
+    // 微信 WebView 不会把 pushState 的新 URL 传给 ··· 分享
+    // 改为整页跳转 /recipe/slug，让微信加载的就是带 OG 的目标页
+    if (/MicroMessenger/i.test(navigator.userAgent)) {
+      window.location.href = '/recipe/' + recipeSlug(recipe);
+      return;
+    }
     state.selected = recipe;
     state.view = 'detail';
     history.pushState(null, '', '/recipe/' + recipeSlug(recipe));
