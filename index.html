@@ -151,6 +151,9 @@
 
     /* Share button */
     .share-wrap{display:flex;flex-direction:column;align-items:center;margin-bottom:20px;gap:7px}
+    .lang-toggle{display:flex;align-items:center;background:#f0f8ec;border:1px solid #c8e4b8;border-radius:20px;padding:3px;gap:2px;cursor:pointer;width:80px;flex-shrink:0}
+    .lang-toggle span{flex:1;text-align:center;padding:3px 0;border-radius:16px;font-size:12px;font-weight:600;color:#4a9a55;transition:all .15s;line-height:1.4}
+    .lang-toggle span.active{background:#4a9a55;color:white}
     .share-btn{display:flex;align-items:center;gap:7px;background:#07c160;border:none;border-radius:22px;padding:9px 22px;color:white;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;box-shadow:0 3px 12px rgba(7,193,96,.3)}
     .share-tip{font-size:11px;color:#4a8a3a;background:#f0f8ec;padding:5px 14px;border-radius:18px;border:1px solid #c8e4b8}
 
@@ -217,6 +220,7 @@
   <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
 </button>
 
+<script src="/recipes-en.js"></script>
 <script>
 // ── Placeholder（图片加载失败时显示）────────────────────────────
 const PLACEHOLDER = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='380' viewBox='0 0 600 380'%3E%3Crect width='600' height='380' fill='%23f0ede6'/%3E%3Ctext x='300' y='200' text-anchor='middle' font-size='48' fill='%23c8b89a'%3E🍽%3C/text%3E%3C/svg%3E";
@@ -227,6 +231,24 @@ const getClicks = id => parseInt(localStorage.getItem(CLICK_KEY(id)) || 0);
 const addClick = id => localStorage.setItem(CLICK_KEY(id), getClicks(id) + 1);
 const topRecipes = () => [...recipes].map(r => ({...r, clicks: getClicks(r.id)})).filter(r => r.clicks > 0).sort((a,b) => b.clicks - a.clicks).slice(0, 8);
 
+// ── Language helper ──────────────────────────────────────────────
+function getLang(recipe) {
+  const en = (state.lang === 'en' && typeof recipesEn !== 'undefined') ? recipesEn[recipe.id] : null;
+  return {
+    title: en ? en.title : recipe.title,
+    category: en ? en.category : recipe.category,
+    desc: en ? en.desc : recipe.desc,
+    diffLabel: en ? en.difficulty : recipe.difficulty,
+    diffKey: recipe.difficulty,
+    ingredients: en ? en.ingredients : recipe.ingredients,
+    steps: recipe.steps.map((s, i) => ({
+      time: s.time,
+      title: (en && en.steps[i]) ? en.steps[i].title : s.title,
+      desc: (en && en.steps[i]) ? en.steps[i].desc : s.desc
+    }))
+  };
+}
+
 // ── Recipe slug（从图片路径提取拼音，兜底用 recipe-ID）────────────
 const recipeSlug = r => {
   const m = r.img && r.img.match(/images\/recipes\/(.+)\.[^.]+$/);
@@ -234,7 +256,7 @@ const recipeSlug = r => {
 };
 
 // ── State ────────────────────────────────────────────────────────
-const state = { view:'list', selected:null, search:'', category:'全部', page:1, qrModal:null, shareTip:'', siteShare:false, catOpen:false };
+const state = { view:'list', selected:null, search:'', category:'全部', page:1, qrModal:null, shareTip:'', siteShare:false, catOpen:false, lang:'zh' };
 const PER_PAGE = 12;
 const CATS = ['全部','热菜','主食','汤羹','冷菜','早餐','甜点','饮品','酱料'];
 
@@ -447,36 +469,41 @@ function renderListPage() {
 function renderDetailPage() {
   const r = state.selected;
   if (!r) return '';
+  const d = getLang(r);
+  const isEn = state.lang === 'en';
   return `
   <div class="detail-nav">
     <div class="detail-nav-inner">
       <button class="back-btn" data-action="back">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-        返回食谱
+        ${isEn ? 'Back' : '返回食谱'}
       </button>
       <div style="display:flex;align-items:center;gap:7px">
         <img src="https://i.postimg.cc/d3Ykkdm6/ma-shu-cai-pulogo2.png" alt="麻薯食谱" style="width:26px;height:26px;border-radius:50%;object-fit:cover;object-position:center 20%">
         <span style="font-size:13px;color:#3a5a30;font-weight:700">麻薯食谱</span>
       </div>
-      <div style="width:60px"></div>
+      <button class="lang-toggle" data-action="lang-toggle" title="${isEn ? 'Switch to Chinese' : '切换英文'}">
+        <span class="${!isEn ? 'active' : ''}">中文</span>
+        <span class="${isEn ? 'active' : ''}">EN</span>
+      </button>
     </div>
   </div>
   <div class="detail-hero">
-    <img src="${r.img}" alt="${r.title}" onload="this.classList.add('loaded')" onerror="this.classList.add('loaded');this.src=PLACEHOLDER">
+    <img src="${r.img}" alt="${d.title}" onload="this.classList.add('loaded')" onerror="this.classList.add('loaded');this.src=PLACEHOLDER">
   </div>
   <div class="detail-content">
     <div class="detail-title-area">
-      <div class="detail-cat">${r.category}</div>
-      <h1 class="detail-title">${r.title}</h1>
+      <div class="detail-cat">${d.category}</div>
+      <h1 class="detail-title">${d.title}</h1>
     </div>
-    <p class="detail-desc">${r.desc}</p>
+    <p class="detail-desc">${d.desc}</p>
     <div class="detail-meta">
-      <div class="meta-item"><div class="meta-icon">⏱</div><div class="meta-label">${r.time} 分钟</div></div>
-      <div class="meta-item"><div class="meta-icon">🍽</div><div class="meta-label">${r.servings} 人份</div></div>
-      <div class="meta-item"><div class="meta-icon">📊</div><div class="meta-label"><span style="font-size:11px;background:${DIFF[r.difficulty].bg};color:${DIFF[r.difficulty].text};padding:2px 10px;border-radius:18px">${r.difficulty}</span></div></div>
+      <div class="meta-item"><div class="meta-icon">⏱</div><div class="meta-label">${r.time} ${isEn ? 'min' : '分钟'}</div></div>
+      <div class="meta-item"><div class="meta-icon">🍽</div><div class="meta-label">${r.servings} ${isEn ? 'servings' : '人份'}</div></div>
+      <div class="meta-item"><div class="meta-icon">📊</div><div class="meta-label"><span style="font-size:11px;background:${DIFF[d.diffKey].bg};color:${DIFF[d.diffKey].text};padding:2px 10px;border-radius:18px">${d.diffLabel}</span></div></div>
     </div>
     <div class="detail-tm">
-      <span class="detail-tm-label">适用机型</span>
+      <span class="detail-tm-label">${isEn ? 'Compatible Models' : '适用机型'}</span>
       ${renderTMTags(r.tm)}
     </div>
 
@@ -489,14 +516,14 @@ function renderDetailPage() {
     </div>
 
     <div class="section-card">
-      <div class="section-title"><span class="section-bar"></span>食材清单</div>
+      <div class="section-title"><span class="section-bar"></span>${isEn ? 'Ingredients' : '食材清单'}</div>
       <div class="ingredient-grid">
-        ${r.ingredients.map(ing => `<div class="ingredient-item"><span class="ingredient-dot">·</span>${ing}</div>`).join('')}
+        ${d.ingredients.map(ing => `<div class="ingredient-item"><span class="ingredient-dot">·</span>${ing}</div>`).join('')}
       </div>
     </div>
 
-    <div class="section-title" style="margin-bottom:13px"><span class="section-bar"></span>烹饪步骤</div>
-    ${r.steps.map((step, i) => `
+    <div class="section-title" style="margin-bottom:13px"><span class="section-bar"></span>${isEn ? 'Instructions' : '烹饪步骤'}</div>
+    ${d.steps.map((step, i) => `
       <div class="step-item">
         <div class="step-num ${i===0?'first':'rest'}">${i+1}</div>
         <div class="step-box">
@@ -509,7 +536,7 @@ function renderDetailPage() {
       </div>`).join('')}
 
     <div class="tip-box">
-      <p class="tip-text">💡 <strong>小贴士：</strong>所有步骤均适用于小美（Thermomix Friend）。TM5 / TM6 / TM7 用户可根据各自机型说明书微调温度和时间设定。</p>
+      <p class="tip-text">💡 <strong>${isEn ? 'Tip:' : '小贴士：'}</strong>${isEn ? 'All steps are designed for the Thermomix. TM5 / TM6 / TM7 users may need to fine-tune temperatures and times per their model\'s manual.' : '所有步骤均适用于小美（Thermomix Friend）。TM5 / TM6 / TM7 用户可根据各自机型说明书微调温度和时间设定。'}</p>
     </div>
   </div>
   ${renderBottom()}`;
@@ -642,6 +669,12 @@ document.addEventListener('click', e => {
 
   if (action === 'close-modal') {
     state.qrModal = null;
+    render();
+  }
+
+  if (action === 'lang-toggle') {
+    state.lang = state.lang === 'zh' ? 'en' : 'zh';
+    window.scrollTo(0, 0);
     render();
   }
 
