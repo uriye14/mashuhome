@@ -1,4 +1,4 @@
-const CACHE = 'mashu-v3';
+const CACHE = 'mashu-v4';
 const IMGS = [
   'images/recipes/bai-xiang-guo-ning-meng-qi-pao-yin.webp',
   'images/recipes/cheng-xiang-ji-chi.webp',
@@ -69,6 +69,11 @@ self.addEventListener('fetch', e => {
 
   // HTML：网络优先，失败走缓存（保证内容更新）
   if (e.request.mode === 'navigate') {
+    // /recipe/* 路径直接返回首页内容，URL 保持不变（微信 ··· 分享能抓到正确 URL 的 OG 标签）
+    if (url.pathname.startsWith('/recipe/')) {
+      e.respondWith(caches.match('/').then(c => c || fetch('/')));
+      return;
+    }
     e.respondWith(
       fetch(e.request).then(res => {
         const clone = res.clone();

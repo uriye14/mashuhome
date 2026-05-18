@@ -50,10 +50,10 @@ for line in lines:
         f'  <meta property="og:url" content="https://www.mashuhome.com/recipe/{slug}" />\n'
         '  <meta property="og:locale" content="zh_CN" />\n'
         '  <meta property="og:site_name" content="麻薯菜谱" />\n'
-        f'  <script>location.replace("https://www.mashuhome.com/#" + "{slug}");</script>\n'
+        '  <script>fetch("/").then(function(r){return r.text()}).then(function(h){document.open();document.write(h);document.close()});</script>\n'
         '</head>\n'
         '<body>\n'
-        f'  <p>正在跳转：<a href="https://www.mashuhome.com/#{slug}">{title}</a></p>\n'
+        f'  <p>正在加载：<a href="https://www.mashuhome.com/recipe/{slug}">{title}</a></p>\n'
         '</body>\n'
         '</html>\n'
     )
