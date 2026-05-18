@@ -44,6 +44,7 @@ for line in lines:
         f'  <meta property="og:title" content="{title} · 麻薯菜谱" />\n'
         f'  <meta property="og:description" content="{desc}" />\n'
         f'  <meta property="og:image" content="{img_url}" />\n'
+        '  <meta property="og:image:type" content="image/webp" />\n'
         '  <meta property="og:image:width" content="800" />\n'
         '  <meta property="og:image:height" content="600" />\n'
         f'  <meta property="og:url" content="https://www.mashuhome.com/recipe/{slug}" />\n'

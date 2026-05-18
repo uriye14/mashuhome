@@ -44,6 +44,8 @@ Step 3: 扫描 菜谱图片/ 文件夹，找出不在 processed_recipe_images.tx
 Step 4: 对每个新菜谱图片 → 执行「添加新菜谱」流程
 Step 5: 对每个新菜谱图片展示图 → 执行「更新菜谱展示图片」流程（含 WebP 转换）
 Step 6: 所有处理完成后，把新文件名追加到对应的 processed_*.txt（-Encoding utf8 -Append）
+Step 7: 运行 python gen_og_pages.py 重新生成所有菜谱 OG 分享页
+Step 8: git add recipe/ processed_*.txt && git commit && git push（包含 OG 页面的更新）
 ```
 
 > 比较文件名时必须 `.ToLower()` 处理，避免大小写（如 .JPEG vs .jpeg）导致漏检。
