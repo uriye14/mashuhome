@@ -28,7 +28,8 @@ for line in lines:
     slug = m.group(1) if m else f'recipe-{id_}'
 
     if img.startswith('images/'):
-        img_url = f'https://www.mashuhome.com/{img}'
+        # 使用 JPEG 版本用于分享卡片（微信爬虫不支持 WebP）
+        img_url = f'https://www.mashuhome.com/images/recipes/{slug}.jpg'
     else:
         img_url = 'https://www.mashuhome.com/icons/icon-512.png'
 
@@ -44,7 +45,7 @@ for line in lines:
         f'  <meta property="og:title" content="{title} · 麻薯菜谱" />\n'
         f'  <meta property="og:description" content="{desc}" />\n'
         f'  <meta property="og:image" content="{img_url}" />\n'
-        '  <meta property="og:image:type" content="image/webp" />\n'
+        '  <meta property="og:image:type" content="image/jpeg" />\n'
         '  <meta property="og:image:width" content="800" />\n'
         '  <meta property="og:image:height" content="600" />\n'
         f'  <meta property="og:url" content="https://www.mashuhome.com/recipe/{slug}" />\n'
