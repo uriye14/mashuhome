@@ -1,4 +1,4 @@
-const CACHE = 'mashu-v4';
+const CACHE = 'mashu-v5';
 const IMGS = [
   'images/recipes/bai-xiang-guo-ning-meng-qi-pao-yin.webp',
   'images/recipes/cheng-xiang-ji-chi.webp',
@@ -30,12 +30,24 @@ const IMGS = [
   'images/recipes/zi-zhi-dou-jiang.webp',
   'images/recipes/zi-zhi-hua-sheng-jiang.webp',
   'images/recipes/zi-zhi-xia-wan.webp',
+  'images/recipes/yan-luo-bo.webp',
+  'images/recipes/shi-jin-shu-cai-tang.webp',
+  'images/recipes/xian-cai-ban-qie-zi.webp',
+  'images/recipes/xian-dan-huang-pei-gen-shou-si-bao.webp',
+  'images/recipes/niu-rou-sheng-jian-bao.webp',
+  'images/recipes/yi-mian-jiang.webp',
+  'images/recipes/sang-shen-jiang.webp',
+  'images/recipes/zhu-rou-yang-cong-xian-bing.webp',
+  'images/recipes/tai-shi-lu-rou-fan.webp',
+  'images/recipes/rou-bao-zi.webp',
 ];
 
-// 安装：预缓存 HTML + 所有图片
+// 安装：预缓存 HTML，图片按需缓存（避免单张404导致SW安装失败）
 self.addEventListener('install', e => {
   e.waitUntil(
-    caches.open(CACHE).then(c => c.addAll(['/', ...IMGS])).then(() => self.skipWaiting())
+    caches.open(CACHE)
+      .then(c => c.add('/'))
+      .then(() => self.skipWaiting())
   );
 });
 
@@ -71,7 +83,13 @@ self.addEventListener('fetch', e => {
   if (e.request.mode === 'navigate') {
     // /recipe/* 路径直接返回首页内容，URL 保持不变（微信 ··· 分享能抓到正确 URL 的 OG 标签）
     if (url.pathname.startsWith('/recipe/')) {
-      e.respondWith(caches.match('/').then(c => c || fetch('/')));
+      e.respondWith(
+        fetch('/').then(res => {
+          const clone = res.clone();
+          caches.open(CACHE).then(c => c.put('/', clone));
+          return res;
+        }).catch(() => caches.match('/'))
+      );
       return;
     }
     e.respondWith(
