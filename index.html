@@ -760,7 +760,8 @@ function injectRecipeSchema(r) {
   document.head.appendChild(s);
   document.title = r.title + ' · 麻薯食谱';
   // 同步更新 OG meta 标签，确保微信 ··· 分享读到菜谱专属图片和标题
-  const imgUrl = recipeImgSrc(r.img);
+  // 使用 JPEG 版本（微信爬虫不支持 WebP 的 og:image）
+  const imgUrl = recipeImgSrc(r.img).replace(/\.webp$/, '.jpg');
   const setMeta = (prop, val) => {
     let m = document.querySelector('meta[property="' + prop + '"]');
     if (!m) { m = document.createElement('meta'); m.setAttribute('property', prop); document.head.appendChild(m); }
