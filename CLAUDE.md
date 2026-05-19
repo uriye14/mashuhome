@@ -81,7 +81,11 @@ Step 4: 用 Python 将图片转换为 WebP，保存为 images/recipes/{slug}.web
         from PIL import Image
         img = Image.open('images/recipes/{slug}.{ext}')
         rgb = img.convert('RGB') if img.mode in ('RGBA','P') else img
-        rgb.save('images/recipes/{slug}.webp', 'WEBP', quality=82, method=6)
+        w, h = rgb.size
+        if max(w, h) > 1200:
+            scale = 1200 / max(w, h)
+            rgb = rgb.resize((int(w * scale), int(h * scale)), Image.LANCZOS)
+        rgb.save('images/recipes/{slug}.webp', 'WEBP', quality=80, method=6)
         "
 Step 5: 删除原始格式文件（保留 WebP）
         Remove-Item "images\recipes\{slug}.{ext}"
