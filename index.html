@@ -57,9 +57,6 @@
     .cat-drop-item:hover{background:#f0f8f0}
     .cat-drop-item.active{background:#edf7e8;color:#4a9a55;font-weight:700}
     .cat-drop-overlay{position:fixed;inset:0;z-index:299}
-    /* Share in cat bar */
-    .cat-share-btn{display:flex;align-items:center;gap:5px;background:#07c160;border:none;border-radius:20px;padding:7px 14px;color:white;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;box-shadow:0 2px 8px rgba(7,193,96,.25);flex-shrink:0;transition:background .15s}
-    .cat-share-btn:hover{background:#06a050}
 
     /* Hero */
     .hero{position:relative;height:200px;overflow:hidden;border-top:1px solid #daeeda}
@@ -149,13 +146,9 @@
     .tip-box{margin-top:18px;background:#f5fbf0;border:1px solid #d4eac8;border-radius:10px;padding:.9rem 1rem}
     .tip-text{font-size:12px;color:#4a7a3a;line-height:1.7;margin:0}
 
-    /* Share button */
-    .share-wrap{display:flex;flex-direction:column;align-items:center;margin-bottom:20px;gap:7px}
     .lang-toggle{display:flex;align-items:center;background:#f0f8ec;border:1px solid #c8e4b8;border-radius:20px;padding:3px;gap:2px;cursor:pointer;width:80px;flex-shrink:0}
     .lang-toggle span{flex:1;text-align:center;padding:3px 0;border-radius:16px;font-size:12px;font-weight:600;color:#4a9a55;transition:all .15s;line-height:1.4}
     .lang-toggle span.active{background:#4a9a55;color:white}
-    .share-btn{display:flex;align-items:center;gap:7px;background:#07c160;border:none;border-radius:22px;padding:9px 22px;color:white;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;box-shadow:0 3px 12px rgba(7,193,96,.3)}
-    .share-tip{font-size:11px;color:#4a8a3a;background:#f0f8ec;padding:5px 14px;border-radius:18px;border:1px solid #c8e4b8}
 
     /* Bottom */
     .bottom-section{background:#f5fbf5;border-top:1px solid #daeeda}
@@ -177,16 +170,6 @@
     .modal-img{width:100%;border-radius:11px;margin-bottom:12px}
     .modal-tip{font-size:12px;color:#6a6a6a;line-height:1.6;margin-bottom:14px}
     .modal-close{padding:7px 26px;border-radius:22px;background:#4a9a55;color:white;font-size:13px;cursor:pointer;border:none;font-family:inherit}
-
-    /* WeChat site share */
-    .site-share-box{background:white;border-radius:20px;padding:26px 22px 20px;text-align:center;max-width:270px;width:100%}
-    .site-share-title{font-size:16px;font-weight:700;color:#1a2a1a;margin-bottom:3px}
-    .site-share-sub{font-size:11px;color:#8a9a88;margin-bottom:16px}
-    .site-share-qr{width:190px;height:190px;border-radius:14px;border:2px solid #e0f0e0;margin:0 auto 10px;display:block}
-    .site-share-hint{font-size:11px;color:#07c160;font-weight:600;margin-bottom:18px}
-    .copy-link-btn{width:100%;padding:10px;border-radius:22px;background:#f0f7f0;border:1.5px solid #c8e4c8;color:#2a6a35;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;transition:background .15s}
-    .copy-link-btn:active,.copy-link-btn:hover{background:#e0f0e0}
-    .copy-link-tip{font-size:11px;color:#07c160;margin-top:8px;min-height:16px;font-weight:500}
 
     /* Back to top */
     .back-top{position:fixed;bottom:24px;right:20px;width:42px;height:42px;border-radius:50%;background:#4a9a55;color:white;border:none;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(74,154,85,.35);cursor:pointer;z-index:999;opacity:0;pointer-events:none;transition:all .25s}
@@ -275,7 +258,7 @@ const recipeSlug = r => {
 };
 
 // ── State ────────────────────────────────────────────────────────
-const state = { view:'list', selected:null, search:'', category:'全部', page:1, qrModal:null, shareTip:'', siteShare:false, catOpen:false, lang:'zh' };
+const state = { view:'list', selected:null, search:'', category:'全部', page:1, qrModal:null, catOpen:false, lang:'zh' };
 const PER_PAGE = 12;
 const CATS = ['全部','热菜','主食','汤羹','冷菜','早餐','甜点','饮品','酱料'];
 const CATS_EN = {'全部':'All','热菜':'Hot Dishes','主食':'Main Dish','汤羹':'Soups','冷菜':'Cold Dishes','早餐':'Breakfast','甜点':'Desserts','饮品':'Drinks','酱料':'Sauces'};
@@ -402,10 +385,6 @@ function renderHeader() {
         <button class="lang-toggle" data-action="lang-toggle">
           <span class="${!isEn ? 'active' : ''}">中文</span>
           <span class="${isEn ? 'active' : ''}">EN</span>
-        </button>
-        <button class="cat-share-btn" data-action="share-site">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M8.5 13.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm8.5 0a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zM12 2C6.48 2 2 6.02 2 11c0 2.85 1.38 5.39 3.55 7.09L4.5 21l3.18-1.59A10.6 10.6 0 0 0 12 20c5.52 0 10-4.02 10-9S17.52 2 12 2z"/></svg>
-          ${isEn ? 'Share' : '分享网站'}
         </button>
       </div>
     </div>
@@ -539,14 +518,6 @@ function renderDetailPage() {
       ${renderTMTags(r.tm)}
     </div>
 
-    <div class="share-wrap">
-      <button class="share-btn" data-action="share">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-        ${isEn ? 'Share on WeChat' : '分享给微信好友'}
-      </button>
-      <div class="share-tip" id="shareTip" style="display:none"></div>
-    </div>
-
     <div class="section-card">
       <div class="section-title"><span class="section-bar"></span>${isEn ? 'Ingredients' : '食材清单'}</div>
       <div class="ingredient-grid">
@@ -599,18 +570,6 @@ function renderBottom() {
 }
 
 function renderModal() {
-  if (state.siteShare) return `
-  <div class="modal-overlay" onclick="if(event.target===this)closeSiteShare()">
-    <div class="site-share-box">
-      <div class="site-share-title">分享麻薯食谱</div>
-      <div class="site-share-sub">把网站推荐给你的微信好友</div>
-      <img class="site-share-qr" src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=https://mashuhome.com&bgcolor=ffffff&color=1a4a2a" alt="麻薯食谱二维码">
-      <div class="site-share-hint">📱 微信扫码 · 或截图发给好友</div>
-      <button class="copy-link-btn" onclick="copySiteLink()">复制网站链接</button>
-      <div class="copy-link-tip" id="copyLinkTip"></div>
-      <button class="modal-close" onclick="closeSiteShare()" style="margin-top:10px">关闭</button>
-    </div>
-  </div>`;
   if (!state.qrModal) return '';
   return `
   <div class="modal-overlay" data-action="close-modal">
@@ -712,45 +671,11 @@ document.addEventListener('click', e => {
     render();
   }
 
-  if (action === 'share-site') {
-    state.siteShare = true;
-    render();
-  }
 
-
-  if (action === 'share') {
-    const r = state.selected;
-    const url = location.origin + '/recipe/' + recipeSlug(r);
-    const tip = document.getElementById('shareTip');
-    const isWeChat = /MicroMessenger/i.test(navigator.userAgent);
-    if (isWeChat) {
-      // 微信内只有 ··· 按钮能生成带封面的卡片，复制粘贴只会显示纯链接
-      if (tip) {
-        tip.innerHTML = '点右上角 <b>···</b> → 发送给朋友，好友会看到菜谱封面图 🍽️';
-        tip.style.display = 'block';
-        setTimeout(() => tip.style.display = 'none', 6000);
-      }
-    } else if (navigator.share) {
-      navigator.share({ title: r.title + ' · 麻薯食谱', text: r.desc, url }).catch(()=>{});
-    } else {
-      navigator.clipboard.writeText(url).then(() => {
-        if (tip) { tip.textContent = '链接已复制！打开微信粘贴给好友即可 🎉'; tip.style.display='block'; setTimeout(()=>tip.style.display='none', 3000); }
-      }).catch(() => {
-        if (tip) { tip.textContent = '请手动复制：' + url; tip.style.display='block'; setTimeout(()=>tip.style.display='none', 4000); }
-      });
-    }
-  }
 });
 
+
 // ── Schema injection ─────────────────────────────────────────────
-// ── Site share helpers ───────────────────────────────────────────
-window.closeSiteShare = function() { state.siteShare = false; render(); };
-window.copySiteLink = function() {
-  const tip = document.getElementById('copyLinkTip');
-  navigator.clipboard.writeText('https://mashuhome.com').then(() => {
-    if (tip) { tip.textContent = '✅ 已复制！打开微信粘贴给好友'; setTimeout(() => { if (tip) tip.textContent = ''; }, 3000); }
-  }).catch(() => { if (tip) tip.textContent = 'https://mashuhome.com'; });
-};
 
 function injectRecipeSchema(r) {
   removeRecipeSchema();
