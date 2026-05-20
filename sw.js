@@ -1,4 +1,4 @@
-const CACHE = 'mashu-v5';
+const CACHE = 'mashu-v6';
 const IMGS = [
   'images/recipes/bai-xiang-guo-ning-meng-qi-pao-yin.webp',
   'images/recipes/cheng-xiang-ji-chi.webp',
@@ -81,14 +81,12 @@ self.addEventListener('fetch', e => {
 
   // HTML：网络优先，失败走缓存（保证内容更新）
   if (e.request.mode === 'navigate') {
-    // /recipe/* 路径直接返回首页内容，URL 保持不变（微信 ··· 分享能抓到正确 URL 的 OG 标签）
+    // /recipe/* 路径：直接请求服务器上的静态OG页面
+    // 静态页面含菜谱专属OG标签（微信首次加载时读到正确图片）
+    // 静态页面的script会自动加载SPA并导航到对应菜谱
     if (url.pathname.startsWith('/recipe/')) {
       e.respondWith(
-        fetch('/').then(res => {
-          const clone = res.clone();
-          caches.open(CACHE).then(c => c.put('/', clone));
-          return res;
-        }).catch(() => caches.match('/'))
+        fetch(e.request).catch(() => caches.match('/'))
       );
       return;
     }
