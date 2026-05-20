@@ -724,37 +724,11 @@ document.addEventListener('click', e => {
     const tip = document.getElementById('shareTip');
     const isWeChat = /MicroMessenger/i.test(navigator.userAgent);
     if (isWeChat) {
-      // 微信内：复制链接，粘贴发送时微信会爬取OG标签生成带图片的卡片
-      const copyDone = () => {
-        if (tip) {
-          tip.innerHTML = '✅ 链接已复制！<br>在微信聊天框<b>粘贴</b>发送，好友会看到菜谱图片 🍽️';
-          tip.style.display = 'block';
-          setTimeout(() => tip.style.display = 'none', 6000);
-        }
-      };
-      const copyFail = () => {
-        if (tip) {
-          tip.innerHTML = '请手动复制此链接，粘贴到微信发送：<br><small>' + url + '</small>';
-          tip.style.display = 'block';
-          setTimeout(() => tip.style.display = 'none', 8000);
-        }
-      };
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(url).then(copyDone).catch(() => {
-          try {
-            const ta = document.createElement('textarea');
-            ta.value = url; document.body.appendChild(ta); ta.select();
-            document.execCommand('copy'); document.body.removeChild(ta);
-            copyDone();
-          } catch(e) { copyFail(); }
-        });
-      } else {
-        try {
-          const ta = document.createElement('textarea');
-          ta.value = url; document.body.appendChild(ta); ta.select();
-          document.execCommand('copy'); document.body.removeChild(ta);
-          copyDone();
-        } catch(e) { copyFail(); }
+      // 微信内只有 ··· 按钮能生成带封面的卡片，复制粘贴只会显示纯链接
+      if (tip) {
+        tip.innerHTML = '点右上角 <b>···</b> → 发送给朋友，好友会看到菜谱封面图 🍽️';
+        tip.style.display = 'block';
+        setTimeout(() => tip.style.display = 'none', 6000);
       }
     } else if (navigator.share) {
       navigator.share({ title: r.title + ' · 麻薯食谱', text: r.desc, url }).catch(()=>{});
@@ -833,4 +807,36 @@ function checkHash() {
   }
   // 兼容旧 hash 格式
   const hash = window.location.hash;
-  if (!hash |
+  if (!hash || hash === '#') return;
+  const val = decodeURIComponent(hash.slice(1));
+  let recipe;
+  if (val.startsWith('recipe-')) {
+    recipe = recipes.find(r => r.id === parseInt(val.replace('recipe-', '')));
+  } else {
+    recipe = recipes.find(r => recipeSlug(r) === val);
+    if (!recipe) recipe = recipes.find(r => r.title === val);
+  }
+  if (recipe) {
+    state.selected = recipe;
+    state.view = 'detail';
+    injectRecipeSchema(recipe);
+    // 把 hash URL 升级为 /recipe/ 路径，确保微信 ··· 分享的是正确 URL
+    history.replaceState(null, '', '/recipe/' + recipeSlug(recipe));
+  }
+}
+
+// ── Init ─────────────────────────────────────────────────────────
+checkHash();
+render();
+
+// 注册 Service Worker
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').catch(() => {});
+  });
+}
+</script>
+</body>
+</html>
+
+
