@@ -930,4 +930,61 @@ function removeRecipeSchema() {
   const el = document.getElementById('recipe-schema');
   if (el) el.remove();
   document.title = '麻薯食谱 · 小美家庭菜谱 | mashuhome.com';
-  // 还原默认
+  // 还原默认 OG 标签
+  const setMeta = (prop, val) => {
+    let m = document.querySelector('meta[property="' + prop + '"]');
+    if (!m) { m = document.createElement('meta'); m.setAttribute('property', prop); document.head.appendChild(m); }
+    m.setAttribute('content', val);
+  };
+  setMeta('og:image', 'https://i.postimg.cc/d3Ykkdm6/ma-shu-cai-pulogo2.png');
+  setMeta('og:title', '麻薯食谱 · 小美家庭菜谱');
+  setMeta('og:description', '专为美善品小美用户打造的家庭食谱，原创步骤简单易懂，涵盖热菜、主食、汤羹、冷菜、早餐、甜点、饮品、酱料等多类菜谱。');
+  setMeta('og:url', 'https://www.mashuhome.com');
+}
+
+// ── Back to top ──────────────────────────────────────────────────
+window.addEventListener('scroll', () => {
+  const btn = document.getElementById('backTop');
+  if (btn) btn.classList.toggle('show', window.scrollY > 300);
+});
+
+// ── Routing ──────────────────────────────────────────────────────
+function checkHash() {
+  const pathMatch = window.location.pathname.match(/^\/recipe\/(.+?)\/?$/);
+  if (pathMatch) {
+    const slug = decodeURIComponent(pathMatch[1]);
+    let recipe = recipes.find(r => recipeSlug(r) === slug);
+    if (!recipe && slug.startsWith('recipe-')) recipe = recipes.find(r => r.id === parseInt(slug.replace('recipe-', '')));
+    if (recipe) { state.selected = recipe; state.view = 'detail'; injectRecipeSchema(recipe); }
+    return;
+  }
+  const hash = window.location.hash;
+  if (!hash || hash === '#') return;
+  const val = decodeURIComponent(hash.slice(1));
+  let recipe;
+  if (val.startsWith('recipe-')) {
+    recipe = recipes.find(r => r.id === parseInt(val.replace('recipe-', '')));
+  } else {
+    recipe = recipes.find(r => recipeSlug(r) === val);
+    if (!recipe) recipe = recipes.find(r => r.title === val);
+  }
+  if (recipe) {
+    state.selected = recipe;
+    state.view = 'detail';
+    injectRecipeSchema(recipe);
+    history.replaceState(null, '', '/recipe/' + recipeSlug(recipe));
+  }
+}
+
+// ── Init ─────────────────────────────────────────────────────────
+checkHash();
+render();
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').catch(() => {});
+  });
+}
+</script>
+</body>
+</html>
