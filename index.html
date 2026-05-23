@@ -741,26 +741,37 @@ function showShareImageModal(dataUrl) {
 
 function generateShareImage(r, done) {
   const d = getLang(r);
-  const W = 750, H = 1100;
+  const slug = recipeSlug(r);
+  const recipeUrl = 'https://www.mashuhome.com/recipe/' + slug;
+  const W = 750, H = 1160;
   const canvas = document.createElement('canvas');
   canvas.width = W; canvas.height = H;
   const ctx = canvas.getContext('2d');
   const FONT = 'system-ui,-apple-system,PingFang SC,Hiragino Sans GB,Microsoft YaHei,sans-serif';
 
-  function draw(imgEl) {
-    // Background
+  function loadImg(url, cors) {
+    return new Promise(resolve => {
+      const img = new Image();
+      if (cors) img.crossOrigin = cors;
+      img.onload = () => resolve(img);
+      img.onerror = () => resolve(null);
+      img.src = url;
+    });
+  }
+
+  function draw(photoImg, qrImg) {
     ctx.fillStyle = '#fdf8f3';
     ctx.fillRect(0, 0, W, H);
 
     // Recipe photo
     const imgH = 430;
-    if (imgEl) {
-      const sa = imgEl.naturalWidth / imgEl.naturalHeight;
+    if (photoImg) {
+      const sa = photoImg.naturalWidth / photoImg.naturalHeight;
       const da = W / imgH;
-      let sx = 0, sy = 0, sw = imgEl.naturalWidth, sh = imgEl.naturalHeight;
-      if (sa > da) { sw = sh * da; sx = (imgEl.naturalWidth - sw) / 2; }
-      else { sh = sw / da; sy = (imgEl.naturalHeight - sh) / 2; }
-      ctx.drawImage(imgEl, sx, sy, sw, sh, 0, 0, W, imgH);
+      let sx = 0, sy = 0, sw = photoImg.naturalWidth, sh = photoImg.naturalHeight;
+      if (sa > da) { sw = sh * da; sx = (photoImg.naturalWidth - sw) / 2; }
+      else { sh = sw / da; sy = (photoImg.naturalHeight - sh) / 2; }
+      ctx.drawImage(photoImg, sx, sy, sw, sh, 0, 0, W, imgH);
     } else {
       ctx.fillStyle = '#f0ede6';
       ctx.fillRect(0, 0, W, imgH);
@@ -769,16 +780,15 @@ function generateShareImage(r, done) {
       ctx.fillStyle = '#c8b89a';
       ctx.fillText('🍽', W/2, imgH/2 + 35);
     }
-    // Fade bottom of photo into background
     const grad = ctx.createLinearGradient(0, imgH-120, 0, imgH);
     grad.addColorStop(0, 'rgba(253,248,243,0)');
     grad.addColorStop(1, 'rgba(253,248,243,1)');
     ctx.fillStyle = grad;
     ctx.fillRect(0, imgH-120, W, 120);
 
-    let y = imgH + 20;
+    let y = imgH + 22;
 
-    // Category badge
+    // Category badge — track badge bottom to avoid title overlap
     ctx.font = `600 26px ${FONT}`;
     ctx.textAlign = 'center';
     const catW = ctx.measureText(d.category).width + 44;
@@ -786,14 +796,15 @@ function generateShareImage(r, done) {
     roundRect(ctx, (W-catW)/2, y, catW, 42, 21);
     ctx.fill();
     ctx.fillStyle = '#4a8a3a';
-    ctx.fillText(d.category, W/2, y+29);
-    y += 62;
+    ctx.fillText(d.category, W/2, y + 29);
+    const badgeBottom = y + 42;
 
-    // Title
+    // Title: baseline must be >= badgeBottom + gap(18) + ascent(~44)
+    const titleBaseline = badgeBottom + 18 + 44;
     ctx.fillStyle = '#1a1810';
     ctx.font = `bold 54px ${FONT}`;
-    ctx.fillText(d.title, W/2, y);
-    y += 72;
+    ctx.fillText(d.title, W/2, titleBaseline);
+    y = titleBaseline + 28;
 
     // Description (max 2 lines)
     ctx.fillStyle = '#6a6055';
@@ -810,87 +821,87 @@ function generateShareImage(r, done) {
     ctx.beginPath(); ctx.moveTo(50, y); ctx.lineTo(W-50, y); ctx.stroke();
     y += 28;
 
-    // Ingredients header
+    // Ingredients
     ctx.fillStyle = '#3a3028';
     ctx.font = `bold 30px ${FONT}`;
     ctx.textAlign = 'left';
     ctx.fillText('食材', 50, y);
     y += 44;
 
-    // Ingredients grid (2 columns, max 6)
     ctx.font = `25px ${FONT}`;
     const ings = d.ingredients.slice(0, 6);
     const half = Math.ceil(ings.length / 2);
     const rows = Math.max(half, ings.length - half);
     for (let i = 0; i < rows; i++) {
-      const left = ings[i];
-      const right = ings[i + half];
+      const left = ings[i], right = ings[i + half];
       if (left) {
-        ctx.fillStyle = '#9acc88';
-        ctx.fillText('·', 50, y + i*38);
-        ctx.fillStyle = '#5a5040';
-        ctx.fillText(left.length > 14 ? left.slice(0,13)+'…' : left, 72, y + i*38);
+        ctx.fillStyle = '#9acc88'; ctx.fillText('·', 50, y+i*38);
+        ctx.fillStyle = '#5a5040'; ctx.fillText(left.length>14?left.slice(0,13)+'…':left, 72, y+i*38);
       }
       if (right) {
-        ctx.fillStyle = '#9acc88';
-        ctx.fillText('·', W/2+10, y + i*38);
-        ctx.fillStyle = '#5a5040';
-        ctx.fillText(right.length > 14 ? right.slice(0,13)+'…' : right, W/2+32, y + i*38);
+        ctx.fillStyle = '#9acc88'; ctx.fillText('·', W/2+10, y+i*38);
+        ctx.fillStyle = '#5a5040'; ctx.fillText(right.length>14?right.slice(0,13)+'…':right, W/2+32, y+i*38);
       }
     }
     y += rows*38 + 22;
 
     // Divider
-    ctx.strokeStyle = '#e8d8c8';
-    ctx.lineWidth = 1.5;
+    ctx.strokeStyle = '#e8d8c8'; ctx.lineWidth = 1.5;
     ctx.beginPath(); ctx.moveTo(50, y); ctx.lineTo(W-50, y); ctx.stroke();
     y += 30;
 
     // Meta row
-    const metas = [
-      {icon:'⏱', val: r.time + ' 分钟'},
-      {icon:'🍽', val: r.servings + ' 人份'},
-      {icon:'📊', val: d.diffLabel}
-    ];
-    const mW = W/3;
-    ctx.textAlign = 'center';
-    metas.forEach((m, i) => {
-      const mx = mW*i + mW/2;
-      ctx.font = '36px serif';
-      ctx.fillStyle = '#1a1810';
-      ctx.fillText(m.icon, mx, y+38);
-      ctx.font = `24px ${FONT}`;
-      ctx.fillStyle = '#7a6e60';
-      ctx.fillText(m.val, mx, y+72);
-    });
+    [{icon:'⏱',val:r.time+' 分钟'},{icon:'🍽',val:r.servings+' 人份'},{icon:'📊',val:d.diffLabel}]
+      .forEach((m, i) => {
+        const mx = W/3*i + W/6;
+        ctx.textAlign = 'center';
+        ctx.font = '36px serif'; ctx.fillStyle = '#1a1810';
+        ctx.fillText(m.icon, mx, y+38);
+        ctx.font = `24px ${FONT}`; ctx.fillStyle = '#7a6e60';
+        ctx.fillText(m.val, mx, y+72);
+      });
 
-    // Bottom bar
+    // Bottom bar with QR code
+    const barH = 130, barY = H - barH;
     ctx.fillStyle = '#f0e6d8';
-    ctx.fillRect(0, H-72, W, 72);
+    ctx.fillRect(0, barY, W, barH);
+
+    // Left: brand text
     ctx.fillStyle = '#5a3e28';
     ctx.font = `bold 28px ${FONT}`;
     ctx.textAlign = 'left';
-    ctx.fillText('🍙 麻薯食谱', 44, H-28);
+    ctx.fillText('🍙 麻薯食谱', 44, barY + 46);
     ctx.fillStyle = '#9a7a5a';
-    ctx.font = `24px ${FONT}`;
-    ctx.textAlign = 'right';
-    ctx.fillText('mashuhome.com', W-44, H-28);
+    ctx.font = `21px ${FONT}`;
+    ctx.fillText('mashuhome.com', 44, barY + 78);
+    ctx.fillText('长按图片扫码打开食谱', 44, barY + 110);
+
+    // Right: QR code
+    if (qrImg) {
+      const qrSize = 98;
+      const qrX = W - qrSize - 28;
+      const qrY = barY + (barH - qrSize) / 2;
+      ctx.fillStyle = 'white';
+      ctx.fillRect(qrX - 4, qrY - 4, qrSize + 8, qrSize + 8);
+      ctx.drawImage(qrImg, qrX, qrY, qrSize, qrSize);
+    }
 
     if (done) done();
     showShareImageModal(canvas.toDataURL('image/jpeg', 0.92));
   }
 
-  // Load image — add ?_s=1 to bypass SW cache and avoid canvas taint
+  // Load recipe photo + QR code in parallel
   const rawSrc = recipeImgSrc(r.img);
-  if (rawSrc && rawSrc.startsWith('http')) {
-    const img = new Image();
-    img.crossOrigin = 'anonymous';
-    img.onload = () => draw(img);
-    img.onerror = () => { if (done) done(); draw(null); };
-    img.src = rawSrc + (rawSrc.includes('?') ? '&' : '?') + '_s=1';
-  } else {
-    draw(null);
-  }
+  const photoUrl = rawSrc && rawSrc.startsWith('http')
+    ? rawSrc + (rawSrc.includes('?') ? '&' : '?') + '_s=1' : null;
+  const qrApiUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=200x200&color=2c1a0e&data='
+    + encodeURIComponent(recipeUrl);
+
+  Promise.all([
+    photoUrl ? loadImg(photoUrl, 'anonymous') : Promise.resolve(null),
+    loadImg(qrApiUrl, 'anonymous')
+  ]).then(([photoImg, qrImg]) => draw(photoImg, qrImg))
+    .catch(() => { if (done) done(); });
 }
 
 // ── Schema injection ─────────────────────────────────────────────
@@ -919,18 +930,4 @@ function removeRecipeSchema() {
   const el = document.getElementById('recipe-schema');
   if (el) el.remove();
   document.title = '麻薯食谱 · 小美家庭菜谱 | mashuhome.com';
-  // 还原默认 OG 标签
-  const setMeta = (prop, val) => {
-    let m = document.querySelector('meta[property="' + prop + '"]');
-    if (!m) { m = document.createElement('meta'); m.setAttribute('property', prop); document.head.appendChild(m); }
-    m.setAttribute('content', val);
-  };
-  setMeta('og:image', 'https://i.postimg.cc/d3Ykkdm6/ma-shu-cai-pulogo2.png');
-  setMeta('og:title', '麻薯食谱 · 小美家庭菜谱');
-  setMeta('og:description', '专为美善品小美用户打造的家庭食谱，原创步骤简单易懂，涵盖热菜、主食、汤羹、冷菜、早餐、甜点、饮品、酱料等多类菜谱。');
-  setMeta('og:url', 'https://www.mashuhome.com');
-}
-
-// ── Back to top ──────────────────────────────────────────────────
-window.addEventListener('scroll', () => {
-  const btn = docume
+  // 还原默认
