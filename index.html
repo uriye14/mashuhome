@@ -171,6 +171,11 @@
     .modal-tip{font-size:12px;color:#6a6a6a;line-height:1.6;margin-bottom:14px}
     .modal-close{padding:7px 26px;border-radius:22px;background:#4a9a55;color:white;font-size:13px;cursor:pointer;border:none;font-family:inherit}
 
+    /* Share image button */
+    .share-img-btn{display:inline-flex;align-items:center;gap:7px;padding:9px 24px;border-radius:22px;background:#f0faf2;border:1.5px solid #b8d8b8;color:#3a7a3a;font-size:14px;font-weight:600;cursor:pointer;transition:all .15s;font-family:inherit}
+    .share-img-btn:hover{background:#e0f4e8;border-color:#4a9a55}
+    .share-img-btn:disabled{opacity:.6;cursor:not-allowed}
+
     /* Back to top */
     .back-top{position:fixed;bottom:24px;right:20px;width:42px;height:42px;border-radius:50%;background:#4a9a55;color:white;border:none;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(74,154,85,.35);cursor:pointer;z-index:999;opacity:0;pointer-events:none;transition:all .25s}
     .back-top.show{opacity:1;pointer-events:auto}
@@ -508,6 +513,9 @@ function renderDetailPage() {
       <h1 class="detail-title">${d.title}</h1>
     </div>
     <p class="detail-desc">${d.desc}</p>
+    <div style="text-align:center;margin-bottom:18px">
+      <button class="share-img-btn" data-action="gen-share-img">📸 生成分享图</button>
+    </div>
     <div class="detail-meta">
       <div class="meta-item"><div class="meta-icon">⏱</div><div class="meta-label">${r.time} ${isEn ? 'min' : '分钟'}</div></div>
       <div class="meta-item"><div class="meta-icon">🍽</div><div class="meta-label">${r.servings} ${isEn ? 'servings' : '人份'}</div></div>
@@ -671,9 +679,218 @@ document.addEventListener('click', e => {
     render();
   }
 
+  if (action === 'gen-share-img') {
+    el.textContent = '⏳ 生成中…';
+    el.disabled = true;
+    generateShareImage(state.selected, () => {
+      el.textContent = '📸 生成分享图';
+      el.disabled = false;
+    });
+  }
 
 });
 
+
+// ── Share image generation ───────────────────────────────────────
+function roundRect(ctx, x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x+r, y);
+  ctx.lineTo(x+w-r, y);
+  ctx.quadraticCurveTo(x+w, y, x+w, y+r);
+  ctx.lineTo(x+w, y+h-r);
+  ctx.quadraticCurveTo(x+w, y+h, x+w-r, y+h);
+  ctx.lineTo(x+r, y+h);
+  ctx.quadraticCurveTo(x, y+h, x, y+h-r);
+  ctx.lineTo(x, y+r);
+  ctx.quadraticCurveTo(x, y, x+r, y);
+  ctx.closePath();
+}
+
+function wrapText(ctx, text, maxWidth) {
+  const lines = [];
+  let line = '';
+  for (const ch of text) {
+    const test = line + ch;
+    if (ctx.measureText(test).width > maxWidth) {
+      if (line) lines.push(line);
+      line = ch;
+    } else {
+      line = test;
+    }
+  }
+  if (line) lines.push(line);
+  return lines;
+}
+
+function showShareImageModal(dataUrl) {
+  const old = document.getElementById('shareImgModal');
+  if (old) old.remove();
+  const overlay = document.createElement('div');
+  overlay.id = 'shareImgModal';
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.82);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.5rem;overflow-y:auto';
+  overlay.innerHTML = `
+    <div style="background:white;border-radius:18px;padding:16px;max-width:340px;width:100%;text-align:center">
+      <img src="${dataUrl}" style="width:100%;border-radius:10px;margin-bottom:12px" alt="菜谱分享图">
+      <p style="font-size:13px;color:#666;margin-bottom:14px;line-height:1.6">长按图片保存到相册<br>再发送给微信好友或朋友圈 🍙</p>
+      <button onclick="document.getElementById('shareImgModal').remove()" style="padding:8px 28px;border-radius:22px;background:#4a9a55;color:white;font-size:13px;border:none;cursor:pointer;font-family:inherit">关闭</button>
+    </div>`;
+  overlay.addEventListener('click', e => { if (e.target === overlay) overlay.remove(); });
+  document.body.appendChild(overlay);
+}
+
+function generateShareImage(r, done) {
+  const d = getLang(r);
+  const W = 750, H = 1100;
+  const canvas = document.createElement('canvas');
+  canvas.width = W; canvas.height = H;
+  const ctx = canvas.getContext('2d');
+  const FONT = 'system-ui,-apple-system,PingFang SC,Hiragino Sans GB,Microsoft YaHei,sans-serif';
+
+  function draw(imgEl) {
+    // Background
+    ctx.fillStyle = '#fdf8f3';
+    ctx.fillRect(0, 0, W, H);
+
+    // Recipe photo
+    const imgH = 430;
+    if (imgEl) {
+      const sa = imgEl.naturalWidth / imgEl.naturalHeight;
+      const da = W / imgH;
+      let sx = 0, sy = 0, sw = imgEl.naturalWidth, sh = imgEl.naturalHeight;
+      if (sa > da) { sw = sh * da; sx = (imgEl.naturalWidth - sw) / 2; }
+      else { sh = sw / da; sy = (imgEl.naturalHeight - sh) / 2; }
+      ctx.drawImage(imgEl, sx, sy, sw, sh, 0, 0, W, imgH);
+    } else {
+      ctx.fillStyle = '#f0ede6';
+      ctx.fillRect(0, 0, W, imgH);
+      ctx.font = '100px serif';
+      ctx.textAlign = 'center';
+      ctx.fillStyle = '#c8b89a';
+      ctx.fillText('🍽', W/2, imgH/2 + 35);
+    }
+    // Fade bottom of photo into background
+    const grad = ctx.createLinearGradient(0, imgH-120, 0, imgH);
+    grad.addColorStop(0, 'rgba(253,248,243,0)');
+    grad.addColorStop(1, 'rgba(253,248,243,1)');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, imgH-120, W, 120);
+
+    let y = imgH + 20;
+
+    // Category badge
+    ctx.font = `600 26px ${FONT}`;
+    ctx.textAlign = 'center';
+    const catW = ctx.measureText(d.category).width + 44;
+    ctx.fillStyle = '#edf7e8';
+    roundRect(ctx, (W-catW)/2, y, catW, 42, 21);
+    ctx.fill();
+    ctx.fillStyle = '#4a8a3a';
+    ctx.fillText(d.category, W/2, y+29);
+    y += 62;
+
+    // Title
+    ctx.fillStyle = '#1a1810';
+    ctx.font = `bold 54px ${FONT}`;
+    ctx.fillText(d.title, W/2, y);
+    y += 72;
+
+    // Description (max 2 lines)
+    ctx.fillStyle = '#6a6055';
+    ctx.font = `28px ${FONT}`;
+    wrapText(ctx, d.desc, W-100).slice(0, 2).forEach(line => {
+      ctx.fillText(line, W/2, y);
+      y += 42;
+    });
+    y += 18;
+
+    // Divider
+    ctx.strokeStyle = '#e8d8c8';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.moveTo(50, y); ctx.lineTo(W-50, y); ctx.stroke();
+    y += 28;
+
+    // Ingredients header
+    ctx.fillStyle = '#3a3028';
+    ctx.font = `bold 30px ${FONT}`;
+    ctx.textAlign = 'left';
+    ctx.fillText('食材', 50, y);
+    y += 44;
+
+    // Ingredients grid (2 columns, max 6)
+    ctx.font = `25px ${FONT}`;
+    const ings = d.ingredients.slice(0, 6);
+    const half = Math.ceil(ings.length / 2);
+    const rows = Math.max(half, ings.length - half);
+    for (let i = 0; i < rows; i++) {
+      const left = ings[i];
+      const right = ings[i + half];
+      if (left) {
+        ctx.fillStyle = '#9acc88';
+        ctx.fillText('·', 50, y + i*38);
+        ctx.fillStyle = '#5a5040';
+        ctx.fillText(left.length > 14 ? left.slice(0,13)+'…' : left, 72, y + i*38);
+      }
+      if (right) {
+        ctx.fillStyle = '#9acc88';
+        ctx.fillText('·', W/2+10, y + i*38);
+        ctx.fillStyle = '#5a5040';
+        ctx.fillText(right.length > 14 ? right.slice(0,13)+'…' : right, W/2+32, y + i*38);
+      }
+    }
+    y += rows*38 + 22;
+
+    // Divider
+    ctx.strokeStyle = '#e8d8c8';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.moveTo(50, y); ctx.lineTo(W-50, y); ctx.stroke();
+    y += 30;
+
+    // Meta row
+    const metas = [
+      {icon:'⏱', val: r.time + ' 分钟'},
+      {icon:'🍽', val: r.servings + ' 人份'},
+      {icon:'📊', val: d.diffLabel}
+    ];
+    const mW = W/3;
+    ctx.textAlign = 'center';
+    metas.forEach((m, i) => {
+      const mx = mW*i + mW/2;
+      ctx.font = '36px serif';
+      ctx.fillStyle = '#1a1810';
+      ctx.fillText(m.icon, mx, y+38);
+      ctx.font = `24px ${FONT}`;
+      ctx.fillStyle = '#7a6e60';
+      ctx.fillText(m.val, mx, y+72);
+    });
+
+    // Bottom bar
+    ctx.fillStyle = '#f0e6d8';
+    ctx.fillRect(0, H-72, W, 72);
+    ctx.fillStyle = '#5a3e28';
+    ctx.font = `bold 28px ${FONT}`;
+    ctx.textAlign = 'left';
+    ctx.fillText('🍙 麻薯食谱', 44, H-28);
+    ctx.fillStyle = '#9a7a5a';
+    ctx.font = `24px ${FONT}`;
+    ctx.textAlign = 'right';
+    ctx.fillText('mashuhome.com', W-44, H-28);
+
+    if (done) done();
+    showShareImageModal(canvas.toDataURL('image/jpeg', 0.92));
+  }
+
+  // Load image — add ?_s=1 to bypass SW cache and avoid canvas taint
+  const rawSrc = recipeImgSrc(r.img);
+  if (rawSrc && rawSrc.startsWith('http')) {
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => draw(img);
+    img.onerror = () => { if (done) done(); draw(null); };
+    img.src = rawSrc + (rawSrc.includes('?') ? '&' : '?') + '_s=1';
+  } else {
+    draw(null);
+  }
+}
 
 // ── Schema injection ─────────────────────────────────────────────
 
