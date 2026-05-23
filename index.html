@@ -786,34 +786,38 @@ function generateShareImage(r, done) {
     ctx.fillStyle = grad;
     ctx.fillRect(0, imgH-120, W, 120);
 
-    let y = imgH + 22;
+    let y = imgH + 32;
 
-    // Category badge — track badge bottom to avoid title overlap
-    ctx.font = `600 26px ${FONT}`;
+    // Category — elegant plain text, no pill background
     ctx.textAlign = 'center';
-    const catW = ctx.measureText(d.category).width + 44;
-    ctx.fillStyle = '#edf7e8';
-    roundRect(ctx, (W-catW)/2, y, catW, 42, 21);
-    ctx.fill();
-    ctx.fillStyle = '#4a8a3a';
-    ctx.fillText(d.category, W/2, y + 29);
-    const badgeBottom = y + 42;
+    ctx.fillStyle = '#6aaa60';
+    ctx.font = `500 22px ${FONT}`;
+    ctx.fillText((d.category || '').toUpperCase(), W/2, y + 18);
+    y += 18 + 18;  // baseline + gap below
 
-    // Title: baseline must be >= badgeBottom + gap(18) + ascent(~44)
-    const titleBaseline = badgeBottom + 18 + 44;
+    // Title — 60px bold with generous breathing room
     ctx.fillStyle = '#1a1810';
-    ctx.font = `bold 54px ${FONT}`;
-    ctx.fillText(d.title, W/2, titleBaseline);
-    y = titleBaseline + 28;
+    ctx.font = `bold 60px ${FONT}`;
+    ctx.fillText(d.title, W/2, y + 48);
+    y += 48 + 14 + 16;  // ascent + descent + gap
 
-    // Description (max 2 lines)
-    ctx.fillStyle = '#6a6055';
-    ctx.font = `28px ${FONT}`;
-    wrapText(ctx, d.desc, W-100).slice(0, 2).forEach(line => {
-      ctx.fillText(line, W/2, y);
-      y += 42;
+    // Decorative separator ── ◆ ──
+    const sepY = y + 8;
+    ctx.strokeStyle = '#c8a878'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(W/2 - 22 - 76, sepY); ctx.lineTo(W/2 - 22, sepY); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(W/2 + 22, sepY); ctx.lineTo(W/2 + 22 + 76, sepY); ctx.stroke();
+    ctx.fillStyle = '#c8a878';
+    ctx.save(); ctx.translate(W/2, sepY); ctx.rotate(Math.PI/4); ctx.fillRect(-5,-5,10,10); ctx.restore();
+    y += 8 + 5 + 16;  // to sepY centre + diamond radius + gap below
+
+    // Description (max 2 lines) — lighter, relaxed line height
+    ctx.fillStyle = '#8a7a68';
+    ctx.font = `26px ${FONT}`;
+    wrapText(ctx, d.desc, W-120).slice(0, 2).forEach(line => {
+      ctx.fillText(line, W/2, y + 21);
+      y += 38;
     });
-    y += 18;
+    y += 16;
 
     // Divider
     ctx.strokeStyle = '#e8d8c8';
