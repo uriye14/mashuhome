@@ -352,7 +352,10 @@ function diffBadge(d) {
 function filtered() {
   return recipes.filter(r => {
     const mc = state.category === '全部' || r.category === state.category;
-    const ms = !state.search || r.title.includes(state.search) || r.desc.includes(state.search);
+    const ms = !state.search
+      || r.title.includes(state.search)
+      || r.desc.includes(state.search)
+      || (r.ingredients && r.ingredients.some(i => i.includes(state.search)));
     return mc && ms;
   }).sort((a, b) => b.id - a.id);
 }
