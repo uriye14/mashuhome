@@ -614,7 +614,10 @@ function render() {
     // Restore search input
     const inp = document.getElementById('searchInput');
     if (inp) {
-      inp.addEventListener('input', e => { state.search = e.target.value; state.page = 1; render(); });
+      let composing = false;
+      inp.addEventListener('compositionstart', () => { composing = true; });
+      inp.addEventListener('compositionend', e => { composing = false; state.search = e.target.value; state.page = 1; render(); });
+      inp.addEventListener('input', e => { if (composing) return; state.search = e.target.value; state.page = 1; render(); });
       inp.focus();
       inp.setSelectionRange(inp.value.length, inp.value.length);
     }
