@@ -377,7 +377,7 @@ function renderHeader() {
   return `
   <div class="header" id="pageHeader">
     <div class="header-top">
-      <div class="logo-area">
+      <div class="logo-area" data-action="home" style="cursor:pointer">
         <img class="logo-img" src="https://i.postimg.cc/d3Ykkdm6/ma-shu-cai-pulogo2.png" alt="麻薯食谱">
         <div class="brand-box">
           <div class="brand-title">麻薯食谱</div>
@@ -651,6 +651,15 @@ document.addEventListener('click', e => {
     window.scrollTo(0, 0);
     render();
     injectRecipeSchema(recipe);
+  }
+
+  if (action === 'home') {
+    state.view = 'list';
+    state.selected = null;
+    history.pushState('', document.title, '/');
+    window.scrollTo(0, 0);
+    render();
+    removeRecipeSchema();
   }
 
   if (action === 'back') {
