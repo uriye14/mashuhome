@@ -615,7 +615,8 @@ function render() {
     const inp = document.getElementById('searchInput');
     if (inp) {
       inp.addEventListener('input', e => { state.search = e.target.value; state.page = 1; render(); });
-      inp.focus && inp.value && inp.setSelectionRange(inp.value.length, inp.value.length);
+      inp.focus();
+      inp.setSelectionRange(inp.value.length, inp.value.length);
     }
   } else {
     app.innerHTML = renderDetailPage() + renderModal();
