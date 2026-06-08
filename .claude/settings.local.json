@@ -1,7 +1,7 @@
 {
   "permissions": {
     "allow": [
-      "Bash(dir D:\\\\YCH\\\\AI\\\\mashuhome /s /b)",
+      "Bash(dir D:\\YCH\\AI\\mashuhome /s /b)",
       "Bash(git remote *)",
       "Bash(git pull *)",
       "Bash(git fetch *)",
@@ -10,7 +10,14 @@
       "Bash(git commit -m ' *)",
       "Bash(git push *)",
       "Bash(git *)",
-      "PowerShell(New-Item *)"
+      "Bash(python *)",
+      "Bash(curl *)",
+      "Bash(convert *)",
+      "PowerShell(New-Item *)",
+      "PowerShell(Copy-Item *)",
+      "PowerShell(Remove-Item *)",
+      "Edit(*)",
+      "Write(*)"
     ]
   }
 }
