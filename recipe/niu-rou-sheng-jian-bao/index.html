@@ -137,6 +137,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Roboto,"Pin
 .step-head .check-btn{width:20px;height:20px;border-radius:50%;border:2px solid #4a9a4a;background:white;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .3s;font-size:0;color:transparent;position:relative}
 .step-head .check-btn::after{content:'✓';font-size:12px;font-weight:700;color:white;opacity:0;transition:opacity .3s}
 .step-check{display:none}
+/* steps-fixed */
 .step-check:checked + .step .step-body{opacity:.5;text-decoration:line-through;text-decoration-color:#4a9a4a;text-decoration-thickness:1.5px}
 .step-check:checked + .step .step-num{background:#9ac99a}
 .step-check:checked + .step .step-head .check-btn{background:#4a9a4a;border-color:#4a9a4a}
@@ -245,46 +246,38 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Roboto,"Pin
   <div>
     <div class="section-title">烹饪步骤 <span style="font-size:11px;font-weight:400;color:#7a9a7a;margin-left:6px">点击打勾完成 ✓</span></div>
     <div class="steps">
-      <input type="checkbox" class="step-check" id="s1">
-      <label for="s1">
-      <div class="step">
+      <input type="checkbox" class="step-check" id="s1"><div class="step"><label for="s1">
         <div class="step-num">1</div>
         <div class="step-body">
           <div class="step-head"><span class="check-btn"></span><strong>发面团</strong></div>
           <p>面皮材料全部放入小美，慢发程序揉好面团，放一边发酵备用。</p>
         </div>
-      </div>
       </label>
-      <input type="checkbox" class="step-check" id="s2">
-      <label for="s2">
-      <div class="step">
+      </div>
+      <input type="checkbox" class="step-check" id="s2"><div class="step"><label for="s2">
         <div class="step-num">2</div>
         <div class="step-body">
           <div class="step-head"><span class="check-btn"></span><strong>调肉馅</strong></div>
           <p>洋葱加水速度 7 打碎 4 秒，加入所有牛肉馅配料，反转速度 1 搅拌 2 分钟上劲。</p>
         </div>
-      </div>
       </label>
-      <input type="checkbox" class="step-check" id="s3">
-      <label for="s3">
-      <div class="step">
+      </div>
+      <input type="checkbox" class="step-check" id="s3"><div class="step"><label for="s3">
         <div class="step-num">3</div>
         <div class="step-body">
           <div class="step-head"><span class="check-btn"></span><strong>包包子</strong></div>
           <p>面团发好后分剂，擀皮包入牛肉馅，捏紧收口。</p>
         </div>
-      </div>
       </label>
-      <input type="checkbox" class="step-check" id="s4">
-      <label for="s4">
-      <div class="step">
+      </div>
+      <input type="checkbox" class="step-check" id="s4"><div class="step"><label for="s4">
         <div class="step-num">4</div>
         <div class="step-body">
           <div class="step-head"><span class="check-btn"></span><strong>生煎出锅</strong></div>
           <p>锅底刷油，包子入锅底朝下煎至金黄，加少量水盖盖焖至水干，出锅前撒葱花和黑芝麻。</p>
         </div>
-      </div>
       </label>
+      </div>
     </div>
   </div>
   <div class="tip">💡 <strong>小贴士：</strong>所有步骤均适用于小美（Thermomix）。TM6 / TM7 用户可根据说明书微调温度和时间。</div>

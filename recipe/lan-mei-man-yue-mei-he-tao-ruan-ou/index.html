@@ -152,6 +152,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Roboto,"Pin
 .step-head .check-btn{width:20px;height:20px;border-radius:50%;border:2px solid #4a9a4a;background:white;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .3s;font-size:0;color:transparent;position:relative}
 .step-head .check-btn::after{content:'✓';font-size:12px;font-weight:700;color:white;opacity:0;transition:opacity .3s}
 .step-check{display:none}
+/* steps-fixed */
 .step-check:checked + .step .step-body{opacity:.5;text-decoration:line-through;text-decoration-color:#4a9a4a;text-decoration-thickness:1.5px}
 .step-check:checked + .step .step-num{background:#9ac99a}
 .step-check:checked + .step .step-head .check-btn{background:#4a9a4a;border-color:#4a9a4a}
@@ -255,86 +256,70 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Roboto,"Pin
   <div>
     <div class="section-title">烹饪步骤 <span style="font-size:11px;font-weight:400;color:#7a9a7a;margin-left:6px">点击打勾完成 ✓</span></div>
     <div class="steps">
-      <input type="checkbox" class="step-check" id="s1">
-      <label for="s1">
-      <div class="step">
+      <input type="checkbox" class="step-check" id="s1"><div class="step"><label for="s1">
         <div class="step-num">1</div>
         <div class="step-body">
           <div class="step-head"><span class="check-btn"></span><strong>提前做波兰种</strong></div>
           <p>干酵母 0.5g（鲜酵母 1.5g）加水 50g 拌匀，加入高筋面粉 50g 拌至无干粉，常温发酵至一倍高（出现小泡泡），放入冰箱冷藏过夜。</p>
         </div>
-      </div>
       </label>
-      <input type="checkbox" class="step-check" id="s2">
-      <label for="s2">
-      <div class="step">
+      </div>
+      <input type="checkbox" class="step-check" id="s2"><div class="step"><label for="s2">
         <div class="step-num">2</div>
         <div class="step-body">
           <div class="step-head"><span class="check-btn"></span><strong>混合材料</strong></div>
           <p>冰水 30~50g、高筋面粉 260g、冷藏波兰种、冰 15~20g、蓝莓酱 43g、糖 15~20g、冰冻鲜蓝莓 100g、鲜酵母 9g 一起放入主锅，速度 3~6 混合 30 秒。使用干酵母时先不加，揉面 2 分钟后再放入糊化好的干酵母。</p>
         </div>
-      </div>
       </label>
-      <input type="checkbox" class="step-check" id="s3">
-      <label for="s3">
-      <div class="step">
+      </div>
+      <input type="checkbox" class="step-check" id="s3"><div class="step"><label for="s3">
         <div class="step-num">3</div>
         <div class="step-body">
           <div class="step-head"><span class="check-btn"></span><strong>揉面</strong></div>
           <p>接着点开揉面键揉面 3 分钟。</p>
         </div>
-      </div>
       </label>
-      <input type="checkbox" class="step-check" id="s4">
-      <label for="s4">
-      <div class="step">
+      </div>
+      <input type="checkbox" class="step-check" id="s4"><div class="step"><label for="s4">
         <div class="step-num">4</div>
         <div class="step-body">
           <div class="step-head"><span class="check-btn"></span><strong>加黄油和盐</strong></div>
           <p>加入软化好的黄油 15~20g 和细盐 3g，再揉面 2 分钟。</p>
         </div>
-      </div>
       </label>
-      <input type="checkbox" class="step-check" id="s5">
-      <label for="s5">
-      <div class="step">
+      </div>
+      <input type="checkbox" class="step-check" id="s5"><div class="step"><label for="s5">
         <div class="step-num">5</div>
         <div class="step-body">
           <div class="step-head"><span class="check-btn"></span><strong>加入果干</strong></div>
           <p>加入蔓越梅干 40g（若清洗过需完全抹干）和核桃干 40g，再揉面 1 分钟。</p>
         </div>
-      </div>
       </label>
-      <input type="checkbox" class="step-check" id="s6">
-      <label for="s6">
-      <div class="step">
+      </div>
+      <input type="checkbox" class="step-check" id="s6"><div class="step"><label for="s6">
         <div class="step-num">6</div>
         <div class="step-body">
           <div class="step-head"><span class="check-btn"></span><strong>一次发酵</strong></div>
           <p>取出面团整圆，盖上保鲜膜，常温发酵至约 2 倍大。</p>
         </div>
-      </div>
       </label>
-      <input type="checkbox" class="step-check" id="s7">
-      <label for="s7">
-      <div class="step">
+      </div>
+      <input type="checkbox" class="step-check" id="s7"><div class="step"><label for="s7">
         <div class="step-num">7</div>
         <div class="step-body">
           <div class="step-head"><span class="check-btn"></span><strong>整形二次发酵</strong></div>
           <p>分成 2 个，稍微排气，整成橄榄型放到烤盘上，在烤箱里发酵 30~40 分钟至 1.5 倍大（无发酵功能可在下层放一碗 80°C 热水）。</p>
         </div>
-      </div>
       </label>
-      <input type="checkbox" class="step-check" id="s8">
-      <label for="s8">
-      <div class="step">
+      </div>
+      <input type="checkbox" class="step-check" id="s8"><div class="step"><label for="s8">
         <div class="step-num">8</div>
         <div class="step-body">
           <div class="step-head"><span class="check-btn"></span><strong>割包烘烤</strong></div>
           <p>喷水、撒粉、割包（割深一点），挤上软化好的黄油。预热烤箱 200°C，中层烤 18~20 分钟至表面金黄。</p>
         </div>
-      </div>
       </label>
+      </div>
     </div>
   </div>
   <div class="tip">💡 <strong>小贴士：</strong>所有步骤均适用于小美（Thermomix）。TM6 / TM7 用户可根据说明书微调温度和时间。</div>

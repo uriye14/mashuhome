@@ -130,6 +130,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Roboto,"Pin
 .step-head .check-btn{width:20px;height:20px;border-radius:50%;border:2px solid #4a9a4a;background:white;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .3s;font-size:0;color:transparent;position:relative}
 .step-head .check-btn::after{content:'✓';font-size:12px;font-weight:700;color:white;opacity:0;transition:opacity .3s}
 .step-check{display:none}
+/* steps-fixed */
 .step-check:checked + .step .step-body{opacity:.5;text-decoration:line-through;text-decoration-color:#4a9a4a;text-decoration-thickness:1.5px}
 .step-check:checked + .step .step-num{background:#9ac99a}
 .step-check:checked + .step .step-head .check-btn{background:#4a9a4a;border-color:#4a9a4a}
@@ -231,46 +232,38 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Roboto,"Pin
   <div>
     <div class="section-title">烹饪步骤 <span style="font-size:11px;font-weight:400;color:#7a9a7a;margin-left:6px">点击打勾完成 ✓</span></div>
     <div class="steps">
-      <input type="checkbox" class="step-check" id="s1">
-      <label for="s1">
-      <div class="step">
+      <input type="checkbox" class="step-check" id="s1"><div class="step"><label for="s1">
         <div class="step-num">1</div>
         <div class="step-body">
           <div class="step-head"><span class="check-btn"></span><strong>腌制肉块</strong></div>
           <p>把肉洗好切成小块，加入生抽、老抽、耗油、料酒和糖一起腌制半个小时以上备用。</p>
         </div>
-      </div>
       </label>
-      <input type="checkbox" class="step-check" id="s2">
-      <label for="s2">
-      <div class="step">
+      </div>
+      <input type="checkbox" class="step-check" id="s2"><div class="step"><label for="s2">
         <div class="step-num">2</div>
         <div class="step-body">
           <div class="step-head"><span class="check-btn"></span><strong>串牙签消毒</strong></div>
           <p>牙签用开水煮一下消毒，把腌制好的肉用牙签串起来。</p>
         </div>
-      </div>
       </label>
-      <input type="checkbox" class="step-check" id="s3">
-      <label for="s3">
-      <div class="step">
+      </div>
+      <input type="checkbox" class="step-check" id="s3"><div class="step"><label for="s3">
         <div class="step-num">3</div>
         <div class="step-body">
           <div class="step-head"><span class="check-btn"></span><strong>炸牙签肉</strong></div>
           <p>主锅加入食用油，以 5分钟/120°C/速度1 把油加热，倒入牙签肉以 10分钟/Varoma/反转速度1 开始炒，炒熟后把肉单独盛到盘子里，把主锅里的油倒出来。</p>
         </div>
-      </div>
       </label>
-      <input type="checkbox" class="step-check" id="s4">
-      <label for="s4">
-      <div class="step">
+      </div>
+      <input type="checkbox" class="step-check" id="s4"><div class="step"><label for="s4">
         <div class="step-num">4</div>
         <div class="step-body">
           <div class="step-head"><span class="check-btn"></span><strong>裹调料出锅</strong></div>
           <p>再把牙签肉倒回主锅，加入花椒面、辣椒面、孜然粉和熟芝麻，以 30秒/反转速度2 进行翻炒，让调料均匀裹在肉上即可出锅！</p>
         </div>
-      </div>
       </label>
+      </div>
     </div>
   </div>
   <div class="tip">💡 <strong>小贴士：</strong>所有步骤均适用于小美（Thermomix）。TM6 / TM7 用户可根据说明书微调温度和时间。</div>

@@ -133,6 +133,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Roboto,"Pin
 .step-head .check-btn{width:20px;height:20px;border-radius:50%;border:2px solid #4a9a4a;background:white;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .3s;font-size:0;color:transparent;position:relative}
 .step-head .check-btn::after{content:'✓';font-size:12px;font-weight:700;color:white;opacity:0;transition:opacity .3s}
 .step-check{display:none}
+/* steps-fixed */
 .step-check:checked + .step .step-body{opacity:.5;text-decoration:line-through;text-decoration-color:#4a9a4a;text-decoration-thickness:1.5px}
 .step-check:checked + .step .step-num{background:#9ac99a}
 .step-check:checked + .step .step-head .check-btn{background:#4a9a4a;border-color:#4a9a4a}
@@ -232,56 +233,46 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Roboto,"Pin
   <div>
     <div class="section-title">烹饪步骤 <span style="font-size:11px;font-weight:400;color:#7a9a7a;margin-left:6px">点击打勾完成 ✓</span></div>
     <div class="steps">
-      <input type="checkbox" class="step-check" id="s1">
-      <label for="s1">
-      <div class="step">
+      <input type="checkbox" class="step-check" id="s1"><div class="step"><label for="s1">
         <div class="step-num">1</div>
         <div class="step-body">
           <div class="step-head"><span class="check-btn"></span><strong>泡糯米</strong></div>
           <p>糯米提前用清水浸泡 2 小时以上，让米粒吸饱水分。</p>
         </div>
-      </div>
       </label>
-      <input type="checkbox" class="step-check" id="s2">
-      <label for="s2">
-      <div class="step">
+      </div>
+      <input type="checkbox" class="step-check" id="s2"><div class="step"><label for="s2">
         <div class="step-num">2</div>
         <div class="step-body">
           <div class="step-head"><span class="check-btn"></span><strong>处理莲藕</strong></div>
           <p>莲藕洗净去皮，从粗端约 2cm 处切开做盖子。把泡好的糯米用筷子塞入藕孔中，边塞边轻敲藕身让米填实，不要塞太满（米熟会膨胀）。盖上切下的盖子，用牙签固定紧。</p>
         </div>
-      </div>
       </label>
-      <input type="checkbox" class="step-check" id="s3">
-      <label for="s3">
-      <div class="step">
+      </div>
+      <input type="checkbox" class="step-check" id="s3"><div class="step"><label for="s3">
         <div class="step-num">3</div>
         <div class="step-body">
           <div class="step-head"><span class="check-btn"></span><strong>煮莲藕</strong></div>
           <p>将填好糯米的莲藕放入主锅，加入红糖、冰糖、红枣，加水没过莲藕。100°C 速度小勺，煮 60 分钟。中途可翻一次面让上色均匀。</p>
         </div>
-      </div>
       </label>
-      <input type="checkbox" class="step-check" id="s4">
-      <label for="s4">
-      <div class="step">
+      </div>
+      <input type="checkbox" class="step-check" id="s4"><div class="step"><label for="s4">
         <div class="step-num">4</div>
         <div class="step-body">
           <div class="step-head"><span class="check-btn"></span><strong>浸泡入味</strong></div>
           <p>煮好后不要急着取出，让莲藕在糖水中浸泡至凉，最好冷藏过夜，味道更透。</p>
         </div>
-      </div>
       </label>
-      <input type="checkbox" class="step-check" id="s5">
-      <label for="s5">
-      <div class="step">
+      </div>
+      <input type="checkbox" class="step-check" id="s5"><div class="step"><label for="s5">
         <div class="step-num">5</div>
         <div class="step-body">
           <div class="step-head"><span class="check-btn"></span><strong>切片装盘</strong></div>
           <p>取出莲藕，去掉牙签，切成 0.5cm 厚片摆盘。煮藕的糖水加干桂花，收浓成蜜汁，淋在藕片上，撒少许干桂花点缀即可。</p>
         </div>
-      </div>
       </label>
+      </div>
     </div>
   </div>
   <div class="tip">💡 <strong>小贴士：</strong>所有步骤均适用于小美（Thermomix）。TM6 / TM7 用户可根据说明书微调温度和时间。</div>

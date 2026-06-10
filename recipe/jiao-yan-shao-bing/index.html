@@ -142,6 +142,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Roboto,"Pin
 .step-head .check-btn{width:20px;height:20px;border-radius:50%;border:2px solid #4a9a4a;background:white;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .3s;font-size:0;color:transparent;position:relative}
 .step-head .check-btn::after{content:'✓';font-size:12px;font-weight:700;color:white;opacity:0;transition:opacity .3s}
 .step-check{display:none}
+/* steps-fixed */
 .step-check:checked + .step .step-body{opacity:.5;text-decoration:line-through;text-decoration-color:#4a9a4a;text-decoration-thickness:1.5px}
 .step-check:checked + .step .step-num{background:#9ac99a}
 .step-check:checked + .step .step-head .check-btn{background:#4a9a4a;border-color:#4a9a4a}
@@ -245,66 +246,54 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Roboto,"Pin
   <div>
     <div class="section-title">烹饪步骤 <span style="font-size:11px;font-weight:400;color:#7a9a7a;margin-left:6px">点击打勾完成 ✓</span></div>
     <div class="steps">
-      <input type="checkbox" class="step-check" id="s1">
-      <label for="s1">
-      <div class="step">
+      <input type="checkbox" class="step-check" id="s1"><div class="step"><label for="s1">
         <div class="step-num">1</div>
         <div class="step-body">
           <div class="step-head"><span class="check-btn"></span><strong>揉面</strong></div>
           <p>面粉、奶粉、鸡蛋、牛奶、酵母、糖放入小美，速度3~6混合30秒，再揉面3分钟至光滑面团。</p>
         </div>
-      </div>
       </label>
-      <input type="checkbox" class="step-check" id="s2">
-      <label for="s2">
-      <div class="step">
+      </div>
+      <input type="checkbox" class="step-check" id="s2"><div class="step"><label for="s2">
         <div class="step-num">2</div>
         <div class="step-body">
           <div class="step-head"><span class="check-btn"></span><strong>一次发酵</strong></div>
           <p>取出面团整圆，在温暖处盖保鲜膜发酵至2倍大，约1小时。</p>
         </div>
-      </div>
       </label>
-      <input type="checkbox" class="step-check" id="s3">
-      <label for="s3">
-      <div class="step">
+      </div>
+      <input type="checkbox" class="step-check" id="s3"><div class="step"><label for="s3">
         <div class="step-num">3</div>
         <div class="step-body">
           <div class="step-head"><span class="check-btn"></span><strong>分份整形</strong></div>
           <p>面团等分成6份，每份约80克，逐一压扁备用。</p>
         </div>
-      </div>
       </label>
-      <input type="checkbox" class="step-check" id="s4">
-      <label for="s4">
-      <div class="step">
+      </div>
+      <input type="checkbox" class="step-check" id="s4"><div class="step"><label for="s4">
         <div class="step-num">4</div>
         <div class="step-body">
           <div class="step-head"><span class="check-btn"></span><strong>抹馅折叠</strong></div>
           <p>将油酥材料混合均匀，取一份面片擀开，抹上葱花椒盐油酥，折叠两次，用刀从中心划开后翻折整形。</p>
         </div>
-      </div>
       </label>
-      <input type="checkbox" class="step-check" id="s5">
-      <label for="s5">
-      <div class="step">
+      </div>
+      <input type="checkbox" class="step-check" id="s5"><div class="step"><label for="s5">
         <div class="step-num">5</div>
         <div class="step-body">
           <div class="step-head"><span class="check-btn"></span><strong>二次发酵</strong></div>
           <p>整形好放到烤盘上，盖保鲜膜二次发酵30分钟。</p>
         </div>
-      </div>
       </label>
-      <input type="checkbox" class="step-check" id="s6">
-      <label for="s6">
-      <div class="step">
+      </div>
+      <input type="checkbox" class="step-check" id="s6"><div class="step"><label for="s6">
         <div class="step-num">6</div>
         <div class="step-body">
           <div class="step-head"><span class="check-btn"></span><strong>烘烤</strong></div>
           <p>刷上蛋液、盐水，撒黑白芝麻，170度预热烤箱，烤10分钟至表面金黄酥脆。</p>
         </div>
-      </div>
       </label>
+      </div>
     </div>
   </div>
   <div class="tip">💡 <strong>小贴士：</strong>所有步骤均适用于小美（Thermomix）。TM6 / TM7 用户可根据说明书微调温度和时间。</div>
