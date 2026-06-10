@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>关于 · 麻薯食谱</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;background:#f4f6f2;color:#142114;overflow-x:hidden}
+
+/* ── Nav ── */
+nav{position:sticky;top:0;z-index:100;background:rgba(244,246,242,.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,0,0,.04)}
+.nav-inner{max-width:1200px;margin:0 auto;padding:14px 32px;display:flex;align-items:center;gap:12px}
+.nav-logo{display:flex;align-items:center;gap:8px}
+.nav-logo img{width:28px;height:28px;border-radius:50%;object-fit:cover;object-position:center 20%}
+.nav-logo span{font-size:14px;font-weight:700;color:#142114;letter-spacing:-.2px}
+.nav-links{margin-left:auto;display:flex;gap:4px}
+.nav-links a{padding:6px 18px;border-radius:20px;font-size:13px;color:#5a7a5a;text-decoration:none;transition:all .2s;font-weight:500}
+.nav-links a:hover{background:rgba(20,33,20,.06);color:#142114}
+.nav-links a.active{background:#142114;color:#edf5ed}
+
+/* ── Main ── */
+.about-page{max-width:600px;margin:0 auto;padding:80px 32px 60px;min-height:70vh;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.about-page img{max-width:400px;width:100%;height:auto;border-radius:16px;animation:fadeIn .6s}
+.about-page h2{font-size:22px;font-weight:700;color:#142114;margin-top:36px;letter-spacing:-.3px}
+.about-page p{font-size:14px;color:#5a7a5a;line-height:1.7;margin-top:16px;max-width:420px}
+@keyframes fadeIn{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}
+</style>
+</head>
+<body>
+
+<nav>
+<div class="nav-inner">
+  <div class="nav-logo" onclick="location.href='preview.html'" style="cursor:pointer">
+    <img src="https://i.postimg.cc/d3Ykkdm6/ma-shu-cai-pulogo2.png" alt="">
+    <span>麻薯食谱</span>
+  </div>
+  <div class="nav-links">
+    <a href="preview.html">首页</a>
+    <a href="preview.html#shop" onclick="location.href='preview.html';setTimeout(()=>document.querySelector('footer')?.scrollIntoView({behavior:'smooth'}),100);return false">店铺</a>
+    <a href="#" class="active">关于</a>
+  </div>
+</div>
+</nav>
+
+<div class="about-page">
+  <img src="under_construction.svg" alt="页面建设中">
+  <h2>页面建设中</h2>
+  <p>关于麻薯食谱的故事和团队信息即将呈现，敬请期待</p>
+</div>
+
+</body>
+</html>

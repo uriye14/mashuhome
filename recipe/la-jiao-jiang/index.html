@@ -112,5 +112,76 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 <div class="section"><div class="section-title">烹饪步骤</div><div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-head"><strong>处理食材</strong></div><p>辣椒去蒂洗净，一定要完全晾干。大蒜和姜不需要提前切，直接放进小美就行。</p></div></div><div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-head"><strong>切碎</strong><span class="step-time">5 秒</span></div><p>辣椒、大蒜、姜一起放入，速度 5 搅打 5 秒，打成粗粒状。</p></div></div><div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-head"><strong>炒制</strong><span class="step-time">10 分钟</span></div><p>加入食用油，100°C 速度 1 翻炒 10 分钟，把辣椒的水分炒干，香味全出来了。</p></div></div><div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-head"><strong>调味装瓶</strong></div><p>加入盐、糖和生抽，继续 100°C 速度 1 炒 5 分钟，炒到稍微浓稠就好。放凉后装入玻璃瓶，冷藏保存。</p></div></div></div>
 <div class="footer"><p>麻薯食谱 · <a href="https://www.mashuhome.com/">mashuhome.com</a> · 适用 Thermomix® 小美</p></div>
 </div>
+<!-- ── Footer ── -->
+<style>
+.footer-section{background:#142114;color:rgba(255,255,255,.7);padding:40px 20px 30px;margin-top:30px}
+.footer-inner{max-width:800px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:30px}
+.footer-brand{text-align:left}
+.footer-brand strong{color:rgba(255,255,255,.85);font-size:14px;display:block;margin-bottom:6px}
+.footer-brand p{font-size:12px;line-height:1.5;color:rgba(255,255,255,.45)}
+.footer-contact{text-align:left}
+.footer-contact h4{font-size:11px;font-weight:600;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
+.footer-shop{display:flex;gap:10px;margin-top:4px}
+.footer-shop-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:10px 12px;display:flex;align-items:center;gap:10px;flex:1;transition:all .2s;cursor:pointer}
+.footer-shop-card:hover{background:rgba(255,255,255,.1)}
+.footer-shop-card .name{font-size:11px;font-weight:600;color:rgba(255,255,255,.8)}
+.footer-shop-card .sub{font-size:9px;color:rgba(255,255,255,.35)}
+.footer-shop-card .qr-mini{width:36px;height:36px;border-radius:6px;object-fit:cover;cursor:pointer;flex-shrink:0}
+.footer-btm{text-align:center;font-size:11px;color:rgba(255,255,255,.25);padding-top:16px;margin-top:24px;border-top:1px solid rgba(255,255,255,.06)}
+.qr-modal{display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.6);backdrop-filter:blur(8px);align-items:center;justify-content:center}
+.qr-modal.open{display:flex}
+.qr-modal-box{background:white;border-radius:16px;padding:20px;max-width:300px;width:90%;text-align:center;animation:fadeIn .3s}
+@keyframes fadeIn{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}
+.qr-modal-box img{width:100%;border-radius:8px;margin-bottom:10px}
+.qr-modal-box p{font-size:12px;color:#5a7a5a;margin-bottom:10px}
+.qr-modal-box button{background:#142114;color:#edf5ed;border:none;border-radius:50px;padding:6px 24px;font-size:12px;cursor:pointer;font-family:inherit}
+@media(max-width:600px){.footer-inner{grid-template-columns:1fr;gap:20px}.footer-shop{flex-direction:column}}
+</style>
+
+<div class="footer-section">
+<div class="footer-inner">
+  <div class="footer-brand">
+    <strong>麻薯食谱</strong>
+    <p>发现 Cookidoo 之外的宝藏菜谱，小美能做的好味道都在这里。</p>
+  </div>
+  <div class="footer-contact">
+    <h4>联系</h4>
+    <div class="footer-shop">
+      <div class="footer-shop-card" onclick="openQR('weixin')">
+        <div><div class="name">美善品小店</div><div class="sub">主机·配件·好物</div></div>
+        <img class="qr-mini" src="https://i.postimg.cc/85nRsDpT/wei-xin-dian-pu-chu-chuang.png" alt="">
+      </div>
+      <div class="footer-shop-card" onclick="openQR('zengli')">
+        <div><div class="name">曾丽顾问</div><div class="sub">海口福维克剑桥郡</div></div>
+        <img class="qr-mini" src="https://i.postimg.cc/VNkrQnzK/ceng-li-wei-xin-er-wei-ma.png" alt="">
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer-btm">© 2026 mashuhome.com · 适用 Thermomix® 小美</div>
+</div>
+
+<!-- QR Modal -->
+<div class="qr-modal" id="qrModalR" onclick="this.classList.remove('open')">
+  <div class="qr-modal-box" onclick="event.stopPropagation()">
+    <img id="qrModalImgR" src="" alt="">
+    <p id="qrModalTextR">微信扫一扫</p>
+    <button onclick="document.getElementById('qrModalR').classList.remove('open')">关闭</button>
+  </div>
+</div>
+
+<script>
+const qrDataR = {
+  weixin: { src: 'https://i.postimg.cc/85nRsDpT/wei-xin-dian-pu-chu-chuang.png', text: '扫码进店购买小美主机和配件' },
+  zengli: { src: 'https://i.postimg.cc/VNkrQnzK/ceng-li-wei-xin-er-wei-ma.png', text: '扫码联系曾丽顾问咨询美善品' }
+}
+function openQR(key) {
+  const d = qrDataR[key]
+  document.getElementById('qrModalImgR').src = d.src
+  document.getElementById('qrModalTextR').textContent = d.text
+  document.getElementById('qrModalR').classList.add('open')
+}
+</script>
+
 </body>
 </html>
