@@ -2,17 +2,13 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <meta name="baidu-site-verification" content="codeva-ba49QXCYOu" />
-
-
 <title>台式卤肉饭 · 麻薯菜谱</title>
 <meta name="description" content="带皮五花肉切丁慢卤，加油葱酥提香，浇在白米饭上，一碗入魂的台式经典">
 <meta property="og:title" content="台式卤肉饭 · 麻薯菜谱">
 <meta property="og:image" content="https://www.mashuhome.com/images/recipes/tai-shi-lu-rou-fan.jpg">
 <meta property="og:url" content="https://www.mashuhome.com/recipe/tai-shi-lu-rou-fan">
-
-
 <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "Recipe",
@@ -108,7 +104,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Roboto,"Pin
 .ingredients{list-style:none;display:flex;flex-direction:column;gap:6px}
 .ingredients li{font-size:14px;padding:9px 14px;background:white;border-radius:10px;color:#3a5a3a;box-shadow:0 1px 3px rgba(26,58,26,.04);display:flex;align-items:center;gap:8px;transition:all .2s}
 .ingredients li:hover{background:#f0f5f0;transform:translateX(3px)}
-.ingredients li::before{content:'\00b7';color:#4a9a4a;font-weight:700;font-size:18px;line-height:1}
+.ingredients li::before{content:'·';color:#4a9a4a;font-weight:700;font-size:18px;line-height:1}
 
 .steps{display:flex;flex-direction:column;gap:14px}
 .step{display:flex;gap:14px;transition:all .2s}
@@ -119,7 +115,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Roboto,"Pin
 .step:hover .step-body{box-shadow:0 4px 16px rgba(26,58,26,.06)}
 .step-head{display:flex;align-items:center;gap:8px;margin-bottom:4px}
 .step-head .check-btn{width:20px;height:20px;border-radius:50%;border:2px solid #4a9a4a;background:white;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .3s;font-size:0;color:transparent;position:relative}
-.step-head .check-btn::after{content:'\2713';font-size:12px;font-weight:700;color:white;opacity:0;transition:opacity .3s}
+.step-head .check-btn::after{content:'✓';font-size:12px;font-weight:700;color:white;opacity:0;transition:opacity .3s}
 .step-check{display:none}
 .step-check:checked + .step .step-body{opacity:.5;text-decoration:line-through;text-decoration-color:#4a9a4a;text-decoration-thickness:1.5px}
 .step-check:checked + .step .step-num{background:#9ac99a}
@@ -134,6 +130,24 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Roboto,"Pin
 .divider{max-width:1100px;margin:0 auto;padding:0 28px}
 .divider-line{height:1px;background:rgba(26,58,26,.06)}
 
+/* ── Bottom shop ── */
+.shop-section{max-width:900px;margin:0 auto 48px;padding:0 28px}
+.shop-title{font-size:15px;font-weight:700;color:#1a3a1a;text-align:center;margin-bottom:20px}
+.shop-grid{display:flex;gap:20px;justify-content:center;flex-wrap:wrap}
+.shop-card{background:white;border-radius:18px;padding:24px;text-align:center;flex:1;min-width:220px;max-width:280px;box-shadow:0 2px 12px rgba(26,58,26,.06);border:1px solid rgba(0,0,0,.03);transition:all .3s}
+.shop-card:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(26,58,26,.1)}
+.shop-card .name{font-size:14px;font-weight:700;color:#1a3a1a;margin-bottom:4px}
+.shop-card .sub{font-size:12px;color:#7a9a7a;margin-bottom:14px}
+.shop-card img{width:130px;height:130px;border-radius:12px;object-fit:cover;display:block;margin:0 auto;cursor:pointer;transition:transform .3s}
+.shop-card img:hover{transform:scale(1.04)}
+.shop-card .hint{font-size:11px;color:#9aaa9a;margin-top:8px}
+
+.footer{text-align:center;padding:32px 20px;background:#e8ede8;border-top:1px solid #d5e0d5}
+.footer p{font-size:12px;color:#7a9a7a}
+.footer .logo-row{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:6px}
+.footer .logo-row img{width:22px;height:22px;border-radius:50%;object-fit:cover;object-position:center 20%}
+.footer .logo-row span{font-size:13px;font-weight:600;color:#3a5a3a}
+
 @media(max-width:768px){
   .hero{flex-direction:column-reverse;gap:20px;padding:24px 0}
   .hero-image{width:100%;max-width:100%}
@@ -145,8 +159,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Roboto,"Pin
   .pill{font-size:11px;padding:4px 11px}
   .body{grid-template-columns:1fr;gap:20px}
   .tip{grid-column:1}
-  .hero-wrap,.body{padding-left:16px;padding-right:16px}
+  .hero-wrap,.body,.shop-section{padding-left:16px;padding-right:16px}
   .top-bar{padding:10px 16px}
+  .shop-grid{flex-direction:column;align-items:center}
 }
 </style>
 </head>
@@ -168,9 +183,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Roboto,"Pin
     <h1>台式卤肉饭</h1>
     <p class="desc">带皮五花肉切丁慢卤，加油葱酥提香，浇在白米饭上，一碗入魂的台式经典</p>
     <div class="meta-pills">
-      <span class="pill">⏱ 50分钟</span>
-      <span class="pill">🍽 4人份</span>
-      <span class="pill highlight">📊 简单</span>
+      <span class="pill">⏱ 50 分钟</span>
+      <span class="pill">🍽 4 人份</span>
+      <span class="pill">⭐ 简单</span>
+      <span class="pill highlight">TM6 · TM7</span>
     </div>
   </div>
   <div class="hero-image">
@@ -231,7 +247,27 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Roboto,"Pin
       </label>
     </div>
   </div>
+  <div class="tip">💡 <strong>小贴士：</strong>所有步骤均适用于小美（Thermomix）。TM6 / TM7 用户可根据说明书微调温度和时间。</div>
+</div>
 
+
+<!-- ── Shop Section ── -->
+<div class="shop-section">
+  <div class="shop-title">🛒 小美相关店铺</div>
+  <div class="shop-grid">
+    <div class="shop-card">
+      <div class="name">美善品小店</div>
+      <div class="sub">正品主机 · 配件齐全</div>
+      <img src="https://i.postimg.cc/85nRsDpT/wei-xin-dian-pu-chu-chuang.png" alt="" onclick="openQR('weixin')">
+      <div class="hint">点击查看二维码</div>
+    </div>
+    <div class="shop-card">
+      <div class="name">曾丽顾问</div>
+      <div class="sub">海口福维克剑桥郡</div>
+      <img src="https://i.postimg.cc/VNkrQnzK/ceng-li-wei-xin-er-wei-ma.png" alt="" onclick="openQR('zengli')">
+      <div class="hint">点击查看二维码</div>
+    </div>
+  </div>
 </div>
 
 <div class="divider"><div class="divider-line"></div></div>
@@ -303,7 +339,7 @@ footer{background:#142114;color:rgba(255,255,255,.7);padding:48px 32px 36px;marg
     </div>
   </div>
 </div>
-<div class="footer-bottom">&copy; 2026 mashuhome.com &middot; 适用 Thermomix&reg; 小美</div>
+<div class="footer-bottom">© 2026 mashuhome.com · 适用 Thermomix® 小美</div>
 </footer>
 
 <!-- QR Modal -->
