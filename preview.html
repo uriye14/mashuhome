@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>麻薯食谱 · 设计预览</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;background:#f4f6f2;color:#142114;overflow-x:hidden}
+
+/* ── Float decorations ── */
+.float-deco{position:fixed;pointer-events:none;z-index:0}
+.float-deco.d1{width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(74,154,74,.06) 0%,transparent 70%);top:-200px;right:-150px}
+.float-deco.d2{width:350px;height:350px;border-radius:50%;background:radial-gradient(circle,rgba(212,165,116,.08) 0%,transparent 70%);bottom:10%;left:-80px}
+.float-deco.d3{width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(74,154,74,.04) 0%,transparent 70%);top:40%;right:5%}
+
+/* ── Nav ── */
+nav{position:sticky;top:0;z-index:100;background:rgba(244,246,242,.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,0,0,.04)}
+.nav-inner{max-width:1200px;margin:0 auto;padding:14px 32px;display:flex;align-items:center;gap:12px}
+.nav-logo{display:flex;align-items:center;gap:8px}
+.nav-logo img{width:28px;height:28px;border-radius:50%;object-fit:cover;object-position:center 20%}
+.nav-logo span{font-size:14px;font-weight:700;color:#142114;letter-spacing:-.2px}
+.nav-links{margin-left:auto;display:flex;gap:4px}
+.nav-links a{padding:6px 18px;border-radius:20px;font-size:13px;color:#5a7a5a;text-decoration:none;transition:all .2s;font-weight:500}
+.nav-links a:hover{background:rgba(20,33,20,.06);color:#142114}
+.nav-links a.active{background:#142114;color:#edf5ed}
+
+/* ── Hero ── */
+.hero{max-width:1200px;margin:0 auto;padding:60px 32px 50px;display:grid;grid-template-columns:1.2fr .8fr;gap:50px;align-items:center;position:relative;z-index:1}
+.hero-left{}
+.hero-tag{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;letter-spacing:1.2px;color:#4a7a4a;background:rgba(74,122,74,.08);padding:4px 14px;border-radius:20px;margin-bottom:20px}
+.hero-tag::before{content:'';width:5px;height:5px;border-radius:50%;background:#4a7a4a}
+.hero-left h1{font-size:52px;font-weight:750;color:#142114;line-height:1.08;letter-spacing:-1.2px;margin-bottom:16px}
+.hero-left h1 .highlight{background:linear-gradient(135deg,#4a9a4a,#7dbb7d);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-left p{font-size:16px;color:#5a7a5a;line-height:1.65;margin-bottom:28px;max-width:460px}
+.search-wrap{display:flex;background:white;border-radius:50px;padding:4px;max-width:420px;box-shadow:0 4px 24px rgba(20,33,20,.06);border:1px solid rgba(0,0,0,.04);transition:box-shadow .3s}
+.search-wrap:focus-within{box-shadow:0 6px 32px rgba(20,33,20,.1)}
+.search-wrap input{flex:1;border:none;outline:none;padding:12px 18px;font-size:14px;background:transparent;color:#142114;font-family:inherit}
+.search-wrap input::placeholder{color:#9aaa9a}
+.search-wrap button{background:#142114;color:#edf5ed;border:none;border-radius:50px;padding:9px 24px;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;font-family:inherit}
+.search-wrap button:hover{background:#2a4a2a;transform:scale(1.02)}
+
+.hero-right{position:relative}
+.hero-right .img-card{width:100%;border-radius:24px;overflow:hidden;box-shadow:0 20px 60px rgba(20,33,20,.12);position:relative;aspect-ratio:4/3;background:#dce8dc;transition:transform .5s cubic-bezier(.25,.46,.45,.94)}
+.hero-right .img-card:hover{transform:scale(1.02)}
+.hero-right .img-card img{width:100%;height:100%;object-fit:cover;display:block}
+.hero-right .img-deco{position:absolute;width:100%;height:100%;border-radius:24px;top:16px;left:16px;background:linear-gradient(135deg,rgba(74,154,74,.12),transparent 60%);z-index:-1}
+
+/* ── Stats ── */
+.stats{max-width:1200px;margin:0 auto;padding:0 32px 32px;display:flex;gap:16px;position:relative;z-index:1;flex-wrap:wrap}
+.stat-card{background:white;border-radius:16px;padding:18px 24px;flex:1;min-width:160px;box-shadow:0 1px 4px rgba(0,0,0,.03);border:1px solid rgba(0,0,0,.03)}
+.stat-card .num{font-size:28px;font-weight:750;color:#142114;letter-spacing:-.5px}
+.stat-card .num span{font-size:14px;font-weight:400;color:#4a9a4a;margin-left:2px}
+.stat-card .label{font-size:12px;color:#7a9a7a;margin-top:2px}
+
+/* ── Main ── */
+.main{max-width:1200px;margin:0 auto;padding:40px 32px 60px;position:relative;z-index:1}
+
+.cat-bar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:32px;border-bottom:1px solid rgba(20,33,20,.05);padding-bottom:20px}
+.cat-btn{padding:6px 18px;border-radius:20px;font-size:13px;color:#5a7a5a;background:transparent;border:none;cursor:pointer;transition:all .2s;font-family:inherit;font-weight:500}
+.cat-btn:hover{background:rgba(20,33,20,.06);color:#142114}
+.cat-btn.active{background:#142114;color:#edf5ed}
+
+/* ── Section header ── */
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:20px}
+.sec-head h2{font-size:18px;font-weight:700;color:#142114;display:flex;align-items:center;gap:8px}
+.sec-head a{font-size:13px;color:#7a9a7a;text-decoration:none;transition:color .2s;cursor:pointer}
+.sec-head a:hover{color:#142114}
+
+/* ── Hot bar ── */
+.hot-scroll{display:flex;gap:14px;overflow-x:auto;padding-bottom:12px;margin-bottom:36px;scrollbar-width:thin;scrollbar-color:#c5dcc5 transparent}
+.hot-scroll::-webkit-scrollbar{height:4px}
+.hot-scroll::-webkit-scrollbar-thumb{background:#c5dcc5;border-radius:4px}
+.hot-card{flex-shrink:0;width:170px;background:white;border-radius:16px;overflow:hidden;cursor:pointer;transition:all .35s cubic-bezier(.25,.46,.45,.94);box-shadow:0 1px 4px rgba(0,0,0,.04);border:1px solid rgba(0,0,0,.03)}
+.hot-card:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(20,33,20,.08)}
+.hot-card img{width:100%;height:110px;object-fit:cover;display:block;background:#dce8dc}
+.hot-card-body{padding:10px 12px 12px}
+.hot-card-name{font-size:13px;font-weight:600;color:#142114;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hot-card-meta{font-size:10px;color:#9aaa9a;margin-top:3px;display:flex;gap:4px;align-items:center}
+
+/* ── Grid ── */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px}
+
+.card{background:white;border-radius:18px;overflow:hidden;transition:all .4s cubic-bezier(.25,.46,.45,.94);cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.04);border:1px solid rgba(0,0,0,.03);opacity:0;transform:translateY(20px)}
+.card.visible{opacity:1;transform:translateY(0)}
+.card:hover{transform:translateY(-6px);box-shadow:0 16px 48px rgba(20,33,20,.1);border-color:rgba(20,33,20,.08)}
+.card-img{width:100%;height:195px;object-fit:cover;display:block;background:#dce8dc;transition:transform .5s}
+.card:hover .card-img{transform:scale(1.03)}
+
+/* ── Card time overlay on image hover ── */
+.card-img-wrap{position:relative;overflow:hidden}
+.card-img-wrap .time-overlay{position:absolute;bottom:8px;right:8px;background:rgba(20,33,20,.75);backdrop-filter:blur(4px);color:#edf5ed;font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;opacity:0;transition:opacity .35s;letter-spacing:.2px}
+.card:hover .time-overlay{opacity:1}
+
+.card-body{padding:16px 18px 18px}
+.card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px}
+.card-title{font-size:16px;font-weight:700;color:#142114;line-height:1.3}
+.card-badge{font-size:10px;padding:2px 10px;border-radius:12px;font-weight:600;white-space:nowrap;margin-left:6px}
+.card-badge.simple{background:#eaf5ea;color:#1a6e2a}
+.card-badge.medium{background:#f5f0e0;color:#7a5a00}
+.card-badge.hard{background:#f5e8e8;color:#8a2020}
+.card-desc{font-size:13px;color:#7a8a7a;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:10px}
+.card-footer{display:flex;justify-content:space-between;align-items:center}
+.card-tags{display:flex;gap:4px}
+.tm-tag{font-size:10px;border-radius:10px;padding:2px 8px;font-weight:600}
+.tm-tag.tm6{background:#e8f5e8;color:#1a5c28}
+.tm-tag.tm7{background:#142114;color:#7ddb8a}
+.card-time{font-size:12px;color:#9aaa9a}
+
+/* ── Footer ── */
+footer{background:#142114;color:rgba(255,255,255,.7);padding:48px 32px 36px;margin-top:20px;position:relative;z-index:1}
+.footer-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:40px}
+.footer-brand img{width:32px;height:32px;border-radius:50%;object-fit:cover;object-position:center 20%;margin-bottom:10px}
+.footer-brand p{font-size:13px;line-height:1.6;color:rgba(255,255,255,.5)}
+.footer-brand strong{color:rgba(255,255,255,.8);font-size:15px;display:block;margin-bottom:6px}
+.footer-col h4{font-size:12px;font-weight:600;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
+.footer-col a{display:block;font-size:13px;color:rgba(255,255,255,.6);text-decoration:none;padding:3px 0;transition:color .2s}
+.footer-col a:hover{color:rgba(255,255,255,.9)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.08);margin-top:36px;padding-top:20px;text-align:center;font-size:12px;color:rgba(255,255,255,.3)}
+
+/* ── Shop cards ── */
+.footer-shop{display:flex;gap:12px;margin-top:12px}
+.footer-shop-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:12px 14px;text-align:center;flex:1;min-width:0;transition:all .3s;display:flex;align-items:center;gap:12px}
+.footer-shop-card:hover{background:rgba(255,255,255,.1)}
+.footer-shop-card .info{flex:1;text-align:left}
+.footer-shop-card .name{font-size:12px;font-weight:600;color:rgba(255,255,255,.85)}
+.footer-shop-card .sub{font-size:10px;color:rgba(255,255,255,.4);margin-top:1px}
+.footer-shop-card .qr-img{width:50px;height:50px;border-radius:8px;object-fit:cover;cursor:pointer;flex-shrink:0;transition:transform .3s}
+.footer-shop-card .qr-img:hover{transform:scale(1.1)}
+
+/* ── QR modal ── */
+.qr-modal{display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.6);backdrop-filter:blur(8px);align-items:center;justify-content:center}
+.qr-modal.open{display:flex}
+.qr-modal-box{background:white;border-radius:20px;padding:24px;max-width:340px;width:90%;text-align:center;animation:fadeIn .3s}
+@keyframes fadeIn{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}
+.qr-modal-box img{width:100%;border-radius:12px;margin-bottom:14px}
+.qr-modal-box p{font-size:13px;color:#5a7a5a;margin-bottom:14px;line-height:1.5}
+.qr-modal-box button{background:#142114;color:#edf5ed;border:none;border-radius:50px;padding:8px 28px;font-size:13px;cursor:pointer;font-family:inherit}
+
+/* ── Back to top ── */
+.back-top{position:fixed;bottom:32px;right:32px;z-index:200;width:44px;height:44px;border-radius:50%;background:#142114;color:#edf5ed;border:none;cursor:pointer;box-shadow:0 4px 16px rgba(20,33,20,.2);transition:all .35s cubic-bezier(.25,.46,.45,.94);opacity:0;transform:translateY(20px);pointer-events:none;font-size:18px;display:flex;align-items:center;justify-content:center}
+.back-top.show{opacity:1;transform:translateY(0);pointer-events:auto}
+.back-top:hover{background:#2a4a2a;transform:translateY(-2px);box-shadow:0 8px 24px rgba(20,33,20,.25)}
+
+/* ── Page fade-in ── */
+@keyframes pageIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+body > *{animation:pageIn .5s ease-out}
+
+@media(max-width:768px){
+  .hero{grid-template-columns:1fr;gap:30px;padding:40px 20px 30px}
+  .hero-left h1{font-size:34px}
+  .hero-right .img-deco{display:none}
+  .stats{flex-direction:column;padding:0 20px}
+  .stat-card{min-width:auto}
+  .main{padding:24px 16px 40px}
+  .nav-inner{padding:12px 16px}
+  .footer-inner{grid-template-columns:1fr;gap:24px}
+}
+</style>
+</head>
+<body>
+
+<div class="float-deco d1"></div>
+<div class="float-deco d2"></div>
+<div class="float-deco d3"></div>
+
+<nav>
+<div class="nav-inner">
+  <div class="nav-logo">
+    <img src="https://i.postimg.cc/d3Ykkdm6/ma-shu-cai-pulogo2.png" alt="">
+    <span>麻薯食谱</span>
+  </div>
+  <div class="nav-links">
+    <a href="#" class="active" onclick="window.scrollTo({top:0,behavior:'smooth'});return false">首页</a>
+    <a href="#" onclick="document.querySelector('footer').scrollIntoView({behavior:'smooth'});setTimeout(()=>openQR('weixin'),600);return false">店铺</a>
+    <a href="about.html">关于</a>
+  </div>
+</div>
+</nav>
+
+<div class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">mashuhome.com</div>
+    <h1>家常美味<br><span class="highlight">轻松上桌</span></h1>
+    <p>发现 Cookidoo 之外的宝藏菜谱<br>小美能做 · TM6 · TM7 兼容 · 63道精选 · 持续更新</p>
+    <div class="search-wrap">
+      <input type="text" placeholder="搜索食材或菜名…">
+      <button>搜索</button>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="img-deco"></div>
+    <div class="img-card">
+      <img src="https://i.postimg.cc/YqBxs0rg/IMG-0746.jpg" alt="" onerror="this.style.background='#dce8dc'">
+    </div>
+  </div>
+</div>
+
+<div class="stats">
+  <div class="stat-card"><div class="num">63<span>道</span></div><div class="label">精选菜谱</div></div>
+  <div class="stat-card"><div class="num">8<span>类</span></div><div class="label">菜品分类</div></div>
+  <div class="stat-card"><div class="num">100%<span></span></div><div class="label">小美兼容</div></div>
+  <div class="stat-card"><div class="num">∞<span></span></div><div class="label">持续更新</div></div>
+</div>
+
+<div class="main">
+  <div class="cat-bar">
+    <button class="cat-btn active">全部</button>
+    <button class="cat-btn">热菜</button>
+    <button class="cat-btn">主食</button>
+    <button class="cat-btn">汤羹</button>
+    <button class="cat-btn">冷菜</button>
+    <button class="cat-btn">早餐</button>
+    <button class="cat-btn">甜点</button>
+    <button class="cat-btn">饮品</button>
+    <button class="cat-btn">酱料</button>
+  </div>
+
+  <div class="grid">
+    <div class="card"><div class="card-img-wrap"><img class="card-img" src="https://i.postimg.cc/YqBxs0rg/IMG-0746.jpg" alt=""><span class="time-overlay">⏱ 60min</span></div><div class="card-body"><div class="card-top"><span class="card-title">红烧肉</span><span class="card-badge medium">中等</span></div><p class="card-desc">软糯入味的经典家常红烧肉，冰糖炒出琥珀糖色，小美慢炖让每一块都入口即化</p><div class="card-footer"><div class="card-tags"><span class="tm-tag tm6">TM6</span><span class="tm-tag tm7">TM7</span></div><span class="card-time">⏱ 60min</span></div></div></div>
+    <div class="card"><div class="card-img-wrap"><img class="card-img" src="https://i.postimg.cc/9XwTJsRt/IMG-0747.jpg" alt=""><span class="time-overlay">⏱ 45min</span></div><div class="card-body"><div class="card-top"><span class="card-title">水煮牛肉</span><span class="card-badge medium">中等</span></div><p class="card-desc">麻辣鲜香的川菜经典，小美轻松搞定嫩滑牛肉和浓香辣底</p><div class="card-footer"><div class="card-tags"><span class="tm-tag tm6">TM6</span><span class="tm-tag tm7">TM7</span></div><span class="card-time">⏱ 45min</span></div></div></div>
+    <div class="card"><div class="card-img-wrap"><img class="card-img" src="https://i.postimg.cc/Bvf9DSLx/IMG-0745.jpg" alt=""><span class="time-overlay">⏱ 25min</span></div><div class="card-body"><div class="card-top"><span class="card-title">奶油蘑菇浓汤</span><span class="card-badge simple">简单</span></div><p class="card-desc">鲜嫩蘑菇搭配淡奶油，口感丝滑浓郁，是全家人都喜欢的暖身汤</p><div class="card-footer"><div class="card-tags"><span class="tm-tag tm6">TM6</span><span class="tm-tag tm7">TM7</span></div><span class="card-time">⏱ 25min</span></div></div></div>
+    <div class="card"><div class="card-img-wrap"><img class="card-img" src="https://i.postimg.cc/HsPhS7CF/IMG-0744.jpg" alt=""><span class="time-overlay">⏱ 90min</span></div><div class="card-body"><div class="card-top"><span class="card-title">腌笃鲜</span><span class="card-badge hard">高级</span></div><p class="card-desc">上海经典名菜，咸肉鲜肉与春笋完美融合，汤白汁浓</p><div class="card-footer"><div class="card-tags"><span class="tm-tag tm6">TM6</span><span class="tm-tag tm7">TM7</span></div><span class="card-time">⏱ 90min</span></div></div></div>
+    <div class="card"><div class="card-img-wrap"><img class="card-img" src="https://i.postimg.cc/xT7hm7G9/IMG-0743.jpg" alt=""><span class="time-overlay">⏱ 15min</span></div><div class="card-body"><div class="card-top"><span class="card-title">麻辣牙签肉</span><span class="card-badge simple">简单</span></div><p class="card-desc">外酥里嫩，一口一个停不下来，下酒追剧必备</p><div class="card-footer"><div class="card-tags"><span class="tm-tag tm6">TM6</span><span class="tm-tag tm7">TM7</span></div><span class="card-time">⏱ 15min</span></div></div></div>
+    <div class="card"><div class="card-img-wrap"><img class="card-img" src="https://i.postimg.cc/KjkC6wYr/IMG-0731.jpg" alt=""><span class="time-overlay">⏱ 25min</span></div><div class="card-body"><div class="card-top"><span class="card-title">米布丁</span><span class="card-badge simple">简单</span></div><p class="card-desc">软fufu的米粒裹着奶香，入口丝滑不腻</p><div class="card-footer"><div class="card-tags"><span class="tm-tag tm6">TM6</span><span class="tm-tag tm7">TM7</span></div><span class="card-time">⏱ 25min</span></div></div></div>
+    <div class="card"><div class="card-img-wrap"><img class="card-img" src="https://i.postimg.cc/4ywnFcG3/IMG-0742.jpg" alt=""><span class="time-overlay">⏱ 30min</span></div><div class="card-body"><div class="card-top"><span class="card-title">番茄鸡蛋意面</span><span class="card-badge simple">简单</span></div><p class="card-desc">家常版番茄意面，酸甜开胃，简单食材做出让全家满足的一餐</p><div class="card-footer"><div class="card-tags"><span class="tm-tag tm6">TM6</span><span class="tm-tag tm7">TM7</span></div><span class="card-time">⏱ 30min</span></div></div></div>
+    <div class="card"><div class="card-img-wrap"><img class="card-img" src="https://i.postimg.cc/mr1dCWMd/IMG-0741.jpg" alt=""><span class="time-overlay">⏱ 65min</span></div><div class="card-body"><div class="card-top"><span class="card-title">玉米排骨汤</span><span class="card-badge simple">简单</span></div><p class="card-desc">甜玉米配排骨，汤色奶白，喝起来鲜甜清润</p><div class="card-footer"><div class="card-tags"><span class="tm-tag tm6">TM6</span><span class="tm-tag tm7">TM7</span></div><span class="card-time">⏱ 65min</span></div></div></div>
+    <div class="card"><div class="card-img-wrap"><img class="card-img" src="https://i.postimg.cc/J7YxbbY3/IMG-0740.jpg" alt=""><span class="time-overlay">⏱ 45min</span></div><div class="card-body"><div class="card-top"><span class="card-title">双皮奶</span><span class="card-badge medium">中等</span></div><p class="card-desc">比奶茶店还好吃的双皮奶，嫩滑到勺子插进去都是享受</p><div class="card-footer"><div class="card-tags"><span class="tm-tag tm6">TM6</span><span class="tm-tag tm7">TM7</span></div><span class="card-time">⏱ 45min</span></div></div></div>
+  </div>
+</div>
+
+<footer>
+<div class="footer-inner">
+  <div class="footer-brand">
+    <img src="https://i.postimg.cc/d3Ykkdm6/ma-shu-cai-pulogo2.png" alt="">
+    <strong>麻薯食谱</strong>
+    <p>发现 Cookidoo 之外的宝藏菜谱，小美能做的好味道都在这里。TM5 · TM6 · TM7 全兼容。</p>
+  </div>
+  <div class="footer-col">
+    <h4>分类</h4>
+    <a href="#">热菜</a>
+    <a href="#">主食</a>
+    <a href="#">汤羹</a>
+    <a href="#">甜点</a>
+  </div>
+  <div class="footer-col">
+    <h4>联系</h4>
+    <a href="#微信小店">微信小店 · 曾丽顾问</a>
+    <div class="footer-shop">
+      <div class="footer-shop-card">
+        <div class="info">
+          <div class="name">美善品小店</div>
+          <div class="sub">小美主机·配件·好物</div>
+        </div>
+        <img class="qr-img" src="https://i.postimg.cc/85nRsDpT/wei-xin-dian-pu-chu-chuang.png" alt="" onclick="openQR('weixin')">
+      </div>
+      <div class="footer-shop-card">
+        <div class="info">
+          <div class="name">曾丽顾问</div>
+          <div class="sub">海口福维克剑桥郡</div>
+        </div>
+        <img class="qr-img" src="https://i.postimg.cc/VNkrQnzK/ceng-li-wei-xin-er-wei-ma.png" alt="" onclick="openQR('zengli')">
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer-bottom">© 2026 mashuhome.com · 适用 Thermomix® 小美</div>
+</footer>
+
+<!-- QR Modal -->
+<div class="qr-modal" id="qrModal" onclick="this.classList.remove('open')">
+  <div class="qr-modal-box" onclick="event.stopPropagation()">
+    <img id="qrModalImg" src="" alt="">
+    <p id="qrModalText">微信扫一扫 或 长按保存到手机后在微信中识别</p>
+    <button onclick="document.getElementById('qrModal').classList.remove('open')">关闭</button>
+  </div>
+</div>
+
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+const qrData = {
+  weixin: { src: 'https://i.postimg.cc/85nRsDpT/wei-xin-dian-pu-chu-chuang.png', text: '微信扫一扫 · 扫码进店购买小美主机和配件' },
+  zengli: { src: 'https://i.postimg.cc/VNkrQnzK/ceng-li-wei-xin-er-wei-ma.png', text: '微信扫一扫 · 联系曾丽顾问咨询美善品' }
+}
+function openQR(key) {
+  const d = qrData[key]
+  document.getElementById('qrModalImg').src = d.src
+  document.getElementById('qrModalText').textContent = d.text
+  document.getElementById('qrModal').classList.add('open')
+}
+// Intersection Observer for card fade-in
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible') })
+}, { threshold: 0.1 })
+document.querySelectorAll('.card').forEach(c => observer.observe(c))
+
+// Back to top
+const backTop = document.getElementById('backTop')
+window.addEventListener('scroll', () => {
+  backTop.classList.toggle('show', window.scrollY > 600)
+}, { passive: true })
+</script>
+</body>
+</html>
