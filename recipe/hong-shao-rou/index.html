@@ -312,6 +312,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Roboto,"Pin
     </div>
   </div>
   <div class="tip">💡 <strong>小贴士：</strong>所有步骤均适用于小美（Thermomix）。TM6 / TM7 用户可根据说明书微调温度和时间。</div>
+
+  <div style="text-align:center;margin-top:24px">
+    <button onclick="generateShareImage()" style="padding:10px 28px;border-radius:24px;background:#4a9a4a;color:white;font-size:14px;font-weight:600;border:none;cursor:pointer;font-family:inherit;transition:all .2s" onmouseover="this.style.background='#3a8a3a'" onmouseout="this.style.background='#4a9a4a'">📸 生成分享图</button>
+    <p style="font-size:12px;color:#7a9a7a;margin-top:6px">保存图片发送给好友或朋友圈</p>
+  </div>
 </div>
 
 
@@ -405,6 +410,181 @@ function openQR(key) {
   document.getElementById('qrModalText').textContent = d.text
   document.getElementById('qrModal').classList.add('open')
 }
+
+// ── Share image generation ───────────────────────────────────────
+function wrapText(ctx, text, maxWidth) {
+  const lines = []; let line = '';
+  for (const ch of text) {
+    const test = line + ch;
+    if (ctx.measureText(test).width > maxWidth) { if (line) lines.push(line); line = ch; }
+    else { line = test; }
+  }
+  if (line) lines.push(line);
+  return lines;
+}
+function showShareImageModal(dataUrl) {
+  const old = document.getElementById('shareImgModal');
+  if (old) old.remove();
+  const overlay = document.createElement('div');
+  overlay.id = 'shareImgModal';
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.82);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.5rem;overflow-y:auto';
+  overlay.innerHTML = '<div style="background:white;border-radius:18px;padding:16px;max-width:340px;width:100%;text-align:center">' +
+    '<img src="' + dataUrl + '" style="width:100%;border-radius:10px;margin-bottom:12px" alt="菜谱分享图">' +
+    '<p style="font-size:13px;color:#666;margin-bottom:14px;line-height:1.6">长按图片保存到相册<br>再发送给微信好友或朋友圈 🍙</p>' +
+    '<button onclick="this.closest(\'#shareImgModal\').remove()" style="padding:8px 28px;border-radius:22px;background:#4a9a55;color:white;font-size:13px;border:none;cursor:pointer;font-family:inherit">关闭</button></div>';
+  overlay.addEventListener('click', function(e) { if (e.target === overlay) overlay.remove(); });
+  document.body.appendChild(overlay);
+}
+// ── Get recipe data from HTML for share image ──
+function getRecipeData() {
+  const title = document.querySelector('h1')?.textContent?.trim() || '';
+  const desc = document.querySelector('.hero-text .desc')?.textContent?.trim() || '';
+  const cat = document.querySelector('.hero-cat')?.textContent?.trim() || '';
+  const timeEl = document.querySelector('.pill:first-child');
+  const time = timeEl?.textContent?.replace(/[⏱\s分钟]/g, '')?.trim() || '';
+  const servingsEl = document.querySelector('.pill:nth-child(2)');
+  const servings = servingsEl?.textContent?.replace(/[🍽\s人份]/g, '')?.trim() || '';
+  const diffEl = document.querySelector('.pill:nth-child(3)');
+  const diffLabel = diffEl?.textContent?.trim() || '';
+  const steps = [];
+  document.querySelectorAll('.step-head strong').forEach(function(s, i) {
+    steps.push({ title: s.textContent, desc: s.closest('.step-body')?.querySelector('p')?.textContent || '' });
+  });
+  const ingredients = [];
+  document.querySelectorAll('.ingredients li').forEach(function(li) {
+    const text = li.textContent?.trim();
+    if (text) ingredients.push(text);
+  });
+  const imgEl = document.querySelector('.hero-image img');
+  const img = imgEl?.getAttribute('src') || '';
+  return { title: title, desc: desc, category: cat, time: time, servings: servings, diffLabel: diffLabel, ingredients: ingredients, steps: steps, img: img, imgEl: imgEl };
+}
+function generateShareImage() {
+  var btn = event?.target;
+  var origText = '';
+  if (btn) { origText = btn.textContent; btn.textContent = '⏳ 生成中…'; btn.disabled = true; }
+  var r = getRecipeData();
+  if (!r.title) { if (btn) { btn.textContent = origText; btn.disabled = false; } return; }
+  var slug = window.location.pathname.replace(/\/recipe\//, '').replace(/\/$/, '') || '';
+  var recipeUrl = 'https://www.mashuhome.com/recipe/' + slug;
+  var W = 750, H = 1160;
+  var canvas = document.createElement('canvas'); canvas.width = W; canvas.height = H;
+  var ctx = canvas.getContext('2d');
+  var FONT = 'system-ui,-apple-system,PingFang SC,Hiragino Sans GB,Microsoft YaHei,sans-serif';
+  function loadImg(url, cors) {
+    return new Promise(function(resolve) {
+      var img = new Image();
+      if (cors) img.crossOrigin = cors;
+      img.onload = function() { resolve(img); };
+      img.onerror = function() { resolve(null); };
+      img.src = url;
+    });
+  }
+  function draw(photoImg, qrImg) {
+    ctx.fillStyle = '#fdf8f3';
+    ctx.fillRect(0, 0, W, H);
+    var imgH = 430;
+    if (photoImg) {
+      var sa = photoImg.naturalWidth / photoImg.naturalHeight;
+      var da = W / imgH;
+      var sx = 0, sy = 0, sw = photoImg.naturalWidth, sh = photoImg.naturalHeight;
+      if (sa > da) { sw = sh * da; sx = (photoImg.naturalWidth - sw) / 2; }
+      else { sh = sw / da; sy = (photoImg.naturalHeight - sh) / 2; }
+      ctx.drawImage(photoImg, sx, sy, sw, sh, 0, 0, W, imgH);
+    } else {
+      ctx.fillStyle = '#f0ede6';
+      ctx.fillRect(0, 0, W, imgH);
+      ctx.font = '100px serif'; ctx.textAlign = 'center'; ctx.fillStyle = '#c8b89a';
+      ctx.fillText('🍽', W/2, imgH/2 + 35);
+    }
+    var grad = ctx.createLinearGradient(0, imgH-120, 0, imgH);
+    grad.addColorStop(0, 'rgba(253,248,243,0)'); grad.addColorStop(1, 'rgba(253,248,243,1)');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, imgH-120, W, 120);
+    var y = imgH + 32;
+    ctx.textAlign = 'center';
+    ctx.fillStyle = '#6aaa60';
+    ctx.font = '500 22px ' + FONT;
+    ctx.fillText((r.category || '').toUpperCase(), W/2, y + 18);
+    y += 42;
+    ctx.fillStyle = '#1a1810';
+    ctx.font = 'bold 60px ' + FONT;
+    ctx.fillText(r.title, W/2, y + 48);
+    y += 78;
+    var sepY = y + 8;
+    ctx.strokeStyle = '#c8a878'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(W/2 - 98, sepY); ctx.lineTo(W/2 - 22, sepY); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(W/2 + 22, sepY); ctx.lineTo(W/2 + 98, sepY); ctx.stroke();
+    ctx.fillStyle = '#c8a878';
+    ctx.save(); ctx.translate(W/2, sepY); ctx.rotate(Math.PI/4); ctx.fillRect(-5,-5,10,10); ctx.restore();
+    y += 29;
+    ctx.fillStyle = '#8a7a68';
+    ctx.font = '26px ' + FONT;
+    wrapText(ctx, r.desc, W-120).slice(0, 2).forEach(function(line) { ctx.fillText(line, W/2, y + 21); y += 38; });
+    y += 16;
+    ctx.strokeStyle = '#e8d8c8'; ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.moveTo(50, y); ctx.lineTo(W-50, y); ctx.stroke();
+    y += 28;
+    ctx.fillStyle = '#3a3028';
+    ctx.font = 'bold 30px ' + FONT;
+    ctx.textAlign = 'left';
+    ctx.fillText('食材', 50, y);
+    y += 44;
+    ctx.font = '25px ' + FONT;
+    var ings = r.ingredients.slice(0, 6);
+    var half = Math.ceil(ings.length / 2);
+    var rows = Math.max(half, ings.length - half);
+    for (var i = 0; i < rows; i++) {
+      var left = ings[i], right = ings[i + half];
+      if (left) { ctx.fillStyle = '#9acc88'; ctx.fillText('·', 50, y+i*38); ctx.fillStyle = '#5a5040'; ctx.fillText(left.length>14?left.slice(0,13)+'…':left, 72, y+i*38); }
+      if (right) { ctx.fillStyle = '#9acc88'; ctx.fillText('·', W/2+10, y+i*38); ctx.fillStyle = '#5a5040'; ctx.fillText(right.length>14?right.slice(0,13)+'…':right, W/2+32, y+i*38); }
+    }
+    y += rows*38 + 22;
+    ctx.strokeStyle = '#e8d8c8'; ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.moveTo(50, y); ctx.lineTo(W-50, y); ctx.stroke();
+    y += 30;
+    [{icon:'⏱',val:r.time+' 分钟'},{icon:'🍽',val:r.servings+' 人份'},{icon:'📊',val:r.diffLabel}].forEach(function(m, i) {
+      var mx = W/3*i + W/6;
+      ctx.textAlign = 'center';
+      ctx.font = '36px serif'; ctx.fillStyle = '#1a1810';
+      ctx.fillText(m.icon, mx, y+38);
+      ctx.font = '24px ' + FONT; ctx.fillStyle = '#7a6e60';
+      ctx.fillText(m.val, mx, y+72);
+    });
+    var barH = 130, barY = H - barH;
+    ctx.fillStyle = '#f0e6d8';
+    ctx.fillRect(0, barY, W, barH);
+    ctx.fillStyle = '#5a3e28';
+    ctx.font = 'bold 28px ' + FONT;
+    ctx.textAlign = 'left';
+    ctx.fillText('🍙 麻薯食谱', 44, barY + 46);
+    ctx.fillStyle = '#9a7a5a';
+    ctx.font = '21px ' + FONT;
+    ctx.fillText('mashuhome.com', 44, barY + 78);
+    ctx.fillText('长按图片扫码打开食谱', 44, barY + 110);
+    if (qrImg) {
+      var qrSize = 98, qrX = W - qrSize - 28, qrY = barY + (barH - qrSize) / 2;
+      ctx.fillStyle = 'white';
+      ctx.fillRect(qrX - 4, qrY - 4, qrSize + 8, qrSize + 8);
+      ctx.drawImage(qrImg, qrX, qrY, qrSize, qrSize);
+    }
+    if (btn) { btn.textContent = origText; btn.disabled = false; }
+    showShareImageModal(canvas.toDataURL('image/jpeg', 0.92));
+  }
+  var photoUrl = '';
+  var imgEl = document.querySelector('.hero-image img');
+  if (imgEl) {
+    var rawSrc = imgEl.getAttribute('src') || '';
+    if (rawSrc && rawSrc.startsWith('http'))
+      photoUrl = rawSrc + (rawSrc.includes('?') ? '&' : '?') + '_s=1';
+  }
+  var qrApiUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=200x200&color=2c1a0e&data=' + encodeURIComponent(recipeUrl);
+  Promise.all([
+    photoUrl ? loadImg(photoUrl, 'anonymous') : Promise.resolve(null),
+    loadImg(qrApiUrl, 'anonymous')
+  ]).then(function(arr) { draw(arr[0], arr[1]); }).catch(function() { if (btn) { btn.textContent = origText; btn.disabled = false; } });
+}
+
 </script>
 
 </body>
