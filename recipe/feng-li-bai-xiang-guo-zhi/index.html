@@ -65,72 +65,74 @@
 }</script>
 <link rel="canonical" href="https://www.mashuhome.com/recipe/feng-li-bai-xiang-guo-zhi">
 <style>
+
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;background:#f5f7f2;color:#1a2e1a;overflow-x:hidden}
 
 /* ── top bar ── */
-.top-bar{position:sticky;top:0;z-index:100;background:rgba(245,247,242,.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);padding:12px 28px;display:flex;align-items:center;max-width:1100px;margin:0 auto;border-bottom:1px solid rgba(26,58,26,.04)}
-.top-bar .back{display:flex;align-items:center;gap:6px;font-size:13px;color:#6a8a6a;text-decoration:none;padding:4px 12px;border-radius:20px;transition:all .2s}
+.top-bar{position:sticky;top:0;z-index:100;background:rgba(245,247,242,.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);padding:14px 32px;display:flex;align-items:center;max-width:1200px;margin:0 auto;border-bottom:1px solid rgba(26,58,26,.04)}
+.top-bar .back{display:flex;align-items:center;gap:8px;font-size:14px;color:#6a8a6a;text-decoration:none;padding:6px 16px;border-radius:24px;transition:all .2s}
 .top-bar .back:hover{background:rgba(26,58,26,.06);color:#1a3a1a}
 .top-bar .spacer{flex:1}
-.top-bar .logo{display:flex;align-items:center;gap:7px}
-.top-bar .logo img{width:22px;height:22px;border-radius:50%;object-fit:cover;object-position:center 20%}
-.top-bar .logo span{font-size:12px;color:#5a7a5a;font-weight:600;letter-spacing:.3px}
+.top-bar .logo{display:flex;align-items:center;gap:8px}
+.top-bar .logo img{width:24px;height:24px;border-radius:50%;object-fit:cover;object-position:center 20%}
+.top-bar .logo span{font-size:13px;color:#5a7a5a;font-weight:600;letter-spacing:.3px}
 
 /* ── HERO: horizontal split ── */
-.hero-wrap{max-width:1100px;margin:0 auto;padding:0 28px}
-.hero{display:flex;gap:40px;align-items:stretch;min-height:0;padding:36px 0 32px}
+.hero-wrap{max-width:1200px;margin:0 auto;padding:0 32px}
+.hero{display:flex;gap:48px;align-items:stretch;min-height:0;padding:48px 0 40px}
 
 /* ── Left: text ── */
 .hero-text{flex:1;display:flex;flex-direction:column;justify-content:center;padding:0}
-.hero-cat{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;letter-spacing:1px;color:#4a9a4a;background:rgba(74,154,74,.08);padding:4px 14px;border-radius:20px;margin-bottom:16px;width:fit-content}
-.hero-cat::before{content:'';width:5px;height:5px;border-radius:50%;background:#4a9a4a}
-.hero-text h1{font-size:36px;font-weight:750;color:#1a2e1a;line-height:1.15;letter-spacing:-.5px;margin-bottom:10px}
-.hero-text .desc{font-size:15px;color:#5a7a5a;line-height:1.65;margin-bottom:20px;max-width:480px}
+.hero-cat{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;letter-spacing:1px;color:#4a9a4a;background:rgba(74,154,74,.08);padding:5px 16px;border-radius:24px;margin-bottom:20px;width:fit-content}
+.hero-cat::before{content:'';width:6px;height:6px;border-radius:50%;background:#4a9a4a}
+.hero-text h1{font-size:40px;font-weight:750;color:#1a2e1a;line-height:1.2;letter-spacing:-.5px;margin-bottom:14px}
+.hero-text .desc{font-size:16px;color:#5a7a5a;line-height:1.7;margin-bottom:24px;max-width:500px}
 
 /* ── meta pills ── */
-.meta-pills{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:0}
-.pill{display:flex;align-items:center;gap:4px;font-size:12px;color:#4a6a4a;background:#e8ede8;padding:5px 13px;border-radius:20px;font-weight:500;transition:all .2s}
+.meta-pills{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:0}
+.pill{display:flex;align-items:center;gap:5px;font-size:13px;color:#4a6a4a;background:#e8ede8;padding:6px 15px;border-radius:24px;font-weight:500;transition:all .2s}
 .pill:hover{background:#d5e0d5}
 .pill.highlight{background:#1a3a1a;color:#e5f0e5}
 .pill.highlight:hover{background:#2a5a2a}
 
 /* ── Right: image ── */
-.hero-image{flex-shrink:0;width:340px;position:relative;display:flex;align-items:center}
-.hero-image .img-wrap{width:100%;border-radius:20px;overflow:hidden;box-shadow:0 8px 40px rgba(26,58,26,.12);position:relative;aspect-ratio:4/3;background:#dce8dc;transition:transform .4s cubic-bezier(.25,.46,.45,.94)}
+.hero-image{flex-shrink:0;width:360px;position:relative;display:flex;align-items:center}
+.hero-image .img-wrap{width:100%;border-radius:24px;overflow:hidden;box-shadow:0 12px 48px rgba(26,58,26,.12);position:relative;aspect-ratio:4/3;background:#dce8dc;transition:transform .4s cubic-bezier(.25,.46,.45,.94)}
 .hero-image .img-wrap:hover{transform:scale(1.02)}
 .hero-image img{width:100%;height:100%;object-fit:cover;display:block}
 /* Decorative dot behind image */
-.hero-image .deco{position:absolute;width:100%;height:100%;border-radius:20px;background:linear-gradient(135deg,rgba(74,154,74,.15),transparent 60%);top:12px;left:12px;z-index:-1;border-radius:20px}
+.hero-image .deco{position:absolute;width:100%;height:100%;border-radius:24px;background:linear-gradient(135deg,rgba(74,154,74,.15),transparent 60%);top:14px;left:14px;z-index:-1;border-radius:24px}
 
 /* ── Body ── */
-.body{max-width:1100px;margin:0 auto;padding:0 28px 60px;display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.body{max-width:1200px;margin:0 auto;padding:0 32px 80px;display:grid;grid-template-columns:1fr 1fr;gap:48px}
 
 /* ── Section ── */
-.section-title{font-size:15px;font-weight:700;color:#1a3a1a;margin-bottom:14px;padding-left:14px;border-left:3px solid #4a9a4a;letter-spacing:.3px}
+.section-title{font-size:16px;font-weight:700;color:#1a3a1a;margin-bottom:18px;padding-left:14px;border-left:3px solid #4a9a4a;letter-spacing:.3px}
 
-.ingredients{list-style:none;display:flex;flex-direction:column;gap:6px}
-.ingredients li{font-size:14px;padding:9px 14px;background:white;border-radius:10px;color:#3a5a3a;box-shadow:0 1px 3px rgba(26,58,26,.04);display:flex;align-items:center;gap:8px;transition:all .2s}
+.ingredients{list-style:none;display:flex;flex-direction:column;gap:8px}
+.ingredients li{font-size:14px;padding:11px 16px 11px 12px;background:white;border-radius:12px;color:#3a5a3a;box-shadow:0 1px 3px rgba(26,58,26,.04);display:flex;align-items:center;gap:10px;transition:all .2s}
 .ingredients li:hover{background:#f0f5f0;transform:translateX(3px)}
 .ingredients li.checked{background:#e8f5e8;text-decoration:line-through;text-decoration-color:#4a9a4a;opacity:.6}
-.ingredient-check{width:18px;height:18px;border-radius:50%;border:2px solid #4a9a4a;background:white;display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;transition:all .2s;font-size:0;color:transparent;position:relative}
-.ingredient-check::after{content:'✓';font-size:11px;font-weight:700;color:white;opacity:0;transition:opacity .2s}
+.ingredient-check{width:20px;height:20px;border-radius:50%;border:2px solid #4a9a4a;background:white;display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;transition:all .2s;font-size:0;color:transparent;position:relative}
+.ingredient-check::after{content:'✓';font-size:12px;font-weight:700;color:white;opacity:0;transition:opacity .2s}
 .ingredient-check.done{background:#4a9a4a;border-color:#4a9a4a}
 .ingredient-check.done::after{opacity:1}
 
-
-.steps{display:flex;flex-direction:column;gap:14px}
+.steps{display:flex;flex-direction:column;gap:18px}
 .step{display:flex;gap:0;transition:all .2s;align-items:flex-start}
-.step:hover{transform:translateX(3px)}
+.step:hover{transform:translateX(4px)}
 /* ── Step left column: check-btn + step-num stacked ── */
-.step-left{display:flex;flex-direction:column;align-items:center;gap:4px;padding-top:10px;width:36px;flex-shrink:0;cursor:pointer}
-.step-left .check-btn{width:22px;height:22px;border-radius:50%;border:2px solid #4a9a4a;background:white;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .3s;position:relative;font-size:0}
-.step-left .check-btn::after{content:'✓';font-size:13px;font-weight:700;color:white;opacity:0;transition:opacity .3s}
-.step-left .step-num{width:26px;height:26px;background:#4a9a4a;color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;transition:all .3s}
+.step-left{display:flex;flex-direction:column;align-items:center;gap:5px;padding-top:12px;width:40px;flex-shrink:0;cursor:pointer}
+.step-left .check-btn{width:24px;height:24px;border-radius:50%;border:2px solid #4a9a4a;background:white;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .3s;position:relative;font-size:0}
+.step-left .check-btn::after{content:'✓';font-size:14px;font-weight:700;color:white;opacity:0;transition:opacity .3s}
+.step-left .step-num{width:28px;height:28px;background:#4a9a4a;color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;transition:all .3s}
 .step:hover .step-left .step-num{background:#2a7a2a;transform:scale(1.1)}
-.step-body{flex:1;background:white;padding:13px 16px;border-radius:12px;box-shadow:0 1px 4px rgba(26,58,26,.03);transition:all .2s}
-.step:hover .step-body{box-shadow:0 4px 16px rgba(26,58,26,.06)}
-.step-head{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.step-body{flex:1;background:white;padding:15px 20px;border-radius:14px;box-shadow:0 1px 4px rgba(26,58,26,.03);transition:all .2s}
+.step:hover .step-body{box-shadow:0 6px 20px rgba(26,58,26,.08)}
+.step-head{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.step-head strong{font-size:15px}
+.step-body p{font-size:14px;line-height:1.65;color:#4a5a4a}
 .step-check{display:none}
 .step-check:checked + label .step .step-left .check-btn{background:#4a9a4a;border-color:#4a9a4a}
 .step-check:checked + label .step .step-left .check-btn::after{opacity:1}
@@ -138,11 +140,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Roboto,"Pin
 .step-check:checked + label .step .step-body{opacity:.5;text-decoration:line-through;text-decoration-color:#4a9a4a;text-decoration-thickness:1.5px}
 .step label{cursor:pointer;display:flex;width:100%}
 
-.tip{grid-column:1/-1;background:#eaf3ea;border:1px solid #c5dcc5;border-radius:14px;padding:18px 20px;font-size:13px;color:#3a5a3a;line-height:1.6}
+/* ── Step click fix for mobile ── */
+.step-left{cursor:pointer}
+
+.tip{grid-column:1/-1;background:#eaf3ea;border:1px solid #c5dcc5;border-radius:16px;padding:20px 24px;font-size:14px;color:#3a5a3a;line-height:1.7}
 .tip strong{color:#1a3a1a}
 
 /* ── Divider ── */
-.divider{max-width:1100px;margin:0 auto;padding:0 28px}
+.divider{max-width:1200px;margin:0 auto;padding:0 32px}
 .divider-line{height:1px;background:rgba(26,58,26,.06)}
 
 /* ── Bottom shop ── */
@@ -156,28 +161,29 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Roboto,"Pin
 .shop-card img{width:130px;height:130px;border-radius:12px;object-fit:cover;display:block;margin:0 auto;cursor:pointer;transition:transform .3s}
 .shop-card img:hover{transform:scale(1.04)}
 .shop-card .hint{font-size:11px;color:#9aaa9a;margin-top:8px}
-
-.footer{text-align:center;padding:32px 20px;background:#e8ede8;border-top:1px solid #d5e0d5}
-.footer p{font-size:12px;color:#7a9a7a}
-.footer .logo-row{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:6px}
-.footer .logo-row img{width:22px;height:22px;border-radius:50%;object-fit:cover;object-position:center 20%}
-.footer .logo-row span{font-size:13px;font-weight:600;color:#3a5a3a}
+@media(max-width:768px){
+  .hero-full-wrap{aspect-ratio:4/3;border-radius:16px;margin-top:20px}
+  .hero-full-overlay{background:linear-gradient(0deg,rgba(20,33,20,.8) 0%,rgba(20,33,20,.3) 60%,transparent 100%);padding:0 24px 30px;align-items:flex-end}
+  .hero-full-text h1{font-size:28px}
+  .hero-full-text p{font-size:14px}
+}
 
 @media(max-width:768px){
-  .hero{flex-direction:column-reverse;gap:20px;padding:24px 0}
+  .hero{flex-direction:column-reverse;gap:24px;padding:28px 0}
   .hero-image{width:100%;max-width:100%}
   .hero-image .img-wrap{aspect-ratio:16/9}
   .hero-image .deco{display:none}
-  .hero-text h1{font-size:26px}
+  .hero-text h1{font-size:28px}
   .hero-text .desc{font-size:14px}
   .meta-pills{flex-wrap:wrap;gap:6px}
   .pill{font-size:11px;padding:4px 11px}
-  .body{grid-template-columns:1fr;gap:20px}
+  .body{grid-template-columns:1fr;gap:24px;padding:0 16px 60px}
   .tip{grid-column:1}
-  .hero-wrap,.body,.shop-section{padding-left:16px;padding-right:16px}
+  .hero-wrap,.body{padding-left:16px;padding-right:16px}
   .top-bar{padding:10px 16px}
-  .shop-grid{flex-direction:column;align-items:center}
+  .divider{padding:0 16px}
 }
+
 </style>
 </head>
 <body>
