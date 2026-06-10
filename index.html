@@ -45,14 +45,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(244,246,242,.85);backdrop-
 .nav-links a:hover{background:rgba(20,33,20,.06);color:#142114}
 .nav-links a.active{background:#142114;color:#edf5ed}
 
-/* ── Hero ── */
-.hero{max-width:1200px;margin:0 auto;padding:60px 32px 50px;display:grid;grid-template-columns:1.2fr .8fr;gap:50px;align-items:center;position:relative;z-index:1}
-.hero-left{}
-.hero-tag{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;letter-spacing:1.2px;color:#4a7a4a;background:rgba(74,122,74,.08);padding:4px 14px;border-radius:20px;margin-bottom:20px}
-.hero-tag::before{content:'';width:5px;height:5px;border-radius:50%;background:#4a7a4a}
-.hero-left h1{font-size:52px;font-weight:750;color:#142114;line-height:1.08;letter-spacing:-1.2px;margin-bottom:16px}
-.hero-left h1 .highlight{color:#2a7a2a}
-.hero-left p{font-size:16px;color:#3d5a3d;line-height:1.65;margin-bottom:28px;max-width:460px}
+/* ── Hero full-width ── */
 .search-wrap{display:flex;background:white;border-radius:50px;padding:4px;max-width:420px;box-shadow:0 4px 24px rgba(20,33,20,.06);border:1px solid rgba(0,0,0,.04);transition:box-shadow .3s}
 .search-wrap:focus-within{box-shadow:0 6px 32px rgba(20,33,20,.1)}
 .search-wrap input{flex:1;border:none;outline:none;padding:12px 18px;font-size:14px;background:transparent;color:#142114;font-family:inherit}
@@ -65,6 +58,30 @@ nav{position:sticky;top:0;z-index:100;background:rgba(244,246,242,.85);backdrop-
 .hero-right .img-card:hover{transform:scale(1.02)}
 .hero-right .img-card img{width:100%;height:100%;object-fit:cover;display:block}
 .hero-right .img-deco{position:absolute;width:100%;height:100%;border-radius:24px;top:16px;left:16px;background:linear-gradient(135deg,rgba(74,154,74,.12),transparent 60%);z-index:-1}
+
+/* ── Hero: full-width image with left text overlay ── */
+.hero-full{max-width:1200px;margin:0 auto;padding:0 32px;position:relative;z-index:1}
+.hero-full-wrap{position:relative;border-radius:28px;overflow:hidden;aspect-ratio:21/9;box-shadow:0 20px 60px rgba(20,33,20,.12);margin-top:36px;margin-bottom:32px}
+.hero-full-wrap img{width:100%;height:100%;object-fit:cover;display:block}
+.hero-full-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(20,33,20,.75) 0%,rgba(20,33,20,.45) 45%,rgba(20,33,20,.05) 65%,transparent 85%);display:flex;align-items:center;padding:0 60px}
+.hero-full-text{max-width:480px}
+.hero-full-text .tag{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;letter-spacing:1.2px;color:#aaddaa;background:rgba(255,255,255,.1);padding:4px 14px;border-radius:20px;margin-bottom:18px;backdrop-filter:blur(4px)}
+.hero-full-text .tag::before{content:'';width:5px;height:5px;border-radius:50%;background:#aaddaa}
+.hero-full-text h1{font-size:46px;font-weight:750;color:#ffffff;line-height:1.08;letter-spacing:-1px;margin-bottom:14px}
+.hero-full-text p{font-size:16px;color:rgba(255,255,255,.7);line-height:1.6;margin-bottom:24px;max-width:420px}
+.hero-full-text .search-wrap{display:flex;background:rgba(255,255,255,.12);backdrop-filter:blur(12px);border-radius:50px;padding:4px;max-width:420px;border:1px solid rgba(255,255,255,.15);transition:all .3s}
+.hero-full-text .search-wrap:focus-within{background:rgba(255,255,255,.2)}
+.hero-full-text .search-wrap input{flex:1;border:none;outline:none;padding:12px 18px;font-size:14px;background:transparent;color:#ffffff;font-family:inherit}
+.hero-full-text .search-wrap input::placeholder{color:rgba(255,255,255,.5)}
+.hero-full-text .search-wrap button{background:#ffffff;color:#142114;border:none;border-radius:50px;padding:9px 24px;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;font-family:inherit}
+.hero-full-text .search-wrap button:hover{background:#edf5ed;transform:scale(1.02)}
+
+@media(max-width:768px){
+  .hero-full-wrap{aspect-ratio:4/3;border-radius:16px;margin-top:20px}
+  .hero-full-overlay{background:linear-gradient(0deg,rgba(20,33,20,.8) 0%,rgba(20,33,20,.3) 60%,transparent 100%);padding:0 24px 30px;align-items:flex-end}
+  .hero-full-text h1{font-size:28px}
+  .hero-full-text p{font-size:14px}
+}
 
 /* ── Stats ── */
 .stats{max-width:1200px;margin:0 auto;padding:0 32px 32px;display:flex;gap:16px;position:relative;z-index:1;flex-wrap:wrap}
@@ -210,22 +227,21 @@ body > *{animation:pageIn .5s ease-out}
 </nav>
 
 
-<div class="hero">
-  <div class="hero-left">
-    <div class="hero-tag">mashuhome.com</div>
-    <h1>家常美味<br><span class="highlight">轻松上桌</span></h1>
-    <p>发现 Cookidoo 之外的宝藏菜谱<br>小美能做 · TM6 · TM7 兼容 · 63道精选 · 持续更新</p>
-    <div class="search-wrap">
-      <input type="text" placeholder="搜索食材或菜名…">
-      <button>搜索</button>
+<div class="hero-full">
+<div class="hero-full-wrap">
+  <img src="https://www.mashuhome.com/images/recipes/hong-shao-rou.jpg" alt="家常美食" onerror="this.style.background='#dce8dc'">
+  <div class="hero-full-overlay">
+    <div class="hero-full-text">
+      <div class="tag">mashuhome.com</div>
+      <h1>家常美味<br>轻松上桌</h1>
+      <p>发现 Cookidoo 之外的宝藏菜谱<br>小美能做 · TM6 · TM7 兼容 · 63道精选 · 持续更新</p>
+      <div class="search-wrap">
+        <input type="text" placeholder="搜索食材或菜名…">
+        <button>搜索</button>
+      </div>
     </div>
   </div>
-  <div class="hero-right">
-    <div class="img-deco"></div>
-    <div class="img-card">
-      <img src="https://www.mashuhome.com/images/recipes/hong-shao-rou.jpg" alt="家常美食" onerror="this.style.background='#dce8dc'">
-    </div>
-  </div>
+</div>
 </div>
 
 
