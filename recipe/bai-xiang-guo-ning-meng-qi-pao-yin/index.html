@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta name="baidu-site-verification" content="codeva-ba49QXCYOu" />
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="baidu-site-verification" content="codeva-ba49QXCYOu" />
+
+
 <title>百香果柠檬气泡饮 · 麻薯菜谱</title>
 <meta name="description" content="清爽酸甜的夏日饮品，孩子放学回来的最佳奖励">
 <meta property="og:title" content="百香果柠檬气泡饮 · 麻薯菜谱">
 <meta property="og:image" content="https://www.mashuhome.com/images/recipes/bai-xiang-guo-ning-meng-qi-pao-yin.jpg">
 <meta property="og:url" content="https://www.mashuhome.com/recipe/bai-xiang-guo-ning-meng-qi-pao-yin">
+
+
 <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "Recipe",
@@ -57,120 +61,268 @@
 <link rel="canonical" href="https://www.mashuhome.com/recipe/bai-xiang-guo-ning-meng-qi-pao-yin">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro","Segoe UI","Helvetica Neue","Noto Sans","PingFang SC","Microsoft YaHei",sans-serif;background:#f4f6f2;color:#2a3a2a;line-height:1.7}
-.container{max-width:740px;margin:0 auto;padding:20px}
-.hero{margin:-20px -20px 20px;position:relative}
-.hero img{width:100%;height:360px;object-fit:cover;display:block;background:#dce8dc}
-.hero-overlay{position:absolute;bottom:0;left:0;right:0;height:60%;background:linear-gradient(transparent,rgba(20,40,20,.85))}
-.hero-text{position:absolute;bottom:20px;left:20px;right:20px}
-.hero-text h1{font-size:28px;font-weight:700;margin-bottom:4px;color:#ffffff}
-.hero-text .cat{font-size:12px;background:rgba(255,255,255,.2);color:#ffffff;padding:2px 12px;border-radius:20px;display:inline-block;margin-bottom:8px;backdrop-filter:blur(4px)}
-.meta-bar{display:flex;gap:16px;margin:16px 0 20px;flex-wrap:wrap}
-.meta-item{font-size:13px;color:#2a5a2a;background:#dde8dd;padding:4px 12px;border-radius:20px}
-.section{margin-bottom:24px}
-.section-title{font-size:18px;font-weight:700;margin-bottom:12px;color:#2a3a2a}
-.ingredients{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.ingredients li{font-size:14px;padding:6px 10px;background:white;border-radius:8px;color:#2a3a2a}
-.step{display:flex;gap:14px;margin-bottom:14px}
-.step-num{width:32px;height:32px;background:#2a7a2a;color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;flex-shrink:0}
-.step-body{flex:1;background:white;padding:12px 16px;border-radius:10px}
-.step-head strong{font-size:15px;color:#2a3a2a}
-.step-time{font-size:12px;color:#5a7a5a;margin-left:8px;background:#e8f0e8;padding:1px 8px;border-radius:10px}
-.step-body p{font-size:14px;color:#3d5a3d}
-.footer{text-align:center;font-size:12px;color:#6a8a6a;padding:20px 0;border-top:1px solid #c5dcc5;margin-top:20px}
-.back-link{display:inline-block;margin-bottom:16px;font-size:13px;color:#4a7a4a}
-@media(max-width:600px){.ingredients{grid-template-columns:1fr}.hero img{height:260px}.hero-text h1{font-size:22px}}
+body{font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;background:#f5f7f2;color:#1a2e1a;overflow-x:hidden}
+
+/* ── top bar ── */
+.top-bar{position:sticky;top:0;z-index:100;background:rgba(245,247,242,.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);padding:12px 28px;display:flex;align-items:center;max-width:1100px;margin:0 auto;border-bottom:1px solid rgba(26,58,26,.04)}
+.top-bar .back{display:flex;align-items:center;gap:6px;font-size:13px;color:#6a8a6a;text-decoration:none;padding:4px 12px;border-radius:20px;transition:all .2s}
+.top-bar .back:hover{background:rgba(26,58,26,.06);color:#1a3a1a}
+.top-bar .spacer{flex:1}
+.top-bar .logo{display:flex;align-items:center;gap:7px}
+.top-bar .logo img{width:22px;height:22px;border-radius:50%;object-fit:cover;object-position:center 20%}
+.top-bar .logo span{font-size:12px;color:#5a7a5a;font-weight:600;letter-spacing:.3px}
+
+/* ── HERO: horizontal split ── */
+.hero-wrap{max-width:1100px;margin:0 auto;padding:0 28px}
+.hero{display:flex;gap:40px;align-items:stretch;min-height:0;padding:36px 0 32px}
+
+/* ── Left: text ── */
+.hero-text{flex:1;display:flex;flex-direction:column;justify-content:center;padding:0}
+.hero-cat{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;letter-spacing:1px;color:#4a9a4a;background:rgba(74,154,74,.08);padding:4px 14px;border-radius:20px;margin-bottom:16px;width:fit-content}
+.hero-cat::before{content:'';width:5px;height:5px;border-radius:50%;background:#4a9a4a}
+.hero-text h1{font-size:36px;font-weight:750;color:#1a2e1a;line-height:1.15;letter-spacing:-.5px;margin-bottom:10px}
+.hero-text .desc{font-size:15px;color:#5a7a5a;line-height:1.65;margin-bottom:20px;max-width:480px}
+
+/* ── meta pills ── */
+.meta-pills{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:0}
+.pill{display:flex;align-items:center;gap:4px;font-size:12px;color:#4a6a4a;background:#e8ede8;padding:5px 13px;border-radius:20px;font-weight:500;transition:all .2s}
+.pill:hover{background:#d5e0d5}
+.pill.highlight{background:#1a3a1a;color:#e5f0e5}
+.pill.highlight:hover{background:#2a5a2a}
+
+/* ── Right: image ── */
+.hero-image{flex-shrink:0;width:340px;position:relative;display:flex;align-items:center}
+.hero-image .img-wrap{width:100%;border-radius:20px;overflow:hidden;box-shadow:0 8px 40px rgba(26,58,26,.12);position:relative;aspect-ratio:4/3;background:#dce8dc;transition:transform .4s cubic-bezier(.25,.46,.45,.94)}
+.hero-image .img-wrap:hover{transform:scale(1.02)}
+.hero-image img{width:100%;height:100%;object-fit:cover;display:block}
+/* Decorative dot behind image */
+.hero-image .deco{position:absolute;width:100%;height:100%;border-radius:20px;background:linear-gradient(135deg,rgba(74,154,74,.15),transparent 60%);top:12px;left:12px;z-index:-1;border-radius:20px}
+
+/* ── Body ── */
+.body{max-width:1100px;margin:0 auto;padding:0 28px 60px;display:grid;grid-template-columns:1fr 1fr;gap:40px}
+
+/* ── Section ── */
+.section-title{font-size:15px;font-weight:700;color:#1a3a1a;margin-bottom:14px;padding-left:14px;border-left:3px solid #4a9a4a;letter-spacing:.3px}
+
+.ingredients{list-style:none;display:flex;flex-direction:column;gap:6px}
+.ingredients li{font-size:14px;padding:9px 14px;background:white;border-radius:10px;color:#3a5a3a;box-shadow:0 1px 3px rgba(26,58,26,.04);display:flex;align-items:center;gap:8px;transition:all .2s}
+.ingredients li:hover{background:#f0f5f0;transform:translateX(3px)}
+.ingredients li::before{content:'\00b7';color:#4a9a4a;font-weight:700;font-size:18px;line-height:1}
+
+.steps{display:flex;flex-direction:column;gap:14px}
+.step{display:flex;gap:14px;transition:all .2s}
+.step:hover{transform:translateX(3px)}
+.step-num{width:30px;height:30px;background:#4a9a4a;color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;transition:all .3s;margin-top:2px}
+.step:hover .step-num{background:#2a7a2a;transform:scale(1.1)}
+.step-body{flex:1;background:white;padding:13px 16px;border-radius:12px;box-shadow:0 1px 4px rgba(26,58,26,.03);transition:all .2s}
+.step:hover .step-body{box-shadow:0 4px 16px rgba(26,58,26,.06)}
+.step-head{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.step-head .check-btn{width:20px;height:20px;border-radius:50%;border:2px solid #4a9a4a;background:white;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .3s;font-size:0;color:transparent;position:relative}
+.step-head .check-btn::after{content:'\2713';font-size:12px;font-weight:700;color:white;opacity:0;transition:opacity .3s}
+.step-check{display:none}
+.step-check:checked + .step .step-body{opacity:.5;text-decoration:line-through;text-decoration-color:#4a9a4a;text-decoration-thickness:1.5px}
+.step-check:checked + .step .step-num{background:#9ac99a}
+.step-check:checked + .step .step-head .check-btn{background:#4a9a4a;border-color:#4a9a4a}
+.step-check:checked + .step .step-head .check-btn::after{opacity:1}
+.step label{display:contents;cursor:pointer}
+
+.tip{grid-column:1/-1;background:#eaf3ea;border:1px solid #c5dcc5;border-radius:14px;padding:18px 20px;font-size:13px;color:#3a5a3a;line-height:1.6}
+.tip strong{color:#1a3a1a}
+
+/* ── Divider ── */
+.divider{max-width:1100px;margin:0 auto;padding:0 28px}
+.divider-line{height:1px;background:rgba(26,58,26,.06)}
+
+@media(max-width:768px){
+  .hero{flex-direction:column-reverse;gap:20px;padding:24px 0}
+  .hero-image{width:100%;max-width:100%}
+  .hero-image .img-wrap{aspect-ratio:16/9}
+  .hero-image .deco{display:none}
+  .hero-text h1{font-size:26px}
+  .hero-text .desc{font-size:14px}
+  .meta-pills{flex-wrap:wrap;gap:6px}
+  .pill{font-size:11px;padding:4px 11px}
+  .body{grid-template-columns:1fr;gap:20px}
+  .tip{grid-column:1}
+  .hero-wrap,.body{padding-left:16px;padding-right:16px}
+  .top-bar{padding:10px 16px}
+}
 </style>
 </head>
 <body>
-<div class="container">
-<a class="back-link" href="https://www.mashuhome.com/">← 返回麻薯食谱首页</a>
+
+<div class="top-bar">
+  <a class="back" href="https://www.mashuhome.com/">← 返回</a>
+  <div class="spacer"></div>
+  <div class="logo">
+    <img src="https://i.postimg.cc/d3Ykkdm6/ma-shu-cai-pulogo2.png" alt="">
+    <span>麻薯食谱</span>
+  </div>
+</div>
+
+<div class="hero-wrap">
 <div class="hero">
-<img src="https://www.mashuhome.com/images/recipes/bai-xiang-guo-ning-meng-qi-pao-yin.jpg" alt="百香果柠檬气泡饮" loading="eager" onerror="this.onerror=null;this.src='https://www.mashuhome.com/images/recipes/bai-xiang-guo-ning-meng-qi-pao-yin.webp'">
-<div class="hero-overlay"></div>
-<div class="hero-text"><div class="cat">饮品</div><h1>百香果柠檬气泡饮</h1></div>
+  <div class="hero-text">
+    <div class="hero-cat">饮品</div>
+    <h1>百香果柠檬气泡饮</h1>
+    <p class="desc">清爽酸甜的夏日饮品，孩子放学回来的最佳奖励</p>
+    <div class="meta-pills">
+      <span class="pill">⏱ 5分钟</span>
+      <span class="pill">🍽 2人份</span>
+      <span class="pill highlight">📊 简单</span>
+    </div>
+  </div>
+  <div class="hero-image">
+    <div class="deco"></div>
+    <div class="img-wrap">
+      <img src="https://www.mashuhome.com/images/recipes/bai-xiang-guo-ning-meng-qi-pao-yin.jpg" alt="百香果柠檬气泡饮" onerror="this.style.background='#dce8dc'">
+    </div>
+  </div>
 </div>
-<div class="meta-bar">
-<span class="meta-item">⏱ 5分钟</span>
-<span class="meta-item">🍽 2人份</span>
-<span class="meta-item">📊 简单</span>
 </div>
-<div class="section"><div class="section-title">食材清单</div><ul class="ingredients"><li>百香果 3 个，取果肉</li>
-<li>新鲜柠檬 1 个，取汁</li>
-<li>蜂蜜 2 汤匙</li>
-<li>气泡水 400ml（冰的）</li>
-<li>冰块 适量</li></ul></div>
-<div class="section"><div class="section-title">烹饪步骤</div><div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-head"><strong>制作糖浆</strong><span class="step-time">30 秒</span></div><p>百香果肉、柠檬汁和蜂蜜放入，速度 5 搅打 30 秒混合均匀。</p></div></div><div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-head"><strong>过滤（可选）</strong></div><p>若不喜欢百香果籽，可用细筛过滤，取清澈果汁。</p></div></div><div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-head"><strong>组合饮品</strong></div><p>杯中加满冰块，倒入果汁，再缓慢注入冰气泡水，不要搅拌保留气泡。</p></div></div></div>
-<div class="footer"><p>麻薯食谱 · <a href="https://www.mashuhome.com/">mashuhome.com</a> · 适用 Thermomix® 小美</p></div>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<div class="body">
+  <div>
+    <div class="section-title">食材清单</div>
+    <ul class="ingredients">
+      <li>百香果 3 个，取果肉</li>
+      <li>新鲜柠檬 1 个，取汁</li>
+      <li>蜂蜜 2 汤匙</li>
+      <li>气泡水 400ml（冰的）</li>
+      <li>冰块 适量</li>
+    </ul>
+  </div>
+  <div>
+    <div class="section-title">烹饪步骤 <span style="font-size:11px;font-weight:400;color:#7a9a7a;margin-left:6px">点击打勾完成 ✓</span></div>
+    <div class="steps">
+      <input type="checkbox" class="step-check" id="s1">
+      <label for="s1">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <div class="step-head"><span class="check-btn"></span><strong>制作糖浆</strong></div>
+          <p>百香果肉、柠檬汁和蜂蜜放入，速度 5 搅打 30 秒混合均匀。</p>
+        </div>
+      </div>
+      </label>
+      <input type="checkbox" class="step-check" id="s2">
+      <label for="s2">
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <div class="step-head"><span class="check-btn"></span><strong>过滤（可选）</strong></div>
+          <p>若不喜欢百香果籽，可用细筛过滤，取清澈果汁。</p>
+        </div>
+      </div>
+      </label>
+      <input type="checkbox" class="step-check" id="s3">
+      <label for="s3">
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <div class="step-head"><span class="check-btn"></span><strong>组合饮品</strong></div>
+          <p>杯中加满冰块，倒入果汁，再缓慢注入冰气泡水，不要搅拌保留气泡。</p>
+        </div>
+      </div>
+      </label>
+    </div>
+  </div>
+
 </div>
+
+<div class="divider"><div class="divider-line"></div></div>
+
 <!-- ── Footer ── -->
 <style>
-.footer-section{background:#142114;color:rgba(255,255,255,.7);padding:40px 20px 30px;margin-top:30px}
-.footer-inner{max-width:800px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:30px}
-.footer-brand{text-align:left}
-.footer-brand strong{color:rgba(255,255,255,.85);font-size:14px;display:block;margin-bottom:6px}
-.footer-brand p{font-size:12px;line-height:1.5;color:rgba(255,255,255,.45)}
-.footer-contact{text-align:left}
-.footer-contact h4{font-size:12px;font-weight:600;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
-.footer-shop{display:flex;gap:10px;margin-top:4px}
-.footer-shop-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:10px 12px;display:flex;align-items:center;gap:10px;flex:1;transition:all .2s;cursor:pointer}
+/* ── Footer ── */
+footer{background:#142114;color:rgba(255,255,255,.7);padding:48px 32px 36px;margin-top:20px;}
+.footer-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:40px}
+.footer-brand img{width:32px;height:32px;border-radius:50%;object-fit:cover;object-position:center 20%;margin-bottom:10px}
+.footer-brand p{font-size:13px;line-height:1.6;color:rgba(255,255,255,.5)}
+.footer-brand strong{color:rgba(255,255,255,.8);font-size:15px;display:block;margin-bottom:6px}
+.footer-col h4{font-size:12px;font-weight:600;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
+.footer-col a{display:block;font-size:13px;color:rgba(255,255,255,.6);text-decoration:none;padding:3px 0;transition:color .2s}
+.footer-col a:hover{color:rgba(255,255,255,.9)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.08);margin-top:36px;padding-top:20px;text-align:center;font-size:12px;color:rgba(255,255,255,.3)}
+.footer-shop{display:flex;gap:12px;margin-top:12px}
+.footer-shop-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:12px 14px;text-align:center;flex:1;min-width:0;transition:all .3s;display:flex;align-items:center;gap:12px}
 .footer-shop-card:hover{background:rgba(255,255,255,.1)}
-.footer-shop-card .name{font-size:12px;font-weight:600;color:rgba(255,255,255,.8)}
-.footer-shop-card .sub{font-size:10px;color:rgba(255,255,255,.35)}
-.footer-shop-card .qr-mini{width:36px;height:36px;border-radius:6px;object-fit:cover;cursor:pointer;flex-shrink:0}
-.footer-btm{text-align:center;font-size:12px;color:rgba(255,255,255,.35);padding-top:16px;margin-top:24px;border-top:1px solid rgba(255,255,255,.06)}
+.footer-shop-card .info{flex:1;text-align:left}
+.footer-shop-card .name{font-size:12px;font-weight:600;color:rgba(255,255,255,.85)}
+.footer-shop-card .sub{font-size:10px;color:rgba(255,255,255,.4);margin-top:1px}
+.footer-shop-card .qr-img{width:50px;height:50px;border-radius:8px;object-fit:cover;cursor:pointer;flex-shrink:0;transition:transform .3s}
+.footer-shop-card .qr-img:hover{transform:scale(1.1)}
 .qr-modal{display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.6);backdrop-filter:blur(8px);align-items:center;justify-content:center}
 .qr-modal.open{display:flex}
-.qr-modal-box{background:white;border-radius:16px;padding:20px;max-width:300px;width:90%;text-align:center;animation:fadeIn .3s}
+.qr-modal-box{background:white;border-radius:20px;padding:24px;max-width:340px;width:90%;text-align:center;animation:fadeIn .3s}
 @keyframes fadeIn{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}
-.qr-modal-box img{width:100%;border-radius:8px;margin-bottom:10px}
-.qr-modal-box p{font-size:12px;color:#5a7a5a;margin-bottom:10px}
-.qr-modal-box button{background:#142114;color:#edf5ed;border:none;border-radius:50px;padding:6px 24px;font-size:12px;cursor:pointer;font-family:inherit}
-@media(max-width:600px){.footer-inner{grid-template-columns:1fr;gap:20px}.footer-shop{flex-direction:column}}
+.qr-modal-box img{width:100%;border-radius:12px;margin-bottom:14px}
+.qr-modal-box p{font-size:13px;color:#5a7a5a;margin-bottom:14px;line-height:1.5}
+.qr-modal-box button{background:#142114;color:#edf5ed;border:none;border-radius:50px;padding:8px 28px;font-size:13px;cursor:pointer;font-family:inherit}
+@media(max-width:768px){
+  .footer-inner{grid-template-columns:1fr;gap:24px}
+}
 </style>
 
-<div class="footer-section">
+<footer>
 <div class="footer-inner">
   <div class="footer-brand">
+    <img src="https://i.postimg.cc/d3Ykkdm6/ma-shu-cai-pulogo2.png" alt="">
     <strong>麻薯食谱</strong>
-    <p>发现 Cookidoo 之外的宝藏菜谱，小美能做的好味道都在这里。</p>
+    <p>发现 Cookidoo 之外的宝藏菜谱，小美能做的好味道都在这里。TM5 · TM6 · TM7 全兼容。</p>
   </div>
-  <div class="footer-contact">
-    <h3 style="font-size:12px;font-weight:600;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">联系</h3>
+  <div class="footer-col">
+    <h4>分类</h4>
+    <a href="#">热菜</a>
+    <a href="#">主食</a>
+    <a href="#">汤羹</a>
+    <a href="#">甜点</a>
+  </div>
+  <div class="footer-col">
+    <h4>联系</h4>
+    <a href="https://www.mashuhome.com/">回到首页</a>
     <div class="footer-shop">
-      <div class="footer-shop-card" onclick="openQR('weixin')">
-        <div><div class="name">美善品小店</div><div class="sub">主机·配件·好物</div></div>
-        <img class="qr-mini" src="https://i.postimg.cc/85nRsDpT/wei-xin-dian-pu-chu-chuang.png" alt="">
+      <div class="footer-shop-card">
+        <div class="info">
+          <div class="name">美善品小店</div>
+          <div class="sub">小美主机·配件·好物</div>
+        </div>
+        <img class="qr-img" src="https://i.postimg.cc/85nRsDpT/wei-xin-dian-pu-chu-chuang.png" alt="" onclick="openQR('weixin')">
       </div>
-      <div class="footer-shop-card" onclick="openQR('zengli')">
-        <div><div class="name">曾丽顾问</div><div class="sub">海口福维克剑桥郡</div></div>
-        <img class="qr-mini" src="https://i.postimg.cc/VNkrQnzK/ceng-li-wei-xin-er-wei-ma.png" alt="">
+      <div class="footer-shop-card">
+        <div class="info">
+          <div class="name">曾丽顾问</div>
+          <div class="sub">海口福维克剑桥郡</div>
+        </div>
+        <img class="qr-img" src="https://i.postimg.cc/VNkrQnzK/ceng-li-wei-xin-er-wei-ma.png" alt="" onclick="openQR('zengli')">
       </div>
     </div>
   </div>
 </div>
-<div class="footer-btm">© 2026 mashuhome.com · 适用 Thermomix® 小美</div>
-</div>
+<div class="footer-bottom">&copy; 2026 mashuhome.com &middot; 适用 Thermomix&reg; 小美</div>
+</footer>
 
 <!-- QR Modal -->
-<div class="qr-modal" id="qrModalR" onclick="this.classList.remove('open')">
+<div class="qr-modal" id="qrModal" onclick="this.classList.remove('open')">
   <div class="qr-modal-box" onclick="event.stopPropagation()">
-    <img id="qrModalImgR" src="" alt="">
-    <p id="qrModalTextR">微信扫一扫</p>
-    <button onclick="document.getElementById('qrModalR').classList.remove('open')">关闭</button>
+    <img id="qrModalImg" src="" alt="">
+    <p id="qrModalText">微信扫一扫 或 长按保存到手机后在微信中识别</p>
+    <button onclick="document.getElementById('qrModal').classList.remove('open')">关闭</button>
   </div>
 </div>
 
 <script>
-const qrDataR = {
-  weixin: { src: 'https://i.postimg.cc/85nRsDpT/wei-xin-dian-pu-chu-chuang.png', text: '扫码进店购买小美主机和配件' },
-  zengli: { src: 'https://i.postimg.cc/VNkrQnzK/ceng-li-wei-xin-er-wei-ma.png', text: '扫码联系曾丽顾问咨询美善品' }
+const qrData = {
+  weixin: { src: 'https://i.postimg.cc/85nRsDpT/wei-xin-dian-pu-chu-chuang.png', text: '微信扫一扫 · 扫码进店购买小美主机和配件' },
+  zengli: { src: 'https://i.postimg.cc/VNkrQnzK/ceng-li-wei-xin-er-wei-ma.png', text: '微信扫一扫 · 联系曾丽顾问咨询美善品' }
 }
 function openQR(key) {
-  const d = qrDataR[key]
-  document.getElementById('qrModalImgR').src = d.src
-  document.getElementById('qrModalTextR').textContent = d.text
-  document.getElementById('qrModalR').classList.add('open')
+  const d = qrData[key]
+  document.getElementById('qrModalImg').src = d.src
+  document.getElementById('qrModalText').textContent = d.text
+  document.getElementById('qrModal').classList.add('open')
 }
 </script>
 

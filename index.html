@@ -127,6 +127,15 @@ nav{position:sticky;top:0;z-index:100;background:rgba(244,246,242,.85);backdrop-
 .tm-tag.tm7{background:#142114;color:#7ddb8a}
 .card-time{font-size:12px;color:#6a8a6a}
 
+
+/* ── Pagination ── */
+.pagination{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:28px;flex-wrap:wrap}
+.page-btn,.page-num{padding:7px 16px;border-radius:20px;font-size:13px;font-weight:500;border:none;cursor:pointer;transition:all .2s;font-family:inherit;background:white;color:#3d5a3d;box-shadow:0 1px 3px rgba(0,0,0,.03);border:1px solid rgba(0,0,0,.03)}
+.page-btn:hover,.page-num:hover{background:#e8f0e8;color:#2a3a2a}
+.page-btn:disabled{opacity:.35;cursor:default;background:#f0f2ee;color:#9aaa9a}
+.page-num.active{background:#142114;color:#edf5ed;border-color:#142114}
+.recipe-count{font-size:12px;color:#6a8a6a;margin-bottom:14px;text-align:center}
+
 /* ── Footer ── */
 footer{background:#142114;color:rgba(255,255,255,.7);padding:48px 32px 36px;margin-top:20px;position:relative;z-index:1}
 .footer-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:40px}
@@ -588,7 +597,7 @@ function renderListPage() {
   const p = paged();
   return `
     ${renderHotRanking()}
-    <p class="recipe-count" style="font-size:12px;color:#9aaa9a;margin-bottom:14px">${f.length} ${state.lang==='en'?'recipes':'道食谱'}${f.length > 0 ? (state.lang==='en' ? ' · Page '+ state.page +' / '+ Math.ceil(f.length/PER_PAGE) : ' · 第 '+ state.page +' / '+ Math.ceil(f.length/PER_PAGE) +' 页') : ''}</p>
+    <p class="recipe-count" class="recipe-count">${f.length} ${state.lang==='en'?'recipes':'道食谱'}${f.length > 0 ? (state.lang==='en' ? ' · Page '+ state.page +' / '+ Math.ceil(f.length/PER_PAGE) : ' · 第 '+ state.page +' / '+ Math.ceil(f.length/PER_PAGE) +' 页') : ''}</p>
     ${p.length === 0
       ? `<div style="text-align:center;padding:5rem 0;color:#9aaa9a;font-size:15px">${state.lang==='en'?'No matching recipes found. Try a different keyword.':'暂无相关食谱，换个关键词试试吧～'}</div>`
       : `<div class="grid">${p.map(renderRecipeCard).join('')}</div>`}
