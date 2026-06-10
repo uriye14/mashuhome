@@ -59,21 +59,23 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Roboto,"Pin
 .ingredient-check.done::after{opacity:1}
 
 .steps{display:flex;flex-direction:column;gap:14px}
-.step{display:flex;gap:14px;transition:all .2s}
+.step{display:flex;gap:0;transition:all .2s;align-items:flex-start}
 .step:hover{transform:translateX(3px)}
-.step-num{width:30px;height:30px;background:#4a9a4a;color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;transition:all .3s;margin-top:2px}
-.step:hover .step-num{background:#2a7a2a;transform:scale(1.1)}
+/* ── Step left column: check-btn + step-num stacked ── */
+.step-left{display:flex;flex-direction:column;align-items:center;gap:4px;padding-top:10px;width:36px;flex-shrink:0;cursor:pointer}
+.step-left .check-btn{width:22px;height:22px;border-radius:50%;border:2px solid #4a9a4a;background:white;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .3s;position:relative;font-size:0}
+.step-left .check-btn::after{content:'✓';font-size:13px;font-weight:700;color:white;opacity:0;transition:opacity .3s}
+.step-left .step-num{width:26px;height:26px;background:#4a9a4a;color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;transition:all .3s}
+.step:hover .step-left .step-num{background:#2a7a2a;transform:scale(1.1)}
 .step-body{flex:1;background:white;padding:13px 16px;border-radius:12px;box-shadow:0 1px 4px rgba(26,58,26,.03);transition:all .2s}
 .step:hover .step-body{box-shadow:0 4px 16px rgba(26,58,26,.06)}
 .step-head{display:flex;align-items:center;gap:8px;margin-bottom:4px}
-.step-head .check-btn{width:20px;height:20px;border-radius:50%;border:2px solid #4a9a4a;background:white;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .3s;font-size:0;color:transparent;position:relative}
-.step-head .check-btn::after{content:'✓';font-size:12px;font-weight:700;color:white;opacity:0;transition:opacity .3s}
 .step-check{display:none}
-.step-check:checked + .step .step-body{opacity:.5;text-decoration:line-through;text-decoration-color:#4a9a4a;text-decoration-thickness:1.5px}
-.step-check:checked + .step .step-num{background:#9ac99a}
-.step-check:checked + .step .step-head .check-btn{background:#4a9a4a;border-color:#4a9a4a}
-.step-check:checked + .step .step-head .check-btn::after{opacity:1}
-.step label{display:contents;cursor:pointer}
+.step-check:checked + label .step .step-left .check-btn{background:#4a9a4a;border-color:#4a9a4a}
+.step-check:checked + label .step .step-left .check-btn::after{opacity:1}
+.step-check:checked + label .step .step-left .step-num{background:#9ac99a}
+.step-check:checked + label .step .step-body{opacity:.5;text-decoration:line-through;text-decoration-color:#4a9a4a;text-decoration-thickness:1.5px}
+.step label{cursor:pointer;display:flex;width:100%}
 
 .tip{grid-column:1/-1;background:#eaf3ea;border:1px solid #c5dcc5;border-radius:14px;padding:18px 20px;font-size:13px;color:#3a5a3a;line-height:1.6}
 .tip strong{color:#1a3a1a}
@@ -172,9 +174,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Roboto,"Pin
       <input type="checkbox" class="step-check" id="s1">
       <label for="s1">
       <div class="step">
-        <div class="step-num">1</div>
+        <div class="step-left">
+          <span class="check-btn"></span>
+          <div class="step-num">1</div>
+        </div>
         <div class="step-body">
-          <div class="step-head"><span class="check-btn"></span><strong>五花肉焯水</strong></div>
+          <div class="step-head"><strong>五花肉焯水</strong></div>
           <p>五花肉冷水下锅，大火煮开后撇净浮沫，捞出冲洗干净备用。</p>
         </div>
       </div>
@@ -182,9 +187,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Roboto,"Pin
       <input type="checkbox" class="step-check" id="s2">
       <label for="s2">
       <div class="step">
-        <div class="step-num">2</div>
+        <div class="step-left">
+          <span class="check-btn"></span>
+          <div class="step-num">2</div>
+        </div>
         <div class="step-body">
-          <div class="step-head"><span class="check-btn"></span><strong>炒糖色</strong><span class="time">5 分钟</span></div>
+          <div class="step-head"><strong>炒糖色</strong><span class="time">5 分钟</span></div>
           <p>小美加少许油和冰糖，100°C 速度 1，炒至深琥珀色。</p>
         </div>
       </div>
@@ -192,9 +200,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Roboto,"Pin
       <input type="checkbox" class="step-check" id="s3">
       <label for="s3">
       <div class="step">
-        <div class="step-num">3</div>
+        <div class="step-left">
+          <span class="check-btn"></span>
+          <div class="step-num">3</div>
+        </div>
         <div class="step-body">
-          <div class="step-head"><span class="check-btn"></span><strong>翻炒上色</strong><span class="time">3 分钟</span></div>
+          <div class="step-head"><strong>翻炒上色</strong><span class="time">3 分钟</span></div>
           <p>放入五花肉，100°C 速度小勺反转，翻炒裹匀糖色。</p>
         </div>
       </div>
@@ -202,9 +213,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Roboto,"Pin
       <input type="checkbox" class="step-check" id="s4">
       <label for="s4">
       <div class="step">
-        <div class="step-num">4</div>
+        <div class="step-left">
+          <span class="check-btn"></span>
+          <div class="step-num">4</div>
+        </div>
         <div class="step-body">
-          <div class="step-head"><span class="check-btn"></span><strong>加料慢炖</strong><span class="time">45 分钟</span></div>
+          <div class="step-head"><strong>加料慢炖</strong><span class="time">45 分钟</span></div>
           <p>倒入生抽、老抽、料酒、姜片、葱段、八角和清水，100°C 慢炖。</p>
         </div>
       </div>
@@ -212,9 +226,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Roboto,"Pin
       <input type="checkbox" class="step-check" id="s5">
       <label for="s5">
       <div class="step">
-        <div class="step-num">5</div>
+        <div class="step-left">
+          <span class="check-btn"></span>
+          <div class="step-num">5</div>
+        </div>
         <div class="step-body">
-          <div class="step-head"><span class="check-btn"></span><strong>收汁装盘</strong><span class="time">7 分钟</span></div>
+          <div class="step-head"><strong>收汁装盘</strong><span class="time">7 分钟</span></div>
           <p>取出葱姜八角，120°C 收汁，装盘撒葱花。</p>
         </div>
       </div>
