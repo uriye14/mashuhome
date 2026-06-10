@@ -111,7 +111,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Roboto,"Pin
 .ingredients{list-style:none;display:flex;flex-direction:column;gap:6px}
 .ingredients li{font-size:14px;padding:9px 14px;background:white;border-radius:10px;color:#3a5a3a;box-shadow:0 1px 3px rgba(26,58,26,.04);display:flex;align-items:center;gap:8px;transition:all .2s}
 .ingredients li:hover{background:#f0f5f0;transform:translateX(3px)}
-.ingredients li::before{content:'·';color:#4a9a4a;font-weight:700;font-size:18px;line-height:1}
+.ingredients li.checked{background:#e8f5e8;text-decoration:line-through;text-decoration-color:#4a9a4a;opacity:.6}
+.ingredient-check{width:18px;height:18px;border-radius:50%;border:2px solid #4a9a4a;background:white;display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;transition:all .2s;font-size:0;color:transparent;position:relative}
+.ingredient-check::after{content:'✓';font-size:11px;font-weight:700;color:white;opacity:0;transition:opacity .2s}
+.ingredient-check.done{background:#4a9a4a;border-color:#4a9a4a}
+.ingredient-check.done::after{opacity:1}
+
 
 .steps{display:flex;flex-direction:column;gap:14px}
 .step{display:flex;gap:14px;transition:all .2s}
@@ -211,19 +216,19 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Roboto,"Pin
   <div>
     <div class="section-title">食材清单</div>
     <ul class="ingredients">
-      <li>整鸡 1 只（约 2 斤），去头去爪</li>
-      <li>蚝油 160g</li>
-      <li>生抽 80g</li>
-      <li>老抽 10g</li>
-      <li>冰糖 30g</li>
-      <li>水 200g</li>
-      <li>米酒 2 汤匙</li>
-      <li>姜 5 片</li>
-      <li>葱 3 根，挽成结</li>
-      <li>桂皮 1 小块</li>
-      <li>香叶 2 片</li>
-      <li>八角 2 个</li>
-      <li>麻油 适量</li>
+      <li><span class="ingredient-check" onclick="this.classList.toggle('done');this.parentElement.classList.toggle('checked')"></span>整鸡 1 只（约 2 斤），去头去爪</li>
+      <li><span class="ingredient-check" onclick="this.classList.toggle('done');this.parentElement.classList.toggle('checked')"></span>蚝油 160g</li>
+      <li><span class="ingredient-check" onclick="this.classList.toggle('done');this.parentElement.classList.toggle('checked')"></span>生抽 80g</li>
+      <li><span class="ingredient-check" onclick="this.classList.toggle('done');this.parentElement.classList.toggle('checked')"></span>老抽 10g</li>
+      <li><span class="ingredient-check" onclick="this.classList.toggle('done');this.parentElement.classList.toggle('checked')"></span>冰糖 30g</li>
+      <li><span class="ingredient-check" onclick="this.classList.toggle('done');this.parentElement.classList.toggle('checked')"></span>水 200g</li>
+      <li><span class="ingredient-check" onclick="this.classList.toggle('done');this.parentElement.classList.toggle('checked')"></span>米酒 2 汤匙</li>
+      <li><span class="ingredient-check" onclick="this.classList.toggle('done');this.parentElement.classList.toggle('checked')"></span>姜 5 片</li>
+      <li><span class="ingredient-check" onclick="this.classList.toggle('done');this.parentElement.classList.toggle('checked')"></span>葱 3 根，挽成结</li>
+      <li><span class="ingredient-check" onclick="this.classList.toggle('done');this.parentElement.classList.toggle('checked')"></span>桂皮 1 小块</li>
+      <li><span class="ingredient-check" onclick="this.classList.toggle('done');this.parentElement.classList.toggle('checked')"></span>香叶 2 片</li>
+      <li><span class="ingredient-check" onclick="this.classList.toggle('done');this.parentElement.classList.toggle('checked')"></span>八角 2 个</li>
+      <li><span class="ingredient-check" onclick="this.classList.toggle('done');this.parentElement.classList.toggle('checked')"></span>麻油 适量</li>
     </ul>
   </div>
   <div>

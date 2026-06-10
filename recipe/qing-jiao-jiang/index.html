@@ -116,7 +116,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Roboto,"Pin
 .ingredients{list-style:none;display:flex;flex-direction:column;gap:6px}
 .ingredients li{font-size:14px;padding:9px 14px;background:white;border-radius:10px;color:#3a5a3a;box-shadow:0 1px 3px rgba(26,58,26,.04);display:flex;align-items:center;gap:8px;transition:all .2s}
 .ingredients li:hover{background:#f0f5f0;transform:translateX(3px)}
-.ingredients li::before{content:'·';color:#4a9a4a;font-weight:700;font-size:18px;line-height:1}
+.ingredients li.checked{background:#e8f5e8;text-decoration:line-through;text-decoration-color:#4a9a4a;opacity:.6}
+.ingredient-check{width:18px;height:18px;border-radius:50%;border:2px solid #4a9a4a;background:white;display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;transition:all .2s;font-size:0;color:transparent;position:relative}
+.ingredient-check::after{content:'✓';font-size:11px;font-weight:700;color:white;opacity:0;transition:opacity .2s}
+.ingredient-check.done{background:#4a9a4a;border-color:#4a9a4a}
+.ingredient-check.done::after{opacity:1}
+
 
 .steps{display:flex;flex-direction:column;gap:14px}
 .step{display:flex;gap:14px;transition:all .2s}
@@ -216,19 +221,19 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Roboto,"Pin
   <div>
     <div class="section-title">食材清单</div>
     <ul class="ingredients">
-      <li>二荆条 50g</li>
-      <li>姜 10g</li>
-      <li>蒜 10g</li>
-      <li>生抽 20g</li>
-      <li>油 50g</li>
-      <li>豆豉 20g</li>
-      <li>甜面酱 5g</li>
-      <li>白糖 5g</li>
-      <li>盐 1/2 茶匙</li>
-      <li>花椒面 1/4 茶匙</li>
-      <li>鸡精 1/2 茶匙</li>
-      <li>醋 10g</li>
-      <li>芹菜末 20g</li>
+      <li><span class="ingredient-check" onclick="this.classList.toggle('done');this.parentElement.classList.toggle('checked')"></span>二荆条 50g</li>
+      <li><span class="ingredient-check" onclick="this.classList.toggle('done');this.parentElement.classList.toggle('checked')"></span>姜 10g</li>
+      <li><span class="ingredient-check" onclick="this.classList.toggle('done');this.parentElement.classList.toggle('checked')"></span>蒜 10g</li>
+      <li><span class="ingredient-check" onclick="this.classList.toggle('done');this.parentElement.classList.toggle('checked')"></span>生抽 20g</li>
+      <li><span class="ingredient-check" onclick="this.classList.toggle('done');this.parentElement.classList.toggle('checked')"></span>油 50g</li>
+      <li><span class="ingredient-check" onclick="this.classList.toggle('done');this.parentElement.classList.toggle('checked')"></span>豆豉 20g</li>
+      <li><span class="ingredient-check" onclick="this.classList.toggle('done');this.parentElement.classList.toggle('checked')"></span>甜面酱 5g</li>
+      <li><span class="ingredient-check" onclick="this.classList.toggle('done');this.parentElement.classList.toggle('checked')"></span>白糖 5g</li>
+      <li><span class="ingredient-check" onclick="this.classList.toggle('done');this.parentElement.classList.toggle('checked')"></span>盐 1/2 茶匙</li>
+      <li><span class="ingredient-check" onclick="this.classList.toggle('done');this.parentElement.classList.toggle('checked')"></span>花椒面 1/4 茶匙</li>
+      <li><span class="ingredient-check" onclick="this.classList.toggle('done');this.parentElement.classList.toggle('checked')"></span>鸡精 1/2 茶匙</li>
+      <li><span class="ingredient-check" onclick="this.classList.toggle('done');this.parentElement.classList.toggle('checked')"></span>醋 10g</li>
+      <li><span class="ingredient-check" onclick="this.classList.toggle('done');this.parentElement.classList.toggle('checked')"></span>芹菜末 20g</li>
     </ul>
   </div>
   <div>
