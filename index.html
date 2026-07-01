@@ -252,7 +252,7 @@ body > *{animation:pageIn .5s ease-out}
 
 <h2 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">菜谱概览</h2>
 <div class="stats">
-  <div class="stat-card"><div class="num">63<span>道</span></div><div class="label">精选菜谱</div></div>
+  <div class="stat-card"><div class="num">67<span>道</span></div><div class="label">精选菜谱</div></div>
   <div class="stat-card"><div class="num">8<span>类</span></div><div class="label">菜品分类</div></div>
   <div class="stat-card"><div class="num">100%<span></span></div><div class="label">小美兼容</div></div>
   <div class="stat-card"><div class="num">∞<span></span></div><div class="label">持续更新</div></div>
@@ -327,7 +327,6 @@ body > *{animation:pageIn .5s ease-out}
 
 <button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
-<script src="/recipes-en.js"></script>
 <script>
 // ── Placeholder（图片加载失败时显示）────────────────────────────
 const PLACEHOLDER = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='380' viewBox='0 0 600 380'%3E%3Crect width='600' height='380' fill='%23f0ede6'/%3E%3Ctext x='300' y='200' text-anchor='middle' font-size='48' fill='%23c8b89a'%3E🍽%3C/text%3E%3C/svg%3E";
@@ -358,8 +357,9 @@ function translateTime(t) {
 }
 
 // ── Language helper ──────────────────────────────────────────────
+const ENABLE_EN = false;
 function getLang(recipe) {
-  const en = (state.lang === 'en' && typeof recipesEn !== 'undefined') ? recipesEn[recipe.id] : null;
+  const en = (ENABLE_EN && state.lang === 'en' && typeof recipesEn !== 'undefined') ? recipesEn[recipe.id] : null;
   return {
     title: en ? en.title : recipe.title,
     category: en ? en.category : recipe.category,
@@ -537,10 +537,6 @@ function renderHeader() {
           </button>
           ${state.catOpen ? `<div class="cat-drop-menu">${CATS.map(c => `<div class="cat-drop-item${state.category===c?' active':''}" data-action="category" data-val="${c}">${isEn ? (CATS_EN[c]||c) : c}</div>`).join('')}</div>` : ''}
         </div>
-        <button class="lang-toggle" data-action="lang-toggle">
-          <span class="${!isEn ? 'active' : ''}">中文</span>
-          <span class="${isEn ? 'active' : ''}">EN</span>
-        </button>
       </div>
     </div>
   </div>`;
@@ -646,10 +642,6 @@ function renderDetailPage() {
         <img src="https://i.postimg.cc/d3Ykkdm6/ma-shu-cai-pulogo2.png" alt="麻薯食谱" style="width:26px;height:26px;border-radius:50%;object-fit:cover;object-position:center 20%">
         <span style="font-size:13px;color:#3a5a30;font-weight:700">麻薯食谱</span>
       </div>
-      <button class="lang-toggle" data-action="lang-toggle" title="${isEn ? 'Switch to Chinese' : '切换英文'}">
-        <span class="${!isEn ? 'active' : ''}">中文</span>
-        <span class="${isEn ? 'active' : ''}">EN</span>
-      </button>
     </div>
   </div>
   <div class="detail-hero">
@@ -836,6 +828,7 @@ document.addEventListener('click', e => {
   }
 
   if (action === 'lang-toggle') {
+    if (!ENABLE_EN) return;
     state.lang = state.lang === 'zh' ? 'en' : 'zh';
     window.scrollTo(0, 0);
     render();
