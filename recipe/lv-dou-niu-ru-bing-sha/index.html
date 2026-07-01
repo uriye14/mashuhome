@@ -15,7 +15,7 @@
   <meta property="og:url" content="https://www.mashuhome.com/recipe/lv-dou-niu-ru-bing-sha" />
   <meta property="og:locale" content="zh_CN" />
   <meta property="og:site_name" content="麻薯菜谱" />
-  <script>fetch("/").then(function(r){return r.text()}).then(function(h){document.open();document.write(h);document.close()});</script>
+  <script>fetch("/").then(function(r){return r.text()}).then(function(h){h=h.replace("<head>","<head><base href=\"/\">");document.open();document.write(h);document.close()});</script>
 </head>
 <body>
   <p>正在加载：<a href="https://www.mashuhome.com/recipe/lv-dou-niu-ru-bing-sha">绿豆牛乳冰沙</a></p>
