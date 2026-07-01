@@ -153,6 +153,85 @@ nav{position:sticky;top:0;z-index:100;background:rgba(244,246,242,.85);backdrop-
 .page-num.active{background:#142114;color:#edf5ed;border-color:#142114}
 .recipe-count{font-size:12px;color:#6a8a6a;margin-bottom:14px;text-align:center}
 
+/* ── Recipe detail redesign ── */
+body.detail-mode .hero-full,
+body.detail-mode .stats,
+body.detail-mode .main > .cat-bar{display:none}
+body.detail-mode .main{max-width:1180px;padding:28px 32px 80px}
+.recipe-page{max-width:1120px;margin:0 auto;color:#172417}
+.recipe-topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px}
+.recipe-back{display:inline-flex;align-items:center;gap:7px;border:none;background:#ffffff;color:#365536;border-radius:999px;padding:10px 16px;font-size:14px;font-weight:650;box-shadow:0 1px 5px rgba(20,33,20,.06);cursor:pointer;font-family:inherit}
+.recipe-brand{display:flex;align-items:center;gap:8px;color:#3a5a30;font-size:13px;font-weight:750}
+.recipe-brand img{width:28px;height:28px;border-radius:50%;object-fit:cover;object-position:center 20%}
+.recipe-shell{position:relative;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(320px,.9fr);gap:30px;align-items:stretch;background:linear-gradient(135deg,#ffffff 0%,#f7faf2 58%,#efe7d8 100%);border:1px solid rgba(20,33,20,.07);border-radius:8px;padding:26px;box-shadow:0 18px 54px rgba(20,33,20,.09);overflow:hidden}
+.recipe-shell::before{content:'RECIPE';position:absolute;right:24px;top:16px;font-size:74px;line-height:1;font-weight:900;color:rgba(20,33,20,.045);letter-spacing:0;pointer-events:none}
+.recipe-summary{position:relative;z-index:1;display:flex;flex-direction:column;justify-content:center;padding:10px 4px 10px 8px}
+.recipe-kicker{display:inline-flex;align-items:center;width:max-content;font-size:13px;color:#365d35;font-weight:800;margin-bottom:15px;background:#eaf3e5;border:1px solid #d9ead1;border-radius:999px;padding:6px 13px}
+.recipe-title-new{font-size:48px;line-height:1.08;color:#142114;font-weight:850;margin:0 0 16px;letter-spacing:0}
+.recipe-desc-new{font-size:17px;line-height:1.75;color:#526b52;margin-bottom:24px;max-width:560px}
+.recipe-meta-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:18px 0}
+.recipe-meta-box{background:rgba(255,255,255,.78);border:1px solid rgba(20,33,20,.06);border-radius:8px;padding:14px 12px;backdrop-filter:blur(8px)}
+.recipe-meta-box strong{display:block;font-size:18px;color:#142114;margin-bottom:4px}
+.recipe-meta-box span{font-size:12px;color:#6d836b}
+.recipe-models{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:16px;padding-top:18px;border-top:1px solid rgba(20,33,20,.09)}
+.recipe-models .tm-tags{display:flex;gap:12px;flex-wrap:wrap}
+.recipe-models .tm-tag{padding:5px 12px;font-size:11px}
+.recipe-models-label{font-size:12px;color:#778a75;font-weight:650}
+.recipe-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.recipe-share-btn{border:none;background:#142114;color:#edf5ed;border-radius:999px;padding:11px 18px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit}
+.recipe-photo-card{position:relative;z-index:1;background:#ffffff;border:1px solid rgba(20,33,20,.06);border-radius:8px;overflow:hidden;box-shadow:0 14px 38px rgba(20,33,20,.12);margin:0}
+.recipe-photo-card img{width:100%;height:100%;min-height:330px;aspect-ratio:4/3;object-fit:cover;display:block;background:#dce8dc}
+.recipe-body-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:30px;margin-top:30px;align-items:start}
+.recipe-panel{background:#ffffff;border:1px solid rgba(20,33,20,.06);border-radius:8px;padding:24px;box-shadow:0 8px 28px rgba(20,33,20,.055)}
+.recipe-panel-title{font-size:20px;color:#142114;font-weight:800;margin-bottom:18px;display:flex;align-items:center;gap:10px}
+.recipe-panel-title::before{content:'';width:4px;height:20px;border-radius:2px;background:#4a9a55}
+.recipe-ingredients{display:grid;gap:10px}
+.recipe-ing{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid #edf1ea;font-size:15px;line-height:1.55;color:#314731;cursor:pointer}
+.recipe-ing:last-child{border-bottom:none}
+.recipe-check-input{position:absolute;opacity:0;pointer-events:none}
+.recipe-check{width:20px;height:20px;border-radius:6px;border:1.5px solid #a9c69d;background:#f8fbf5;display:flex;align-items:center;justify-content:center;flex:0 0 auto;margin-top:2px;color:transparent;font-size:14px;font-weight:900;transition:all .2s}
+.recipe-check-input:checked + .recipe-check{background:#4a9a55;border-color:#4a9a55;color:#fff}
+.recipe-check-input:checked + .recipe-check + span{text-decoration:line-through;color:#8aa08a}
+.recipe-steps{display:grid;gap:16px}
+.recipe-step{display:grid;grid-template-columns:38px minmax(0,1fr);gap:14px;align-items:start}
+.recipe-step-num{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#142114;color:#edf5ed;font-size:15px;font-weight:800;margin-top:2px;cursor:pointer;transition:all .2s}
+.recipe-step-num:hover{transform:scale(1.04);background:#2b4d2b}
+.recipe-step-card{border:1px solid #edf1ea;border-radius:8px;padding:16px 18px;background:#fbfdf9}
+.recipe-step-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:8px}
+.recipe-step-name{font-size:17px;font-weight:800;color:#172417}
+.recipe-step-time{font-size:12px;color:#4a7a45;background:#eaf5e7;border-radius:999px;padding:4px 10px;white-space:nowrap}
+.recipe-step-desc{font-size:15px;line-height:1.8;color:#405640}
+.recipe-check-input:checked + .recipe-step-num{background:#8d4d37;color:#fff}
+.recipe-check-input:checked + .recipe-step-num + .recipe-step-card{opacity:.62}
+.recipe-check-input:checked + .recipe-step-num + .recipe-step-card .recipe-step-name,
+.recipe-check-input:checked + .recipe-step-num + .recipe-step-card .recipe-step-desc{text-decoration:line-through;color:#879887}
+.recipe-note{margin-top:18px;background:#f6f1e7;border:1px solid #eadcc6;border-radius:8px;padding:16px 18px;color:#654f2c;font-size:14px;line-height:1.7}
+
+@media(max-width:900px){
+  body.detail-mode .main{padding:18px 16px 64px}
+  .recipe-shell,.recipe-body-grid{grid-template-columns:1fr}
+  .recipe-shell{padding:18px}
+  .recipe-summary{padding:4px}
+  .recipe-title-new{font-size:34px}
+  .recipe-meta-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .recipe-photo-card{order:-1}
+}
+
+@media(max-width:560px){
+  .recipe-topbar{margin-bottom:14px}
+  .recipe-brand span{display:none}
+  .recipe-shell{padding:14px}
+  .recipe-summary,.recipe-panel{padding:20px}
+  .recipe-title-new{font-size:30px}
+  .recipe-desc-new{font-size:15px}
+  .recipe-meta-grid{grid-template-columns:1fr}
+  .recipe-step{grid-template-columns:32px minmax(0,1fr);gap:10px}
+  .recipe-step-num{width:32px;height:32px;font-size:13px}
+  .recipe-step-card{padding:14px}
+  .recipe-step-head{display:block}
+  .recipe-step-time{display:inline-block;margin-top:8px}
+}
+
 /* ── Footer ── */
 footer{background:#142114;color:rgba(255,255,255,.7);padding:48px 32px 36px;margin-top:20px;position:relative;z-index:1}
 .footer-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:40px}
@@ -630,66 +709,77 @@ function renderDetailPage() {
   const r = state.selected;
   if (!r) return '';
   const d = getLang(r);
-  const isEn = state.lang === 'en';
   return `
-  <div class="detail-nav">
-    <div class="detail-nav-inner">
-      <button class="back-btn" data-action="back">
+  <article class="recipe-page">
+    <div class="recipe-topbar">
+      <button class="recipe-back" data-action="back">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-        ${isEn ? 'Back' : '返回食谱'}
+        返回食谱
       </button>
-      <div style="display:flex;align-items:center;gap:7px">
-        <img src="https://i.postimg.cc/d3Ykkdm6/ma-shu-cai-pulogo2.png" alt="麻薯食谱" style="width:26px;height:26px;border-radius:50%;object-fit:cover;object-position:center 20%">
-        <span style="font-size:13px;color:#3a5a30;font-weight:700">麻薯食谱</span>
-      </div>
-    </div>
-  </div>
-  <div class="detail-hero">
-    <img src="${recipeImgSrc(r.img)}" alt="${d.title}" onload="this.classList.add('loaded')" onerror="this.classList.add('loaded');this.src=PLACEHOLDER">
-  </div>
-  <div class="detail-content">
-    <div class="detail-title-area">
-      <div class="detail-cat">${d.category}</div>
-      <h1 class="detail-title">${d.title}</h1>
-    </div>
-    <p class="detail-desc">${d.desc}</p>
-    <div style="text-align:center;margin-bottom:18px">
-      <button class="share-img-btn" data-action="gen-share-img">📸 生成分享图</button>
-    </div>
-    <div class="detail-meta">
-      <div class="meta-item"><div class="meta-icon">⏱</div><div class="meta-label">${r.time} ${isEn ? 'min' : '分钟'}</div></div>
-      <div class="meta-item"><div class="meta-icon">🍽</div><div class="meta-label">${r.servings} ${isEn ? 'servings' : '人份'}</div></div>
-      <div class="meta-item"><div class="meta-icon">📊</div><div class="meta-label"><span style="font-size:11px;background:${DIFF[d.diffKey].bg};color:${DIFF[d.diffKey].text};padding:2px 10px;border-radius:18px">${d.diffLabel}</span></div></div>
-    </div>
-    <div class="detail-tm">
-      <span class="detail-tm-label">${isEn ? 'Compatible Models' : '适用机型'}</span>
-      ${renderTMTags(r.tm)}
-    </div>
-
-    <div class="section-card">
-      <div class="section-title"><span class="section-bar"></span>${isEn ? 'Ingredients' : '食材清单'}</div>
-      <div class="ingredient-grid">
-        ${d.ingredients.map(ing => `<div class="ingredient-item"><span class="ingredient-dot">·</span>${ing}</div>`).join('')}
+      <div class="recipe-brand">
+        <img src="https://i.postimg.cc/d3Ykkdm6/ma-shu-cai-pulogo2.png" alt="麻薯食谱">
+        <span>麻薯食谱</span>
       </div>
     </div>
 
-    <div class="section-title" style="margin-bottom:13px"><span class="section-bar"></span>${isEn ? 'Instructions' : '烹饪步骤'}</div>
-    ${d.steps.map((step, i) => `
-      <div class="step-item">
-        <div class="step-num ${i===0?'first':'rest'}">${i+1}</div>
-        <div class="step-box">
-          <div class="step-head">
-            <span class="step-name">${step.title}</span>
-            ${step.time ? `<span class="step-time">${translateTime(step.time)}</span>` : ''}
-          </div>
-          <p class="step-desc">${step.desc}</p>
+    <div class="recipe-shell">
+      <section class="recipe-summary">
+        <div class="recipe-kicker">${d.category}</div>
+        <h1 class="recipe-title-new">${d.title}</h1>
+        <p class="recipe-desc-new">${d.desc}</p>
+        <div class="recipe-meta-grid">
+          <div class="recipe-meta-box"><strong>${r.time}</strong><span>分钟</span></div>
+          <div class="recipe-meta-box"><strong>${r.servings}</strong><span>人份</span></div>
+          <div class="recipe-meta-box"><strong>${d.diffLabel}</strong><span>难度</span></div>
         </div>
-      </div>`).join('')}
-
-    <div class="tip-box">
-      <p class="tip-text">💡 <strong>${isEn ? 'Tip:' : '小贴士：'}</strong>${isEn ? 'All steps are designed for the Thermomix. TM6 / TM7 users may need to fine-tune temperatures and times per their model\'s manual.' : '所有步骤均适用于小美（Thermomix Friend）。TM6 / TM7 用户可根据各自机型说明书微调温度和时间设定。'}</p>
+        <div class="recipe-models">
+          <span class="recipe-models-label">适用机型</span>
+          ${renderTMTags(r.tm)}
+        </div>
+        <div class="recipe-actions">
+          <button class="recipe-share-btn" data-action="gen-share-img">生成分享图</button>
+        </div>
+      </section>
+      <figure class="recipe-photo-card">
+        <img src="${recipeImgSrc(r.img)}" alt="${d.title}" onerror="this.src=PLACEHOLDER">
+      </figure>
     </div>
-  </div>`;
+
+    <div class="recipe-body-grid">
+      <section class="recipe-panel">
+        <h2 class="recipe-panel-title">食材清单</h2>
+        <div class="recipe-ingredients">
+          ${d.ingredients.map((ing, i) => `
+            <label class="recipe-ing">
+              <input class="recipe-check-input" type="checkbox" id="ing-${r.id}-${i}">
+              <span class="recipe-check">✓</span>
+              <span>${ing}</span>
+            </label>`).join('')}
+        </div>
+      </section>
+
+      <section class="recipe-panel recipe-steps-panel">
+        <h2 class="recipe-panel-title">烹饪步骤</h2>
+        <div class="recipe-steps">
+          ${d.steps.map((step, i) => `
+            <div class="recipe-step">
+              <input class="recipe-check-input" type="checkbox" id="step-${r.id}-${i}">
+              <label class="recipe-step-num" for="step-${r.id}-${i}" title="标记完成">${i+1}</label>
+              <div class="recipe-step-card">
+                <div class="recipe-step-head">
+                  <span class="recipe-step-name">${step.title}</span>
+                  ${step.time ? `<span class="recipe-step-time">${translateTime(step.time)}</span>` : ''}
+                </div>
+                <p class="recipe-step-desc">${step.desc}</p>
+              </div>
+            </div>`).join('')}
+        </div>
+        <div class="recipe-note">
+          <strong>小贴士：</strong>所有步骤均适用于小美，TM6 / TM7 用户可根据各自机型说明书微调温度和时间设定。
+        </div>
+      </section>
+      </div>
+  </article>`;
 }
 
 function renderBottom() {
@@ -731,6 +821,7 @@ function renderModal() {
 // ── Main render ──────────────────────────────────────────────────
 function render() {
   const app = document.getElementById('app');
+  document.body.classList.toggle('detail-mode', state.view === 'detail');
   if (state.view === 'list') {
     app.innerHTML = renderListPage() + renderModal();
     setTimeout(observeCards, 50);
