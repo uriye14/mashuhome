@@ -872,6 +872,10 @@ document.addEventListener('click', e => {
   if (action === 'home') {
     state.view = 'list';
     state.selected = null;
+    state.category = '全部';
+    state.search = '';
+    state.page = 1;
+    state.catOpen = false;
     history.pushState('', document.title, '/');
     window.scrollTo(0, 0);
     render();
