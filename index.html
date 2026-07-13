@@ -1281,8 +1281,8 @@ render();
 
 // ── Wire up static search input ──
 document.addEventListener('DOMContentLoaded', function() {
-  const heroSearchInput = document.querySelector('.hero .search-wrap input');
-  const heroSearchBtn = document.querySelector('.hero .search-wrap button');
+  const heroSearchInput = document.querySelector('.hero-full .search-wrap input');
+  const heroSearchBtn = document.querySelector('.hero-full .search-wrap button');
   if (heroSearchInput) {
     let composing = false;
     heroSearchInput.addEventListener('compositionstart', () => { composing = true; });
@@ -1291,7 +1291,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   if (heroSearchBtn) {
     heroSearchBtn.addEventListener('click', () => {
-      const inp = document.querySelector('.hero .search-wrap input');
+      const inp = document.querySelector('.hero-full .search-wrap input');
       if (inp) { state.search = inp.value; state.page = 1; render(); }
     });
   }
