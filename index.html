@@ -319,7 +319,7 @@ body > *{animation:pageIn .5s ease-out}
     <div class="hero-full-text">
       <div class="tag">mashuhome.com</div>
       <h1>家常美味<br>轻松上桌</h1>
-      <p>发现 Cookidoo 之外的宝藏菜谱<br>小美能做 · TM6 · TM7 兼容 · 67道精选 · 持续更新</p>
+      <p>发现 Cookidoo 之外的宝藏菜谱<br>小美能做 · TM6 · TM7 兼容 · <span data-recipe-count>68</span>道精选 · 持续更新</p>
       <div class="search-wrap">
         <input type="text" placeholder="搜索食材或菜名…">
         <button>搜索</button>
@@ -332,7 +332,7 @@ body > *{animation:pageIn .5s ease-out}
 
 <h2 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">菜谱概览</h2>
 <div class="stats">
-  <div class="stat-card"><div class="num">67<span>道</span></div><div class="label">精选菜谱</div></div>
+  <div class="stat-card"><div class="num"><span data-recipe-count>68</span><span>道</span></div><div class="label">精选菜谱</div></div>
   <div class="stat-card"><div class="num">8<span>类</span></div><div class="label">菜品分类</div></div>
   <div class="stat-card"><div class="num">100%<span></span></div><div class="label">小美兼容</div></div>
   <div class="stat-card"><div class="num">∞<span></span></div><div class="label">持续更新</div></div>
@@ -563,6 +563,14 @@ const recipes = [
 {id:70,title:'肉夹馍',category:'主食',time:120,servings:8,difficulty:'中等',img:'images/recipes/rou-jia-mo.webp',desc:'外婆红烧肉夹进热馍里，肉香浓郁，饼皮松软，一口下去满满家常味',tm:['TM6','TM7'],ingredients:['中筋面粉 500克','水 280克（做馍用）','酵母 4克','糖 10克','食用油 10克（做馍用）','盐 2克（做馍用）','姜 3片','食用油 15克（炖肉用）','五花肉 500克，带皮切3.5厘米块','料酒 30克','老抽 15克','生抽 25克','水 120克（炖肉用）','蚝油 5克','冰糖 25克','香菜或青椒 适量'],steps:[{title:'揉馍面团',time:'',desc:'将面粉、水、酵母、糖、油和盐揉成光滑面团，发酵后分成 8 份，做法可参考馒头面团。'},{title:'烙馍',time:'',desc:'面团擀成圆饼，平底锅小火烙至两面微黄熟透，备用。'},{title:'爆香姜片',time:'3 分钟',desc:'姜和油放入主锅，以 120°C 速度 1 爆香 3 分钟。'},{title:'炒香五花肉',time:'4 分钟',desc:'加入五花肉，以 120°C 反转速度小勺爆香 4 分钟。'},{title:'慢炖入味',time:'20 分钟',desc:'加入料酒、老抽、生抽、水、蚝油和冰糖，以 120°C 反转速度小勺烹煮 20 分钟。'},{title:'翻拌收汁',time:'10 分钟',desc:'打开主锅盖，用刮刀棒上下翻拌，让汤汁均匀包裹在肉上，再以 120°C 反转速度小勺烹煮 10 分钟。'},{title:'夹馍',time:'',desc:'炖好的肉剁碎，按喜好拌入香菜或青椒，夹入热馍中即可享用。'}]},
 {id:71,title:'牛肉番茄酱',category:'酱料',time:25,servings:4,difficulty:'简单',img:'images/recipes/niu-rou-fan-qie-jiang.webp',desc:'牛肉末和番茄慢慢熬成浓郁肉酱，拌饭拌面都很香',tm:['TM6','TM7'],ingredients:['大蒜 25克','洋葱 100克','橄榄油或黄油 15克','牛肉末 350克','番茄 150克，切小块','料酒 10克','盐 1小匙','番茄酱 60克'],steps:[{title:'爆香蒜葱',time:'3 分钟',desc:'大蒜、洋葱和橄榄油或黄油放入主锅，5秒速度5切碎，再以120°C速度小勺爆香3分钟。'},{title:'炒牛肉末',time:'5 分钟',desc:'加入牛肉末，以120°C速度1炒制5分钟，把肉末炒散炒香。'},{title:'熬煮番茄',time:'8 分钟',desc:'加入切小块的番茄、料酒和盐，以Varoma温度速度小勺熬煮8分钟，让番茄软化出汁。'},{title:'加入番茄酱',time:'2 分钟',desc:'加入番茄酱，以Varoma温度速度小勺继续煮2分钟，酱料会更浓郁。'},{title:'盛出放凉',time:'',desc:'把酱料盛入大盘中晾凉，可拌意面、抹面包或搭配米饭一起吃。'}]},
 ];
+
+function syncRecipeCounts() {
+  document.querySelectorAll('[data-recipe-count]').forEach(el => {
+    el.textContent = recipes.length;
+  });
+}
+
+syncRecipeCounts();
 
 // ── Helpers ──────────────────────────────────────────────────────
 function tmTagHTML(label) {
