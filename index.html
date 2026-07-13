@@ -89,6 +89,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(244,246,242,.85);backdrop-
 .stat-card{background:white;border-radius:18px;padding:22px 28px;flex:1;min-width:180px;box-shadow:0 1px 4px rgba(0,0,0,.03);border:1px solid rgba(0,0,0,.03)}
 .stat-card .num{font-size:30px;font-weight:750;color:#142114;letter-spacing:-.5px}
 .stat-card .num span{font-size:14px;font-weight:400;color:#3a8a3a;margin-left:2px}
+.stat-card .num .stat-number{font:inherit;margin-left:0}
 .stat-card .label{font-size:13px;color:#4a7a4a;margin-top:3px}
 
 /* ── Main ── */
@@ -332,7 +333,7 @@ body > *{animation:pageIn .5s ease-out}
 
 <h2 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">菜谱概览</h2>
 <div class="stats">
-  <div class="stat-card"><div class="num"><span data-recipe-count>68</span><span>道</span></div><div class="label">精选菜谱</div></div>
+  <div class="stat-card"><div class="num"><span class="stat-number" data-recipe-count>68</span><span>道</span></div><div class="label">精选菜谱</div></div>
   <div class="stat-card"><div class="num">8<span>类</span></div><div class="label">菜品分类</div></div>
   <div class="stat-card"><div class="num">100%<span></span></div><div class="label">小美兼容</div></div>
   <div class="stat-card"><div class="num">∞<span></span></div><div class="label">持续更新</div></div>
