@@ -12,6 +12,7 @@
   <link rel="canonical" href="https://www.mashuhome.com" />
   <link rel="manifest" href="manifest.json" />
   <meta name="theme-color" content="#4a9a55" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' https://i.postimg.cc https://images.unsplash.com https://api.qrserver.com data:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self'; connect-src 'self' https://api.qrserver.com;" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="麻薯菜谱" />
@@ -318,7 +319,7 @@ body > *{animation:pageIn .5s ease-out}
     <div class="hero-full-text">
       <div class="tag">mashuhome.com</div>
       <h1>家常美味<br>轻松上桌</h1>
-      <p>发现 Cookidoo 之外的宝藏菜谱<br>小美能做 · TM6 · TM7 兼容 · 63道精选 · 持续更新</p>
+      <p>发现 Cookidoo 之外的宝藏菜谱<br>小美能做 · TM6 · TM7 兼容 · 67道精选 · 持续更新</p>
       <div class="search-wrap">
         <input type="text" placeholder="搜索食材或菜名…">
         <button>搜索</button>
@@ -407,6 +408,17 @@ body > *{animation:pageIn .5s ease-out}
 <button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
 <script>
+// ── HTML 转义（防 XSS）─────────────────────────────────────────
+function escapeHtml(str) {
+  if (str == null) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 // ── Placeholder（图片加载失败时显示）────────────────────────────
 const PLACEHOLDER = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='380' viewBox='0 0 600 380'%3E%3Crect width='600' height='380' fill='%23f0ede6'/%3E%3Ctext x='300' y='200' text-anchor='middle' font-size='48' fill='%23c8b89a'%3E🍽%3C/text%3E%3C/svg%3E";
 
@@ -603,7 +615,7 @@ function renderHeader() {
       </div>
       <div class="search-wrap">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#8a9a88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        <input class="search-input" type="text" placeholder="${isEn ? 'Search recipes…' : '搜索食谱…'}" value="${state.search}" id="searchInput">
+        <input class="search-input" type="text" placeholder="${isEn ? 'Search recipes…' : '搜索食谱…'}" value="${escapeHtml(state.search)}" id="searchInput">
       </div>
     </div>
     <div class="cat-bar">

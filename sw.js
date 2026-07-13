@@ -64,6 +64,9 @@ self.addEventListener('activate', e => {
 self.addEventListener('fetch', e => {
   const url = new URL(e.request.url);
 
+  // 只处理同源请求，跨域请求直接放行
+  if (url.origin !== self.location.origin) return;
+
   // 图片：缓存优先
   if (url.pathname.startsWith('/images/recipes/')) {
     e.respondWith(
