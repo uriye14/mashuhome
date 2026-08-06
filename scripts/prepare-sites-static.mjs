@@ -15,7 +15,7 @@ const siteFiles = [
   'under_construction.svg'
 ];
 
-const siteDirectories = ['icons', 'images', 'recipe'];
+const siteDirectories = ['recipe'];
 
 await rm(outputRoot, { recursive: true, force: true });
 await mkdir(outputRoot, { recursive: true });

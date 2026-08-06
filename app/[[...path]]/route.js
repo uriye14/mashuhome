@@ -1,7 +1,8 @@
 import { readFile, stat } from 'node:fs/promises';
 import { extname, resolve, sep } from 'node:path';
 
-const SITE_ROOT = resolve(process.cwd(), 'dist/client');
+const CLIENT_ROOT = resolve(process.cwd(), 'dist/client');
+const SERVER_ASSET_ROOT = resolve(process.cwd(), 'dist/server/site-assets');
 
 const CONTENT_TYPES = {
   '.css': 'text/css; charset=utf-8',
@@ -18,14 +19,21 @@ const CONTENT_TYPES = {
   '.xml': 'application/xml; charset=utf-8'
 };
 
+function rootFor(parts) {
+  return parts[0] === 'images' || parts[0] === 'icons'
+    ? SERVER_ASSET_ROOT
+    : CLIENT_ROOT;
+}
+
 function safePath(parts = []) {
   if (parts.some((part) => !part || part === '.' || part === '..' || part.includes('\0'))) {
     return null;
   }
 
+  const siteRoot = rootFor(parts);
   const relativePath = parts.length === 0 ? 'index.html' : parts.join('/');
-  const candidate = resolve(SITE_ROOT, relativePath);
-  const rootPrefix = SITE_ROOT.endsWith(sep) ? SITE_ROOT : `${SITE_ROOT}${sep}`;
+  const candidate = resolve(siteRoot, relativePath);
+  const rootPrefix = siteRoot.endsWith(sep) ? siteRoot : `${siteRoot}${sep}`;
 
   return candidate.startsWith(rootPrefix) ? candidate : null;
 }
