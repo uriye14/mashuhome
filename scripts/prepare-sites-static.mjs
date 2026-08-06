@@ -15,7 +15,7 @@ const siteFiles = [
   'under_construction.svg'
 ];
 
-const siteDirectories = ['recipe'];
+const siteDirectories = ['icons', 'images', 'recipe'];
 
 await rm(outputRoot, { recursive: true, force: true });
 await mkdir(outputRoot, { recursive: true });
@@ -28,3 +28,8 @@ await Promise.all([
     { recursive: true }
   ))
 ]);
+
+await rm(
+  resolve(outputRoot, 'images', 'recipes', 'fei-niu-gai-fan.webp'),
+  { force: true }
+);

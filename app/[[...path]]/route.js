@@ -3,6 +3,7 @@ import { extname, resolve, sep } from 'node:path';
 
 const CLIENT_ROOT = resolve(process.cwd(), 'dist/client');
 const SERVER_ASSET_ROOT = resolve(process.cwd(), 'dist/server/site-assets');
+const SERVER_ASSET_PATHS = new Set(['images/recipes/fei-niu-gai-fan.webp']);
 
 const CONTENT_TYPES = {
   '.css': 'text/css; charset=utf-8',
@@ -20,7 +21,7 @@ const CONTENT_TYPES = {
 };
 
 function rootFor(parts) {
-  return parts[0] === 'images' || parts[0] === 'icons'
+  return SERVER_ASSET_PATHS.has(parts.join('/'))
     ? SERVER_ASSET_ROOT
     : CLIENT_ROOT;
 }

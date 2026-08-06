@@ -1,9 +1,16 @@
-import { copyFile, cp, mkdir } from 'node:fs/promises';
+import { copyFile, mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
 const projectRoot = process.cwd();
 const metadataDirectory = resolve(projectRoot, 'dist', '.openai');
-const serverAssetDirectory = resolve(projectRoot, 'dist', 'server', 'site-assets');
+const serverImageDirectory = resolve(
+  projectRoot,
+  'dist',
+  'server',
+  'site-assets',
+  'images',
+  'recipes'
+);
 
 await mkdir(metadataDirectory, { recursive: true });
 await copyFile(
@@ -11,9 +18,8 @@ await copyFile(
   resolve(metadataDirectory, 'hosting.json')
 );
 
-await mkdir(serverAssetDirectory, { recursive: true });
-await Promise.all(['icons', 'images'].map((directory) => cp(
-  resolve(projectRoot, directory),
-  resolve(serverAssetDirectory, directory),
-  { recursive: true }
-)));
+await mkdir(serverImageDirectory, { recursive: true });
+await copyFile(
+  resolve(projectRoot, 'images', 'recipes', 'fei-niu-gai-fan.webp'),
+  resolve(serverImageDirectory, 'fei-niu-gai-fan.webp')
+);
